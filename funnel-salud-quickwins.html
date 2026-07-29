@@ -20,7 +20,7 @@
 
     --header-h: 60px;
     --content-max: 560px;
-    --side-panel-w: 420px;
+    --side-panel-w: 536px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -362,7 +362,7 @@
   /* Consentimiento por canal — caja con cabecera (Acepto…) + filas */
   .pub-list { border: 1px solid var(--wf-40); border-radius: 10px; margin: 32px 0 24px; overflow: hidden; }
   .pub-head { padding: 14px 16px; border-bottom: 1px solid var(--wf-40); }
-  .pub-q { font-size: 14px; color: var(--wf-90); line-height: 1.5; margin: 0 0 4px; }
+  .pub-q { font-size: 14px; font-weight: 700; color: var(--wf-100); line-height: 1.5; margin: 0 0 4px; }
   .pub-head .legal-mini { margin: 0; color: var(--wf-90); }
   .pub-head .legal-trigger { color: var(--wf-90); }
   .pub-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; }
@@ -473,7 +473,7 @@
     content: ''; position: absolute; top: 0; left: 0; right: 0;
     height: 1px; background: var(--wf-20);
   }
-  .why-title { font-size: 18px; font-weight: 700; color: var(--wf-100); margin-bottom: 16px; text-align: center; }
+  .why-title { font-size: 20px; font-weight: 700; color: var(--wf-100); margin-bottom: 24px; text-align: center; }
   .why-list { display: flex; flex-direction: column; }
   .why-item { border-bottom: 1px solid var(--wf-20); overflow: hidden; }
   .why-item:first-child { border-top: 1px solid var(--wf-20); }
@@ -552,6 +552,8 @@
   .side-modal-close:hover { color: var(--wf-100); background: var(--wf-20); }
 
   .side-modal-body { padding: 40px 24px 24px; overflow-y: auto; }
+  /* Desktop: +8px de padding lateral (el ancho del panel sube en paralelo para no estrechar el contenido) */
+  @media (min-width: 601px) { .side-modal-body { padding-left: 32px; padding-right: 32px; } }
 
   /* Avatares del equipo (stack solapado) */
   .avatar-stack { display: flex; align-items: center; margin-bottom: 16px; }
@@ -560,6 +562,10 @@
 
   .hablemos-title { font-size: 24px; font-weight: 700; color: var(--wf-100); margin-bottom: 6px; }
   .hablemos-subtitle { font-size: 16px; color: var(--wf-90); line-height: 1.35; margin-bottom: 28px; }
+  /* Exit: acercar el CTA al bloque de texto (en desktop, un pelín más de aire) */
+  #exitModal .hablemos-subtitle { margin-bottom: 4px; }
+  #exitModal .btn-primary { margin-top: 16px; }
+  @media (min-width: 601px) { #exitModal .btn-primary { margin-top: 24px; } }
 
   /* Divisor del exit-intent ("o si necesitas ayuda") */
   .exit-divider { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
@@ -576,6 +582,8 @@
     cursor: pointer; font-family: inherit; text-align: left;
   }
   .hablemos-link:first-child { border-top: 1px solid var(--wf-20); }
+  /* En el exit, el primer canal va justo bajo la raya del divisor: sin border-top para no doblar la línea */
+  #exitModal .hablemos-link:first-child { border-top: none; }
   .hablemos-link-icon {
     flex-shrink: 0; width: 32px; height: 32px;
     background: var(--wf-20); border-radius: 50%;
@@ -618,7 +626,8 @@
   .toggle-switch input:checked + .toggle-track::before { transform: translateX(18px); }
 
   /* Confirmación */
-  .call-confirm-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--wf-20); display: flex; align-items: center; justify-content: center; margin: 24px auto; color: var(--wf-90); }
+  .call-confirm-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--wf-20); display: flex; align-items: center; justify-content: center; margin: 8px auto 16px; color: var(--wf-90); }
+  .call-confirm-icon svg { width: 22px; height: 22px; }
   .call-confirm-title { font-size: 20px; font-weight: 700; color: var(--wf-100); margin-bottom: 12px; line-height: 1.25; }
   .call-confirm-text { font-size: 14px; color: var(--wf-90); line-height: 1.6; margin-bottom: 32px; }
 
@@ -633,7 +642,7 @@
   .step-loading.active { display: flex; animation: stepIn 0.35s ease; }
   .loading-spinner { width: 36px; height: 36px; border: 3px solid var(--wf-40); border-top-color: var(--wf-100); border-radius: 50%; animation: spinAnim 0.85s linear infinite; margin-bottom: 24px; }
   @keyframes spinAnim { to { transform: rotate(360deg); } }
-  .loading-title { font-size: 20px; font-weight: 700; color: var(--wf-100); margin-bottom: 8px; }
+  .loading-title { font-size: 20px; font-weight: 700; color: var(--wf-100); margin-bottom: 28px; }
   .loading-text { font-size: 15px; color: var(--wf-60); transition: opacity 0.4s ease; }
   .loading-text.fade { opacity: 0; }
 
@@ -692,7 +701,7 @@
     /* Hablemos: bottom-sheet (como la propuesta original) */
     .side-modal-panel {
       top: auto; bottom: 0; left: 0; right: 0;
-      width: 100%; max-width: 100%; height: auto; max-height: 90vh;
+      width: 100%; max-width: 100%; height: auto; max-height: 96vh;
       border-radius: 20px 20px 0 0;
       box-shadow: 0 -8px 32px rgba(39, 42, 48, 0.15);
       transform: translateY(100%);
@@ -702,7 +711,9 @@
       display: block; width: 40px; height: 4px;
       background: var(--wf-40); border-radius: 2px; margin: 12px auto 0;
     }
-    .side-modal-body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+    .side-modal-body { padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
+    /* Más aire abajo para que la barra nativa del móvil no se solape con el CTA */
+    .step0-sticky-bar { padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
   }
 </style>
 </head>
@@ -1380,7 +1391,7 @@
             Atrás
           </button>
           <div class="hablemos-title">Agenda una llamada</div>
-          <div class="hablemos-subtitle" style="margin-bottom:24px;">Déjanos tus datos y te llamamos cuando mejor te vaya.</div>
+          <div class="hablemos-subtitle" style="margin-bottom:24px;">Un asesor te llama cuando mejor te vaya, sin compromiso.</div>
 
           <div class="input-wrap">
             <input type="text" placeholder=" " onclick="if(!this.value){this.value='María García';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
@@ -1399,14 +1410,7 @@
             <label>Mensaje (opcional)</label>
           </div>
 
-          <div class="consent-row">
-            <p class="legal-mini" style="flex:1; margin:0;">Acepto recibir comunicaciones comerciales de FIATC. Puedes revocarlo cuando quieras.</p>
-            <label class="toggle-switch">
-              <input type="checkbox">
-              <span class="toggle-track"></span>
-            </label>
-          </div>
-          <p class="legal-mini">Tus datos se tratarán para gestionar tu solicitud de llamada. Consulta la <a onclick="return false;" href="#">Política de privacidad</a>.</p>
+          <p class="legal-mini" style="margin-top:4px;">FIATC Mutua de Seguros tratará tus datos solo para gestionar esta solicitud de llamada. Puedes ejercer tus derechos de acceso, rectificación y supresión escribiéndonos. Más información en la <a onclick="return false;" href="#">Política de privacidad</a>.</p>
 
           <button class="btn-primary" onclick="hablemosConfirm()">Agendar llamada</button>
         </div>
@@ -1417,8 +1421,52 @@
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div class="call-confirm-title">¡Te llamamos pronto!</div>
-          <p class="call-confirm-text">En menos de 24 h un asesor de FIATC te llamará al teléfono que nos has dejado. Sin compromiso.</p>
-          <button class="btn-primary" onclick="closeHablemos()">Entendido</button>
+          <p class="call-confirm-text">En menos de 24 h un asesor te llamará al teléfono que nos has dejado. Sin compromiso.</p>
+
+          <div class="pub-list" style="text-align:left; margin:28px 0 20px;">
+            <div class="pub-head">
+              <p class="pub-q">¡No te pierdas nada! ¿Quieres recibir novedades y ofertas?</p>
+              <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales de FIATC.</p>
+              <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email, teléfono y/o WhatsApp sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
+              <div class="pub-head-foot">
+                <span class="pub-cancel-badge">Cancela cuando quieras :)</span>
+                <a class="pub-leermas" onclick="toggleLegal(this)">Leer más</a>
+              </div>
+            </div>
+            <label class="pub-row">
+              <span class="pub-row-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+              </span>
+              <span class="pub-row-body">
+                <span class="pub-row-text"><span class="pub-row-title">Por email</span></span>
+                <span class="pub-row-adv">Directo a tu bandeja de entrada</span>
+              </span>
+              <span class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></span>
+            </label>
+            <label class="pub-row">
+              <span class="pub-row-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </span>
+              <span class="pub-row-body">
+                <span class="pub-row-text"><span class="pub-row-title">Por WhatsApp</span></span>
+                <span class="pub-row-adv">La manera más cómoda</span>
+              </span>
+              <span class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></span>
+            </label>
+            <label class="pub-row">
+              <span class="pub-row-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              <span class="pub-row-body">
+                <span class="pub-row-text"><span class="pub-row-title">Por teléfono</span></span>
+                <span class="pub-row-adv">Si lo prefieres de viva voz</span>
+              </span>
+              <span class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></span>
+            </label>
+          </div>
+
+          <button class="btn-primary" onclick="closeHablemos()">Guardar preferencias</button>
+          <a class="btn-skip" style="cursor:pointer; display:block; text-align:center; margin-top:14px; font-size:16px;" onclick="closeHablemos()">No, gracias</a>
         </div>
       </div>
     </aside>
@@ -1435,15 +1483,15 @@
       <div class="side-modal-body">
         <div class="hablemos-title">¿Seguro que quieres salir?</div>
         <div class="hablemos-subtitle">Si te marchas ahora perderás los datos que ya has introducido.</div>
-        <button class="btn-primary" onclick="closeExit()">Continuar</button>
-        <a class="btn-skip" style="cursor:pointer; display:block; text-align:center; margin:16px 0 28px; font-size:14px; color:var(--wf-90);" onclick="exitReset()">Salir y perder los datos</a>
+        <button class="btn-primary" onclick="closeExit()">No, quiero seguir aquí</button>
+        <a class="btn-skip" style="cursor:pointer; display:block; text-align:center; margin:16px 0 28px; font-size:16px; color:var(--wf-90);" onclick="exitReset()">Salir y perder los datos</a>
 
         <div class="exit-divider">
           <span>o si necesitas ayuda</span>
         </div>
 
         <div class="hablemos-links">
-          <button class="hablemos-link" onclick="closeExit();openHablemos();hablemosAgendar();">
+          <button class="hablemos-link" onclick="exitToHablemos('agendar')">
             <div class="hablemos-link-icon">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             </div>
@@ -1749,8 +1797,23 @@
       if (v === 'confirm') body.classList.add('view-confirm');
       body.scrollTop = 0;
     }
-    function hablemosAgendar() { setHablemosView('agendar'); }
-    function hablemosBack() { setHablemosView('main'); }
+    /* Origen del agendar: 'hablemos' (lista de canales) o 'exit' (modal de salida).
+       El botón Atrás del agendar vuelve a donde toca según esto. */
+    let agendarOrigin = 'hablemos';
+    function hablemosAgendar() { agendarOrigin = 'hablemos'; setHablemosView('agendar'); }
+    function hablemosBack() {
+      if (agendarOrigin === 'exit') hablemosToExit();
+      else setHablemosView('main');
+    }
+    /* Vuelve al exit desde Hablemos con una sola animación (mismo patrón que exitToHablemos). */
+    function hablemosToExit() {
+      const hmPanel = document.querySelector('#hablemosModal .side-modal-panel');
+      hmPanel.style.transition = 'none';
+      document.getElementById('hablemosModal').classList.remove('open');
+      setHablemosView('main');
+      openExit();
+      requestAnimationFrame(() => requestAnimationFrame(() => { hmPanel.style.transition = ''; }));
+    }
     function hablemosConfirm() { setHablemosView('confirm'); }
 
     /* ── Exit intent (clic en el logo) ── */
@@ -1760,6 +1823,18 @@
       closeExit();
       document.querySelectorAll('.step-loading.active').forEach(s => s.classList.remove('active'));
       showStep('step0');
+    }
+    /* Desde el exit se salta al mismo flujo de Hablemos (misma vista agendar/confirm).
+       Ocultamos el panel del exit sin deslizar para que solo haya UNA animación (la de
+       Hablemos), igual que abrir Hablemos desde la cabecera. */
+    function exitToHablemos(view) {
+      agendarOrigin = 'exit';
+      const exPanel = document.querySelector('#exitModal .side-modal-panel');
+      exPanel.style.transition = 'none';
+      closeExit();
+      setHablemosView(view || 'main');
+      openHablemos();
+      requestAnimationFrame(() => requestAnimationFrame(() => { exPanel.style.transition = ''; }));
     }
 
     document.addEventListener('keydown', function (e) {
