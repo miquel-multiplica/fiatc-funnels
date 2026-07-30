@@ -127,21 +127,25 @@
     min-height: 0;
     overflow-y: auto;
     overflow-x: hidden; /* el scroll vertical vive aquí; sin esto, un hijo con 100vw desborda y recorta header/modales/CTA */
+    display: flex;
+    flex-direction: column;
   }
-  /* Pie legal discreto y fijo (fuera del scroll de .app-main) */
+  /* Pie legal discreto: dentro del scroll, al final del contenido (el contenido lo empuja fuera de vista) */
   .legal-footer {
     flex-shrink: 0;
     display: flex; justify-content: center; flex-wrap: wrap; gap: 16px;
-    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
-    background: var(--wf-10); border-top: 1px solid var(--wf-20);
+    padding: 20px 16px calc(28px + env(safe-area-inset-bottom, 0px));
   }
   .legal-footer a { font-size: 12px; color: var(--wf-60); text-decoration: none; cursor: pointer; }
   .legal-footer a:hover { color: var(--wf-90); }
   .content-col {
     --content-pad: 24px;
     position: relative;
+    flex: none;
+    width: 100%;
     max-width: var(--content-max);
     margin: 0 auto;
+    min-height: calc(100% + 72px); /* llena el alto + extra → el pie legal queda por debajo del fold en pasos cortos */
     padding: 40px var(--content-pad) 64px;
   }
 
@@ -315,11 +319,13 @@
 
   /* Email (step6) */
   .step-icon-badge {
-    width: 64px; height: 64px; border-radius: 50%;
+    width: 56px; height: 56px; border-radius: 50%;
     background: var(--wf-20); border: 1.5px solid var(--wf-40);
     display: flex; align-items: center; justify-content: center;
-    color: var(--wf-90); margin: 4px auto 18px;
+    color: var(--wf-90); margin: 4px auto 12px;
   }
+  .step-icon-badge svg { width: 24px; height: 24px; }
+  #step6 .step-title, #step6b .step-title, #stepRecover .step-title { margin-bottom: 24px; }
   .contact-fields { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
   .contact-fields .input-wrap { margin-bottom: 0; }
   .email-input-wrap { position: relative; }
@@ -563,7 +569,7 @@
   .side-modal-close {
     position: absolute; top: 14px; right: 14px; z-index: 2;
     background: none; border: none; cursor: pointer;
-    color: var(--wf-60); display: flex; padding: 4px; border-radius: 6px;
+    color: var(--wf-90); display: flex; padding: 4px; border-radius: 6px;
   }
   .side-modal-close:hover { color: var(--wf-100); background: var(--wf-20); }
 
@@ -678,6 +684,13 @@
   .results-meta-edit { display: inline-flex; align-items: center; gap: 5px; color: var(--wf-90); font-weight: 700; text-decoration: none; cursor: pointer; }
   .results-meta-edit svg { flex-shrink: 0; }
   .results-meta-edit:hover { color: var(--wf-100); }
+  #calcModal .hablemos-subtitle { font-size: 14px; }
+  /* Calc: CP (ancho justo) + ubicación (rellena el resto), floating label en horizontal */
+  .calc-cp { display: flex; gap: 12px; margin-bottom: 20px; }
+  .calc-cp .input-wrap { margin-bottom: 0; }
+  .calc-cp .input-wrap:first-child { flex: 0 0 140px; }
+  .calc-cp #calcCpZona { flex: 1; }
+
   /* Panel calculadora: footer (Cancelar + Recalcular) tras el último bloque, sticky al desbordar */
   #calcModal .side-modal-body { padding-bottom: 0; }
   .calc-recalc { position: sticky; bottom: 0; display: flex; gap: 12px; background: var(--wf-0); padding-top: 18px; padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); margin-top: 24px; }
@@ -727,22 +740,27 @@
   .faq-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
   .faq-pill { display: inline-flex; align-items: center; padding: 10px 16px; background: var(--wf-0); border: 1.5px solid var(--wf-40); border-radius: 100px; font-size: 14px; font-family: inherit; color: var(--wf-90); cursor: pointer; transition: border-color 0.15s, color 0.15s; }
   .faq-pill:hover { border-color: var(--wf-100); color: var(--wf-100); }
-  .faq-pill--all { background: none; border-color: transparent; font-weight: 600; color: var(--wf-90); text-decoration: underline; text-underline-offset: 3px; }
+  .faq-pill--all { background: none; border-color: transparent; font-weight: 600; color: var(--wf-90); text-decoration: none; }
   .faq-pill--all:hover { color: var(--wf-100); }
   /* Acordeón de FAQ dentro del panel */
   .faq-item { border-bottom: 1px solid var(--wf-20); }
   .faq-item:first-child { border-top: 1px solid var(--wf-20); }
-  .faq-trigger { display: flex; align-items: center; gap: 12px; width: 100%; padding: 24px 0; background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-trigger { display: flex; align-items: center; gap: 12px; width: 100%; padding: 20px 0; background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; }
+  .faq-item.open .faq-trigger { padding-bottom: 6px; }
   .faq-q { flex: 1; font-size: 16px; font-weight: 400; color: var(--wf-100); line-height: 1.35; }
   .faq-item.open .faq-q { font-weight: 700; }
   .faq-chevron { flex-shrink: 0; color: var(--wf-60); transition: transform 0.25s ease; }
   .faq-item.open .faq-chevron { transform: rotate(180deg); }
   .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding-bottom 0.3s ease; }
-  .faq-item.open .faq-answer { max-height: 320px; padding-bottom: 16px; }
+  .faq-item.open .faq-answer { max-height: 320px; padding-bottom: 20px; }
   .faq-answer p { font-size: 14px; color: var(--wf-90); line-height: 1.5; margin: 0; }
   /* Bloque de contacto al pie del panel FAQ: fondo gris a todo el ancho de la modal */
-  .faq-help { margin: 24px -24px 0; padding: 28px 24px calc(24px + env(safe-area-inset-bottom, 0px)); background: var(--wf-10); }
-  .faq-help-title { font-size: 18px; font-weight: 700; color: var(--wf-100); margin: 0 0 10px; }
+  .faq-help { margin: 24px -24px 0; padding: 28px 24px calc(24px + env(safe-area-inset-bottom, 0px)); background: var(--wf-10); border-top: 1px solid var(--wf-30); }
+  .faq-help .hablemos-link-icon { background: var(--wf-30); }
+  .faq-help-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+  .faq-help-title { font-size: 18px; font-weight: 700; color: var(--wf-100); margin: 0; }
+  .faq-help .avatar-stack { margin-bottom: 0; }
   #faqModal .side-modal-body { padding-bottom: 0; }
   @media (min-width: 601px) { .faq-help { margin-left: -32px; margin-right: -32px; padding-left: 32px; padding-right: 32px; } }
 
@@ -769,12 +787,15 @@
     #step7 .products-scroll { padding: 44px calc((100vw - 288px) / 2) 20px; }
 
     /* El "cancela cuando quieras" cae debajo del título en mobile */
-    .pub-row-body { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .pub-row-body { flex-direction: column; align-items: flex-start; gap: 4px; }
     /* Gap simétrico: botón ↔ bloque = input ↔ bloque (24px) */
     .pub-list { margin: 24px 0 24px; }
     #step6 .btn-primary { margin-top: 16px; }
     /* 16px de padding vertical entre canales en mobile */
     .pub-row { padding-top: 16px; padding-bottom: 16px; }
+    /* FAQ pills alineadas a la izquierda en mobile */
+    .faq-pills { justify-content: flex-start; }
+    .faq-pills-title { text-align: left; }
 
     /* Iconos de email/teléfono más pequeños en mobile (bajan la altura del paso) */
     .step-icon-badge { width: 48px; height: 48px; margin: 0 auto 12px; }
@@ -850,7 +871,7 @@
         </div>
 
         <button class="btn-primary" id="step0Cta" onclick="nextStep()">Calcula tu precio online</button>
-        <button class="btn-skip" onclick="nextStep()">Recuperar presupuesto anterior</button>
+        <button class="btn-skip" onclick="openRecover()">Recuperar presupuesto anterior</button>
 
         <div class="why-section">
           <p class="why-title">¿Por qué elegir FIATC?</p>
@@ -975,6 +996,21 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- RECUPERAR PRESUPUESTO · email → resultados -->
+      <div class="step" id="stepRecover">
+        <div class="step-icon-badge">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        </div>
+        <p class="step-eyebrow" style="text-align:center;">Ya casi lo tienes</p>
+        <h1 class="step-title" style="text-align:center;">Recupera tu presupuesto</h1>
+        <p class="step-subtitle" style="text-align:center; margin-top:-12px;">Introduce el email con el que lo guardaste y te llevamos directo a tus precios.</p>
+        <div class="input-wrap" style="margin-top:24px;">
+          <input type="email" id="recoverEmail" placeholder=" " onclick="if(!this.value){this.value='maria@email.com';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label for="recoverEmail">Email</label>
+        </div>
+        <button class="btn-primary" onclick="showLoading()">Ver mi presupuesto</button>
       </div>
 
       <!-- PASO CP · Código postal -->
@@ -1214,7 +1250,7 @@
         <div class="results-summary">
           <h1 class="step-title" id="step7Title" style="margin-bottom:14px;">Las opciones más populares en clientes como tú</h1>
           <div class="results-meta">
-            <span><span id="metaCp">07349</span> <span class="results-meta-prov" id="metaProv">Illes Balears</span></span>
+            <span><span id="metaCp">07310</span> <span class="results-meta-prov" id="metaProv">Illes Balears</span></span>
             <span class="results-meta-sep" aria-hidden="true">·</span>
             <span id="metaCount">2 asegurados</span>
             <span class="results-meta-sep" aria-hidden="true">·</span>
@@ -1434,14 +1470,13 @@
       </div>
 
     </div>
+    <!-- PIE LEGAL (dentro del scroll, al final del contenido) -->
+    <footer class="legal-footer">
+      <a onclick="return false;" href="#">Política de cookies</a>
+      <a onclick="return false;" href="#">Aviso legal</a>
+      <a onclick="return false;" href="#">Política de privacidad</a>
+    </footer>
   </main>
-
-  <!-- PIE LEGAL (fijo, fuera del scroll) -->
-  <footer class="legal-footer">
-    <a onclick="return false;" href="#">Política de cookies</a>
-    <a onclick="return false;" href="#">Aviso legal</a>
-    <a onclick="return false;" href="#">Política de privacidad</a>
-  </footer>
 
   <!-- STICKY BAR step0 (aparece al hacer scroll) -->
   <div class="step0-sticky-bar" id="step0StickyBar">
@@ -1644,8 +1679,23 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="side-modal-body">
-        <div class="hablemos-title">¿Quieres probar con más o menos asegurados?</div>
-        <div class="hablemos-subtitle" style="margin-bottom:24px;">Recalculamos el precio al momento para que pruebes distintos escenarios.</div>
+        <div class="hablemos-title">¿Quieres cambiar algún dato?</div>
+        <div class="hablemos-subtitle" style="margin-bottom:24px;">Cambia el número de asegurados o modifica el código postal y recalculamos al momento.</div>
+        <div class="calc-cp">
+          <div class="input-wrap filled">
+            <input type="text" id="calcCpInput" maxlength="5" inputmode="numeric" placeholder=" " value="07310" oninput="calcCpInputHandler(this)">
+            <label for="calcCpInput">Código postal</label>
+          </div>
+          <div class="input-wrap select-wrap filled" id="calcCpZona" hidden>
+            <select id="calcZona" onchange="handleSelectChange(this)">
+              <option value="" disabled></option>
+              <option selected>Campanet</option>
+              <option>Ullaró</option>
+            </select>
+            <label for="calcZona">Ubicación</label>
+            <div class="select-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
         <div id="calcInsuredList"></div>
         <button class="btn-add-insured" onclick="calcAdd()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -1672,12 +1722,14 @@
         <div class="faq-list" id="faqList"></div>
 
         <div class="faq-help">
-          <div class="avatar-stack">
-            <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-40)"/><circle cx="19" cy="15" r="7" fill="var(--wf-60)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-60)"/></svg></div>
-            <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-20)"/><circle cx="19" cy="15" r="7" fill="var(--wf-40)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-40)"/></svg></div>
-            <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-40)"/><circle cx="19" cy="15" r="7" fill="var(--wf-60)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-60)"/></svg></div>
+          <div class="faq-help-head">
+            <p class="faq-help-title">¿Te ayudamos?</p>
+            <div class="avatar-stack">
+              <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-40)"/><circle cx="19" cy="15" r="7" fill="var(--wf-60)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-60)"/></svg></div>
+              <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-20)"/><circle cx="19" cy="15" r="7" fill="var(--wf-40)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-40)"/></svg></div>
+              <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-40)"/><circle cx="19" cy="15" r="7" fill="var(--wf-60)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-60)"/></svg></div>
+            </div>
           </div>
-          <p class="faq-help-title">¿No encuentras tu respuesta?</p>
           <div class="hablemos-links">
             <button class="hablemos-link" onclick="faqToHablemos()">
               <div class="hablemos-link-icon">
@@ -1735,9 +1787,16 @@
       const next = PLANNED_FLOW[i];
       if (next && document.getElementById(next)) showStep(next);
     }
+    /* Entrada lateral: recuperar presupuesto (email → resultados) */
+    function openRecover() {
+      showStep('stepRecover');
+      document.querySelector('.app-header').classList.add('show-back');
+    }
     function prevStep() {
       // Desde resultados, el back vuelve al último paso del funnel (step6b)
       if (document.getElementById('step7').classList.contains('active')) { showStep('step6b'); return; }
+      // Recuperar presupuesto vuelve a la portada
+      if (document.getElementById('stepRecover').classList.contains('active')) { showStep('step0'); return; }
       let i = stepIdx - 1;
       while (PLANNED_FLOW[i] === 'stepDNI' && !isClient) i--;
       const prev = PLANNED_FLOW[i];
@@ -1807,7 +1866,7 @@
     let calcSeq = 0; // contador monotónico de ids de bloque (evita choques al añadir tras quitar)
     function updateResultsMeta() {
       const cpEl = document.getElementById('cp');
-      const cp = (cpEl && cpEl.value) ? cpEl.value : '07349';
+      const cp = (cpEl && cpEl.value) ? cpEl.value : '07310';
       const n = insuredCount || 1;
       const metaCp = document.getElementById('metaCp');
       const metaCount = document.getElementById('metaCount');
@@ -1865,8 +1924,25 @@
         if (strong) strong.textContent = (withMe && idx === 0) ? 'Tú' : 'Asegurado ' + (idx + 1);
       });
     }
-    function openCalc() { calcCount = insuredCount || 1; calcBaseCount = calcCount; calcSeq = calcCount; renderCalcInsured(); document.getElementById('calcModal').classList.add('open'); }
+    function openCalc() {
+      calcCount = insuredCount || 1; calcBaseCount = calcCount; calcSeq = calcCount;
+      const cp = document.getElementById('metaCp');
+      const inp = document.getElementById('calcCpInput');
+      if (cp) inp.value = cp.textContent;
+      inp.closest('.input-wrap').classList.toggle('filled', inp.value.length > 0);
+      calcCpZona();
+      renderCalcInsured();
+      document.getElementById('calcModal').classList.add('open');
+    }
     function closeCalc() { document.getElementById('calcModal').classList.remove('open'); }
+    function calcCpInputHandler(input) {
+      input.closest('.input-wrap').classList.toggle('filled', input.value.length > 0);
+      calcCpZona();
+    }
+    /* Si el CP es ambiguo (07310) mostramos el campo de ubicación al lado, como en el paso de CP */
+    function calcCpZona() {
+      document.getElementById('calcCpZona').hidden = (document.getElementById('calcCpInput').value.trim() !== '07310');
+    }
     function calcAdd() {
       calcCount++;
       const id = 'c' + (++calcSeq); // id monotónico → nunca choca aunque se hayan quitado bloques
@@ -1883,6 +1959,9 @@
     }
     function calcRecalculate() {
       insuredCount = calcCount;
+      const cpVal = document.getElementById('calcCpInput').value.trim() || '07310';
+      const cpEl = document.getElementById('cp');
+      if (cpEl) cpEl.value = cpVal; // el CP editado se refleja en la ristra
       closeCalc();
       updateResultsMeta();
       /* micro-loading para dar feedback de recálculo */
@@ -1933,7 +2012,7 @@
     function faqToHablemos() {
       const p = document.querySelector('#faqModal .side-modal-panel');
       if (p) p.style.transition = 'none';
-      agendarOrigin = 'hablemos';
+      agendarOrigin = 'faq';
       closeFaq();
       setHablemosView('agendar');
       openHablemos();
@@ -1941,9 +2020,9 @@
     }
     function openFaq(i) {
       renderFaqList(i);
+      const body = document.querySelector('#faqModal .side-modal-body');
+      if (body) body.scrollTop = 0;
       document.getElementById('faqModal').classList.add('open');
-      const el = document.getElementById('faq-item-' + i);
-      if (el) requestAnimationFrame(() => el.scrollIntoView({ block: 'start' }));
     }
     function closeFaq() { document.getElementById('faqModal').classList.remove('open'); }
 
@@ -2153,7 +2232,17 @@
     function hablemosAgendar() { agendarOrigin = 'hablemos'; setHablemosView('agendar'); }
     function hablemosBack() {
       if (agendarOrigin === 'exit') hablemosToExit();
+      else if (agendarOrigin === 'faq') hablemosToFaq();
       else setHablemosView('main');
+    }
+    /* Vuelve a la modal de FAQs desde Hablemos con una sola animación */
+    function hablemosToFaq() {
+      const hmPanel = document.querySelector('#hablemosModal .side-modal-panel');
+      hmPanel.style.transition = 'none';
+      document.getElementById('hablemosModal').classList.remove('open');
+      setHablemosView('main');
+      document.getElementById('faqModal').classList.add('open');
+      requestAnimationFrame(() => requestAnimationFrame(() => { hmPanel.style.transition = ''; }));
     }
     /* Vuelve al exit desde Hablemos con una sola animación (mismo patrón que exitToHablemos). */
     function hablemosToExit() {
