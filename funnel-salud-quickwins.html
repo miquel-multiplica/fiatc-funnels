@@ -443,16 +443,17 @@
   @media (min-width: 601px) { .why-stats { flex-direction: row; } .why-stat { flex: 1; min-width: 0; } }
 
   /* Modal "Detalles del seguro" (QW#3) */
-  .detail-hero { padding-bottom: 24px; border-bottom: 1px solid var(--wf-20); }
-  .detail-hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .detail-hero { background: var(--wf-10); margin: -40px -24px 0; padding: 32px 24px 24px; border-bottom: 1px solid var(--wf-20); }
+  @media (min-width: 601px) { .detail-hero { margin-left: -32px; margin-right: -32px; padding-left: 32px; padding-right: 32px; } }
+  .detail-hero-name { font-size: 24px; font-weight: 700; color: var(--wf-100); }
+  .detail-hero-sub { font-size: 14px; color: var(--wf-90); line-height: 1.4; margin-top: 4px; }
+  .detail-hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   .detail-hero-pop { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-90); color: var(--wf-0); font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; }
   .detail-hero-tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-20); color: var(--wf-100); font-size: 12px; font-weight: 700; }
-  .detail-hero-name { font-size: 21px; font-weight: 700; color: var(--wf-100); }
-  .detail-hero-sub { font-size: 14px; color: var(--wf-90); line-height: 1.4; margin-top: 4px; }
-  .detail-hero-pricerow { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
-  .detail-hero-price { font-size: 12px; color: var(--wf-60); margin: 0; }
+  .detail-hero-pricerow { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+  .detail-hero-price { font-size: 12px; color: var(--wf-90); margin: 0; }
   .detail-hero-price strong { font-size: 28px; font-weight: 700; color: var(--wf-100); }
-  .detail-hero-badge { font-size: 14px; color: var(--wf-90); }
+  .detail-hero-annual { display: inline-flex; align-items: center; margin-top: 12px; padding: 4px 12px; border-radius: 100px; background: var(--wf-20); font-size: 12px; color: var(--wf-90); }
   .detail-hero-cta { width: auto; margin-top: 0; flex-shrink: 0; padding-left: 24px; padding-right: 24px; }
   .detail-section { margin-top: 28px; }
   .detail-section-h { font-size: 16px; font-weight: 700; color: var(--wf-100); margin-bottom: 12px; }
@@ -465,6 +466,10 @@
   .detail-more-text { font-size: 14px; color: var(--wf-90); line-height: 1.5; }
   .detail-more-phone { font-size: 14px; color: var(--wf-90); margin-top: 12px; }
   .detail-cta { margin-top: 28px; }
+  @media (min-width: 601px) {
+    #detailModal .side-modal-panel { width: 640px; }
+    #detailModal .detail-hero-cta { padding-left: 40px; padding-right: 40px; }
+  }
 
   .reviews-scroll {
     display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none;
@@ -746,11 +751,12 @@
   /* Tag de tipo (como las tabs de arriba): pill blanco con borde gris, entre título y precio */
   .card-tag { display: inline-flex; align-self: flex-start; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-20); font-size: 12px; font-weight: 700; color: var(--wf-100); margin-bottom: 16px; }
   .card-subtitle { font-size: 14px; color: var(--wf-90); margin-bottom: 16px; line-height: 1.35; }
-  .card-price-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 16px; }
-  .card-price { font-size: 12px; color: var(--wf-60); }
+  .card-price-row { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 16px; }
+  .card-price { font-size: 12px; color: var(--wf-90); }
   .card-price strong { font-size: 24px; font-weight: 700; color: var(--wf-100); }
-  .card-price-note { font-size: 12px; font-weight: 400; color: var(--wf-60); }
+  .card-price-note { font-size: 12px; font-weight: 400; color: var(--wf-90); }
   .card-annual-badge { font-size: 14px; font-weight: 400; color: var(--wf-90); }
+  .card-annual-badge strong { font-weight: 700; color: var(--wf-100); }
   .card-divider { height: 1px; background: var(--wf-20); margin-bottom: 12px; }
   .card-features { list-style: none; display: flex; flex-direction: column; gap: 8px; flex: 1; margin-bottom: 16px; }
   .card-features li { font-size: 14px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.35; }
@@ -1332,7 +1338,7 @@
             <div class="product-card">
               <h3 class="card-name">Start</h3>
               <span class="card-tag">Básico</span>
-              <div class="card-price-row"><div class="card-price"><strong>28€</strong>/mes</div><div class="card-annual-badge">-20€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>28€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>20€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-yes">Todas las especialidades</li>
@@ -1346,7 +1352,7 @@
               <div class="card-badge">El más popular</div>
               <h3 class="card-name">Medifiatc P15</h3>
               <span class="card-tag">Con copago</span>
-              <div class="card-price-row"><div class="card-price"><strong>45€</strong>/mes</div><div class="card-annual-badge">-32€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>45€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>32€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-yes">Hospitalización incluida</li>
@@ -1359,7 +1365,7 @@
             <div class="product-card">
               <h3 class="card-name">Medifiatc</h3>
               <span class="card-tag">Sin copago</span>
-              <div class="card-price-row"><div class="card-price"><strong>82€</strong>/mes</div><div class="card-annual-badge">-59€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>82€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>59€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-yes">Todas las especialidades</li>
@@ -1376,7 +1382,7 @@
             <div class="product-card">
               <h3 class="card-name">Start</h3>
               <span class="card-tag">Básico</span>
-              <div class="card-price-row"><div class="card-price"><strong>28€</strong>/mes</div><div class="card-annual-badge">-20€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>28€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>20€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-yes">Todas las especialidades</li>
@@ -1390,7 +1396,7 @@
               <div class="card-badge">El más popular</div>
               <h3 class="card-name">Medifiatc P15</h3>
               <span class="card-tag">Con copago</span>
-              <div class="card-price-row"><div class="card-price"><strong>45€</strong>/mes</div><div class="card-annual-badge">-32€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>45€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>32€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-yes">Hospitalización incluida</li>
@@ -1403,7 +1409,7 @@
             <div class="product-card">
               <h3 class="card-name">Medifiatc Diagonal P15</h3>
               <span class="card-tag">Con copago</span>
-              <div class="card-price-row"><div class="card-price"><strong>55€</strong>/mes</div><div class="card-annual-badge">-40€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>55€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>40€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-diagonal">Acceso Clínica Diagonal</li>
@@ -1416,7 +1422,7 @@
             <div class="product-card">
               <h3 class="card-name">Medifiatc P5</h3>
               <span class="card-tag">Con copago mínimo</span>
-              <div class="card-price-row"><div class="card-price"><strong>60€</strong>/mes</div><div class="card-annual-badge">-43€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>60€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>43€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-yes">Cobertura completa</li>
@@ -1429,7 +1435,7 @@
             <div class="product-card">
               <h3 class="card-name">Medifiatc Diagonal P4</h3>
               <span class="card-tag">Con copago mínimo</span>
-              <div class="card-price-row"><div class="card-price"><strong>72€</strong>/mes</div><div class="card-annual-badge">-52€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>72€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>52€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-diagonal">Acceso Clínica Diagonal</li>
@@ -1447,7 +1453,7 @@
               <div class="card-badge">El más popular</div>
               <h3 class="card-name">Medifiatc</h3>
               <span class="card-tag">Sin copago</span>
-              <div class="card-price-row"><div class="card-price"><strong>82€</strong>/mes</div><div class="card-annual-badge">-59€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>82€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>59€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-yes">Todas las especialidades</li>
@@ -1460,7 +1466,7 @@
             <div class="product-card">
               <h3 class="card-name">Medifiatc Diagonal</h3>
               <span class="card-tag">Sin copago</span>
-              <div class="card-price-row"><div class="card-price"><strong>98€</strong>/mes</div><div class="card-annual-badge">-71€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>98€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>71€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-diagonal">Acceso Clínica Diagonal</li>
@@ -1478,7 +1484,7 @@
             <div class="product-card">
               <h3 class="card-name">Selec</h3>
               <span class="card-tag">Reembolso</span>
-              <div class="card-price-row"><div class="card-price"><strong>38€</strong>/mes</div><div class="card-annual-badge">-27€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>38€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>27€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-yes"><strong>Reembolso</strong> de gastos médicos</li>
@@ -1493,7 +1499,7 @@
               <div class="card-badge">El más popular</div>
               <h3 class="card-name">Multi125</h3>
               <span class="card-tag">Reembolso</span>
-              <div class="card-price-row"><div class="card-price"><strong>63€</strong>/mes</div><div class="card-annual-badge">-45€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>63€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>45€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-yes">Reembolso hasta <strong>125.000 €/año</strong></li>
@@ -1507,7 +1513,7 @@
             <div class="product-card">
               <h3 class="card-name">Multi250</h3>
               <span class="card-tag">Reembolso</span>
-              <div class="card-price-row"><div class="card-price"><strong>92€</strong>/mes</div><div class="card-annual-badge">-66€ con pago anual</div></div>
+              <div class="card-price-row"><div class="card-price"><strong>92€</strong>/mes</div><div class="card-annual-badge">Ahorra <strong>66€</strong> con el pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
                 <li class="feat-yes">Reembolso hasta <strong>250.000 €/año</strong></li>
@@ -1931,16 +1937,17 @@
       </button>
       <div class="side-modal-body">
         <div class="detail-hero">
+          <p class="detail-hero-name" id="detailName">Medifiatc P15</p>
+          <p class="detail-hero-sub" id="detailSub">Cobertura completa con cuota ajustada</p>
           <div class="detail-hero-badges">
             <span class="detail-hero-pop" id="detailPop">El más popular</span>
             <span class="detail-hero-tag" id="detailTag">Con copago</span>
           </div>
-          <p class="detail-hero-name" id="detailName">Medifiatc P15</p>
-          <p class="detail-hero-sub" id="detailSub">Cobertura completa con cuota ajustada</p>
           <div class="detail-hero-pricerow">
-            <p class="detail-hero-price"><strong id="detailPrice">45€</strong>/mes <span class="detail-hero-badge" id="detailBadge">· -32€ con pago anual</span></p>
+            <p class="detail-hero-price"><strong id="detailPrice">45€</strong>/mes</p>
             <button class="btn-primary detail-hero-cta" onclick="closeDetail(); openHablemos();">Me interesa</button>
           </div>
+          <span class="detail-hero-annual" id="detailBadge">Ahorra 32€ con el pago anual</span>
         </div>
 
         <div class="detail-section">
@@ -2311,7 +2318,7 @@
       if (card.classList.contains('featured') && popEl) { pop.textContent = popEl.textContent.trim(); pop.style.display = 'inline-flex'; }
       else { pop.style.display = 'none'; }
       const badge = document.getElementById('detailBadge');
-      if (badgeEl) { badge.textContent = '· ' + badgeEl.textContent.trim(); badge.style.display = 'inline'; }
+      if (badgeEl) { badge.textContent = badgeEl.textContent.trim(); badge.style.display = 'inline-flex'; }
       else { badge.style.display = 'none'; }
       document.getElementById('detailForWhom').textContent = DETAIL_FORWHOM[tag] || '';
       const inc = document.getElementById('detailIncludes');
