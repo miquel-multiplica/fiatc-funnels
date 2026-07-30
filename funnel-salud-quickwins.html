@@ -157,7 +157,7 @@
   }
 
   .step-eyebrow {
-    font-size: 13px; font-weight: 600; color: var(--wf-60);
+    font-size: 12px; font-weight: 600; color: var(--wf-60);
     text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
   }
   .step-title {
@@ -165,7 +165,7 @@
     color: var(--wf-100); line-height: 27px;
     margin-bottom: 32px;
   }
-  #step0 .step-title { margin-bottom: 16px; font-size: 26px; line-height: 1.2; }
+  #step0 .step-title { margin-bottom: 16px; font-size: 28px; line-height: 1.2; }
   @media (min-width: 601px) {
     .step-title { font-size: 28px; line-height: 36.5px; }
     #step0 .step-title { font-size: 32px; }
@@ -218,12 +218,12 @@
   }
   .pref-card:hover { border-color: var(--wf-60); background: var(--wf-20); }
   .pref-body { display: flex; flex-direction: column; gap: 4px; }
-  .pref-title { font-size: 15px; font-weight: 600; color: var(--wf-100); line-height: 20px; }
+  .pref-title { font-size: 16px; font-weight: 600; color: var(--wf-100); line-height: 21px; }
   .pref-icon-wrap { flex-shrink: 0; margin-left: auto; display: flex; align-items: center; gap: 6px; color: var(--wf-60); }
-  .pref-icon-plus { font-size: 13px; color: var(--wf-60); font-weight: 400; line-height: 1; }
+  .pref-icon-plus { font-size: 14px; color: var(--wf-60); font-weight: 400; line-height: 1; }
 
   /* Nota sutil (p.ej. "podrás modificarlo más adelante") */
-  .step-hint { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--wf-60); line-height: 1.5; }
+  .step-hint { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--wf-60); line-height: 1.5; }
   .step-hint svg { flex-shrink: 0; margin-top: 1px; }
 
   /* Asegurados / fechas de nacimiento */
@@ -268,14 +268,14 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); max-height: 180px; overflow-y: auto;
   }
   .dob-cs.open .dob-options { display: block; }
-  .dob-option { padding: 9px 12px; font-size: 13px; font-family: inherit; color: var(--wf-100); cursor: pointer; transition: background 0.1s; }
+  .dob-option { padding: 9px 12px; font-size: 12px; font-family: inherit; color: var(--wf-100); cursor: pointer; transition: background 0.1s; }
   .dob-option:hover { background: var(--wf-20); }
   .dob-option.selected { font-weight: 700; background: var(--wf-20); }
 
   .btn-add-insured {
     display: flex; align-items: center; gap: 8px;
     background: none; border: none; cursor: pointer;
-    font-family: inherit; font-size: 13px; font-weight: 700;
+    font-family: inherit; font-size: 14px; font-weight: 700;
     color: var(--wf-90); padding: 8px 0; margin-top: 14px;
   }
 
@@ -288,7 +288,7 @@
     cursor: pointer; transition: border-color 0.15s, background 0.15s;
   }
   .date-card:hover { border-color: var(--wf-60); background: var(--wf-20); }
-  .date-label { font-size: 15px; font-weight: 600; color: var(--wf-100); line-height: 20px; }
+  .date-label { font-size: 16px; font-weight: 600; color: var(--wf-100); line-height: 21px; }
   .date-badge {
     display: inline-flex; align-items: center;
     font-size: 12px; font-weight: 700; color: var(--wf-0);
@@ -360,11 +360,11 @@
   .cc-option .cc-opt-code { margin-left: auto; color: var(--wf-60); }
 
   /* Consentimiento por canal — caja con cabecera (Acepto…) + filas */
-  .pub-list { border: 1px solid var(--wf-40); border-radius: 10px; margin: 32px 0 24px; overflow: hidden; background: var(--wf-0); }
+  .pub-list { border: 1px solid var(--wf-40); border-radius: 10px; margin: 32px 0 32px; overflow: hidden; background: var(--wf-0); }
   .pub-head { padding: 14px 16px; position: relative; }
   .pub-head::after { content: ''; position: absolute; bottom: 0; left: 16px; right: 16px; height: 1px; background: var(--wf-20); }
-  .pub-q { font-size: 14px; font-weight: 700; color: var(--wf-100); line-height: 1.5; margin: 0 0 4px; }
-  .pub-head .legal-mini { margin: 0; color: var(--wf-90); }
+  .pub-q { font-size: 16px; font-weight: 700; color: var(--wf-100); line-height: 1.4; margin: 0 0 4px; }
+  .pub-head .legal-mini { margin: 0; font-size: 14px; color: var(--wf-90); }
   .pub-head .legal-trigger { color: var(--wf-90); }
   .pub-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; position: relative; }
   /* Divisor entre items: insetado (no llega a los lados) y más suave */
@@ -382,12 +382,13 @@
   .pub-row-sub { display: block; font-size: 12px; color: var(--wf-60); margin-top: 2px; }
 
   .step-hero-msg {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: flex-start; gap: 10px;
     width: fit-content; margin-bottom: 18px;
-    font-size: 14px; color: var(--wf-90); line-height: 1.45;
+    font-size: 16px; color: var(--wf-90); line-height: 1.45;
   }
   .step-hero-msg strong { color: var(--wf-100); font-weight: 700; }
-  .step-hero-msg svg { flex-shrink: 0; color: var(--wf-100); }
+  /* Check alineado con la primera línea de texto (por si el copy cae a 2 líneas) */
+  .step-hero-msg svg { flex-shrink: 0; color: var(--wf-100); margin-top: 4px; }
 
   /* Mensaje promocional con fondo (pill) */
   .step-promo {
@@ -402,13 +403,15 @@
   /* CTAs */
   .btn-primary {
     width: 100%; padding: 18px 14px;
-    background: var(--wf-90); color: var(--wf-0);
+    background: var(--wf-100); color: var(--wf-0);
     border: none; border-radius: 8px;
     font-size: 16px; font-weight: 700; font-family: inherit;
     cursor: pointer; margin-top: 24px; letter-spacing: 0.2px;
   }
   .btn-primary:hover { background: var(--wf-100); }
   .btn-primary:disabled { background: var(--wf-20); color: var(--wf-60); cursor: not-allowed; }
+  /* step6b: el gap arriba/abajo del bloque de consentimiento lo define la pub-list (simétrico) */
+  #step6b .btn-primary { margin-top: 0; }
   .btn-skip {
     display: block; width: 100%; margin-top: 10px; padding: 12px;
     background: none; border: none; font-family: inherit;
@@ -419,8 +422,8 @@
   /* Social proof — stats + reviews */
   .why-stats { display: flex; gap: 10px; margin-bottom: 16px; }
   .why-stat { flex: 1; background: var(--wf-20); border-radius: 10px; padding: 12px; text-align: center; }
-  .why-stat-num { font-size: 20px; font-weight: 700; color: var(--wf-100); letter-spacing: -0.5px; }
-  .why-stat-label { font-size: 13px; color: var(--wf-90); margin-top: 4px; line-height: 1.3; }
+  .why-stat-num { font-size: 21px; font-weight: 700; color: var(--wf-100); letter-spacing: -0.5px; }
+  .why-stat-label { font-size: 12px; color: var(--wf-90); margin-top: 4px; line-height: 1.3; }
 
   .reviews-scroll {
     display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none;
@@ -433,7 +436,7 @@
     border: 1.5px solid var(--wf-20); border-radius: 12px; padding: 16px;
   }
   .review-stars { display: flex; gap: 3px; margin-bottom: 10px; }
-  .review-quote { font-size: 13px; color: var(--wf-90); line-height: 1.5; margin-bottom: 12px; }
+  .review-quote { font-size: 14px; color: var(--wf-90); line-height: 1.5; margin-bottom: 12px; }
   .review-author { font-size: 12px; color: var(--wf-60); font-weight: 600; }
 
   /* Flechas del carrusel (solo desktop) */
@@ -475,7 +478,7 @@
     content: ''; position: absolute; top: 0; left: 0; right: 0;
     height: 1px; background: var(--wf-20);
   }
-  .why-title { font-size: 20px; font-weight: 700; color: var(--wf-100); margin-bottom: 24px; text-align: center; }
+  .why-title { font-size: 21px; font-weight: 700; color: var(--wf-100); margin-bottom: 24px; text-align: center; }
   .why-list { display: flex; flex-direction: column; }
   .why-item { border-bottom: 1px solid var(--wf-20); overflow: hidden; }
   .why-item:first-child { border-top: 1px solid var(--wf-20); }
@@ -572,7 +575,7 @@
   /* Divisor del exit-intent ("o si necesitas ayuda") */
   .exit-divider { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
   .exit-divider::before, .exit-divider::after { content: ''; flex: 1; height: 1px; background: var(--wf-20); }
-  .exit-divider span { font-size: 13px; color: var(--wf-60); white-space: nowrap; }
+  .exit-divider span { font-size: 12px; color: var(--wf-60); white-space: nowrap; }
 
   /* Opciones de contacto con raya separadora */
   .hablemos-links { display: flex; flex-direction: column; }
@@ -630,7 +633,7 @@
   /* Confirmación */
   .call-confirm-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--wf-20); display: flex; align-items: center; justify-content: center; margin: 8px auto 16px; color: var(--wf-90); }
   .call-confirm-icon svg { width: 22px; height: 22px; }
-  .call-confirm-title { font-size: 20px; font-weight: 700; color: var(--wf-100); margin-bottom: 12px; line-height: 1.25; }
+  .call-confirm-title { font-size: 21px; font-weight: 700; color: var(--wf-100); margin-bottom: 12px; line-height: 1.25; }
   .call-confirm-text { font-size: 14px; color: var(--wf-90); line-height: 1.6; margin-bottom: 32px; }
 
   /* ══════════════════════════════════════════
@@ -644,59 +647,67 @@
   .step-loading.active { display: flex; animation: stepIn 0.35s ease; }
   .loading-spinner { width: 36px; height: 36px; border: 3px solid var(--wf-40); border-top-color: var(--wf-100); border-radius: 50%; animation: spinAnim 0.85s linear infinite; margin-bottom: 24px; }
   @keyframes spinAnim { to { transform: rotate(360deg); } }
-  .loading-title { font-size: 20px; font-weight: 700; color: var(--wf-100); margin-bottom: 28px; }
-  .loading-text { font-size: 15px; color: var(--wf-60); transition: opacity 0.4s ease; }
+  .loading-title { font-size: 21px; font-weight: 700; color: var(--wf-100); margin-bottom: 28px; }
+  .loading-text { font-size: 14px; color: var(--wf-60); transition: opacity 0.4s ease; }
   .loading-text.fade { opacity: 0; }
 
   /* ══════════════════════════════════════════
      RESULTADOS (step7)
      ══════════════════════════════════════════ */
-  .filter-tabs { display: flex; margin: 0 0 16px; padding: 3px; overflow-x: auto; scrollbar-width: none; background: var(--wf-0); border: 1.5px solid var(--wf-20); border-radius: 100px; }
+  .filter-tabs { display: flex; width: fit-content; max-width: 100%; margin: 0 auto 16px; padding: 3px; overflow-x: auto; scrollbar-width: none; background: var(--wf-0); border: 1.5px solid var(--wf-20); border-radius: 100px; }
   .filter-tabs::-webkit-scrollbar { display: none; }
-  .filter-tab { flex-shrink: 0; padding: 6px 14px; border-radius: 100px; font-size: 13px; font-family: inherit; border: none; background: none; color: var(--wf-60); cursor: pointer; transition: all 0.2s; }
+  .filter-tab { flex-shrink: 0; padding: 6px 14px; border-radius: 100px; font-size: 12px; font-family: inherit; border: none; background: none; color: var(--wf-60); cursor: pointer; transition: all 0.2s; }
   .filter-tab.active { background: var(--wf-20); color: var(--wf-100); font-weight: 700; }
   .results-summary { margin-bottom: 8px; }
   #step7Sub { font-size: 14px; color: var(--wf-90); margin-bottom: 8px; line-height: 1.4; }
   /* Ristra de metadatos del cálculo (CP · N asegurados · Editar) */
   .results-meta { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--wf-90); margin-bottom: 8px; }
-  .results-meta-prov { color: var(--wf-60); }
+  .results-meta-prov { color: inherit; }
   .results-meta-sep { color: var(--wf-60); font-weight: 700; }
-  .results-meta-edit { display: inline-flex; align-items: center; gap: 5px; color: var(--wf-90); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+  .results-meta-edit { display: inline-flex; align-items: center; gap: 5px; color: var(--wf-90); font-weight: 700; text-decoration: none; cursor: pointer; }
   .results-meta-edit svg { flex-shrink: 0; }
   .results-meta-edit:hover { color: var(--wf-100); }
-  /* Panel calculadora: "Recalcular" va tras el último bloque y solo se ancla abajo (sticky) al desbordar */
+  /* Panel calculadora: footer (Cancelar + Recalcular) tras el último bloque, sticky al desbordar */
   #calcModal .side-modal-body { padding-bottom: 0; }
-  .calc-recalc { position: sticky; bottom: 0; background: var(--wf-0); padding-top: 14px; padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); margin-top: 16px; }
-  .calc-recalc .btn-primary { margin-top: 0; }
+  .calc-recalc { position: sticky; bottom: 0; display: flex; gap: 12px; background: var(--wf-0); padding-top: 18px; padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); margin-top: 24px; }
+  /* Separador suave sobre el bloque de CTAs (alineado con los botones, no con el borde del panel) */
+  .calc-recalc::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--wf-20); }
+  .calc-recalc .btn-ghost { flex: 0 0 auto; }
+  .calc-recalc .btn-primary { flex: 1; margin-top: 0; }
+  .btn-ghost { padding: 18px 20px; background: none; border: 1px solid var(--wf-40); border-radius: 8px; font-size: 16px; font-weight: 700; font-family: inherit; color: var(--wf-90); cursor: pointer; letter-spacing: 0.2px; }
+  .btn-ghost:hover { border-color: var(--wf-60); color: var(--wf-100); }
   .products-carousel { margin: 0 calc(-1 * var(--content-pad)); }
   .products-scroll { display: none; flex-direction: row; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 20px var(--content-pad); scrollbar-width: none; }
   .products-scroll::-webkit-scrollbar { display: none; }
   @keyframes scrollFadeIn { from { opacity: 0; } to { opacity: 1; } }
   .products-scroll.active { display: flex; animation: scrollFadeIn 0.3s ease-in-out; }
-  .product-card { flex-shrink: 0; width: 263px; background: var(--wf-0); border: 1.5px solid var(--wf-40); border-radius: 16px; padding: 24px 18px 20px; scroll-snap-align: center; position: relative; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); overflow: hidden; }
+  .product-card { flex-shrink: 0; width: 288px; background: var(--wf-0); border: 1.5px solid var(--wf-40); border-radius: 16px; padding: 24px 18px 20px; scroll-snap-align: center; position: relative; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); overflow: hidden; }
   /* Card destacada: sube para que la cabecera oscura sobresalga y el cuerpo quede alineado con las demás */
   .product-card.featured { border-color: var(--wf-90); box-shadow: 0 4px 16px rgba(39, 42, 48, 0.10); margin-top: -26px; }
   /* Cabecera "El más popular": barra oscura a todo el ancho (cancela el padding de la card) */
-  .card-badge { display: block; margin: -24px -18px 18px; padding: 9px 12px; text-align: center; background: var(--wf-20); color: var(--wf-90); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+  .card-badge { display: block; margin: -24px -18px 18px; padding: 8px 12px; text-align: center; background: var(--wf-20); color: var(--wf-90); font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; }
+  /* Header wf-90: un tono más claro que los CTA (ahora wf-100), sin competir */
   .product-card.featured .card-badge { background: var(--wf-90); color: var(--wf-0); }
-  .card-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--wf-60); margin-bottom: 7px; }
-  .card-name { font-size: 18px; font-weight: 700; color: var(--wf-100); margin-bottom: 5px; line-height: 1.2; }
-  .card-subtitle { font-size: 13px; color: var(--wf-90); margin-bottom: 18px; line-height: 1.35; }
+  .card-name { font-size: 18px; font-weight: 700; color: var(--wf-100); margin-bottom: 8px; line-height: 1.2; }
+  /* Tag de tipo (como las tabs de arriba): pill blanco con borde gris, entre título y precio */
+  .card-tag { display: inline-flex; align-self: flex-start; align-items: center; padding: 5px 12px; border-radius: 100px; background: var(--wf-20); font-size: 12px; font-weight: 700; color: var(--wf-100); margin-bottom: 16px; }
+  .card-subtitle { font-size: 14px; color: var(--wf-90); margin-bottom: 18px; line-height: 1.35; }
   .card-price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 16px; }
-  .card-price { font-size: 13px; color: var(--wf-60); }
-  .card-price strong { font-size: 22px; font-weight: 700; color: var(--wf-100); }
-  .card-annual-badge { font-size: 12px; font-weight: 400; color: var(--wf-60); flex-shrink: 0; text-align: right; }
+  .card-price { font-size: 12px; color: var(--wf-60); }
+  .card-price strong { font-size: 24px; font-weight: 700; color: var(--wf-100); }
+  .card-annual-badge { font-size: 14px; font-weight: 400; color: var(--wf-90); flex-shrink: 0; text-align: right; }
   .card-divider { height: 1px; background: var(--wf-20); margin-bottom: 12px; }
   .card-features { list-style: none; display: flex; flex-direction: column; gap: 8px; flex: 1; margin-bottom: 16px; }
-  .card-features li { font-size: 13.5px; display: flex; align-items: flex-start; gap: 7px; line-height: 1.35; }
+  .card-features li { font-size: 14px; display: flex; align-items: flex-start; gap: 7px; line-height: 1.35; }
+  .card-features strong { white-space: nowrap; } /* mantiene juntos importes tipo "125.000 €/año" */
   .feat-yes { color: var(--wf-90); }
   .feat-yes::before { content: ''; flex-shrink: 0; width: 14px; height: 14px; margin-top: 1px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23272A30' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; }
   .feat-no { color: var(--wf-60); }
   .feat-no::before { content: ''; flex-shrink: 0; width: 14px; height: 14px; margin-top: 1px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238994A5' stroke-width='2' stroke-linecap='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; }
   .feat-diagonal { list-style: none; background: var(--wf-20); margin-left: -18px; margin-right: -18px; padding: 4px 18px; font-weight: 700; color: var(--wf-90); }
   .feat-diagonal::before { content: ''; flex-shrink: 0; width: 14px; height: 14px; margin-top: 1px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23424B5A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; }
-  .card-cta { width: 100%; padding: 13px; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; font-family: inherit; cursor: pointer; background: var(--wf-90); color: var(--wf-0); }
-  .card-cta:hover { background: var(--wf-100); }
+  .card-cta { width: 100%; padding: 13px; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; font-family: inherit; cursor: pointer; background: var(--wf-100); color: var(--wf-0); }
+  .card-cta:hover { background: var(--wf-90); }
   .card-detail { background: none; border: none; font-size: 14px; color: var(--wf-90); text-decoration: underline; cursor: pointer; padding: 14px 0 0; font-family: inherit; width: 100%; text-align: center; }
 
   /* Resultados en desktop: columna más ancha (clase results-wide en .app-main solo en step7),
@@ -719,13 +730,15 @@
     .app-header-title { display: none; }
     .content-col { --content-pad: 16px; padding: 24px var(--content-pad) 48px; }
     /* Resultados mobile: padding lateral que centra la card (263px) con las vecinas asomando (como el proto) */
-    #step7 .products-scroll { padding: 34px calc((100vw - 263px) / 2) 20px; }
+    #step7 .products-scroll { padding: 44px calc((100vw - 288px) / 2) 20px; }
 
     /* El "cancela cuando quieras" cae debajo del título en mobile */
     .pub-row-body { flex-direction: column; align-items: flex-start; gap: 2px; }
-    /* CTA más pegado al bloque de consentimiento en mobile */
-    .pub-list { margin: 24px 0 8px; }
-    #step6b .btn-primary, #step6 .btn-primary { margin-top: 16px; }
+    /* Gap simétrico: botón ↔ bloque = input ↔ bloque (24px) */
+    .pub-list { margin: 24px 0 24px; }
+    #step6 .btn-primary { margin-top: 16px; }
+    /* 16px de padding vertical entre canales en mobile */
+    .pub-row { padding-top: 16px; padding-bottom: 16px; }
 
     /* Iconos de email/teléfono más pequeños en mobile (bajan la altura del paso) */
     .step-icon-badge { width: 48px; height: 48px; margin: 0 auto 12px; }
@@ -1103,7 +1116,7 @@
         <div class="pub-list">
           <div class="pub-head">
             <p class="pub-q">¿Te informamos sobre productos y ofertas relacionadas?</p>
-            <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales de FIATC.</p>
+            <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
             <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email, teléfono y/o WhatsApp sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
             <div class="pub-head-foot">
               <span class="pub-cancel-badge">Cancela cuando quieras</span>
@@ -1178,9 +1191,8 @@
           <!-- PARA TI -->
           <div class="products-scroll active" id="scroll-para-ti">
             <div class="product-card">
-              <div class="card-eyebrow">Básico</div>
               <h3 class="card-name">Start</h3>
-              <div class="card-subtitle">La opción más asequible, sin hospitalización</div>
+              <span class="card-tag">Básico</span>
               <div class="card-price-row"><div class="card-price"><strong>28€</strong>/mes</div><div class="card-annual-badge">-20€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1193,9 +1205,8 @@
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
-              <div class="card-eyebrow">Completo con copago</div>
               <h3 class="card-name">Medifiatc P15</h3>
-              <div class="card-subtitle">Cobertura completa con cuota ajustada</div>
+              <span class="card-tag">Con copago</span>
               <div class="card-price-row"><div class="card-price"><strong>45€</strong>/mes</div><div class="card-annual-badge">-32€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1207,9 +1218,8 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <div class="card-eyebrow">Completo sin copago</div>
               <h3 class="card-name">Medifiatc</h3>
-              <div class="card-subtitle">Cobertura total sin ningún copago</div>
+              <span class="card-tag">Sin copago</span>
               <div class="card-price-row"><div class="card-price"><strong>82€</strong>/mes</div><div class="card-annual-badge">-59€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1225,9 +1235,8 @@
           <!-- CON COPAGO -->
           <div class="products-scroll" id="scroll-copago">
             <div class="product-card">
-              <div class="card-eyebrow">Básico</div>
               <h3 class="card-name">Start</h3>
-              <div class="card-subtitle">Sin hospitalización, la más asequible</div>
+              <span class="card-tag">Básico</span>
               <div class="card-price-row"><div class="card-price"><strong>28€</strong>/mes</div><div class="card-annual-badge">-20€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1240,9 +1249,8 @@
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
-              <div class="card-eyebrow">Completo con copago</div>
               <h3 class="card-name">Medifiatc P15</h3>
-              <div class="card-subtitle">Cobertura completa con cuota ajustada</div>
+              <span class="card-tag">Con copago</span>
               <div class="card-price-row"><div class="card-price"><strong>45€</strong>/mes</div><div class="card-annual-badge">-32€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1254,9 +1262,8 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <div class="card-eyebrow">Completo con copago</div>
               <h3 class="card-name">Medifiatc Diagonal P15</h3>
-              <div class="card-subtitle">Cobertura completa</div>
+              <span class="card-tag">Con copago</span>
               <div class="card-price-row"><div class="card-price"><strong>55€</strong>/mes</div><div class="card-annual-badge">-40€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1268,9 +1275,8 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <div class="card-eyebrow">Completo con copago</div>
               <h3 class="card-name">Medifiatc P5</h3>
-              <div class="card-subtitle">Máxima cobertura, copago mínimo</div>
+              <span class="card-tag">Con copago mínimo</span>
               <div class="card-price-row"><div class="card-price"><strong>60€</strong>/mes</div><div class="card-annual-badge">-43€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1282,9 +1288,8 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <div class="card-eyebrow">Completo con copago</div>
               <h3 class="card-name">Medifiatc Diagonal P4</h3>
-              <div class="card-subtitle">Cobertura completa, copago mínimo</div>
+              <span class="card-tag">Con copago mínimo</span>
               <div class="card-price-row"><div class="card-price"><strong>72€</strong>/mes</div><div class="card-annual-badge">-52€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1301,9 +1306,8 @@
           <div class="products-scroll" id="scroll-sin-copago">
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
-              <div class="card-eyebrow">Completo sin copago</div>
               <h3 class="card-name">Medifiatc</h3>
-              <div class="card-subtitle">Cobertura total sin ningún copago</div>
+              <span class="card-tag">Sin copago</span>
               <div class="card-price-row"><div class="card-price"><strong>82€</strong>/mes</div><div class="card-annual-badge">-59€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1315,9 +1319,8 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <div class="card-eyebrow">Completo sin copago</div>
               <h3 class="card-name">Medifiatc Diagonal</h3>
-              <div class="card-subtitle">Sin copagos en toda la red médica</div>
+              <span class="card-tag">Sin copago</span>
               <div class="card-price-row"><div class="card-price"><strong>98€</strong>/mes</div><div class="card-annual-badge">-71€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1334,9 +1337,8 @@
           <!-- REEMBOLSO -->
           <div class="products-scroll" id="scroll-reembolso">
             <div class="product-card">
-              <div class="card-eyebrow">Reembolso</div>
               <h3 class="card-name">Selec</h3>
-              <div class="card-subtitle">Libertad para elegir médico o clínica al mejor precio.</div>
+              <span class="card-tag">Reembolso</span>
               <div class="card-price-row"><div class="card-price"><strong>38€</strong>/mes</div><div class="card-annual-badge">-27€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1350,9 +1352,8 @@
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
-              <div class="card-eyebrow">Reembolso</div>
               <h3 class="card-name">Multi125</h3>
-              <div class="card-subtitle">Más cobertura y mayor reembolso para tu tranquilidad.</div>
+              <span class="card-tag">Reembolso</span>
               <div class="card-price-row"><div class="card-price"><strong>63€</strong>/mes</div><div class="card-annual-badge">-45€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1365,9 +1366,8 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <div class="card-eyebrow">Reembolso</div>
               <h3 class="card-name">Multi250</h3>
-              <div class="card-subtitle">La máxima protección para quienes no quieren límites.</div>
+              <span class="card-tag">Reembolso</span>
               <div class="card-price-row"><div class="card-price"><strong>92€</strong>/mes</div><div class="card-annual-badge">-66€ con pago anual</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1482,7 +1482,7 @@
           <div class="pub-list" style="text-align:left; margin:28px 0 20px;">
             <div class="pub-head">
               <p class="pub-q">¡No te pierdas nada! ¿Quieres recibir novedades y ofertas?</p>
-              <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales de FIATC.</p>
+              <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
               <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email, teléfono y/o WhatsApp sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
               <div class="pub-head-foot">
                 <span class="pub-cancel-badge">Cancela cuando quieras</span>
@@ -1587,14 +1587,15 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="side-modal-body">
-        <div class="hablemos-title">¿Quién va en el seguro?</div>
-        <div class="hablemos-subtitle" style="margin-bottom:24px;">Añade o quita asegurados y ajusta sus edades. Recalculamos el precio al momento.</div>
+        <div class="hablemos-title">¿Quieres probar con más o menos asegurados?</div>
+        <div class="hablemos-subtitle" style="margin-bottom:24px;">Recalculamos el precio al momento para que pruebes distintos escenarios.</div>
         <div id="calcInsuredList"></div>
         <button class="btn-add-insured" onclick="calcAdd()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Añadir asegurado
         </button>
         <div class="calc-recalc">
+          <button class="btn-ghost" onclick="closeCalc()">Cancelar</button>
           <button class="btn-primary" onclick="calcRecalculate()">Recalcular</button>
         </div>
       </div>
@@ -1628,6 +1629,8 @@
       if (next && document.getElementById(next)) showStep(next);
     }
     function prevStep() {
+      // Desde resultados, el back vuelve al último paso del funnel (step6b)
+      if (document.getElementById('step7').classList.contains('active')) { showStep('step6b'); return; }
       let i = stepIdx - 1;
       while (PLANNED_FLOW[i] === 'stepDNI' && !isClient) i--;
       const prev = PLANNED_FLOW[i];
@@ -1661,6 +1664,7 @@
         ld.classList.remove('active');
         document.getElementById('step7').classList.add('active');
         document.getElementById('appMain').classList.add('results-wide');
+        document.querySelector('.app-header').classList.add('show-back');
         document.getElementById('appMain').scrollTop = 0;
         updateResultsMeta();
         requestAnimationFrame(() => centerFeatured(document.querySelector('#step7 .products-scroll.active')));
@@ -1692,6 +1696,8 @@
 
     /* ── Efecto calculadora: editar asegurados/edades desde resultados (QW#1) ── */
     let calcCount = 1;
+    let calcBaseCount = 1; // nº de asegurados al abrir el panel; los añadidos por encima van sin fecha
+    let calcSeq = 0; // contador monotónico de ids de bloque (evita choques al añadir tras quitar)
     function updateResultsMeta() {
       const cpEl = document.getElementById('cp');
       const cp = (cpEl && cpEl.value) ? cpEl.value : '07349';
@@ -1711,26 +1717,31 @@
     ];
     function calcDobHTML(id, dob) {
       const opts = meses.map(m => `<div class="dob-option" onclick="selectMonth('${id}','${m}')">${m}</div>`).join('');
+      const dd = dob ? dob.dd : '';
+      const mesTxt = dob ? dob.mes : 'Mes';
+      const mesCls = dob ? ' has-value' : '';
+      const aaaa = dob ? dob.aaaa : '';
       return `
         <div class="dob-row">
-          <input type="text" inputmode="numeric" maxlength="2" placeholder="DD" value="${dob.dd}" oninput="dobDayInput(this,'${id}')">
+          <input type="text" inputmode="numeric" maxlength="2" placeholder="DD" value="${dd}" oninput="dobDayInput(this,'${id}')">
           <div class="dob-cs" id="dcs-${id}">
-            <div class="dob-cs-trigger has-value" id="dcst-${id}" onclick="toggleMonth('${id}')">${dob.mes}</div>
+            <div class="dob-cs-trigger${mesCls}" id="dcst-${id}" onclick="toggleMonth('${id}')">${mesTxt}</div>
             <div class="dob-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="dob-options">${opts}</div>
           </div>
-          <input type="text" inputmode="numeric" maxlength="4" placeholder="AAAA" value="${dob.aaaa}">
+          <input type="text" inputmode="numeric" maxlength="4" placeholder="AAAA" value="${aaaa}">
         </div>`;
     }
     function calcBlockHTML(id, label, removable, dob) {
       const removeBtn = removable
-        ? `<button class="btn-remove" onclick="calcRemove()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>`
+        ? `<button class="btn-remove" onclick="calcRemove(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>`
         : '';
       return `<div class="insured-block" id="cblock-${id}"><div class="insured-header"><strong>${label}</strong>${removeBtn}</div>${calcDobHTML(id, dob)}</div>`;
     }
+    /* Render inicial (al abrir). Add/quitar luego mutan el DOM en sitio, sin rebuild → sin flash. */
     function renderCalcInsured() {
       const list = document.getElementById('calcInsuredList');
-      const dob = i => CALC_DOBS[(i - 1) % CALC_DOBS.length];
+      const dob = i => (i <= calcBaseCount ? CALC_DOBS[(i - 1) % CALC_DOBS.length] : null);
       let html = '';
       if (withMe) {
         html = calcBlockHTML('c1', 'Tú', false, dob(1));
@@ -1740,10 +1751,29 @@
       }
       list.innerHTML = html;
     }
-    function openCalc() { calcCount = insuredCount || 1; renderCalcInsured(); document.getElementById('calcModal').classList.add('open'); }
+    /* Renumbra las etiquetas por posición sin tocar los inputs (preserva lo escrito) */
+    function calcRelabel() {
+      document.querySelectorAll('#calcInsuredList .insured-block').forEach((b, idx) => {
+        const strong = b.querySelector('.insured-header strong');
+        if (strong) strong.textContent = (withMe && idx === 0) ? 'Tú' : 'Asegurado ' + (idx + 1);
+      });
+    }
+    function openCalc() { calcCount = insuredCount || 1; calcBaseCount = calcCount; calcSeq = calcCount; renderCalcInsured(); document.getElementById('calcModal').classList.add('open'); }
     function closeCalc() { document.getElementById('calcModal').classList.remove('open'); }
-    function calcAdd() { calcCount++; renderCalcInsured(); }
-    function calcRemove() { if (calcCount <= 1) return; calcCount--; renderCalcInsured(); }
+    function calcAdd() {
+      calcCount++;
+      const id = 'c' + (++calcSeq); // id monotónico → nunca choca aunque se hayan quitado bloques
+      document.getElementById('calcInsuredList').insertAdjacentHTML('beforeend', calcBlockHTML(id, 'Asegurado ' + calcCount, true, null));
+    }
+    function calcRemove(el) {
+      const blocks = document.querySelectorAll('#calcInsuredList .insured-block');
+      if (blocks.length <= 1) return;
+      const block = el ? el.closest('.insured-block') : blocks[blocks.length - 1];
+      if (!block) return;
+      block.remove();
+      calcCount--;
+      calcRelabel();
+    }
     function calcRecalculate() {
       insuredCount = calcCount;
       closeCalc();
