@@ -496,6 +496,11 @@
     height: 1px; background: var(--wf-20);
   }
   .why-title { font-size: 21px; font-weight: 700; color: var(--wf-100); margin-bottom: 24px; text-align: center; }
+  /* Destacado de social proof (no testimonial): banda gris con icono + mensaje genérico */
+  .social-proof { display: flex; align-items: flex-start; gap: 12px; background: var(--wf-20); border-radius: 8px; padding: 12px 16px; margin-bottom: 24px; }
+  .social-proof svg { flex-shrink: 0; color: var(--wf-90); margin-top: 1px; }
+  .social-proof span { font-size: 14px; color: var(--wf-90); line-height: 1.5; }
+  .social-proof strong { color: var(--wf-100); }
   .why-list { display: flex; flex-direction: column; }
   .why-item { border-bottom: 1px solid var(--wf-20); overflow: hidden; }
   .why-item:first-child { border-top: 1px solid var(--wf-20); }
@@ -746,6 +751,8 @@
     #step1 .faq-pills-section { width: min(760px, calc(100vw - 160px)); margin-left: 50%; transform: translateX(-50%); }
   }
   .faq-pills-title { font-size: 16px; font-weight: 700; color: var(--wf-100); text-align: center; margin-bottom: 16px; }
+  /* En resultados el "¿Te queda alguna duda?" iguala al "¿Por qué elegir FIATC?" (21px, headlineS) */
+  #step7 .faq-pills-title { font-size: 21px; margin-bottom: 24px; }
   .faq-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
   .faq-pill { display: inline-flex; align-items: center; padding: 8px 16px; background: var(--wf-0); border: 1.5px solid var(--wf-40); border-radius: 100px; font-size: 14px; font-family: inherit; color: var(--wf-90); cursor: pointer; transition: border-color 0.15s, color 0.15s; }
   .faq-pill:hover { border-color: var(--wf-100); color: var(--wf-100); }
@@ -1495,6 +1502,10 @@
         </div>
 
         <div class="why-section">
+          <div class="social-proof">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+            <span><strong>571.674 personas</strong> ya cuidan su salud con FIATC</span>
+          </div>
           <p class="why-title">¿Por qué elegir FIATC?</p>
           <div class="why-list">
             <div class="why-item">
