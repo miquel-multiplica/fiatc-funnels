@@ -468,8 +468,8 @@
   .detail-more-phone { font-size: 14px; color: var(--wf-90); margin-top: 12px; }
   .detail-cta { margin-top: 28px; }
   /* Dropdown "Más información" con grupos de enlaces/documentos */
-  .detail-more { border-top: 1px solid var(--wf-20); }
-  .detail-more-trigger { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 20px 0; background: none; border: none; cursor: pointer; font-family: inherit; font-size: 16px; font-weight: 700; color: var(--wf-100); text-align: left; }
+  .detail-more { margin-top: 28px; border-top: 1px solid var(--wf-20); border-bottom: 1px solid var(--wf-20); }
+  .detail-more-trigger { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 20px 0; background: none; border: none; cursor: pointer; font-family: inherit; font-size: 16px; font-weight: 400; color: var(--wf-100); text-align: left; }
   .detail-more-trigger svg { flex-shrink: 0; color: var(--wf-60); transition: transform 0.25s ease; }
   .detail-more.open .detail-more-trigger svg { transform: rotate(180deg); }
   .detail-more-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
@@ -480,9 +480,9 @@
   .detail-doc-link svg { flex-shrink: 0; color: var(--wf-60); }
   .detail-doc-link:hover { color: var(--wf-100); }
   /* Bloque de contacto: Hablemos + teléfono visible */
-  .detail-contact { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
-  .detail-contact .btn-ghost { width: 100%; }
-  .detail-contact-phone { font-size: 14px; color: var(--wf-90); text-align: center; margin: 0; }
+  .detail-contact { margin-top: 24px; display: flex; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .detail-contact .btn-ghost { width: auto; display: inline-flex; align-items: center; gap: 8px; }
+  .detail-contact-phone { font-size: 14px; color: var(--wf-90); margin: 0; }
   .detail-contact-phone strong { color: var(--wf-100); }
   @media (min-width: 601px) {
     #detailModal .side-modal-panel { width: 640px; }
@@ -1966,7 +1966,6 @@
             <p class="detail-hero-price"><strong id="detailPrice">45<span class="price-dec">,90€</span></strong> al mes</p>
             <button class="btn-primary detail-hero-cta" onclick="closeDetail(); openHablemos();">Me interesa</button>
           </div>
-          <span class="detail-hero-annual" id="detailBadge">Ahorra 32€ con el pago anual</span>
         </div>
 
         <div class="detail-section">
@@ -2016,7 +2015,10 @@
         </div>
 
         <div class="detail-contact">
-          <button class="btn-ghost" onclick="closeDetail(); openHablemos();">Hablemos</button>
+          <button class="btn-ghost" onclick="closeDetail(); openHablemos();">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Hablemos
+          </button>
           <p class="detail-contact-phone">o llámanos al <strong>900 123 456</strong></p>
         </div>
       </div>
@@ -2333,7 +2335,7 @@
 
     /* ── Modal "Detalles del seguro" (QW#3): se rellena leyendo el propio card ── */
     const DETAIL_SUB = {
-      'Básico': 'Lo esencial a la cuota más baja',
+      'Básico': 'Lo necesario para tu día a día',
       'Con copago': 'Cobertura completa con cuota ajustada',
       'Con copago mínimo': 'Cobertura completa con copagos mínimos',
       'Sin copago': 'Cobertura completa, sin copagos',
@@ -2351,7 +2353,6 @@
       const tagEl = card.querySelector('.card-tag');
       const tag = tagEl ? tagEl.textContent.trim() : '';
       const priceEl = card.querySelector('.card-price strong');
-      const priceCol = card.querySelector('.card-price');
       document.getElementById('detailName').textContent = card.querySelector('.card-name').textContent.trim();
       document.getElementById('detailSub').textContent = DETAIL_SUB[tag] || tag;
       document.getElementById('detailPrice').innerHTML = priceEl ? priceEl.innerHTML : '';
@@ -2362,13 +2363,6 @@
       const popEl = card.querySelector('.card-badge');
       if (card.classList.contains('featured') && popEl) { pop.textContent = popEl.textContent.trim(); pop.style.display = 'inline-flex'; }
       else { pop.style.display = 'none'; }
-      const badge = document.getElementById('detailBadge');
-      const monthly = priceEl ? parseInt(priceEl.textContent, 10) : 0;
-      const save = priceCol ? parseInt(priceCol.dataset.save || '0', 10) : 0;
-      if (save > 0 && monthly > 0) {
-        badge.innerHTML = 'O paga <strong>' + (monthly * 12 - save) + '€</strong> al año y ahorra <strong>' + save + '€</strong>';
-        badge.style.display = 'inline-block';
-      } else { badge.style.display = 'none'; }
       document.getElementById('detailForWhom').textContent = DETAIL_FORWHOM[tag] || '';
       const inc = document.getElementById('detailIncludes');
       inc.innerHTML = '';
