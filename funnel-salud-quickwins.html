@@ -434,11 +434,13 @@
     text-decoration: none; cursor: pointer;
   }
 
-  /* Social proof — stats + reviews */
-  .why-stats { display: flex; gap: 12px; margin-bottom: 16px; }
-  .why-stat { flex: 1; min-width: 0; background: var(--wf-20); border-radius: 10px; padding: 12px; text-align: center; }
-  .why-stat-num { font-size: 21px; font-weight: 700; color: var(--wf-100); letter-spacing: -0.5px; }
-  .why-stat-label { font-size: 12px; color: var(--wf-90); margin-top: 4px; line-height: 1.3; }
+  /* Social proof — dos cifras con icono, texto a la izquierda. Vertical en mobile, horizontal en desktop */
+  .why-stats { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .why-stat { display: flex; align-items: center; gap: 12px; background: var(--wf-20); border-radius: 10px; padding: 16px; }
+  .why-stat svg { flex-shrink: 0; width: 24px; height: 24px; color: var(--wf-90); }
+  .why-stat-num { font-size: 21px; font-weight: 700; color: var(--wf-100); letter-spacing: -0.5px; line-height: 1.1; }
+  .why-stat-label { font-size: 12px; color: var(--wf-90); margin-top: 2px; line-height: 1.3; }
+  @media (min-width: 601px) { .why-stats { flex-direction: row; } .why-stat { flex: 1; min-width: 0; } }
 
   .reviews-scroll {
     display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none;
@@ -496,11 +498,6 @@
     height: 1px; background: var(--wf-20);
   }
   .why-title { font-size: 21px; font-weight: 700; color: var(--wf-100); margin-bottom: 24px; text-align: center; }
-  /* Destacado de social proof (no testimonial): banda gris con icono + mensaje genérico */
-  .social-proof { display: flex; align-items: flex-start; gap: 12px; background: var(--wf-20); border-radius: 8px; padding: 12px 16px; margin-bottom: 24px; }
-  .social-proof svg { flex-shrink: 0; color: var(--wf-90); margin-top: 1px; }
-  .social-proof span { font-size: 14px; color: var(--wf-90); line-height: 1.5; }
-  .social-proof strong { color: var(--wf-100); }
   .why-list { display: flex; flex-direction: column; }
   .why-item { border-bottom: 1px solid var(--wf-20); overflow: hidden; }
   .why-item:first-child { border-top: 1px solid var(--wf-20); }
@@ -904,12 +901,18 @@
           <p class="why-title">¿Por qué elegir FIATC?</p>
           <div class="why-stats">
             <div class="why-stat">
-              <div class="why-stat-num">571.674</div>
-              <div class="why-stat-label">clientes confían en nosotros</div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <div>
+                <div class="why-stat-num">571.674</div>
+                <div class="why-stat-label">clientes confían en nosotros</div>
+              </div>
             </div>
             <div class="why-stat">
-              <div class="why-stat-num">8,8</div>
-              <div class="why-stat-label">valoración media de clientes</div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <div>
+                <div class="why-stat-num">8,8</div>
+                <div class="why-stat-label">valoración media de clientes</div>
+              </div>
             </div>
           </div>
           <div class="reviews-wrap">
@@ -1502,11 +1505,23 @@
         </div>
 
         <div class="why-section">
-          <div class="social-proof">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
-            <span><strong>571.674 personas</strong> ya cuidan su salud con FIATC</span>
-          </div>
           <p class="why-title">¿Por qué elegir FIATC?</p>
+          <div class="why-stats">
+            <div class="why-stat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <div>
+                <div class="why-stat-num">571.674</div>
+                <div class="why-stat-label">clientes confían en nosotros</div>
+              </div>
+            </div>
+            <div class="why-stat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <div>
+                <div class="why-stat-num">8,8</div>
+                <div class="why-stat-label">valoración media de clientes</div>
+              </div>
+            </div>
+          </div>
           <div class="why-list">
             <div class="why-item">
               <button class="why-trigger" onclick="toggleWhy(this)">
