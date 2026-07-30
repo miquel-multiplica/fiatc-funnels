@@ -2141,7 +2141,7 @@
         let note = p.querySelector('.card-price-note');
         if (n > 1) {
           if (!note) { note = document.createElement('span'); note.className = 'card-price-note'; p.appendChild(note); }
-          note.textContent = ' · total ' + n + ' asegurados';
+          note.textContent = ' · precio total para ' + n + ' asegurados';
         } else if (note) { note.remove(); }
       });
     }
