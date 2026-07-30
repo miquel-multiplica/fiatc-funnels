@@ -442,6 +442,25 @@
   .why-stat-text strong { font-size: 16px; font-weight: 700; color: var(--wf-100); }
   @media (min-width: 601px) { .why-stats { flex-direction: row; } .why-stat { flex: 1; min-width: 0; } }
 
+  /* Modal "Detalles del seguro" (QW#3) */
+  .detail-hero { padding-bottom: 24px; border-bottom: 1px solid var(--wf-20); }
+  .detail-hero-name { font-size: 21px; font-weight: 700; color: var(--wf-100); }
+  .detail-hero-sub { font-size: 14px; color: var(--wf-90); line-height: 1.4; margin-top: 4px; }
+  .detail-hero-price { font-size: 12px; color: var(--wf-60); margin-top: 16px; }
+  .detail-hero-price strong { font-size: 28px; font-weight: 700; color: var(--wf-100); }
+  .detail-hero-badge { display: block; font-size: 14px; color: var(--wf-90); margin-top: 4px; }
+  .detail-section { margin-top: 28px; }
+  .detail-section-h { font-size: 16px; font-weight: 700; color: var(--wf-100); margin-bottom: 12px; }
+  .detail-text { font-size: 14px; color: var(--wf-90); line-height: 1.5; }
+  .detail-check { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: var(--wf-90); line-height: 1.4; padding: 6px 0; }
+  .detail-check svg { flex-shrink: 0; color: var(--wf-90); margin-top: 2px; }
+  .detail-benefit { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--wf-90); padding: 12px 0; border-bottom: 1px solid var(--wf-20); }
+  .detail-benefit:first-child { border-top: 1px solid var(--wf-20); }
+  .detail-benefit svg { flex-shrink: 0; color: var(--wf-60); }
+  .detail-more-text { font-size: 14px; color: var(--wf-90); line-height: 1.5; }
+  .detail-more-phone { font-size: 14px; color: var(--wf-90); margin-top: 12px; }
+  .detail-cta { margin-top: 28px; }
+
   .reviews-scroll {
     display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none;
     margin: 24px calc(-1 * var(--content-pad)) 32px;
@@ -722,10 +741,11 @@
   /* Tag de tipo (como las tabs de arriba): pill blanco con borde gris, entre título y precio */
   .card-tag { display: inline-flex; align-self: flex-start; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-20); font-size: 12px; font-weight: 700; color: var(--wf-100); margin-bottom: 16px; }
   .card-subtitle { font-size: 14px; color: var(--wf-90); margin-bottom: 16px; line-height: 1.35; }
-  .card-price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 16px; }
+  .card-price-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 16px; }
   .card-price { font-size: 12px; color: var(--wf-60); }
   .card-price strong { font-size: 24px; font-weight: 700; color: var(--wf-100); }
-  .card-annual-badge { font-size: 14px; font-weight: 400; color: var(--wf-90); flex-shrink: 0; text-align: right; }
+  .card-price-note { font-size: 12px; font-weight: 400; color: var(--wf-60); }
+  .card-annual-badge { font-size: 14px; font-weight: 400; color: var(--wf-90); }
   .card-divider { height: 1px; background: var(--wf-20); margin-bottom: 12px; }
   .card-features { list-style: none; display: flex; flex-direction: column; gap: 8px; flex: 1; margin-bottom: 16px; }
   .card-features li { font-size: 14px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.35; }
@@ -984,7 +1004,15 @@
                 <strong>Acceso directo a especialistas</strong>
                 <svg class="why-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
-              <div class="why-body"><span>Consulta con el especialista que necesitas en días, no en meses</span></div>
+              <div class="why-body"><span>Consulta con el especialista que necesitas en días, no en meses. Sin listas de espera</span></div>
+            </div>
+            <div class="why-item">
+              <button class="why-trigger" onclick="toggleWhy(this)">
+                <div class="why-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+                <strong>Sigues cubierto si cambias de compañía</strong>
+                <svg class="why-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="why-body"><span>Si vienes de otra aseguradora con más de 12 meses, derogamos tus carencias y usas las coberturas sin esperas</span></div>
             </div>
             <div class="why-item">
               <button class="why-trigger" onclick="toggleWhy(this)">
@@ -1307,7 +1335,7 @@
                 <li class="feat-no">Sin hospitalización</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
@@ -1321,7 +1349,7 @@
                 <li class="feat-yes">Cuota mensual ajustada</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
               <h3 class="card-name">Medifiatc</h3>
@@ -1334,7 +1362,7 @@
                 <li class="feat-yes">Sin copagos en toda la red</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
           </div>
 
@@ -1351,7 +1379,7 @@
                 <li class="feat-no">Sin hospitalización</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
@@ -1365,7 +1393,7 @@
                 <li class="feat-yes">Cuota mensual ajustada</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
               <h3 class="card-name">Medifiatc Diagonal P15</h3>
@@ -1378,7 +1406,7 @@
                 <li class="feat-yes">Copagos desde 10€</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
               <h3 class="card-name">Medifiatc P5</h3>
@@ -1391,7 +1419,7 @@
                 <li class="feat-yes">Copagos reducidos desde 2€</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
               <h3 class="card-name">Medifiatc Diagonal P4</h3>
@@ -1404,7 +1432,7 @@
                 <li class="feat-yes">Copagos desde 4€</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
           </div>
 
@@ -1422,7 +1450,7 @@
                 <li class="feat-yes">Sin copagos en toda la red</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
               <h3 class="card-name">Medifiatc Diagonal</h3>
@@ -1436,7 +1464,7 @@
                 <li class="feat-yes">Sin copagos en toda la red</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
           </div>
 
@@ -1454,7 +1482,7 @@
                 <li class="feat-yes">Amplio cuadro médico FIATC</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
@@ -1469,7 +1497,7 @@
                 <li class="feat-yes">Cobertura completa en España y el extranjero</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
               <h3 class="card-name">Multi250</h3>
@@ -1483,7 +1511,7 @@
                 <li class="feat-yes">Cobertura premium nacional e internacional</li>
               </ul>
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="return false;">Detalles del seguro</button>
+              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
           </div>
         </div>
@@ -1525,7 +1553,15 @@
                 <strong>Acceso directo a especialistas</strong>
                 <svg class="why-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
-              <div class="why-body"><span>Consulta con el especialista que necesitas en días, no en meses</span></div>
+              <div class="why-body"><span>Consulta con el especialista que necesitas en días, no en meses. Sin listas de espera</span></div>
+            </div>
+            <div class="why-item">
+              <button class="why-trigger" onclick="toggleWhy(this)">
+                <div class="why-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+                <strong>Sigues cubierto si cambias de compañía</strong>
+                <svg class="why-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="why-body"><span>Si vienes de otra aseguradora con más de 12 meses, derogamos tus carencias y usas las coberturas sin esperas</span></div>
             </div>
             <div class="why-item">
               <button class="why-trigger" onclick="toggleWhy(this)">
@@ -1880,6 +1916,51 @@
     </aside>
   </div>
 
+  <!-- MODAL DETALLES DEL SEGURO (QW#3) -->
+  <div class="side-modal" id="detailModal" aria-hidden="true">
+    <div class="side-modal-backdrop" onclick="closeDetail()"></div>
+    <aside class="side-modal-panel" role="dialog" aria-label="Detalles del seguro">
+      <div class="side-modal-handle"></div>
+      <button class="side-modal-close" onclick="closeDetail()" aria-label="Cerrar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="side-modal-body">
+        <div class="detail-hero">
+          <p class="detail-hero-name" id="detailName">Medifiatc P15</p>
+          <p class="detail-hero-sub" id="detailSub">Cobertura completa con cuota ajustada</p>
+          <p class="detail-hero-price"><strong id="detailPrice">45€</strong>/mes<span class="detail-hero-badge" id="detailBadge">-32€ con pago anual</span></p>
+        </div>
+
+        <div class="detail-section">
+          <p class="detail-section-h">¿Para quién está pensado?</p>
+          <p class="detail-text" id="detailForWhom"></p>
+        </div>
+
+        <div class="detail-section">
+          <p class="detail-section-h">¿Qué incluye?</p>
+          <div id="detailIncludes"></div>
+        </div>
+
+        <div class="detail-section">
+          <p class="detail-section-h">Además, benefíciate de</p>
+          <div class="detail-benefit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 11a5 5 0 0 1 4.5-7 5 5 0 0 1 4.5 3 5 5 0 0 1 4.5-3 5 5 0 0 1 4.5 7c-1.5 3.5-9 8-9 8s-7.5-4.5-9-8z"/></svg>La mejor asistencia médica especializada</div>
+          <div class="detail-benefit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Programas de salud preventiva</div>
+          <div class="detail-benefit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Telemedicina e innovación médica</div>
+          <div class="detail-benefit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Cobertura durante el embarazo y postparto</div>
+          <div class="detail-benefit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Asistencia en viajes</div>
+        </div>
+
+        <div class="detail-section">
+          <p class="detail-section-h">¿Quieres saber más?</p>
+          <p class="detail-more-text">Puedes descargar los documentos de tu seguro y sus prestaciones al final de la página.</p>
+          <p class="detail-more-phone">Si lo prefieres, llámanos al <strong>900 123 456</strong>.</p>
+        </div>
+
+        <button class="btn-primary detail-cta" onclick="closeDetail(); openHablemos();">Me interesa</button>
+      </div>
+    </aside>
+  </div>
+
   <script>
     /* ── Navegación del funnel ──
        PLANNED_FLOW define el orden completo previsto; solo se navega a los
@@ -1991,6 +2072,14 @@
       const metaCount = document.getElementById('metaCount');
       if (metaCp) metaCp.textContent = cp;
       if (metaCount) metaCount.textContent = n + (n === 1 ? ' asegurado' : ' asegurados');
+      // QW#4: aclara total vs. por persona — nota "· total N asegurados" solo si hay más de uno
+      document.querySelectorAll('#step7 .card-price').forEach(function (p) {
+        let note = p.querySelector('.card-price-note');
+        if (n > 1) {
+          if (!note) { note = document.createElement('span'); note.className = 'card-price-note'; p.appendChild(note); }
+          note.textContent = ' · total ' + n + ' asegurados';
+        } else if (note) { note.remove(); }
+      });
     }
     /* Fechas de nacimiento inventadas para prerellenar cada asegurado (placeholder de wireframe) */
     const CALC_DOBS = [
@@ -2179,6 +2268,48 @@
       document.getElementById('faqModal').classList.add('open');
     }
     function closeFaq() { document.getElementById('faqModal').classList.remove('open'); }
+
+    /* ── Modal "Detalles del seguro" (QW#3): se rellena leyendo el propio card ── */
+    const DETAIL_SUB = {
+      'Básico': 'Lo esencial a la cuota más baja',
+      'Con copago': 'Cobertura completa con cuota ajustada',
+      'Con copago mínimo': 'Cobertura completa con copagos mínimos',
+      'Sin copago': 'Cobertura completa, sin copagos',
+      'Reembolso': 'Libre elección de médico y clínica'
+    };
+    const DETAIL_FORWHOM = {
+      'Básico': 'Para quien quiere lo esencial a la cuota más baja: acceso a todas las especialidades, con la hospitalización aparte.',
+      'Con copago': 'Para quien prefiere una cuota mensual más baja y pagar una pequeña cantidad en cada visita.',
+      'Con copago mínimo': 'Para quien quiere cobertura completa con copagos muy reducidos en cada visita.',
+      'Sin copago': 'Para quien usa el seguro a menudo y prefiere no pagar nada en cada visita.',
+      'Reembolso': 'Para quien quiere elegir libremente médico y clínica, dentro o fuera del cuadro médico.'
+    };
+    function openDetail(btn) {
+      const card = btn.closest('.product-card');
+      const tagEl = card.querySelector('.card-tag');
+      const tag = tagEl ? tagEl.textContent.trim() : '';
+      const priceEl = card.querySelector('.card-price strong');
+      const badgeEl = card.querySelector('.card-annual-badge');
+      document.getElementById('detailName').textContent = card.querySelector('.card-name').textContent.trim();
+      document.getElementById('detailSub').textContent = DETAIL_SUB[tag] || tag;
+      document.getElementById('detailPrice').textContent = priceEl ? priceEl.textContent : '';
+      const badge = document.getElementById('detailBadge');
+      if (badgeEl) { badge.textContent = badgeEl.textContent.trim(); badge.style.display = 'block'; }
+      else { badge.style.display = 'none'; }
+      document.getElementById('detailForWhom').textContent = DETAIL_FORWHOM[tag] || '';
+      const inc = document.getElementById('detailIncludes');
+      inc.innerHTML = '';
+      card.querySelectorAll('.card-features li.feat-yes').forEach(function (li) {
+        const row = document.createElement('div');
+        row.className = 'detail-check';
+        row.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>' + li.innerHTML + '</span>';
+        inc.appendChild(row);
+      });
+      const m = document.getElementById('detailModal');
+      m.querySelector('.side-modal-body').scrollTop = 0;
+      m.classList.add('open');
+    }
+    function closeDetail() { document.getElementById('detailModal').classList.remove('open'); }
 
     /* ── Acordeón "¿Por qué elegir FIATC?" ── */
     function toggleWhy(btn) {
