@@ -781,6 +781,10 @@
   .products-scroll::-webkit-scrollbar { display: none; }
   @keyframes scrollFadeIn { from { opacity: 0; } to { opacity: 1; } }
   .products-scroll.active { display: flex; animation: scrollFadeIn 0.3s ease-in-out; }
+  /* Bloque "Clínica Diagonal" (fila inferior en la pestaña Con copago) */
+  .diagonal-block { display: none; }
+  .diagonal-pretitle { font-size: 16px; color: var(--wf-90); text-align: center; line-height: 1.4; margin: 8px var(--content-pad) 0; }
+  .diagonal-pretitle strong { color: var(--wf-100); font-weight: 700; }
   .product-card { flex-shrink: 0; width: 288px; background: var(--wf-0); border: 1.5px solid var(--wf-40); border-radius: 16px; padding: 24px 18px 20px; scroll-snap-align: center; position: relative; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); overflow: hidden; }
   /* Card destacada: sube para que la cabecera oscura sobresalga y el cuerpo quede alineado con las demás */
   .product-card.featured { border-color: var(--wf-90); box-shadow: 0 4px 16px rgba(39, 42, 48, 0.10); margin-top: -26px; }
@@ -1450,19 +1454,6 @@
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <h3 class="card-name">Medifiatc Diagonal P15</h3>
-              <span class="card-tag">Con copago</span>
-              <div class="card-price-row"><div class="card-price" data-save="40"><strong>55<span class="price-dec">,48€</span></strong> al mes</div></div>
-              <div class="card-divider"></div>
-              <ul class="card-features">
-                <li class="feat-diagonal">Acceso Clínica Diagonal</li>
-                <li class="feat-yes">Hospitalización incluida</li>
-                <li class="feat-yes">Copagos desde 10€</li>
-              </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
-            </div>
-            <div class="product-card">
               <h3 class="card-name">Medifiatc P5</h3>
               <span class="card-tag">Con copago mínimo</span>
               <div class="card-price-row"><div class="card-price" data-save="43"><strong>60<span class="price-dec">,33€</span></strong> al mes</div></div>
@@ -1475,18 +1466,37 @@
               <button class="card-cta" onclick="openHablemos()">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
-            <div class="product-card">
-              <h3 class="card-name">Medifiatc Diagonal P4</h3>
-              <span class="card-tag">Con copago mínimo</span>
-              <div class="card-price-row"><div class="card-price" data-save="52"><strong>72<span class="price-dec">,77€</span></strong> al mes</div></div>
-              <div class="card-divider"></div>
-              <ul class="card-features">
-                <li class="feat-diagonal">Acceso Clínica Diagonal</li>
-                <li class="feat-yes">Hospitalización incluida</li>
-                <li class="feat-yes">Copagos desde 4€</li>
-              </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
-              <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
+          </div>
+
+          <div class="diagonal-block" id="copagoDiagonal">
+            <p class="diagonal-pretitle">Y si quieres acceso a la prestigiosa <strong>Clínica Diagonal</strong>…</p>
+            <div class="products-scroll" id="scroll-copago-diagonal">
+              <div class="product-card">
+                <h3 class="card-name">Medifiatc Diagonal P15</h3>
+                <span class="card-tag">Con copago</span>
+                <div class="card-price-row"><div class="card-price" data-save="40"><strong>55<span class="price-dec">,48€</span></strong> al mes</div></div>
+                <div class="card-divider"></div>
+                <ul class="card-features">
+                  <li class="feat-diagonal">Acceso Clínica Diagonal</li>
+                  <li class="feat-yes">Hospitalización incluida</li>
+                  <li class="feat-yes">Copagos desde 10€</li>
+                </ul>
+                <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+                <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
+              </div>
+              <div class="product-card">
+                <h3 class="card-name">Medifiatc Diagonal P4</h3>
+                <span class="card-tag">Con copago mínimo</span>
+                <div class="card-price-row"><div class="card-price" data-save="52"><strong>72<span class="price-dec">,77€</span></strong> al mes</div></div>
+                <div class="card-divider"></div>
+                <ul class="card-features">
+                  <li class="feat-diagonal">Acceso Clínica Diagonal</li>
+                  <li class="feat-yes">Hospitalización incluida</li>
+                  <li class="feat-yes">Copagos desde 4€</li>
+                </ul>
+                <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+                <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
+              </div>
             </div>
           </div>
 
@@ -2215,6 +2225,13 @@
       document.querySelectorAll('#step7 .products-scroll').forEach(s => s.classList.remove('active'));
       const scroll = document.getElementById('scroll-' + filter);
       if (scroll) { scroll.classList.add('active'); requestAnimationFrame(() => centerFeatured(scroll)); }
+      // Fila inferior "Clínica Diagonal": solo en la pestaña Con copago
+      const diag = document.getElementById('copagoDiagonal');
+      if (diag) diag.style.display = (filter === 'copago') ? 'block' : 'none';
+      if (filter === 'copago') {
+        const ds = document.getElementById('scroll-copago-diagonal');
+        if (ds) { ds.classList.add('active'); requestAnimationFrame(() => centerFeatured(ds)); }
+      }
       document.getElementById('appMain').scrollTop = 0;
     }
     /* En mobile deja la card destacada centrada (con las vecinas asomando). En desktop las cards
