@@ -467,6 +467,12 @@
   .detail-more-text { font-size: 14px; color: var(--wf-90); line-height: 1.5; }
   .detail-more-phone { font-size: 14px; color: var(--wf-90); margin-top: 12px; }
   .detail-cta { margin-top: 28px; }
+  /* Bottombar del modal: aparece cuando el "Me interesa" del hero sale de vista al hacer scroll */
+  #detailModal .side-modal-body { padding-bottom: calc(112px + env(safe-area-inset-bottom, 0px)); }
+  .detail-stickybar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--wf-0); border-top: 1px solid var(--wf-20); box-shadow: 0 -4px 16px rgba(39, 42, 48, 0.08); transform: translateY(100%); transition: transform 0.25s ease; }
+  .detail-stickybar.visible { transform: translateY(0); }
+  .detail-stickybar .btn-primary { margin-top: 0; }
+  @media (min-width: 601px) { .detail-stickybar { padding-left: 32px; padding-right: 32px; } }
   /* Dropdown "Más información" con grupos de enlaces/documentos */
   .detail-more { margin-top: 28px; border-top: 1px solid var(--wf-20); border-bottom: 1px solid var(--wf-20); }
   .detail-more-trigger { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 20px 0; background: none; border: none; cursor: pointer; font-family: inherit; font-size: 16px; font-weight: 400; color: var(--wf-100); text-align: left; }
@@ -893,7 +899,8 @@
     .side-modal-body { padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
     /* Regla mobile: toda bottombar anclada deja aire abajo para que la barra nativa del iPhone no la tape */
     .step0-sticky-bar,
-    .calc-recalc { padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
+    .calc-recalc,
+    .detail-stickybar { padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
     /* La barra mobile es más alta → más colchón abajo en step0 para no tapar la última FAQ */
     #step0 { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
   }
@@ -1994,9 +2001,8 @@
           <div class="detail-contact">
             <button class="btn-ghost" onclick="closeDetail(); openHablemos();">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              Hablemos
+              Hablemos y te ayudamos
             </button>
-            <p class="detail-contact-phone">o llámanos al <strong>900 123 456</strong></p>
           </div>
         </div>
 
@@ -2027,6 +2033,9 @@
           </div>
         </div>
 
+      </div>
+      <div class="detail-stickybar" id="detailStickybar">
+        <button class="btn-primary" onclick="closeDetail(); openHablemos();">Me interesa</button>
       </div>
     </aside>
   </div>
@@ -2383,10 +2392,20 @@
       const m = document.getElementById('detailModal');
       const more = m.querySelector('.detail-more');
       if (more) more.classList.remove('open');
-      m.querySelector('.side-modal-body').scrollTop = 0;
+      const dbody = m.querySelector('.side-modal-body');
+      dbody.scrollTop = 0;
+      dbody.onscroll = updateDetailStickybar;
+      document.getElementById('detailStickybar').classList.remove('visible');
       m.classList.add('open');
     }
     function closeDetail() { document.getElementById('detailModal').classList.remove('open'); }
+    function updateDetailStickybar() {
+      const body = document.querySelector('#detailModal .side-modal-body');
+      const cta = document.querySelector('#detailModal .detail-hero-cta');
+      const bar = document.getElementById('detailStickybar');
+      if (!body || !cta || !bar) return;
+      bar.classList.toggle('visible', cta.getBoundingClientRect().bottom < body.getBoundingClientRect().top);
+    }
     function toggleDetailMore(btn) { btn.closest('.detail-more').classList.toggle('open'); }
 
     /* ── Acordeón "¿Por qué elegir FIATC?" ── */
