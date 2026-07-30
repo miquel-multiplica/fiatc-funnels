@@ -1824,7 +1824,7 @@
         <div class="hablemos-title">¿Seguro que quieres salir?</div>
         <div class="hablemos-subtitle">Si te marchas ahora perderás los datos que ya has introducido.</div>
         <button class="btn-primary" onclick="closeExit()">No, quiero seguir aquí</button>
-        <button class="btn-ghost" style="width:100%; margin-top:12px;" onclick="exitSaveBudget()">Guardar presupuesto</button>
+        <button class="btn-ghost" id="exitSaveBtn" style="width:100%; margin-top:12px; display:none;" onclick="exitSaveBudget()">Guardar presupuesto</button>
         <a class="btn-skip" style="cursor:pointer; display:block; text-align:center; margin:16px 0 28px; font-size:16px; color:var(--wf-90);" onclick="exitReset()">Salir y perder los datos</a>
 
         <div class="faq-help">
@@ -1880,7 +1880,7 @@
             Atrás
           </button>
           <div class="hablemos-title">Guarda tu presupuesto</div>
-          <div class="hablemos-subtitle">Te lo enviamos por email para que puedas retomarlo cuando quieras.</div>
+          <div class="hablemos-subtitle">Lo guardamos con tu email para que puedas recuperarlo cuando quieras.</div>
           <div class="input-wrap" style="margin-top:24px;">
             <input type="email" id="exitSaveEmail" placeholder=" " onclick="if(!this.value){this.value='maria@email.com';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
             <label for="exitSaveEmail">Email</label>
@@ -1894,7 +1894,7 @@
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div class="call-confirm-title">¡Presupuesto guardado!</div>
-          <p class="call-confirm-text">Te lo hemos enviado por email. Podrás retomarlo cuando quieras desde el enlace.</p>
+          <p class="call-confirm-text">Recupéralo cuando quieras desde <strong>«Recuperar presupuesto»</strong> con tu email <strong id="exitSavedEmail">maria@email.com</strong>.</p>
 
           <div class="pub-list" style="text-align:left; margin:28px 0 20px;">
             <div class="pub-head">
@@ -2175,6 +2175,7 @@
 
     /* ── Loading → Resultados ── */
     function showLoading() {
+      reachedResults = true;
       document.querySelectorAll('.step.active').forEach(s => s.classList.remove('active'));
       document.getElementById('appMain').classList.remove('results-wide');
       document.querySelector('.app-header').classList.remove('show-back');
@@ -2726,15 +2727,35 @@
     function hablemosConfirm() { setHablemosView('confirm'); }
 
     /* ── Exit intent (clic en el logo) ── */
-    function openExit() { document.getElementById('exitModal').classList.add('open'); }
+    let reachedResults = false; // "Guardar presupuesto" en el exit solo si ya se vio el precio
+    function openExit() {
+      const btn = document.getElementById('exitSaveBtn');
+      if (btn) btn.style.display = reachedResults ? '' : 'none';
+      document.getElementById('exitModal').classList.add('open');
+    }
     function closeExit() {
       document.getElementById('exitModal').classList.remove('open');
       setTimeout(function () { document.getElementById('exitBody').classList.remove('view-saveform', 'view-saveconfirm'); }, 300);
     }
     /* QW#5 · Guardar presupuesto desde el exit-intent */
-    function exitSaveBudget() { document.getElementById('exitBody').classList.add('view-saveform'); }
-    function exitSaveConfirm() { const b = document.getElementById('exitBody'); b.classList.remove('view-saveform'); b.classList.add('view-saveconfirm'); }
-    function exitBackToMain() { document.getElementById('exitBody').classList.remove('view-saveform', 'view-saveconfirm'); }
+    function exitSaveBudget() {
+      const email = (document.getElementById('contactEmail') || {}).value || '';
+      const input = document.getElementById('exitSaveEmail');
+      if (email && input) { input.value = email; input.closest('.input-wrap').classList.add('filled'); }
+      const body = document.getElementById('exitBody');
+      body.classList.add('view-saveform');
+      body.scrollTop = 0;
+    }
+    function exitSaveConfirm() {
+      const email = ((document.getElementById('exitSaveEmail') || {}).value || '').trim();
+      const em = document.getElementById('exitSavedEmail');
+      if (em && email) em.textContent = email;
+      const body = document.getElementById('exitBody');
+      body.classList.remove('view-saveform');
+      body.classList.add('view-saveconfirm');
+      body.scrollTop = 0;
+    }
+    function exitBackToMain() { const b = document.getElementById('exitBody'); b.classList.remove('view-saveform', 'view-saveconfirm'); b.scrollTop = 0; }
     function exitReset() {
       closeExit();
       document.querySelectorAll('.step-loading.active').forEach(s => s.classList.remove('active'));
