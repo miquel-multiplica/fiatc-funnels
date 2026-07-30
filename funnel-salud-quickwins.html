@@ -698,6 +698,8 @@
   .calc-recalc::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--wf-20); }
   .calc-recalc .btn-ghost { flex: 0 0 auto; }
   .calc-recalc .btn-primary { flex: 1; margin-top: 0; }
+  /* Botones del footer del calc menos altos (≈48px, btn-l de la skill) */
+  .calc-recalc .btn-primary, .calc-recalc .btn-ghost { padding-top: 14px; padding-bottom: 14px; }
   .btn-ghost { padding: 18px 20px; background: none; border: 1px solid var(--wf-40); border-radius: 8px; font-size: 16px; font-weight: 700; font-family: inherit; color: var(--wf-90); cursor: pointer; letter-spacing: 0.2px; }
   .btn-ghost:hover { border-color: var(--wf-60); color: var(--wf-100); }
   .products-carousel { margin: 0 calc(-1 * var(--content-pad)); }
@@ -755,6 +757,11 @@
   .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding-bottom 0.3s ease; }
   .faq-item.open .faq-answer { max-height: 320px; padding-bottom: 20px; }
   .faq-answer p { font-size: 14px; color: var(--wf-90); line-height: 1.5; margin: 0; }
+  .faq-more { display: none; }
+  .faq-more.open { display: block; }
+  .faq-vermas { display: flex; align-items: center; gap: 6px; width: 100%; padding: 16px 0 4px; background: none; border: none; font-family: inherit; font-size: 14px; font-weight: 600; color: var(--wf-90); cursor: pointer; }
+  .faq-vermas svg { transition: transform 0.2s; }
+  .faq-vermas.open svg { transform: rotate(180deg); }
   /* Bloque de contacto al pie del panel FAQ: fondo gris a todo el ancho de la modal */
   .faq-help { margin: 24px -24px 0; padding: 28px 24px calc(24px + env(safe-area-inset-bottom, 0px)); background: var(--wf-10); border-top: 1px solid var(--wf-30); }
   .faq-help .hablemos-link-icon { background: var(--wf-30); }
@@ -1070,6 +1077,14 @@
             <div class="pref-icon-wrap">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
+          </div>
+        </div>
+        <div class="faq-pills-section">
+          <p class="faq-pills-title">¿Te queda alguna duda?</p>
+          <div class="faq-pills">
+            <button class="faq-pill" onclick="openFaq('asegurados', 0)">¿Puedo incluir a mi familia?</button>
+            <button class="faq-pill" onclick="openFaq('asegurados', 1)">¿Puedo añadir o quitar asegurados más adelante?</button>
+            <button class="faq-pill faq-pill--all" onclick="openFaq('asegurados', 0)">Ver todas</button>
           </div>
         </div>
       </div>
@@ -1459,12 +1474,10 @@
         <div class="faq-pills-section">
           <p class="faq-pills-title">¿Te queda alguna duda?</p>
           <div class="faq-pills">
-            <button class="faq-pill" onclick="openFaq(0)">¿Qué es un copago?</button>
-            <button class="faq-pill" onclick="openFaq(2)">¿Cubre urgencias desde el día 1?</button>
-            <button class="faq-pill" onclick="openFaq(1)">¿Hay carencias?</button>
-            <button class="faq-pill" onclick="openFaq(3)">¿Puedo incluir a mi familia?</button>
-            <button class="faq-pill" onclick="openFaq(4)">¿Puedo cancelar cuando quiera?</button>
-            <button class="faq-pill faq-pill--all" onclick="openFaq(0)">Ver todas</button>
+            <button class="faq-pill" onclick="openFaq('resultados', 0)">¿Qué es el copago y cuándo me conviene?</button>
+            <button class="faq-pill" onclick="openFaq('resultados', 1)">¿Desde cuándo puedo usar el seguro?</button>
+            <button class="faq-pill" onclick="openFaq('resultados', 2)">¿Sigo cubierto desde el primer día si cambio de compañía?</button>
+            <button class="faq-pill faq-pill--all" onclick="openFaq('resultados', 0)">Ver todas</button>
           </div>
         </div>
       </div>
@@ -1982,25 +1995,60 @@
     }
 
     /* ── FAQ (píldoras en resultados → panel con acordeón) ── */
-    const FAQS = [
-      { q: '¿Qué es un copago?', a: 'Es una pequeña cantidad que pagas en cada visita o prueba; a cambio, la cuota mensual es más baja. En las modalidades sin copago pagas solo la cuota.' },
-      { q: '¿Hay período de carencia?', a: 'Las urgencias y el médico general están cubiertos desde el primer día. Las cirugías programadas tienen una carencia de 6 meses. Si vienes de otra compañía, podemos derogar las carencias.' },
-      { q: '¿Cubre urgencias desde el primer día?', a: 'Sí. Las urgencias y la asistencia de médico general quedan cubiertas desde que se activa la póliza.' },
-      { q: '¿Puedo incluir a mi familia?', a: 'Sí, puedes incluir a tu pareja e hijos. El precio varía según la edad de cada asegurado y el plan elegido.' },
-      { q: '¿Puedo cancelar cuando quiera?', a: 'Puedes cancelar con 30 días de preaviso antes de la renovación anual, sin penalización.' },
-      { q: '¿Qué cubre y qué no cubre?', a: 'Incluye médico general, especialistas, urgencias, hospitalización y pruebas diagnósticas. Quedan fuera las enfermedades preexistentes durante el período de carencia.' },
-      { q: '¿Puedo cambiar de plan más adelante?', a: 'Sí, puedes subir o bajar de plan en la renovación anual, sin coste de gestión.' },
-      { q: '¿Cuánto tarda en activarse la póliza?', a: 'La póliza se activa al día siguiente de la contratación. Las urgencias quedan cubiertas desde el primer momento.' },
-    ];
-    function renderFaqList(openIndex) {
-      document.getElementById('faqList').innerHTML = FAQS.map((f, i) => `
-        <div class="faq-item${i === openIndex ? ' open' : ''}" id="faq-item-${i}">
+    /* FAQs por contexto de paso. Las 3 primeras de cada contexto son las pills que salen fuera. */
+    const FAQS = {
+      resultados: [
+        { q: '¿Qué es el copago y cuándo me conviene?', a: 'Es una pequeña cantidad que pagas en cada visita o prueba; a cambio, la cuota mensual es más baja. Si vas poco al médico suele compensar el copago; si lo usas mucho, una modalidad sin copago te da precio fijo.' },
+        { q: '¿Desde cuándo puedo usar el seguro?', a: 'Las urgencias y el médico general están cubiertos desde el primer día. Algunas prestaciones, como las cirugías programadas, tienen un período de carencia.' },
+        { q: '¿Sigo cubierto desde el primer día si cambio de compañía?', a: 'Sí. Si vienes de otra aseguradora podemos derogar tus carencias para que sigas cubierto sin esperas. Solo necesitamos tu póliza anterior (o la tarjeta con la fecha de alta) y el último recibo.' },
+        { q: '¿Qué cubre y qué no cubre?', a: 'Incluye médico general, especialistas, urgencias, hospitalización y pruebas diagnósticas. Quedan fuera las enfermedades preexistentes durante el período de carencia.' },
+        { q: '¿Cuántas sesiones de psicología, fisioterapia o nutrición incluye?', a: 'Depende de la modalidad. Te detallamos el número de sesiones incluidas de cada plan antes de contratar.' },
+        { q: '¿El precio sube con la edad o al renovar?', a: 'El precio se calcula por tramos de edad, así que puede ajustarse en la renovación anual a medida que cumples años. Puedes pagar mensual o anual (con descuento por pago anual).' },
+        { q: '¿Puedo cambiar de plan más adelante?', a: 'Sí, puedes subir o bajar de plan en la renovación anual, sin coste de gestión.' },
+        { q: '¿Cómo pido cita y consulto el cuadro médico?', a: 'Desde tu área privada o la app consultas el cuadro médico y pides cita con los profesionales y centros disponibles en tu zona.' },
+        { q: '¿Cuándo me llega la tarjeta?', a: 'Al contratar recibes tu tarjeta digital enseguida y puedes usar el seguro aunque todavía no tengas la tarjeta física.' },
+        { q: '¿Necesito hacer un cuestionario de salud?', a: 'Sí, un breve cuestionario de salud. Si marcas algo, la plataforma médica lo amplía contigo; puedes aportar informes y no es vinculante.' },
+        { q: '¿Puedo cancelar cuando quiera?', a: 'Puedes cancelar con 30 días de preaviso antes de la renovación anual, sin penalización.' },
+      ],
+      asegurados: [
+        { q: '¿Puedo incluir a mi familia?', a: 'Sí, puedes incluir a tu pareja e hijos, incluidos recién nacidos. El precio se ajusta según la edad de cada asegurado.' },
+        { q: '¿Puedo añadir o quitar asegurados más adelante?', a: 'Sí, puedes modificar los asegurados de tu póliza. De hecho, al ver los precios podrás probar distintas combinaciones y ver cómo cambia el precio.' },
+        { q: '¿Hasta qué edad puedo incluir a mis hijos?', a: 'Puedes incluir a tus hijos mientras convivan contigo; te confirmamos el límite exacto según tu situación.' },
+        { q: '¿Cuánto baja el precio si somos más?', a: 'Cuantos más asegurados incluyes en la misma póliza, mayor es el descuento que se aplica al conjunto.' },
+      ],
+    };
+    const FAQ_VISIBLE = { resultados: 4, asegurados: 2 }; // cuántas se ven antes del "Ver más"
+    let faqCtx = 'resultados';
+    function faqItemHTML(f, i, open) {
+      return `<div class="faq-item${open ? ' open' : ''}" id="faq-item-${i}">
           <button class="faq-trigger" onclick="toggleFaqItem(${i})">
             <span class="faq-q">${f.q}</span>
             <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="faq-answer"><p>${f.a}</p></div>
-        </div>`).join('');
+        </div>`;
+    }
+    function renderFaqList(ctx, openIndex) {
+      faqCtx = ctx;
+      const items = FAQS[ctx];
+      const n = FAQ_VISIBLE[ctx] || items.length;
+      let html = items.slice(0, n).map((f, i) => faqItemHTML(f, i, i === openIndex)).join('');
+      if (items.length > n) {
+        const rest = items.slice(n).map((f, k) => faqItemHTML(f, k + n, (k + n) === openIndex)).join('');
+        const expanded = openIndex >= n;
+        html += `<div class="faq-more${expanded ? ' open' : ''}" id="faqMore">${rest}</div>
+          <button class="faq-vermas${expanded ? ' open' : ''}" id="faqVerMas" onclick="toggleFaqMore()">
+            <span>Ver más preguntas</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>`;
+      }
+      document.getElementById('faqList').innerHTML = html;
+    }
+    function toggleFaqMore() {
+      const open = document.getElementById('faqMore').classList.toggle('open');
+      const btn = document.getElementById('faqVerMas');
+      btn.classList.toggle('open', open);
+      btn.querySelector('span').textContent = open ? 'Ver menos' : 'Ver más preguntas';
     }
     function toggleFaqItem(i) {
       const item = document.getElementById('faq-item-' + i);
@@ -2018,8 +2066,8 @@
       openHablemos();
       if (p) requestAnimationFrame(() => requestAnimationFrame(() => { p.style.transition = ''; }));
     }
-    function openFaq(i) {
-      renderFaqList(i);
+    function openFaq(ctx, i) {
+      renderFaqList(ctx, i);
       const body = document.querySelector('#faqModal .side-modal-body');
       if (body) body.scrollTop = 0;
       document.getElementById('faqModal').classList.add('open');
