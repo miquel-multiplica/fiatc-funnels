@@ -360,13 +360,15 @@
   .cc-option .cc-opt-code { margin-left: auto; color: var(--wf-60); }
 
   /* Consentimiento por canal — caja con cabecera (Acepto…) + filas */
-  .pub-list { border: 1px solid var(--wf-40); border-radius: 10px; margin: 32px 0 24px; overflow: hidden; }
-  .pub-head { padding: 14px 16px; border-bottom: 1px solid var(--wf-40); }
+  .pub-list { border: 1px solid var(--wf-40); border-radius: 10px; margin: 32px 0 24px; overflow: hidden; background: var(--wf-0); }
+  .pub-head { padding: 14px 16px; position: relative; }
+  .pub-head::after { content: ''; position: absolute; bottom: 0; left: 16px; right: 16px; height: 1px; background: var(--wf-20); }
   .pub-q { font-size: 14px; font-weight: 700; color: var(--wf-100); line-height: 1.5; margin: 0 0 4px; }
   .pub-head .legal-mini { margin: 0; color: var(--wf-90); }
   .pub-head .legal-trigger { color: var(--wf-90); }
-  .pub-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; }
-  .pub-row + .pub-row { border-top: 1px solid var(--wf-40); }
+  .pub-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; position: relative; }
+  /* Divisor entre items: insetado (no llega a los lados) y más suave */
+  .pub-row + .pub-row::before { content: ''; position: absolute; top: 0; left: 16px; right: 16px; height: 1px; background: var(--wf-20); }
   .pub-row-icon { width: 32px; height: 32px; flex-shrink: 0; border-radius: 8px; background: var(--wf-20); display: flex; align-items: center; justify-content: center; color: var(--wf-90); transition: background 0.2s; }
   /* Refuerzo al marcar: el icono sube un tono */
   .pub-row:has(input:checked) .pub-row-icon { background: var(--wf-30); }
@@ -655,21 +657,35 @@
   .filter-tab.active { background: var(--wf-20); color: var(--wf-100); font-weight: 700; }
   .results-summary { margin-bottom: 8px; }
   #step7Sub { font-size: 14px; color: var(--wf-90); margin-bottom: 8px; line-height: 1.4; }
+  /* Ristra de metadatos del cálculo (CP · N asegurados · Editar) */
+  .results-meta { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--wf-90); margin-bottom: 8px; }
+  .results-meta-prov { color: var(--wf-60); }
+  .results-meta-sep { color: var(--wf-60); font-weight: 700; }
+  .results-meta-edit { display: inline-flex; align-items: center; gap: 5px; color: var(--wf-90); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+  .results-meta-edit svg { flex-shrink: 0; }
+  .results-meta-edit:hover { color: var(--wf-100); }
+  /* Panel calculadora: "Recalcular" va tras el último bloque y solo se ancla abajo (sticky) al desbordar */
+  #calcModal .side-modal-body { padding-bottom: 0; }
+  .calc-recalc { position: sticky; bottom: 0; background: var(--wf-0); padding-top: 14px; padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); margin-top: 16px; }
+  .calc-recalc .btn-primary { margin-top: 0; }
   .products-carousel { margin: 0 calc(-1 * var(--content-pad)); }
   .products-scroll { display: none; flex-direction: row; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 20px var(--content-pad); scrollbar-width: none; }
   .products-scroll::-webkit-scrollbar { display: none; }
   @keyframes scrollFadeIn { from { opacity: 0; } to { opacity: 1; } }
   .products-scroll.active { display: flex; animation: scrollFadeIn 0.3s ease-in-out; }
-  .product-card { flex-shrink: 0; width: 263px; background: var(--wf-0); border: 1.5px solid var(--wf-40); border-radius: 16px; padding: 24px 18px 20px; scroll-snap-align: center; position: relative; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
-  .product-card.featured { border-color: var(--wf-90); box-shadow: 0 4px 16px rgba(39, 42, 48, 0.10); }
-  .card-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--wf-20); color: var(--wf-90); font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 100px; white-space: nowrap; }
+  .product-card { flex-shrink: 0; width: 263px; background: var(--wf-0); border: 1.5px solid var(--wf-40); border-radius: 16px; padding: 24px 18px 20px; scroll-snap-align: center; position: relative; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); overflow: hidden; }
+  /* Card destacada: sube para que la cabecera oscura sobresalga y el cuerpo quede alineado con las demás */
+  .product-card.featured { border-color: var(--wf-90); box-shadow: 0 4px 16px rgba(39, 42, 48, 0.10); margin-top: -26px; }
+  /* Cabecera "El más popular": barra oscura a todo el ancho (cancela el padding de la card) */
+  .card-badge { display: block; margin: -24px -18px 18px; padding: 9px 12px; text-align: center; background: var(--wf-20); color: var(--wf-90); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
   .product-card.featured .card-badge { background: var(--wf-90); color: var(--wf-0); }
-  .card-name { font-size: 18px; font-weight: 700; color: var(--wf-100); margin-bottom: 3px; line-height: 1.2; }
-  .card-subtitle { font-size: 13px; color: var(--wf-90); margin-bottom: 12px; line-height: 1.3; }
-  .card-price-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+  .card-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--wf-60); margin-bottom: 7px; }
+  .card-name { font-size: 18px; font-weight: 700; color: var(--wf-100); margin-bottom: 5px; line-height: 1.2; }
+  .card-subtitle { font-size: 13px; color: var(--wf-90); margin-bottom: 18px; line-height: 1.35; }
+  .card-price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 16px; }
   .card-price { font-size: 13px; color: var(--wf-60); }
   .card-price strong { font-size: 22px; font-weight: 700; color: var(--wf-100); }
-  .card-annual-badge { display: inline-flex; align-items: center; background: var(--wf-60); border-radius: 4px; padding: 5px 7px; font-size: 12px; font-weight: 700; color: var(--wf-0); flex-shrink: 0; }
+  .card-annual-badge { font-size: 12px; font-weight: 400; color: var(--wf-60); flex-shrink: 0; text-align: right; }
   .card-divider { height: 1px; background: var(--wf-20); margin-bottom: 12px; }
   .card-features { list-style: none; display: flex; flex-direction: column; gap: 8px; flex: 1; margin-bottom: 16px; }
   .card-features li { font-size: 13.5px; display: flex; align-items: flex-start; gap: 7px; line-height: 1.35; }
@@ -683,10 +699,27 @@
   .card-cta:hover { background: var(--wf-100); }
   .card-detail { background: none; border: none; font-size: 14px; color: var(--wf-90); text-decoration: underline; cursor: pointer; padding: 14px 0 0; font-family: inherit; width: 100%; text-align: center; }
 
+  /* Resultados en desktop: columna más ancha (clase results-wide en .app-main solo en step7),
+     tabs y título centrados, cards más anchas y centradas. Mobile intacto (scroll horizontal). */
+  @media (min-width: 601px) {
+    .app-main.results-wide .content-col { max-width: 1120px; }
+    #step7 .filter-tabs { width: fit-content; max-width: 100%; margin: 0 auto 20px; }
+    #step7 .results-summary { text-align: center; margin-bottom: 24px; }
+    #step7 .results-meta { justify-content: center; }
+    /* Carrusel full-bleed a los bordes de la pantalla (como mobile), pase lo que pase con la columna */
+    #step7 .products-carousel { margin: 0; width: 100vw; margin-left: 50%; transform: translateX(-50%); }
+    /* safe center: centradas si caben, desde el inicio si desbordan (scroll accesible) */
+    #step7 .products-scroll { justify-content: safe center; gap: 20px; padding: 28px 24px; }
+    /* Las cards se ajustan al ancho (encogen hasta el mínimo) antes de disparar scroll */
+    #step7 .product-card { flex: 0 1 340px; min-width: 268px; max-width: 340px; width: auto; }
+  }
+
   @media (max-width: 600px) {
     .app-header-row { padding: 0 16px; gap: 10px; }
     .app-header-title { display: none; }
     .content-col { --content-pad: 16px; padding: 24px var(--content-pad) 48px; }
+    /* Resultados mobile: padding lateral que centra la card (263px) con las vecinas asomando (como el proto) */
+    #step7 .products-scroll { padding: 34px calc((100vw - 263px) / 2) 20px; }
 
     /* El "cancela cuando quieras" cae debajo del título en mobile */
     .pub-row-body { flex-direction: column; align-items: flex-start; gap: 2px; }
@@ -712,8 +745,9 @@
       background: var(--wf-40); border-radius: 2px; margin: 12px auto 0;
     }
     .side-modal-body { padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
-    /* Más aire abajo para que la barra nativa del móvil no se solape con el CTA */
-    .step0-sticky-bar { padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
+    /* Regla mobile: toda bottombar anclada deja aire abajo para que la barra nativa del iPhone no la tape */
+    .step0-sticky-bar,
+    .calc-recalc { padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
   }
 </style>
 </head>
@@ -1072,7 +1106,7 @@
             <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales de FIATC.</p>
             <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email, teléfono y/o WhatsApp sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
             <div class="pub-head-foot">
-              <span class="pub-cancel-badge">Cancela cuando quieras :)</span>
+              <span class="pub-cancel-badge">Cancela cuando quieras</span>
               <a class="pub-leermas" onclick="toggleLegal(this)">Leer más</a>
             </div>
           </div>
@@ -1127,14 +1161,24 @@
         </div>
 
         <div class="results-summary">
-          <h1 class="step-title" id="step7Title" style="margin-bottom:6px;">Las opciones más populares en clientes como tú</h1>
-          <p id="step7Sub">Ideales para parejas jóvenes en Barcelona</p>
+          <h1 class="step-title" id="step7Title" style="margin-bottom:14px;">Las opciones más populares en clientes como tú</h1>
+          <div class="results-meta">
+            <span><span id="metaCp">07349</span> <span class="results-meta-prov" id="metaProv">Illes Balears</span></span>
+            <span class="results-meta-sep" aria-hidden="true">·</span>
+            <span id="metaCount">2 asegurados</span>
+            <span class="results-meta-sep" aria-hidden="true">·</span>
+            <a class="results-meta-edit" onclick="openCalc()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              Modificar
+            </a>
+          </div>
         </div>
 
         <div class="products-carousel">
           <!-- PARA TI -->
           <div class="products-scroll active" id="scroll-para-ti">
             <div class="product-card">
+              <div class="card-eyebrow">Básico</div>
               <h3 class="card-name">Start</h3>
               <div class="card-subtitle">La opción más asequible, sin hospitalización</div>
               <div class="card-price-row"><div class="card-price"><strong>28€</strong>/mes</div><div class="card-annual-badge">-20€ con pago anual</div></div>
@@ -1148,7 +1192,8 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card featured">
-              <div class="card-badge">Recomendado para ti</div>
+              <div class="card-badge">El más popular</div>
+              <div class="card-eyebrow">Completo con copago</div>
               <h3 class="card-name">Medifiatc P15</h3>
               <div class="card-subtitle">Cobertura completa con cuota ajustada</div>
               <div class="card-price-row"><div class="card-price"><strong>45€</strong>/mes</div><div class="card-annual-badge">-32€ con pago anual</div></div>
@@ -1162,6 +1207,7 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
+              <div class="card-eyebrow">Completo sin copago</div>
               <h3 class="card-name">Medifiatc</h3>
               <div class="card-subtitle">Cobertura total sin ningún copago</div>
               <div class="card-price-row"><div class="card-price"><strong>82€</strong>/mes</div><div class="card-annual-badge">-59€ con pago anual</div></div>
@@ -1179,6 +1225,7 @@
           <!-- CON COPAGO -->
           <div class="products-scroll" id="scroll-copago">
             <div class="product-card">
+              <div class="card-eyebrow">Básico</div>
               <h3 class="card-name">Start</h3>
               <div class="card-subtitle">Sin hospitalización, la más asequible</div>
               <div class="card-price-row"><div class="card-price"><strong>28€</strong>/mes</div><div class="card-annual-badge">-20€ con pago anual</div></div>
@@ -1193,6 +1240,7 @@
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
+              <div class="card-eyebrow">Completo con copago</div>
               <h3 class="card-name">Medifiatc P15</h3>
               <div class="card-subtitle">Cobertura completa con cuota ajustada</div>
               <div class="card-price-row"><div class="card-price"><strong>45€</strong>/mes</div><div class="card-annual-badge">-32€ con pago anual</div></div>
@@ -1206,6 +1254,7 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
+              <div class="card-eyebrow">Completo con copago</div>
               <h3 class="card-name">Medifiatc Diagonal P15</h3>
               <div class="card-subtitle">Cobertura completa</div>
               <div class="card-price-row"><div class="card-price"><strong>55€</strong>/mes</div><div class="card-annual-badge">-40€ con pago anual</div></div>
@@ -1219,6 +1268,7 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
+              <div class="card-eyebrow">Completo con copago</div>
               <h3 class="card-name">Medifiatc P5</h3>
               <div class="card-subtitle">Máxima cobertura, copago mínimo</div>
               <div class="card-price-row"><div class="card-price"><strong>60€</strong>/mes</div><div class="card-annual-badge">-43€ con pago anual</div></div>
@@ -1232,6 +1282,7 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
+              <div class="card-eyebrow">Completo con copago</div>
               <h3 class="card-name">Medifiatc Diagonal P4</h3>
               <div class="card-subtitle">Cobertura completa, copago mínimo</div>
               <div class="card-price-row"><div class="card-price"><strong>72€</strong>/mes</div><div class="card-annual-badge">-52€ con pago anual</div></div>
@@ -1250,6 +1301,7 @@
           <div class="products-scroll" id="scroll-sin-copago">
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
+              <div class="card-eyebrow">Completo sin copago</div>
               <h3 class="card-name">Medifiatc</h3>
               <div class="card-subtitle">Cobertura total sin ningún copago</div>
               <div class="card-price-row"><div class="card-price"><strong>82€</strong>/mes</div><div class="card-annual-badge">-59€ con pago anual</div></div>
@@ -1263,6 +1315,7 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
+              <div class="card-eyebrow">Completo sin copago</div>
               <h3 class="card-name">Medifiatc Diagonal</h3>
               <div class="card-subtitle">Sin copagos en toda la red médica</div>
               <div class="card-price-row"><div class="card-price"><strong>98€</strong>/mes</div><div class="card-annual-badge">-71€ con pago anual</div></div>
@@ -1281,6 +1334,7 @@
           <!-- REEMBOLSO -->
           <div class="products-scroll" id="scroll-reembolso">
             <div class="product-card">
+              <div class="card-eyebrow">Reembolso</div>
               <h3 class="card-name">Selec</h3>
               <div class="card-subtitle">Libertad para elegir médico o clínica al mejor precio.</div>
               <div class="card-price-row"><div class="card-price"><strong>38€</strong>/mes</div><div class="card-annual-badge">-27€ con pago anual</div></div>
@@ -1296,6 +1350,7 @@
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
+              <div class="card-eyebrow">Reembolso</div>
               <h3 class="card-name">Multi125</h3>
               <div class="card-subtitle">Más cobertura y mayor reembolso para tu tranquilidad.</div>
               <div class="card-price-row"><div class="card-price"><strong>63€</strong>/mes</div><div class="card-annual-badge">-45€ con pago anual</div></div>
@@ -1310,6 +1365,7 @@
               <button class="card-detail" onclick="return false;">Detalles del seguro</button>
             </div>
             <div class="product-card">
+              <div class="card-eyebrow">Reembolso</div>
               <h3 class="card-name">Multi250</h3>
               <div class="card-subtitle">La máxima protección para quienes no quieren límites.</div>
               <div class="card-price-row"><div class="card-price"><strong>92€</strong>/mes</div><div class="card-annual-badge">-66€ con pago anual</div></div>
@@ -1429,7 +1485,7 @@
               <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales de FIATC.</p>
               <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email, teléfono y/o WhatsApp sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
               <div class="pub-head-foot">
-                <span class="pub-cancel-badge">Cancela cuando quieras :)</span>
+                <span class="pub-cancel-badge">Cancela cuando quieras</span>
                 <a class="pub-leermas" onclick="toggleLegal(this)">Leer más</a>
               </div>
             </div>
@@ -1522,6 +1578,29 @@
     </aside>
   </div>
 
+  <!-- EDITAR CÁLCULO (efecto calculadora, desde la ristra de resultados) -->
+  <div class="side-modal" id="calcModal" aria-hidden="true">
+    <div class="side-modal-backdrop" onclick="closeCalc()"></div>
+    <aside class="side-modal-panel" role="dialog" aria-label="Editar cálculo">
+      <div class="side-modal-handle"></div>
+      <button class="side-modal-close" onclick="closeCalc()" aria-label="Cerrar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="side-modal-body">
+        <div class="hablemos-title">¿Quién va en el seguro?</div>
+        <div class="hablemos-subtitle" style="margin-bottom:24px;">Añade o quita asegurados y ajusta sus edades. Recalculamos el precio al momento.</div>
+        <div id="calcInsuredList"></div>
+        <button class="btn-add-insured" onclick="calcAdd()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Añadir asegurado
+        </button>
+        <div class="calc-recalc">
+          <button class="btn-primary" onclick="calcRecalculate()">Recalcular</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
   <script>
     /* ── Navegación del funnel ──
        PLANNED_FLOW define el orden completo previsto; solo se navega a los
@@ -1535,6 +1614,7 @@
       if (!el) return;
       document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
       el.classList.add('active');
+      document.getElementById('appMain').classList.remove('results-wide');
       stepIdx = PLANNED_FLOW.indexOf(id);
       updateProgress();
       document.querySelector('.app-header').classList.toggle('show-back', stepIdx > 0);
@@ -1561,6 +1641,7 @@
     /* ── Loading → Resultados ── */
     function showLoading() {
       document.querySelectorAll('.step.active').forEach(s => s.classList.remove('active'));
+      document.getElementById('appMain').classList.remove('results-wide');
       document.querySelector('.app-header').classList.remove('show-back');
       document.getElementById('progressFill').style.width = '100%';
       const ld = document.getElementById('stepLoading');
@@ -1579,7 +1660,10 @@
         clearInterval(interval);
         ld.classList.remove('active');
         document.getElementById('step7').classList.add('active');
+        document.getElementById('appMain').classList.add('results-wide');
         document.getElementById('appMain').scrollTop = 0;
+        updateResultsMeta();
+        requestAnimationFrame(() => centerFeatured(document.querySelector('#step7 .products-scroll.active')));
       }, 4200);
     }
 
@@ -1593,8 +1677,92 @@
       if (subEl && btn.dataset.sub) subEl.textContent = btn.dataset.sub;
       document.querySelectorAll('#step7 .products-scroll').forEach(s => s.classList.remove('active'));
       const scroll = document.getElementById('scroll-' + filter);
-      if (scroll) scroll.classList.add('active');
+      if (scroll) { scroll.classList.add('active'); requestAnimationFrame(() => centerFeatured(scroll)); }
       document.getElementById('appMain').scrollTop = 0;
+    }
+    /* En mobile deja la card destacada centrada (con las vecinas asomando). En desktop las cards
+       ya van centradas por layout, así que no tocamos el scroll. */
+    function centerFeatured(scrollEl) {
+      if (!scrollEl) return;
+      if (scrollEl.scrollWidth <= scrollEl.clientWidth) { scrollEl.scrollLeft = 0; return; } // caben: las centra el layout
+      const f = scrollEl.querySelector('.product-card.featured');
+      if (!f) { scrollEl.scrollLeft = 0; return; }
+      scrollEl.scrollLeft = Math.max(0, f.offsetLeft - (scrollEl.clientWidth - f.offsetWidth) / 2);
+    }
+
+    /* ── Efecto calculadora: editar asegurados/edades desde resultados (QW#1) ── */
+    let calcCount = 1;
+    function updateResultsMeta() {
+      const cpEl = document.getElementById('cp');
+      const cp = (cpEl && cpEl.value) ? cpEl.value : '07349';
+      const n = insuredCount || 1;
+      const metaCp = document.getElementById('metaCp');
+      const metaCount = document.getElementById('metaCount');
+      if (metaCp) metaCp.textContent = cp;
+      if (metaCount) metaCount.textContent = n + (n === 1 ? ' asegurado' : ' asegurados');
+    }
+    /* Fechas de nacimiento inventadas para prerellenar cada asegurado (placeholder de wireframe) */
+    const CALC_DOBS = [
+      { dd: '12', mes: 'Marzo', aaaa: '1985' },
+      { dd: '08', mes: 'Julio', aaaa: '1988' },
+      { dd: '21', mes: 'Noviembre', aaaa: '2015' },
+      { dd: '03', mes: 'Febrero', aaaa: '2018' },
+      { dd: '30', mes: 'Septiembre', aaaa: '1990' },
+    ];
+    function calcDobHTML(id, dob) {
+      const opts = meses.map(m => `<div class="dob-option" onclick="selectMonth('${id}','${m}')">${m}</div>`).join('');
+      return `
+        <div class="dob-row">
+          <input type="text" inputmode="numeric" maxlength="2" placeholder="DD" value="${dob.dd}" oninput="dobDayInput(this,'${id}')">
+          <div class="dob-cs" id="dcs-${id}">
+            <div class="dob-cs-trigger has-value" id="dcst-${id}" onclick="toggleMonth('${id}')">${dob.mes}</div>
+            <div class="dob-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="dob-options">${opts}</div>
+          </div>
+          <input type="text" inputmode="numeric" maxlength="4" placeholder="AAAA" value="${dob.aaaa}">
+        </div>`;
+    }
+    function calcBlockHTML(id, label, removable, dob) {
+      const removeBtn = removable
+        ? `<button class="btn-remove" onclick="calcRemove()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>`
+        : '';
+      return `<div class="insured-block" id="cblock-${id}"><div class="insured-header"><strong>${label}</strong>${removeBtn}</div>${calcDobHTML(id, dob)}</div>`;
+    }
+    function renderCalcInsured() {
+      const list = document.getElementById('calcInsuredList');
+      const dob = i => CALC_DOBS[(i - 1) % CALC_DOBS.length];
+      let html = '';
+      if (withMe) {
+        html = calcBlockHTML('c1', 'Tú', false, dob(1));
+        for (let i = 2; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Asegurado ' + i, true, dob(i));
+      } else {
+        for (let i = 1; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Asegurado ' + i, i > 1, dob(i));
+      }
+      list.innerHTML = html;
+    }
+    function openCalc() { calcCount = insuredCount || 1; renderCalcInsured(); document.getElementById('calcModal').classList.add('open'); }
+    function closeCalc() { document.getElementById('calcModal').classList.remove('open'); }
+    function calcAdd() { calcCount++; renderCalcInsured(); }
+    function calcRemove() { if (calcCount <= 1) return; calcCount--; renderCalcInsured(); }
+    function calcRecalculate() {
+      insuredCount = calcCount;
+      closeCalc();
+      updateResultsMeta();
+      /* micro-loading para dar feedback de recálculo */
+      const ld = document.getElementById('stepLoading');
+      document.getElementById('step7').classList.remove('active');
+      document.getElementById('appMain').classList.remove('results-wide');
+      ld.classList.add('active');
+      document.querySelector('#stepLoading .loading-title').textContent = 'Recalculando...';
+      document.getElementById('loadingText').textContent = 'Ajustando el precio a tus asegurados...';
+      document.getElementById('appMain').scrollTop = 0;
+      setTimeout(function () {
+        ld.classList.remove('active');
+        document.getElementById('step7').classList.add('active');
+        document.getElementById('appMain').classList.add('results-wide');
+        document.getElementById('appMain').scrollTop = 0;
+        requestAnimationFrame(() => centerFeatured(document.querySelector('#step7 .products-scroll.active')));
+      }, 1400);
     }
 
     /* ── Acordeón "¿Por qué elegir FIATC?" ── */
@@ -1700,7 +1868,7 @@
         title.textContent = 'Añade tu fecha de nacimiento';
       } else if (withMe) {
         html = insuredBlockHTML(1, 'Tú', false);
-        for (let i = 2; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Asegurado ' + (i - 1), true);
+        for (let i = 2; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Asegurado ' + i, true);
         title.textContent = 'Añade las fechas de nacimiento';
       } else {
         for (let i = 1; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Asegurado ' + i, i > 1);
@@ -1838,7 +2006,7 @@
     }
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { closeHablemos(); closeExit(); }
+      if (e.key === 'Escape') { closeHablemos(); closeExit(); closeCalc(); }
     });
     document.getElementById('appMain').addEventListener('scroll', updateStep0StickyBar);
     window.addEventListener('load', function () { showStep('step0'); });
