@@ -567,11 +567,14 @@
   .side-modal-handle { display: none; }
 
   .side-modal-close {
-    position: absolute; top: 14px; right: 14px; z-index: 2;
-    background: none; border: none; cursor: pointer;
-    color: var(--wf-90); display: flex; padding: 4px; border-radius: 6px;
+    position: absolute; top: 16px; right: 16px; z-index: 2;
+    width: 32px; height: 32px; padding: 0; border-radius: 50%;
+    background: var(--wf-0); border: 1px solid var(--wf-20); cursor: pointer;
+    box-shadow: 0 1px 4px rgba(39, 42, 48, 0.10);
+    color: var(--wf-90); display: flex; align-items: center; justify-content: center;
   }
-  .side-modal-close:hover { color: var(--wf-100); background: var(--wf-20); }
+  .side-modal-close svg { width: 20px; height: 20px; }
+  .side-modal-close:hover { color: var(--wf-100); background: var(--wf-20); border-color: var(--wf-40); }
 
   .side-modal-body { padding: 40px 24px 24px; overflow-y: auto; }
   /* Desktop: +8px de padding lateral (el ancho del panel sube en paralelo para no estrechar el contenido) */
@@ -777,7 +780,7 @@
   .faq-help .hablemos-link { font-size: 14px; }
   .faq-help .hablemos-link-chevron { color: var(--wf-60); }
   /* El bloque gris crece hasta el fondo del panel aunque haya poco contenido arriba */
-  #faqModal .side-modal-body, #exitModal .side-modal-body { display: flex; flex-direction: column; padding-bottom: 0; }
+  #faqModal .side-modal-body, #exitModal .side-modal-body { display: flex; flex-direction: column; flex: 1; min-height: 0; padding-bottom: 0; }
   .faq-help { flex: 1 0 auto; }
   @media (min-width: 601px) { .faq-help { margin-left: -32px; margin-right: -32px; padding-left: 32px; padding-right: 32px; } }
 
@@ -1090,11 +1093,10 @@
           </div>
         </div>
         <div class="faq-pills-section">
-          <p class="faq-pills-title">¿Te queda alguna duda?</p>
+          <p class="faq-pills-title">¿Tienes alguna duda?</p>
           <div class="faq-pills">
             <button class="faq-pill" onclick="openFaq('asegurados', 0)">¿Puedo incluir a mi familia?</button>
             <button class="faq-pill" onclick="openFaq('asegurados', 1)">¿Puedo añadir o quitar asegurados más adelante?</button>
-            <button class="faq-pill faq-pill--all" onclick="openFaq('asegurados', 0)">Ver todas</button>
           </div>
         </div>
       </div>
@@ -1486,8 +1488,8 @@
           <div class="faq-pills">
             <button class="faq-pill" onclick="openFaq('resultados', 0)">¿Qué es el copago y cuándo me conviene?</button>
             <button class="faq-pill" onclick="openFaq('resultados', 1)">¿Desde cuándo puedo usar el seguro?</button>
-            <button class="faq-pill" onclick="openFaq('resultados', 2)">¿Sigo cubierto desde el primer día si cambio de compañía?</button>
-            <button class="faq-pill faq-pill--all" onclick="openFaq('resultados', 0)">Ver todas</button>
+            <button class="faq-pill" onclick="openFaq('resultados', 2)">¿Sigo cubierto si cambio de compañía?</button>
+            <button class="faq-pill" onclick="openFaq('resultados', 0)">Ver todas</button>
           </div>
         </div>
       </div>
