@@ -1092,7 +1092,7 @@
           <input type="email" id="recoverEmail" placeholder=" " onclick="if(!this.value){this.value='maria@email.com';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
           <label for="recoverEmail">Email</label>
         </div>
-        <button class="btn-primary" onclick="showLoading()">Ver mi presupuesto</button>
+        <button class="btn-primary" onclick="insuredCount = 2; showLoading();">Ver mi presupuesto</button>
       </div>
 
       <!-- PASO CP · Código postal -->
@@ -1963,7 +1963,7 @@
             <span class="detail-hero-tag" id="detailTag">Con copago</span>
           </div>
           <div class="detail-hero-pricerow">
-            <p class="detail-hero-price"><strong id="detailPrice">45<span class="price-dec">,90€</span></strong> al mes</p>
+            <p class="detail-hero-price"><strong id="detailPrice">45<span class="price-dec">,90€</span></strong> al mes<span id="detailNote"></span></p>
             <button class="btn-primary detail-hero-cta" onclick="closeDetail(); openHablemos();">Me interesa</button>
           </div>
         </div>
@@ -2356,6 +2356,8 @@
       document.getElementById('detailName').textContent = card.querySelector('.card-name').textContent.trim();
       document.getElementById('detailSub').textContent = DETAIL_SUB[tag] || tag;
       document.getElementById('detailPrice').innerHTML = priceEl ? priceEl.innerHTML : '';
+      const nAseg = insuredCount || 1;
+      document.getElementById('detailNote').textContent = nAseg > 1 ? ' · total para ' + nAseg + ' asegurados' : '';
       // tag pill + "El más popular" oscuro solo si el card es destacado
       const tagEl2 = document.getElementById('detailTag');
       if (tag) { tagEl2.textContent = tag; tagEl2.style.display = 'inline-flex'; } else { tagEl2.style.display = 'none'; }
