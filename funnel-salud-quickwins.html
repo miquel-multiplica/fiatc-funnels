@@ -444,11 +444,16 @@
 
   /* Modal "Detalles del seguro" (QW#3) */
   .detail-hero { padding-bottom: 24px; border-bottom: 1px solid var(--wf-20); }
+  .detail-hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .detail-hero-pop { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-90); color: var(--wf-0); font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; }
+  .detail-hero-tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-20); color: var(--wf-100); font-size: 12px; font-weight: 700; }
   .detail-hero-name { font-size: 21px; font-weight: 700; color: var(--wf-100); }
   .detail-hero-sub { font-size: 14px; color: var(--wf-90); line-height: 1.4; margin-top: 4px; }
-  .detail-hero-price { font-size: 12px; color: var(--wf-60); margin-top: 16px; }
+  .detail-hero-pricerow { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  .detail-hero-price { font-size: 12px; color: var(--wf-60); margin: 0; }
   .detail-hero-price strong { font-size: 28px; font-weight: 700; color: var(--wf-100); }
-  .detail-hero-badge { display: block; font-size: 14px; color: var(--wf-90); margin-top: 4px; }
+  .detail-hero-badge { font-size: 14px; color: var(--wf-90); }
+  .detail-hero-cta { width: auto; margin-top: 0; flex-shrink: 0; padding-left: 24px; padding-right: 24px; }
   .detail-section { margin-top: 28px; }
   .detail-section-h { font-size: 16px; font-weight: 700; color: var(--wf-100); margin-bottom: 12px; }
   .detail-text { font-size: 14px; color: var(--wf-90); line-height: 1.5; }
@@ -1926,9 +1931,16 @@
       </button>
       <div class="side-modal-body">
         <div class="detail-hero">
+          <div class="detail-hero-badges">
+            <span class="detail-hero-pop" id="detailPop">El más popular</span>
+            <span class="detail-hero-tag" id="detailTag">Con copago</span>
+          </div>
           <p class="detail-hero-name" id="detailName">Medifiatc P15</p>
           <p class="detail-hero-sub" id="detailSub">Cobertura completa con cuota ajustada</p>
-          <p class="detail-hero-price"><strong id="detailPrice">45€</strong>/mes<span class="detail-hero-badge" id="detailBadge">-32€ con pago anual</span></p>
+          <div class="detail-hero-pricerow">
+            <p class="detail-hero-price"><strong id="detailPrice">45€</strong>/mes <span class="detail-hero-badge" id="detailBadge">· -32€ con pago anual</span></p>
+            <button class="btn-primary detail-hero-cta" onclick="closeDetail(); openHablemos();">Me interesa</button>
+          </div>
         </div>
 
         <div class="detail-section">
@@ -1955,8 +1967,6 @@
           <p class="detail-more-text">Puedes descargar los documentos de tu seguro y sus prestaciones al final de la página.</p>
           <p class="detail-more-phone">Si lo prefieres, llámanos al <strong>900 123 456</strong>.</p>
         </div>
-
-        <button class="btn-primary detail-cta" onclick="closeDetail(); openHablemos();">Me interesa</button>
       </div>
     </aside>
   </div>
@@ -2293,8 +2303,15 @@
       document.getElementById('detailName').textContent = card.querySelector('.card-name').textContent.trim();
       document.getElementById('detailSub').textContent = DETAIL_SUB[tag] || tag;
       document.getElementById('detailPrice').textContent = priceEl ? priceEl.textContent : '';
+      // tag pill + "El más popular" oscuro solo si el card es destacado
+      const tagEl2 = document.getElementById('detailTag');
+      if (tag) { tagEl2.textContent = tag; tagEl2.style.display = 'inline-flex'; } else { tagEl2.style.display = 'none'; }
+      const pop = document.getElementById('detailPop');
+      const popEl = card.querySelector('.card-badge');
+      if (card.classList.contains('featured') && popEl) { pop.textContent = popEl.textContent.trim(); pop.style.display = 'inline-flex'; }
+      else { pop.style.display = 'none'; }
       const badge = document.getElementById('detailBadge');
-      if (badgeEl) { badge.textContent = badgeEl.textContent.trim(); badge.style.display = 'block'; }
+      if (badgeEl) { badge.textContent = '· ' + badgeEl.textContent.trim(); badge.style.display = 'inline'; }
       else { badge.style.display = 'none'; }
       document.getElementById('detailForWhom').textContent = DETAIL_FORWHOM[tag] || '';
       const inc = document.getElementById('detailIncludes');
