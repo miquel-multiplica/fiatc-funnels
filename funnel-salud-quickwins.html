@@ -270,6 +270,10 @@
   }
   .dob-cs-trigger.has-value { color: var(--wf-100); }
   .dob-cs.open .dob-cs-trigger { border-color: var(--wf-60); }
+  /* Contratación: fecha de nacimiento deshabilitada (viene de la tarificación) */
+  .dob-row input:disabled { background: var(--wf-20); color: var(--wf-90); cursor: not-allowed; -webkit-text-fill-color: var(--wf-90); opacity: 1; }
+  /* Etiqueta de sección de campos + segmentado (Sexo) */
+  .field-section-label { display: block; font-size: 12px; font-weight: 700; color: var(--wf-90); margin: 16px 0 8px; }
   .dob-chevron {
     position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
     pointer-events: none; display: flex; color: var(--wf-60); transition: transform 0.2s;
@@ -490,8 +494,8 @@
   .interes-plan-price { font-size: 14px; color: var(--wf-90); margin: 0; }
   .interes-plan-price strong { font-size: 24px; font-weight: 700; color: var(--wf-100); }
   .interes-lead { font-size: 16px; color: var(--wf-90); line-height: 1.4; margin: 24px 0 20px; }
-  .interes-help-btn { width: 100%; margin-top: 12px; }
-  .interes-divider { display: flex; align-items: center; gap: 12px; margin: 24px 0; color: var(--wf-60); font-size: 12px; }
+  .interes-help-btn { width: 100%; margin-top: 20px; }
+  .interes-divider { display: flex; align-items: center; gap: 12px; margin: 32px 0 24px; color: var(--wf-60); font-size: 12px; }
   .interes-divider::before, .interes-divider::after { content: ''; flex: 1; height: 1px; background: var(--wf-20); }
   .interes-save { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; background: none; border: none; font-family: inherit; font-size: 14px; font-weight: 700; color: var(--wf-90); cursor: pointer; }
   .interes-save:hover { color: var(--wf-100); }
@@ -929,6 +933,11 @@
     /* FAQ pills alineadas a la izquierda en mobile */
     .faq-pills { justify-content: flex-start; }
     .faq-pills-title { text-align: left; }
+    /* Resultados: título, ristra y FAQs centrados en mobile */
+    #step7 .results-summary { text-align: center; }
+    #step7 .results-meta { justify-content: center; flex-wrap: wrap; }
+    #step7 .faq-pills { justify-content: center; }
+    #step7 .faq-pills-title { text-align: center; }
 
     /* Iconos de email/teléfono más pequeños en mobile (bajan la altura del paso) */
     .step-icon-badge { width: 48px; height: 48px; margin: 0 auto 12px; }
@@ -941,7 +950,7 @@
 
     /* Banner de campaña: full-width en mobile; en portada/fecha pegado al header (no sticky) */
     .promo-banner { margin-left: calc(-1 * var(--content-pad)); margin-right: calc(-1 * var(--content-pad)); border-radius: 0; }
-    #step0 .promo-banner, #step4 .promo-banner { margin-top: -24px; }
+    #step0 .promo-banner, #step4 .promo-banner, #step7 .promo-banner { margin-top: -24px; }
 
     /* Hablemos: bottom-sheet (como la propuesta original) */
     .side-modal-panel {
@@ -998,7 +1007,7 @@
         <!-- BANNER CAMPAÑA "2 meses gratis" (quita y pon · estacional sep–feb) -->
         <div class="promo-banner">
           <span class="promo-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
-          <div class="promo-banner-text"><strong>2 meses gratis</strong><span>Hasta el 30 de septiembre de 2026</span></div>
+          <div class="promo-banner-text"><strong>¡Consigue 2 meses gratis!</strong><span>Sólo hasta el 30/9/2026 como fecha de inicio</span></div>
         </div>
         <h1 class="step-title">Hola, estás a 2 min de saber el precio de tu seguro de salud ideal</h1>
         <div class="step-hero-msg" style="margin-top:28px;">
@@ -1255,7 +1264,7 @@
         <!-- BANNER CAMPAÑA "2 meses gratis" (quita y pon · estacional sep–feb) -->
         <div class="promo-banner">
           <span class="promo-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
-          <div class="promo-banner-text"><strong>2 meses gratis</strong><span>Hasta el 30 de septiembre de 2026</span></div>
+          <div class="promo-banner-text"><strong>¡Consigue 2 meses gratis!</strong><span>Sólo hasta el 30/9/2026 como fecha de inicio</span></div>
         </div>
         <h1 class="step-title">¿Cuándo quieres empezar?</h1>
         <p class="step-subtitle">Elige la fecha de inicio de tu cobertura</p>
@@ -1403,6 +1412,11 @@
 
       <!-- PASO 7 · Resultados -->
       <div class="step" id="step7">
+        <!-- BANNER CAMPAÑA "2 meses gratis" (quita y pon · estacional sep–feb) -->
+        <div class="promo-banner">
+          <span class="promo-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
+          <div class="promo-banner-text"><strong>¡Consigue 2 meses gratis!</strong><span>Sólo hasta el 30/9/2026 como fecha de inicio</span></div>
+        </div>
         <div class="filter-tabs">
           <button class="filter-tab active" onclick="selectFilter('para-ti',this)" data-title="Las opciones más populares en clientes como tú" data-sub="Ideales para parejas jóvenes en Barcelona">Para ti</button>
           <button class="filter-tab" onclick="selectFilter('copago',this)" data-title="El equilibrio entre precio y cobertura" data-sub="Si prefieres cuota mensual baja y pagar algo en cada visita">Con copago</button>
@@ -1422,12 +1436,6 @@
               Modificar
             </a>
           </div>
-        </div>
-
-        <!-- BANNER CAMPAÑA "2 meses gratis" (quita y pon · estacional sep–feb) -->
-        <div class="promo-banner">
-          <span class="promo-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
-          <div class="promo-banner-text"><strong>2 meses gratis</strong><span>Hasta el 30 de septiembre de 2026</span></div>
         </div>
 
         <div class="products-carousel">
@@ -1700,6 +1708,43 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- ══════════ CONTRATACIÓN ══════════ -->
+
+      <!-- CONTRATACIÓN · step8 · Datos personales del tomador -->
+      <div class="step" id="cDatos">
+        <h1 class="step-title">¡Perfecto! Iniciemos la contratación con tus datos personales</h1>
+        <p class="step-subtitle">Estos son los datos del titular o tomador del seguro.</p>
+        <div class="input-wrap" style="margin-top:24px;">
+          <input type="text" id="cNombre" placeholder=" " onclick="if(!this.value){this.value='María';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label for="cNombre">Nombre</label>
+        </div>
+        <div style="display:flex; gap:12px;">
+          <div class="input-wrap" style="flex:1; min-width:0;">
+            <input type="text" id="cAp1" placeholder=" " onclick="if(!this.value){this.value='García';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+            <label for="cAp1">Primer apellido</label>
+          </div>
+          <div class="input-wrap" style="flex:1; min-width:0;">
+            <input type="text" id="cAp2" placeholder=" " onclick="if(!this.value){this.value='López';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+            <label for="cAp2">Segundo apellido</label>
+          </div>
+        </div>
+        <div class="input-wrap">
+          <input type="text" id="cNif" placeholder=" " onclick="if(!this.value){this.value='47854123X';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label for="cNif">NIF / NIE</label>
+        </div>
+        <span class="field-section-label">Fecha de nacimiento</span>
+        <div class="dob-row">
+          <input type="text" value="12" disabled>
+          <input type="text" value="Marzo" disabled>
+          <input type="text" value="1985" disabled>
+        </div>
+        <div class="cp-info" style="margin-top:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>La fecha de nacimiento viene de la tarificación. Para cambiarla, vuelve a tarificar.</span>
+        </div>
+        <button class="btn-primary" onclick="nextContrat()">Continuar</button>
       </div>
 
     </div>
@@ -2242,6 +2287,8 @@
       document.querySelector('.app-header').classList.add('show-back');
     }
     function prevStep() {
+      // En contratación, el back navega dentro de la contratación (o vuelve a resultados)
+      if (contractMode) { prevContrat(); return; }
       // Desde resultados, el back vuelve al último paso del funnel (step6b)
       if (document.getElementById('step7').classList.contains('active')) { showStep('step6b'); return; }
       // Recuperar presupuesto vuelve a la portada
@@ -2606,7 +2653,42 @@
     }
     function closeInteres() { document.getElementById('interesModal').classList.remove('open'); }
     /* Entrada a la fase de contratación (pendiente de construir) */
-    function startContratacion() { closeInteres(); }
+    /* ── Contratación (modo aparte, con su propio progreso) ── */
+    let contractMode = false;
+    // Orden del proto original (step8→20); showContrat/nextContrat solo navegan a los que ya existen.
+    // cDerogacion (camino "sí, otra compañía") y cAseg2 son condicionales.
+    const CONTRAT_FLOW = ['cDatos', 'cContacto', 'cDireccion', 'cAseg1', 'cAseg2', 'cCuestionario', 'cFirma', 'cOtra', 'cDerogacion', 'cPago', 'cAntes', 'cTPV', 'cConfirm'];
+    let contratIdx = 0;
+    function startContratacion() { closeInteres(); showContrat('cDatos'); }
+    function showContrat(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      contractMode = true;
+      document.querySelectorAll('.step, .step-loading').forEach(s => s.classList.remove('active'));
+      document.getElementById('appMain').classList.remove('results-wide');
+      el.classList.add('active');
+      contratIdx = CONTRAT_FLOW.indexOf(id);
+      const pct = Math.round(((contratIdx + 1) / CONTRAT_FLOW.length) * 100);
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.querySelector('.app-header').classList.add('show-back');
+      document.getElementById('appMain').scrollTop = 0;
+    }
+    function nextContrat() { const n = CONTRAT_FLOW[contratIdx + 1]; if (n && document.getElementById(n)) showContrat(n); }
+    function prevContrat() {
+      if (contratIdx <= 0) { backToResults(); return; }
+      const p = CONTRAT_FLOW[contratIdx - 1];
+      if (p) showContrat(p);
+    }
+    function backToResults() {
+      contractMode = false;
+      document.querySelectorAll('.step, .step-loading').forEach(s => s.classList.remove('active'));
+      document.getElementById('step7').classList.add('active');
+      document.getElementById('appMain').classList.add('results-wide');
+      document.querySelector('.app-header').classList.add('show-back');
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('appMain').scrollTop = 0;
+      requestAnimationFrame(() => centerFeatured(document.querySelector('#step7 .products-scroll.active')));
+    }
 
     /* ── Acordeón "¿Por qué elegir FIATC?" ── */
     function toggleWhy(btn) {
