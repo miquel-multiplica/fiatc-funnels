@@ -471,14 +471,17 @@
   .detail-more-phone { font-size: 14px; color: var(--wf-90); margin-top: 12px; }
   .detail-cta { margin-top: 28px; }
   /* Modal "Me interesa": confirma plan + anticipa el proceso (arranque contratación) */
-  .interes-hero { background: var(--wf-10); margin: -40px -24px 0; padding: 32px 24px 24px; border-bottom: 1px solid var(--wf-20); }
-  @media (min-width: 601px) { .interes-hero { margin-left: -32px; margin-right: -32px; padding-left: 32px; padding-right: 32px; } }
-  .interes-eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--wf-60); }
-  .interes-name { font-size: 24px; font-weight: 700; color: var(--wf-100); margin-top: 4px; }
-  .interes-price { font-size: 14px; color: var(--wf-90); margin-top: 12px; }
-  .interes-price strong { font-size: 24px; font-weight: 700; color: var(--wf-100); }
+  .interes-celebrate { text-align: center; margin: 4px 0 20px; }
+  .interes-check { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--wf-20); color: var(--wf-90); }
+  .interes-check svg { width: 32px; height: 32px; }
+  .interes-gran { font-size: 24px; font-weight: 700; color: var(--wf-100); margin-top: 16px; }
+  .interes-plan { border: 1.5px solid var(--wf-40); border-radius: 12px; padding: 16px; }
+  .interes-plan-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .interes-plan-name { font-size: 18px; font-weight: 700; color: var(--wf-100); }
+  .interes-plan-tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-20); font-size: 12px; font-weight: 700; color: var(--wf-100); flex-shrink: 0; }
+  .interes-plan-price { font-size: 14px; color: var(--wf-90); margin: 0; }
+  .interes-plan-price strong { font-size: 24px; font-weight: 700; color: var(--wf-100); }
   .interes-lead { font-size: 16px; color: var(--wf-90); line-height: 1.4; margin: 24px 0 20px; }
-  .interes-note { font-size: 12px; color: var(--wf-60); text-align: center; margin-top: 8px; line-height: 1.4; }
   .interes-help-btn { width: 100%; margin-top: 12px; }
   .interes-divider { display: flex; align-items: center; gap: 12px; margin: 24px 0; color: var(--wf-60); font-size: 12px; }
   .interes-divider::before, .interes-divider::after { content: ''; flex: 1; height: 1px; background: var(--wf-20); }
@@ -2154,14 +2157,19 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="side-modal-body">
-        <div class="interes-hero">
-          <p class="interes-eyebrow">Gran elección</p>
-          <p class="interes-name" id="interesName">Medifiatc P15</p>
-          <p class="interes-price"><strong id="interesPrice">45<span class="price-dec">,78€</span></strong> al mes<span id="interesNote"></span></p>
+        <div class="interes-celebrate">
+          <span class="interes-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <p class="interes-gran">¡Gran elección!</p>
+        </div>
+        <div class="interes-plan">
+          <div class="interes-plan-head">
+            <span class="interes-plan-name" id="interesName">Medifiatc P15</span>
+            <span class="interes-plan-tag" id="interesTag">Con copago</span>
+          </div>
+          <p class="interes-plan-price"><strong id="interesPrice">45<span class="price-dec">,78€</span></strong> al mes<span id="interesNote"></span></p>
         </div>
         <p class="interes-lead">Tú tienes el control, ¿cómo quieres continuar?</p>
         <button class="btn-primary" style="margin-top:0;" onclick="startContratacion()">Contratar online ahora</button>
-        <p class="interes-note">100% online. Incluye un breve cuestionario de salud (no es vinculante).</p>
         <button class="btn-ghost interes-help-btn" onclick="closeInteres(); openHablemos();">Prefiero que me ayuden</button>
         <div class="interes-divider"><span>¿Continuar más tarde?</span></div>
         <button class="interes-save" onclick="closeInteres(); openExit(); exitSaveBudget();">
@@ -2555,7 +2563,10 @@
     function openInteres(card) {
       if (!card) return;
       const priceEl = card.querySelector('.card-price strong');
+      const tagEl = card.querySelector('.card-tag');
       document.getElementById('interesName').textContent = card.querySelector('.card-name').textContent.trim();
+      const it = document.getElementById('interesTag');
+      if (tagEl) { it.textContent = tagEl.textContent.trim(); it.style.display = 'inline-flex'; } else { it.style.display = 'none'; }
       document.getElementById('interesPrice').innerHTML = priceEl ? priceEl.innerHTML : '';
       const n = insuredCount || 1;
       document.getElementById('interesNote').textContent = n > 1 ? ' · total para ' + n + ' asegurados' : '';
