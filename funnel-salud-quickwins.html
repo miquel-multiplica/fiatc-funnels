@@ -475,7 +475,8 @@
   .interes-check { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--wf-20); color: var(--wf-90); }
   .interes-check svg { width: 32px; height: 32px; }
   .interes-gran { font-size: 24px; font-weight: 700; color: var(--wf-100); margin-top: 16px; }
-  .interes-plan { border: 1.5px solid var(--wf-40); border-radius: 12px; padding: 16px; }
+  .interes-sub { font-size: 16px; color: var(--wf-90); line-height: 1.4; margin-top: 8px; }
+  .interes-plan { border: 1.5px solid var(--wf-40); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
   .interes-plan-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
   .interes-plan-name { font-size: 18px; font-weight: 700; color: var(--wf-100); }
   .interes-plan-tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-20); font-size: 12px; font-weight: 700; color: var(--wf-100); flex-shrink: 0; }
@@ -2160,6 +2161,7 @@
         <div class="interes-celebrate">
           <span class="interes-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
           <p class="interes-gran">¡Gran elección!</p>
+          <p class="interes-sub">Tú tienes el control, ¿cómo quieres continuar?</p>
         </div>
         <div class="interes-plan">
           <div class="interes-plan-head">
@@ -2168,10 +2170,9 @@
           </div>
           <p class="interes-plan-price"><strong id="interesPrice">45<span class="price-dec">,78€</span></strong> al mes<span id="interesNote"></span></p>
         </div>
-        <p class="interes-lead">Tú tienes el control, ¿cómo quieres continuar?</p>
         <button class="btn-primary" style="margin-top:0;" onclick="startContratacion()">Contratar online ahora</button>
         <button class="btn-ghost interes-help-btn" onclick="closeInteres(); openHablemos();">Prefiero que me ayuden</button>
-        <div class="interes-divider"><span>¿Continuar más tarde?</span></div>
+        <div class="interes-divider"><span>¿Quieres continuar más tarde?</span></div>
         <button class="interes-save" onclick="closeInteres(); openExit(); exitSaveBudget();">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Guardar presupuesto
