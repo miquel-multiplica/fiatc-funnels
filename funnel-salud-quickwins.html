@@ -415,7 +415,7 @@
   .step-promo strong { color: var(--wf-100); font-weight: 700; }
   /* Banner de campaña "2 meses gratis" (rev. cliente 31 jul). QUITA Y PON: es estacional (sep–feb); para bajarlo, ocultar los bloques .promo-banner. */
   .promo-banner { display: flex; align-items: center; gap: 12px; background: var(--wf-40); border-radius: 10px; padding: 12px; margin-bottom: 20px; }
-  .promo-banner-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: var(--wf-20); display: flex; align-items: center; justify-content: center; color: var(--wf-90); }
+  .promo-banner-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: var(--wf-60); color: var(--wf-0); display: flex; align-items: center; justify-content: center; }
   .promo-banner-icon svg { width: 24px; height: 24px; }
   .promo-banner-text strong { display: block; font-size: 18px; font-weight: 700; color: var(--wf-100); line-height: 1.2; }
   .promo-banner-text span { font-size: 14px; color: var(--wf-90); }
@@ -939,6 +939,10 @@
     /* Ristra de resultados: solo el CP, sin provincia, en mobile */
     #step7 .results-meta-prov { display: none; }
 
+    /* Banner de campaña: full-width en mobile; en portada/fecha pegado al header (no sticky) */
+    .promo-banner { margin-left: calc(-1 * var(--content-pad)); margin-right: calc(-1 * var(--content-pad)); border-radius: 0; }
+    #step0 .promo-banner, #step4 .promo-banner { margin-top: -24px; }
+
     /* Hablemos: bottom-sheet (como la propuesta original) */
     .side-modal-panel {
       top: auto; bottom: 0; left: 0; right: 0;
@@ -1248,6 +1252,11 @@
 
       <!-- PASO 4 · ¿Cuándo quieres empezar? -->
       <div class="step" id="step4">
+        <!-- BANNER CAMPAÑA "2 meses gratis" (quita y pon · estacional sep–feb) -->
+        <div class="promo-banner">
+          <span class="promo-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
+          <div class="promo-banner-text"><strong>2 meses gratis</strong><span>Hasta el 30 de septiembre de 2026</span></div>
+        </div>
         <h1 class="step-title">¿Cuándo quieres empezar?</h1>
         <p class="step-subtitle">Elige la fecha de inicio de tu cobertura</p>
         <div class="date-list">
