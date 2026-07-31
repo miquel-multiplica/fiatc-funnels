@@ -88,8 +88,6 @@
     white-space: nowrap;
   }
   .hablemos-btn {
-    grid-column: 3;
-    justify-self: end;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -212,6 +210,11 @@
   .input-wrap:focus-within select, .input-wrap.filled select {
     padding-top: 22px;
   }
+  /* Campos autorrellenados no editables (Ciudad/Provincia tras CP) */
+  .input-wrap:has(input:disabled), .input-wrap:has(select:disabled) { background: var(--wf-20); border-color: var(--wf-30); }
+  .input-wrap input:disabled, .input-wrap select:disabled {
+    color: var(--wf-90); cursor: not-allowed; -webkit-text-fill-color: var(--wf-90); opacity: 1;
+  }
   .select-wrap select { padding-right: 36px; cursor: pointer; }
   .select-arrow {
     position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
@@ -271,9 +274,23 @@
   .dob-cs-trigger.has-value { color: var(--wf-100); }
   .dob-cs.open .dob-cs-trigger { border-color: var(--wf-60); }
   /* Contratación: fecha de nacimiento deshabilitada (viene de la tarificación) */
-  .dob-row input:disabled { background: var(--wf-20); color: var(--wf-90); cursor: not-allowed; -webkit-text-fill-color: var(--wf-90); opacity: 1; }
-  /* Etiqueta de sección de campos + segmentado (Sexo) */
-  .field-section-label { display: block; font-size: 12px; font-weight: 700; color: var(--wf-90); margin: 16px 0 8px; }
+  .dob-row input:disabled { background: var(--wf-20); color: var(--wf-90); cursor: pointer; -webkit-text-fill-color: var(--wf-90); opacity: 1; }
+  /* Fecha bloqueada: al pulsar muestra un tooltip explicativo (en vez de un mensaje fijo) */
+  .dob-locked { position: relative; cursor: pointer; }
+  .dob-locked .dob-row input:disabled { pointer-events: none; } /* el clic lo captura el contenedor */
+  .dob-locked .field-section-label { cursor: pointer; }
+  /* Tooltip (patrón skill wireframe): burbuja oscura con flecha */
+  .tooltip { position: absolute; background: var(--wf-100); color: var(--wf-0); font-size: 12px; line-height: 1.4; padding: 8px 12px; border-radius: 8px; max-width: 260px; z-index: 20; box-shadow: 0 4px 16px rgba(39, 42, 48, 0.18); }
+  .tooltip::after { content: ''; position: absolute; width: 8px; height: 8px; background: var(--wf-100); transform: rotate(45deg); }
+  .tooltip.top { bottom: calc(100% + 8px); left: 0; }
+  .tooltip.top::after { bottom: -4px; left: 20px; }
+  .dob-tip { display: none; }
+  .dob-locked.show-tip .dob-tip { display: block; }
+  /* Etiqueta de sección de campos */
+  .field-section-label { display: block; font-size: 14px; font-weight: 400; color: var(--wf-90); margin: 16px 0 8px; }
+  /* Toggle "¿Copiamos los datos del titular?" (asegurados) — solo línea inferior, como el proto */
+  .aseg-toggle-wrap { display: flex; align-items: center; gap: 12px; margin: 8px 0 20px; padding-bottom: 16px; border-bottom: 1px solid var(--wf-20); }
+  .aseg-toggle-label { flex: 1; font-size: 14px; font-weight: 500; color: var(--wf-100); }
   .dob-chevron {
     position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
     pointer-events: none; display: flex; color: var(--wf-60); transition: transform 0.2s;
@@ -417,6 +434,10 @@
     font-size: 14px; color: var(--wf-90); line-height: 1.45;
   }
   .step-promo strong { color: var(--wf-100); font-weight: 700; }
+  /* Variante de dos líneas (cuestionario): dos checks en la misma card */
+  .step-promo.quest-promo { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .quest-promo .promo-line { display: flex; align-items: flex-start; gap: 12px; }
+  .quest-promo .promo-line svg { flex-shrink: 0; margin-top: 1px; }
   /* Banner de campaña "2 meses gratis" (rev. cliente 31 jul). QUITA Y PON: es estacional (sep–feb); para bajarlo, ocultar los bloques .promo-banner. */
   .promo-banner { display: flex; align-items: center; gap: 12px; background: var(--wf-40); border-radius: 10px; padding: 12px; margin-bottom: 20px; }
   .promo-banner-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: var(--wf-60); color: var(--wf-0); display: flex; align-items: center; justify-content: center; }
@@ -447,6 +468,8 @@
     font-size: 14px; font-weight: 600; color: var(--wf-100);
     text-decoration: none; cursor: pointer;
   }
+  /* Enlace "Recuperar presupuesto" del inicio: solo más grande, sin subrayado */
+  #step0 .btn-skip { font-size: 16px; }
 
   /* Social proof — dos cifras con icono, texto a la izquierda. Vertical en mobile, horizontal en desktop */
   .why-stats { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
@@ -487,7 +510,7 @@
   .interes-check svg { width: 32px; height: 32px; }
   .interes-gran { font-size: 24px; font-weight: 700; color: var(--wf-100); margin-top: 16px; }
   .interes-sub { font-size: 16px; color: var(--wf-90); line-height: 1.4; margin-top: 8px; }
-  .interes-plan { border: 1.5px solid var(--wf-40); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+  .interes-plan { border: 1.5px solid var(--wf-40); border-radius: 12px; padding: 24px; margin: 40px 0; }
   .interes-plan-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
   .interes-plan-name { font-size: 18px; font-weight: 700; color: var(--wf-100); }
   .interes-plan-tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-20); font-size: 12px; font-weight: 700; color: var(--wf-100); flex-shrink: 0; }
@@ -495,10 +518,137 @@
   .interes-plan-price strong { font-size: 24px; font-weight: 700; color: var(--wf-100); }
   .interes-lead { font-size: 16px; color: var(--wf-90); line-height: 1.4; margin: 24px 0 20px; }
   .interes-help-btn { width: 100%; margin-top: 20px; }
-  .interes-divider { display: flex; align-items: center; gap: 12px; margin: 32px 0 24px; color: var(--wf-60); font-size: 12px; }
-  .interes-divider::before, .interes-divider::after { content: ''; flex: 1; height: 1px; background: var(--wf-20); }
+  .interes-divider { display: flex; justify-content: center; margin: 28px 0 8px; color: var(--wf-60); font-size: 14px; }
   .interes-save { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; background: none; border: none; font-family: inherit; font-size: 14px; font-weight: 700; color: var(--wf-90); cursor: pointer; }
   .interes-save:hover { color: var(--wf-100); }
+  /* ══════════════════════════════════════════
+     RESUMEN FLOTANTE (contratación) — se va rellenando paso a paso
+     FAB: mobile abajo full-width · desktop arriba a la derecha
+     ══════════════════════════════════════════ */
+  .resumen-fab {
+    position: fixed; z-index: 90; display: none; cursor: pointer;
+    align-items: center; gap: 12px; font-family: 'Roboto', sans-serif;
+    background: var(--wf-0); border: 1px solid var(--wf-40);
+    box-shadow: 0 4px 16px rgba(39, 42, 48, 0.14);
+  }
+  .resumen-fab.visible { display: flex; }
+  .resumen-fab-icon { flex-shrink: 0; color: var(--wf-90); display: flex; align-items: center; }
+  .resumen-fab-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; align-items: flex-start; }
+  .resumen-fab-label { font-size: 12px; font-weight: 600; color: var(--wf-100); }
+  .resumen-fab-price { font-size: 14px; color: var(--wf-90); }
+  .resumen-fab-price strong { font-size: 18px; font-weight: 700; color: var(--wf-100); }
+  .resumen-fab-extra { color: var(--wf-90); }
+  .resumen-fab-chevron { flex-shrink: 0; color: var(--wf-60); display: flex; align-items: center; }
+  /* Barra inferior a sangre, pegada al borde inferior — solo hasta <900 */
+  .resumen-fab { left: 0; right: 0; bottom: 0; border-radius: 0; border-left: none; border-right: none; border-bottom: none; border-top: 1px solid var(--wf-40); box-shadow: 0 -2px 16px rgba(39, 42, 48, 0.10); padding: 16px 24px calc(24px + env(safe-area-inset-bottom, 0px)); }
+  @media (max-width: 899px) { body.resumen-active .app-main { padding-bottom: 110px; } }
+  @media (min-width: 900px) { .resumen-fab { display: none !important; } }
+
+  /* Carrito del resumen en la cabecera (desktop ≥900): Hablemos pasa a la izquierda,
+     el resumen a la derecha separado por una línea vertical. Solo en modo contratación. */
+  .hcart { display: none; align-items: center; gap: 12px; cursor: pointer; background: none; border: none; font-family: inherit; padding: 0; }
+  .hcart-icon { flex-shrink: 0; color: var(--wf-90); display: flex; }
+  .hcart-info { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; text-align: left; min-width: 0; }
+  .hcart-label { font-size: 12px; font-weight: 600; color: var(--wf-90); }
+  .hcart-price { font-size: 14px; color: var(--wf-90); white-space: nowrap; }
+  .hcart-price strong { font-size: 16px; font-weight: 700; color: var(--wf-100); }
+  .hcart-chevron { flex-shrink: 0; color: var(--wf-60); display: flex; margin-left: 8px; }
+  /* Hablemos + resumen agrupados a la derecha; el logo se mantiene centrado */
+  .header-actions { grid-column: 3; justify-self: end; align-self: stretch; display: flex; align-items: center; gap: 20px; }
+  /* Línea divisoria de arriba a abajo del header (solo contratación desktop) */
+  .hactions-sep { display: none; align-self: stretch; width: 1px; background: var(--wf-30); }
+  @media (min-width: 900px) {
+    .app-header.contrat .hcart { display: flex; }
+    .app-header.contrat .hactions-sep { display: block; }
+  }
+
+  /* Card del seguro dentro del resumen (mismo estilo que "Me interesa") */
+  #resumenModal .interes-plan { margin: 8px 0 16px; padding: 16px; }
+  .resumen-start { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--wf-20); }
+  .resumen-start svg { flex-shrink: 0; color: var(--wf-90); }
+  .resumen-start-label { font-size: 14px; color: var(--wf-90); }
+  .resumen-start-val { font-size: 14px; font-weight: 700; color: var(--wf-90); }
+  .resumen-h { font-size: 24px; font-weight: 700; color: var(--wf-100); margin-bottom: 20px; }
+
+  /* Acordeones del resumen (una sección por dato recogido) */
+  .racc { border-bottom: 1px solid var(--wf-20); }
+  .racc:first-of-type { border-top: 1px solid var(--wf-20); }
+  .racc-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 0; cursor: pointer; }
+  .racc-header .racc-hlabel { font-size: 16px; font-weight: 500; color: var(--wf-100); }
+  .racc-chevron { color: var(--wf-60); transition: transform 0.2s; flex-shrink: 0; }
+  .racc.open .racc-chevron { transform: rotate(180deg); }
+  .racc-body { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
+  .racc.open .racc-body { max-height: 240px; }
+  /* Secciones aún no completadas: gris y con etiqueta "Pendiente", no desplegables */
+  .racc-pending-tag { display: none; font-size: 12px; font-weight: 600; color: var(--wf-60); background: var(--wf-10); border: 1px solid var(--wf-20); border-radius: 100px; padding: 3px 10px; flex-shrink: 0; }
+  .racc.pending .racc-header { cursor: default; }
+  .racc.pending .racc-header .racc-hlabel { color: var(--wf-60); }
+  .racc.pending .racc-chevron { display: none; }
+  .racc.pending .racc-pending-tag { display: inline-flex; }
+
+  /* ══════════════════════════════════════════
+     CUESTIONARIO DE SALUD — lista de asegurados + modal progresivo
+     ══════════════════════════════════════════ */
+  .ques-list { display: flex; flex-direction: column; gap: 12px; margin: 12px 0 24px; }
+  .ques-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--wf-0); border: 1px solid var(--wf-40); border-radius: 12px; padding: 16px; }
+  .ques-card-info { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .ques-card-name { font-size: 16px; font-weight: 700; color: var(--wf-100); }
+  .ques-card-state { display: flex; align-items: center; gap: 8px; }
+  .ques-tag { display: inline-flex; align-items: center; gap: 4px; border-radius: 100px; padding: 3px 10px; font-size: 12px; font-weight: 600; }
+  /* Colores semánticos como el proto original (excepción al grayscale, estado) */
+  .ques-tag.pending { background: #FEF3C7; color: #92400E; }
+  .ques-tag.done { background: #E8F5E9; color: #2E7D32; }
+  .ques-progress { font-size: 12px; font-weight: 600; color: var(--wf-60); }
+  .ques-cta { flex-shrink: 0; background: var(--wf-100); color: var(--wf-0); border: none; border-radius: 8px; padding: 10px 16px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  .ques-cta.edit { background: none; color: var(--wf-90); display: inline-flex; align-items: center; gap: 6px; padding: 10px 4px; }
+
+  /* Modal del cuestionario — cabecera fija + scroll (Typeform) + footer fijo */
+  .quest-modal-head { flex-shrink: 0; position: relative; padding: 22px 24px; border-bottom: 1px solid var(--wf-20); }
+  .quest-h { font-size: 21px; font-weight: 700; color: var(--wf-100); margin-bottom: 6px; }
+  .quest-name { font-size: 16px; color: var(--wf-90); }
+  /* padding-bottom generoso: cualquier pregunta puede subir hasta arriba (las respondidas quedan ocultas) */
+  .quest-modal-scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 24px 24px 65vh; scroll-behavior: smooth; }
+  .quest-modal-foot { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--wf-20); }
+  .quest-modal-foot .btn-primary { width: auto; flex-shrink: 0; }
+  @media (min-width: 601px) {
+    #questModal .side-modal-panel { width: 640px; }
+    .quest-modal-head, .quest-modal-scroll, .quest-modal-foot { padding-left: 32px; padding-right: 32px; }
+    .quest-modal-foot .btn-primary { min-width: 260px; } /* más ancho en desktop */
+  }
+  @media (max-width: 600px) {
+    .quest-modal-foot .btn-primary { flex: 1; } /* a todo el ancho disponible en mobile */
+  }
+  .quest-bio { display: flex; gap: 12px; }
+  .quest-bio .input-wrap { flex: 1; min-width: 0; margin-bottom: 8px; }
+  .quest-hint { font-size: 12px; color: var(--wf-60); margin: 0 0 12px; }
+  .quest-imc { display: none; align-items: baseline; gap: 8px; background: var(--wf-20); border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; }
+  .quest-imc.visible { display: flex; }
+  .quest-imc-num { font-size: 16px; font-weight: 700; color: var(--wf-100); }
+  .quest-imc-label { font-size: 12px; color: var(--wf-90); }
+  .quest-nodeclare { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: var(--wf-90); line-height: 1.5; margin-top: 4px; }
+  .quest-nodeclare svg { flex-shrink: 0; margin-top: 2px; color: var(--wf-90); }
+  .quest-sep { height: 1px; background: var(--wf-20); margin: 24px 0; }
+  .quest-q { display: none; margin-bottom: 56px; scroll-margin-top: 44px; }
+  .quest-q.show { display: block; animation: questIn 0.3s ease; }
+  @keyframes questIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .quest-q-num { display: block; font-size: 12px; font-weight: 700; color: var(--wf-60); margin-bottom: 6px; letter-spacing: 0.02em; }
+  .quest-q-label { display: block; font-size: 16px; color: var(--wf-100); line-height: 1.4; margin-bottom: 12px; }
+  .quest-yesno { display: flex; gap: 8px; }
+  .quest-yn-btn { flex: 1; padding: 12px; border: 1px solid var(--wf-40); border-radius: 8px; background: var(--wf-0); font-size: 14px; font-weight: 600; color: var(--wf-90); cursor: pointer; font-family: inherit; transition: all 0.15s; }
+  .quest-yn-btn.selected { border-color: var(--wf-90); background: var(--wf-20); color: var(--wf-100); }
+  .quest-textarea { display: none; margin-top: 12px; }
+  .quest-q.expand .quest-textarea { display: block; animation: questIn 0.3s ease; }
+  .quest-textarea textarea { width: 100%; min-height: 76px; border: 1px solid var(--wf-40); border-radius: 8px; padding: 12px; font-family: inherit; font-size: 14px; color: var(--wf-100); resize: vertical; box-sizing: border-box; }
+  .quest-textarea textarea::placeholder { color: var(--wf-60); }
+  .quest-textarea textarea:focus { outline: none; border-color: var(--wf-60); }
+  .quest-next-btn { margin-top: 12px; padding: 12px 28px; border: none; border-radius: 8px; background: var(--wf-100); color: var(--wf-0); font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  .quest-next-btn:hover { background: var(--wf-90); }
+  .quest-counter { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--wf-90); }
+  .quest-counter-check { display: none; color: #2E7D32; }
+  .quest-counter.done .quest-counter-check { display: block; }
+  .racc-body p { font-size: 14px; font-weight: 400; color: var(--wf-90); margin: 0 0 6px; line-height: 1.5; }
+  .racc-body p:last-child { margin-bottom: 16px; }
+
   /* Bottombar del modal: aparece cuando el "Me interesa" del hero sale de vista al hacer scroll */
   #detailModal .side-modal-body { padding-bottom: calc(112px + env(safe-area-inset-bottom, 0px)); }
   .detail-stickybar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; display: flex; align-items: center; gap: 16px; padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--wf-0); border-top: 1px solid var(--wf-20); box-shadow: 0 -4px 16px rgba(39, 42, 48, 0.08); transform: translateY(100%); transition: transform 0.25s ease; }
@@ -694,7 +844,7 @@
   /* Divisor del exit-intent ("o si necesitas ayuda") */
   .exit-divider { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
   .exit-divider::before, .exit-divider::after { content: ''; flex: 1; height: 1px; background: var(--wf-20); }
-  .exit-divider span { font-size: 12px; color: var(--wf-60); white-space: nowrap; }
+  .exit-divider span { font-size: 14px; color: var(--wf-60); white-space: nowrap; }
 
   /* Opciones de contacto con raya separadora */
   .hablemos-links { display: flex; flex-direction: column; }
@@ -714,7 +864,7 @@
     display: flex; align-items: center; justify-content: center; color: var(--wf-100);
   }
   .hablemos-link-chevron { margin-left: auto; flex-shrink: 0; color: var(--wf-40); }
-  .hablemos-hours { font-size: 12px; color: var(--wf-60); margin-top: 4px; font-weight: 400; display: block; }
+  .hablemos-hours { font-size: 14px; color: var(--wf-60); margin-top: 4px; font-weight: 400; display: block; }
 
   /* Vistas del Hablemos: main · agendar · confirmación */
   .hablemos-agendar, .hablemos-confirm { display: none; }
@@ -726,7 +876,7 @@
   .hablemos-back {
     display: flex; align-items: center; gap: 8px; background: none; border: none;
     cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 600;
-    color: var(--wf-90); padding: 0; margin-top: -24px; margin-bottom: 16px;
+    color: var(--wf-90); padding: 0; margin-top: 0; margin-bottom: 16px;
   }
   .hablemos-back:hover { color: var(--wf-100); }
 
@@ -858,11 +1008,18 @@
   /* En asegurados (step1) la zona de pills es una sección aparte: separador arriba + más ancha */
   #step1 .faq-pills-section { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--wf-20); }
   @media (min-width: 601px) {
-    #step1 .faq-pills-section { width: min(760px, calc(100vw - 160px)); margin-left: 50%; transform: translateX(-50%); }
+    #step1 .faq-pills-section, #cCuestionario .faq-pills-section { width: min(760px, calc(100vw - 160px)); margin-left: 50%; transform: translateX(-50%); }
+    /* Con la zona ancha, los pills caben centrados en una fila (sin corte) */
+    #cCuestionario .faq-pills { justify-content: center; overflow-x: visible; }
   }
   .faq-pills-title { font-size: 16px; font-weight: 700; color: var(--wf-100); text-align: center; margin-bottom: 16px; }
   /* En resultados el "¿Te queda alguna duda?" iguala al "¿Por qué elegir FIATC?" (21px, headlineS) */
   #step7 .faq-pills-title { font-size: 21px; margin-bottom: 24px; }
+  /* Cuestionario: bloque de FAQs separado con línea (como en step1) + pills en una fila horizontal */
+  #cCuestionario .faq-pills-section { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--wf-20); }
+  #cCuestionario .faq-pills { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; }
+  #cCuestionario .faq-pills::-webkit-scrollbar { display: none; }
+  #cCuestionario .faq-pill { flex-shrink: 0; }
   .faq-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
   .faq-pill { display: inline-flex; align-items: center; padding: 8px 16px; background: var(--wf-0); border: 1.5px solid var(--wf-40); border-radius: 100px; font-size: 14px; font-family: inherit; color: var(--wf-90); cursor: pointer; transition: border-color 0.15s, color 0.15s; }
   .faq-pill:hover { border-color: var(--wf-100); color: var(--wf-100); }
@@ -933,6 +1090,8 @@
     /* FAQ pills alineadas a la izquierda en mobile */
     .faq-pills { justify-content: flex-start; }
     .faq-pills-title { text-align: left; }
+    /* Cuestionario: en mobile los pills envuelven (no scroll horizontal) */
+    #cCuestionario .faq-pills { flex-wrap: wrap; overflow-x: visible; }
     /* Resultados: título, ristra y FAQs centrados en mobile */
     #step7 .results-summary { text-align: center; }
     #step7 .results-meta { justify-content: center; flex-wrap: wrap; }
@@ -951,6 +1110,8 @@
     /* Banner de campaña: full-width en mobile; en portada/fecha pegado al header (no sticky) */
     .promo-banner { margin-left: calc(-1 * var(--content-pad)); margin-right: calc(-1 * var(--content-pad)); border-radius: 0; }
     #step0 .promo-banner, #step4 .promo-banner, #step7 .promo-banner { margin-top: -24px; }
+    /* En mobile el back sube junto a la X (recupera altura en el bottom-sheet) */
+    .hablemos-back { margin-top: -24px; }
 
     /* Hablemos: bottom-sheet (como la propuesta original) */
     .side-modal-panel {
@@ -961,6 +1122,10 @@
       transform: translateY(100%);
     }
     .side-modal.open .side-modal-panel { transform: translateY(0); }
+    /* El resumen y el cuestionario abren a altura máxima fija (header/footer fijos, scroll interno) */
+    #resumenModal .side-modal-panel, #questModal .side-modal-panel { height: 93dvh; }
+    /* Más aire bajo la bottom bar del cuestionario en mobile (no pegar al borde/barra nativa) */
+    .quest-modal-foot { padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
     .side-modal-handle {
       display: block; width: 40px; height: 4px;
       background: var(--wf-40); border-radius: 2px; margin: 12px auto 0;
@@ -985,10 +1150,21 @@
       </button>
       <div class="app-header-title">Calcula tu seguro de salud</div>
       <a class="app-logo" href="#" onclick="openExit(); return false;"><svg width="90" height="25" viewBox="0 0 215 59" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_67_2)"><path fill-rule="evenodd" clip-rule="evenodd" d="M168.66 0.671875H172.81L183.09 38.6219H172.66L165.85 13.5219L168.66 0.671875ZM164.91 17.5119L170.46 38.6219H160.19L164.91 17.5119ZM181.24 0.671875H185.39L195.67 38.6219H185.24L178.42 13.5219L181.24 0.671875Z" fill="#8994A5"/><path fill-rule="evenodd" clip-rule="evenodd" d="M200.06 0.669375L202.8 10.6794H212.75L214.98 0.669375H200.06ZM212.3 12.6794L210.05 22.7894H206.07L203.34 12.6794H212.3ZM197.94 0.669375L208.22 38.6194H197.79L187.41 0.669375H197.94ZM123.37 0.609375L85.7304 0.629375L84.1504 7.64937H98.0404L91.0504 38.8794H100.69L107.7 7.64937L121.74 7.62937L123.37 0.609375Z" fill="#424B5A"/><path fill-rule="evenodd" clip-rule="evenodd" d="M157.07 3.45066C151.98 0.210656 147.95 0.100656 144.41 0.0106563C128.45 -0.389344 116.68 10.5307 115.76 22.8107C115.03 32.6207 122.34 39.2007 135.09 39.0007C141.83 38.8907 145.63 37.5807 150.69 35.3707L152.61 26.4507C146.53 29.6207 141.34 31.1107 136.68 31.1107C132.81 31.1107 125.85 28.4907 126.1 22.2207C126.37 15.6107 130.39 8.21066 143.88 8.14066C147.22 8.12066 150.89 8.87066 155.25 12.1107L157.07 3.45066ZM50.75 0.610656H41.2L32.64 38.8707H42.23L50.75 0.610656ZM22.6 0.640656L21.04 7.71066H35.62L37.2 0.640656H22.6ZM19.39 15.5007L17.77 22.6307H30.33L31.95 15.5007H19.39ZM20.48 0.640656H10.5L2.04004 38.8907H11.99L20.48 0.640656ZM44.5 38.9407L65.54 0.550656L68.73 12.2507L62.21 24.3307H72.03L73.84 31.2407H58.51L54.41 38.9407H44.5ZM67.73 0.550656L78.14 38.8007H88.18L77.31 0.550656H67.73Z" fill="#424B5A"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8.19 46.4626L7.8 48.1126C7.16 47.6826 6.43 47.4726 5.63 47.4726C4.95 47.4726 4.39 47.6426 3.96 47.9726C3.52 48.3026 3.28 48.7426 3.24 49.2926C3.22 49.5626 3.29 49.8426 3.46 50.1426C3.63 50.4426 4.15 50.9526 5.03 51.6626C5.91 52.3826 6.47 53.0026 6.73 53.5526C6.98 54.0926 7.09 54.6326 7.04 55.1726C6.97 56.0326 6.56 56.7826 5.82 57.4126C5.08 58.0426 4.14 58.3526 3 58.3526C1.99 58.3526 0.99 58.0626 0 57.4926L0.42 55.7226C1.51 56.4926 2.47 56.8726 3.3 56.8726C3.75 56.8726 4.19 56.7326 4.62 56.4526C5.05 56.1726 5.28 55.7926 5.32 55.3226C5.35 55.0126 5.27 54.7026 5.1 54.3726C4.92 54.0426 4.4 53.5126 3.52 52.7826C2.64 52.0526 2.08 51.4226 1.84 50.8826C1.6 50.3426 1.5 49.8126 1.55 49.2826C1.63 48.3526 2.1 47.5626 2.97 46.9326C3.84 46.3026 4.82 45.9926 5.93 45.9926C6.67 45.9826 7.43 46.1426 8.19 46.4626Z" fill="#424B5A"/><path fill-rule="evenodd" clip-rule="evenodd" d="M40.4003 46.1444L40.0703 47.5744H34.9803L34.1003 51.3544H38.5903L38.2603 52.7844H33.7403L32.7903 56.7644H38.0603L37.7103 58.1944H30.7803L33.6703 46.1344H40.4003V46.1444ZM73.3303 52.9744L72.3003 57.3044C70.8603 58.0044 69.4603 58.3544 68.1003 58.3544C66.4703 58.3544 65.2103 57.8444 64.3403 56.8344C63.4603 55.8144 63.0903 54.5644 63.2203 53.0544C63.3903 51.1444 64.2903 49.4844 65.9203 48.0844C67.5603 46.6844 69.7603 45.9844 72.5503 45.9844C73.1003 45.9844 73.8203 46.0344 74.7403 46.1344L74.4103 47.5844C73.4203 47.4844 72.6703 47.4344 72.1703 47.4344C70.0903 47.4344 68.4103 47.9944 67.1403 49.1044C65.8703 50.2144 65.1603 51.5144 65.0403 53.0044C64.9403 54.1544 65.2003 55.0944 65.8203 55.8144C66.4403 56.5344 67.2903 56.9044 68.3703 56.9044C69.1803 56.9044 70.0103 56.7144 70.8603 56.3244L71.3403 54.2344H69.5303L69.8303 52.9644H73.3303V52.9744ZM108.9 46.1444L107.16 53.5844C106.79 55.1544 106.12 56.3344 105.15 57.1444C104.18 57.9544 102.94 58.3544 101.45 58.3544C100.13 58.3544 99.1003 58.0144 98.3703 57.3344C97.6403 56.6544 97.3203 55.7444 97.4203 54.6144C97.4403 54.3744 97.4803 54.1444 97.5403 53.8944L99.3703 46.1344H101.04L99.1803 54.0244C99.1403 54.1944 99.1103 54.3544 99.1003 54.5044C99.0303 55.2444 99.2403 55.8344 99.7203 56.2544C100.2 56.6744 100.85 56.8944 101.67 56.8944C102.38 56.8944 103.02 56.7344 103.59 56.4164C104.16 56.0954 104.57 55.6954 104.82 55.2154C105.07 54.7354 105.3 54.0154 105.53 53.0554L107.16 46.1254H108.9V46.1444ZM135.21 47.5744L134.32 51.4544H135.21C136.17 51.4544 136.92 51.2644 137.46 50.8854C137.99 50.5054 138.29 49.9854 138.35 49.3354C138.45 48.1654 137.74 47.5854 136.21 47.5854H135.21V47.5744ZM133.8 46.1444H136.09C137.77 46.1444 138.88 46.4654 139.43 47.0954C139.98 47.7254 140.21 48.5054 140.13 49.4154C140.077 50.1117 139.779 50.7669 139.29 51.2654C138.79 51.7954 138.12 52.1554 137.27 52.3654C137.63 52.5954 137.94 53.0454 138.21 53.6954L140.09 58.2054H138.27L137.06 55.3354C136.68 54.4354 136.34 53.7954 136.05 53.4354C135.76 53.0654 135.28 52.8854 134.62 52.8854H133.95L132.71 58.2054H130.96L133.8 46.1444ZM167.99 56.9044C169.17 56.9044 170.24 56.3044 171.22 55.1044C172.19 53.9044 172.75 52.4544 172.9 50.7554C172.99 49.7154 172.81 48.9054 172.36 48.3154C171.91 47.7254 171.25 47.4254 170.4 47.4254C169.09 47.4254 167.97 48.0454 167.04 49.2854C166.12 50.5055 165.565 51.962 165.44 53.4854C165.35 54.5354 165.53 55.3654 166 55.9754C166.46 56.6054 167.13 56.9044 167.99 56.9044ZM170.54 45.9854C171.88 45.9854 172.92 46.4454 173.67 47.3754C174.42 48.3054 174.72 49.5254 174.59 51.0454C174.41 53.1354 173.65 54.8854 172.33 56.2754C171 57.6654 169.5 58.3554 167.83 58.3554C166.51 58.3554 165.46 57.8754 164.7 56.9354C163.93 55.9854 163.61 54.7654 163.74 53.2754C163.9 51.4154 164.62 49.7354 165.91 48.2354C167.2 46.7354 168.74 45.9854 170.54 45.9854Z" fill="#424B5A"/><path fill-rule="evenodd" clip-rule="evenodd" d="M206.33 46.4626L205.94 48.1126C205.3 47.6826 204.57 47.4726 203.77 47.4726C203.09 47.4726 202.53 47.6426 202.1 47.9726C201.66 48.3026 201.42 48.7426 201.38 49.2926C201.36 49.5626 201.43 49.8426 201.6 50.1426C201.77 50.4426 202.29 50.9526 203.17 51.6626C204.05 52.3826 204.61 53.0026 204.87 53.5526C205.12 54.0926 205.23 54.6326 205.18 55.1726C205.11 56.0326 204.7 56.7826 203.96 57.4126C203.22 58.0426 202.28 58.3526 201.14 58.3526C200.13 58.3526 199.13 58.0626 198.14 57.4926L198.56 55.7226C199.65 56.4926 200.61 56.8726 201.44 56.8726C201.89 56.8726 202.33 56.7326 202.76 56.4526C203.19 56.1726 203.42 55.7926 203.46 55.3226C203.49 55.0126 203.41 54.7026 203.24 54.3726C203.06 54.0426 202.54 53.5126 201.66 52.7826C200.78 52.0526 200.22 51.4226 199.98 50.8826C199.74 50.3426 199.64 49.8126 199.69 49.2826C199.77 48.3526 200.24 47.5626 201.11 46.9326C201.98 46.3026 202.96 45.9926 204.07 45.9926C204.82 45.9826 205.58 46.1426 206.33 46.4626Z" fill="#424B5A"/></g><defs><clipPath id="clip0_67_2"><rect width="215" height="59" fill="white"/></clipPath></defs></svg></a>
-      <button class="hablemos-btn" onclick="openHablemos()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span class="hablemos-label">Hablemos</span>
-      </button>
+      <div class="header-actions">
+        <button class="hablemos-btn" onclick="openHablemos()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="hablemos-label">Hablemos</span>
+        </button>
+        <span class="hactions-sep" aria-hidden="true"></span>
+        <button class="hcart" id="resumenCart" onclick="openResumen()" aria-label="Ver tu resumen">
+          <span class="hcart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
+          <span class="hcart-info">
+            <span class="hcart-label">Tu resumen</span>
+            <span class="hcart-price"><strong id="resumenCartPrice">45,78€</strong> al mes</span>
+          </span>
+          <span class="hcart-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+      </div>
     </div>
     <div class="progress-track">
       <div class="progress-fill" id="progressFill" style="width:8%"></div>
@@ -1299,8 +1475,8 @@
 
       <!-- PASO DNI · Solo si "ya soy cliente" -->
       <div class="step" id="stepDNI">
-        <h1 class="step-title">Identifícate como cliente</h1>
-        <p class="step-subtitle">Introduce tu DNI para localizar tu ficha de cliente.</p>
+        <h1 class="step-title">¡Nos alegra que ya seas de FIATC!</h1>
+        <p class="step-subtitle">Introduce tu DNI y vinculamos esta póliza a tu ficha de cliente.</p>
         <div class="step-promo">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
           <span>Como ya eres cliente, vinculamos esta póliza a tu <strong>ficha de FIATC</strong>.</span>
@@ -1309,7 +1485,7 @@
           <input type="text" id="clientDni" placeholder=" " onclick="if(!this.value){this.value='47854123X';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
           <label for="clientDni">DNI</label>
         </div>
-        <button class="btn-primary" onclick="nextStep()">Continuar</button>
+        <button class="btn-primary" style="margin-top:32px;" onclick="nextStep()">Continuar</button>
       </div>
 
       <!-- PASO 6 · Email -->
@@ -1734,17 +1910,197 @@
           <input type="text" id="cNif" placeholder=" " onclick="if(!this.value){this.value='47854123X';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
           <label for="cNif">NIF / NIE</label>
         </div>
-        <span class="field-section-label">Fecha de nacimiento</span>
-        <div class="dob-row">
-          <input type="text" value="12" disabled>
-          <input type="text" value="Marzo" disabled>
-          <input type="text" value="1985" disabled>
-        </div>
-        <div class="cp-info" style="margin-top:8px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <span>La fecha de nacimiento viene de la tarificación. Para cambiarla, vuelve a tarificar.</span>
+        <div class="dob-locked" onclick="toggleDobTip(this)">
+          <span class="field-section-label">Fecha de nacimiento</span>
+          <div class="dob-row">
+            <input type="text" value="12" disabled>
+            <input type="text" value="Marzo" disabled>
+            <input type="text" value="1985" disabled>
+          </div>
+          <span class="tooltip top dob-tip">Para cambiar la fecha de nacimiento, vuelve al paso de resultados y edita los asegurados.</span>
         </div>
         <button class="btn-primary" onclick="nextContrat()">Continuar</button>
+      </div>
+
+      <!-- CONTRATACIÓN · step9 · Datos de contacto -->
+      <div class="step" id="cContacto">
+        <h1 class="step-title">Confirmemos tus datos de contacto</h1>
+        <p class="step-subtitle">Usamos estos datos para enviarte la documentación del seguro.</p>
+        <div class="input-wrap filled" style="margin-top:24px;">
+          <input type="tel" value="612 345 678" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label>Teléfono</label>
+        </div>
+        <div class="input-wrap filled">
+          <input type="email" value="maria@gmail.com" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label>Email</label>
+        </div>
+        <button class="btn-primary" onclick="nextContrat()">Confirmar y continuar</button>
+      </div>
+
+      <!-- CONTRATACIÓN · step10 · Dirección -->
+      <div class="step" id="cDireccion">
+        <h1 class="step-title">¿Cuál es tu dirección?</h1>
+        <p class="step-subtitle">Para generar el contrato necesitamos el domicilio del titular.</p>
+        <div class="input-wrap select-wrap" style="margin-top:24px;">
+          <select onchange="this.closest('.input-wrap').classList.toggle('filled',!!this.value)">
+            <option value="" disabled selected></option>
+            <option value="calle">Calle</option>
+            <option value="avenida">Avenida</option>
+            <option value="plaza">Plaza</option>
+            <option value="paseo">Paseo</option>
+            <option value="ronda">Ronda</option>
+            <option value="via">Vía</option>
+          </select>
+          <label>Tipo de vía</label>
+          <span class="select-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="input-wrap">
+          <input type="text" placeholder=" " onclick="if(!this.value){this.value='Diagonal';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label>Nombre de la vía</label>
+        </div>
+        <div style="display:grid; grid-template-columns:100px 1fr; gap:12px;">
+          <div class="input-wrap">
+            <input type="text" inputmode="numeric" placeholder=" " onclick="if(!this.value){this.value='161';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+            <label>Número</label>
+          </div>
+          <div class="input-wrap">
+            <input type="text" placeholder=" " oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+            <label>Piso, puerta… (opcional)</label>
+          </div>
+        </div>
+        <div class="input-wrap">
+          <input type="text" inputmode="numeric" maxlength="5" placeholder=" " onclick="if(!this.value)this.value='08018';handleContratCp(this)" oninput="handleContratCp(this)">
+          <label>Código postal</label>
+        </div>
+        <!-- Ciudad y Provincia: aparecen autorrellenadas (disabled) al poner el CP -->
+        <div id="cAddrAutofill" style="display:none;">
+          <div class="input-wrap filled">
+            <input type="text" value="Barcelona" disabled>
+            <label>Ciudad</label>
+          </div>
+          <div class="input-wrap filled">
+            <input type="text" value="Barcelona" disabled>
+            <label>Provincia</label>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="nextContrat()">Continuar</button>
+      </div>
+
+      <!-- CONTRATACIÓN · step11 · Datos del asegurado 1 (con copiar-titular · QW17) -->
+      <div class="step" id="cAseg1">
+        <h1 class="step-title">Datos del asegurado 1</h1>
+        <div class="aseg-toggle-wrap">
+          <span class="aseg-toggle-label">¿Copiamos los datos del titular?</span>
+          <label class="toggle-switch"><input type="checkbox" onchange="copyTitular('a1', this.checked)"><span class="toggle-track"></span></label>
+        </div>
+        <div class="input-wrap">
+          <input type="text" id="a1Nombre" placeholder=" " onclick="if(!this.value){this.value='Carlos';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label for="a1Nombre">Nombre</label>
+        </div>
+        <div style="display:flex; gap:12px;">
+          <div class="input-wrap" style="flex:1; min-width:0;">
+            <input type="text" id="a1Ap1" placeholder=" " onclick="if(!this.value){this.value='Ruiz';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+            <label for="a1Ap1">Primer apellido</label>
+          </div>
+          <div class="input-wrap" style="flex:1; min-width:0;">
+            <input type="text" id="a1Ap2" placeholder=" " onclick="if(!this.value){this.value='Soler';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+            <label for="a1Ap2">Segundo apellido</label>
+          </div>
+        </div>
+        <div class="input-wrap">
+          <input type="text" id="a1Nif" placeholder=" " onclick="if(!this.value){this.value='87654321B';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label for="a1Nif">NIF / NIE</label>
+        </div>
+        <div class="dob-locked" onclick="toggleDobTip(this)">
+          <span class="field-section-label">Fecha de nacimiento</span>
+          <div class="dob-row">
+            <input type="text" value="08" disabled>
+            <input type="text" value="Julio" disabled>
+            <input type="text" value="1988" disabled>
+          </div>
+          <span class="tooltip top dob-tip">Para cambiar la fecha de nacimiento, vuelve al paso de resultados y edita los asegurados.</span>
+        </div>
+        <button class="btn-primary" onclick="nextContrat()">Continuar</button>
+      </div>
+
+      <!-- CONTRATACIÓN · step12 · Datos del asegurado 2 -->
+      <div class="step" id="cAseg2">
+        <h1 class="step-title">Datos del asegurado 2</h1>
+        <div class="input-wrap" style="margin-top:24px;">
+          <input type="text" placeholder=" " onclick="if(!this.value){this.value='Lucía';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label>Nombre</label>
+        </div>
+        <div style="display:flex; gap:12px;">
+          <div class="input-wrap" style="flex:1; min-width:0;">
+            <input type="text" placeholder=" " onclick="if(!this.value){this.value='García';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+            <label>Primer apellido</label>
+          </div>
+          <div class="input-wrap" style="flex:1; min-width:0;">
+            <input type="text" placeholder=" " onclick="if(!this.value){this.value='López';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+            <label>Segundo apellido</label>
+          </div>
+        </div>
+        <div class="input-wrap">
+          <input type="text" placeholder=" " onclick="if(!this.value){this.value='11223344C';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label>NIF / NIE</label>
+        </div>
+        <div class="dob-locked" onclick="toggleDobTip(this)">
+          <span class="field-section-label">Fecha de nacimiento</span>
+          <div class="dob-row">
+            <input type="text" value="20" disabled>
+            <input type="text" value="Noviembre" disabled>
+            <input type="text" value="2015" disabled>
+          </div>
+          <span class="tooltip top dob-tip">Para cambiar la fecha de nacimiento, vuelve al paso de resultados y edita los asegurados.</span>
+        </div>
+        <button class="btn-primary" onclick="nextContrat()">Continuar</button>
+      </div>
+
+      <!-- CONTRATACIÓN · step13 · Cuestionarios de salud (QW#18 · una a una + textarea al Sí) -->
+      <div class="step" id="cCuestionario">
+        <h1 class="step-title">Rellena los cuestionarios de salud</h1>
+        <p class="step-subtitle">Cada asegurado debe rellenar su cuestionario de salud para completar la contratación.</p>
+        <div class="step-promo quest-promo">
+          <div class="promo-line">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+            <span>Rellenarlo <strong>no te compromete a contratar</strong>.</span>
+          </div>
+          <div class="promo-line">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+            <span><strong>No necesitas declarar</strong> apendicitis, amigdalitis, parto o cesárea.</span>
+          </div>
+        </div>
+        <div class="ques-list" id="quesList">
+          <div class="ques-card" data-q-idx="0">
+            <div class="ques-card-info">
+              <span class="ques-card-name">María García López</span>
+              <div class="ques-card-state">
+                <span class="ques-tag pending">Pendiente</span>
+                <span class="ques-progress">0 / 7</span>
+              </div>
+            </div>
+            <button class="ques-cta" onclick="openQuest(0)">Rellenar</button>
+          </div>
+          <div class="ques-card" data-q-idx="1">
+            <div class="ques-card-info">
+              <span class="ques-card-name">Carlos Ruiz Soler</span>
+              <div class="ques-card-state">
+                <span class="ques-tag pending">Pendiente</span>
+                <span class="ques-progress">0 / 7</span>
+              </div>
+            </div>
+            <button class="ques-cta" onclick="openQuest(1)">Rellenar</button>
+          </div>
+        </div>
+        <button class="btn-primary" id="quesContinueBtn" style="display:none; margin-top:8px;" onclick="nextContrat()">Confirmar y firmar</button>
+        <div class="faq-pills-section">
+          <p class="faq-pills-title">¿Tienes dudas sobre el cuestionario?</p>
+          <div class="faq-pills">
+            <button class="faq-pill" onclick="openFaq('cuestionario', 0)">¿Qué pasa si marco un "Sí"?</button>
+            <button class="faq-pill" onclick="openFaq('cuestionario', 2)">¿Qué no tengo que declarar?</button>
+            <button class="faq-pill" onclick="openFaq('cuestionario', 3)">¿Tengo que declarar medicación?</button>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -1771,6 +2127,10 @@
       </button>
       <div class="side-modal-body" id="hablemosBody">
         <div class="hablemos-main">
+        <button class="hablemos-back" id="hablemosMainBack" onclick="hablemosMainBack()" style="display:none;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Atrás
+        </button>
         <div class="avatar-stack">
           <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-40)"/><circle cx="19" cy="15" r="7" fill="var(--wf-60)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-60)"/></svg></div>
           <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-20)"/><circle cx="19" cy="15" r="7" fill="var(--wf-40)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-40)"/></svg></div>
@@ -2243,14 +2603,204 @@
             <span class="interes-plan-tag" id="interesTag">Con copago</span>
           </div>
           <p class="interes-plan-price"><strong id="interesPrice">45<span class="price-dec">,78€</span></strong> al mes<span id="interesNote"></span></p>
+          <button class="btn-primary" style="margin-top:20px;" onclick="startContratacion()">Contratar online ahora</button>
+          <button class="btn-ghost interes-help-btn" onclick="interesToHablemos()">Prefiero que me ayuden</button>
         </div>
-        <button class="btn-primary" style="margin-top:0;" onclick="startContratacion()">Contratar online ahora</button>
-        <button class="btn-ghost interes-help-btn" onclick="closeInteres(); openHablemos();">Prefiero que me ayuden</button>
         <div class="interes-divider"><span>¿Quieres continuar más tarde?</span></div>
         <button class="interes-save" onclick="closeInteres(); openExit(); exitSaveBudget();">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Guardar presupuesto
         </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- RESUMEN FLOTANTE (contratación) -->
+  <div class="resumen-fab" id="resumenFab" onclick="openResumen()">
+    <span class="resumen-fab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
+    <div class="resumen-fab-info">
+      <span class="resumen-fab-label">Tu resumen</span>
+      <span class="resumen-fab-price"><strong id="resumenFabPrice">45,78€</strong> al mes</span>
+    </div>
+    <span class="resumen-fab-chevron"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></span>
+  </div>
+
+  <div class="side-modal" id="resumenModal" aria-hidden="true">
+    <div class="side-modal-backdrop" onclick="closeResumen()"></div>
+    <aside class="side-modal-panel" role="dialog" aria-label="Tu resumen">
+      <div class="side-modal-handle"></div>
+      <button class="side-modal-close" onclick="closeResumen()" aria-label="Cerrar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="side-modal-body">
+        <h2 class="resumen-h">Tu resumen</h2>
+        <div class="interes-plan">
+          <div class="interes-plan-head">
+            <span class="interes-plan-name" id="resumenName">Medifiatc P15</span>
+            <span class="interes-plan-tag" id="resumenTag">Con copago</span>
+          </div>
+          <p class="interes-plan-price"><strong id="resumenPrice">45<span class="price-dec">,78€</span></strong> al mes<span id="resumenNote"></span></p>
+          <div class="resumen-start">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <div><span class="resumen-start-label">Inicio de cobertura</span> <span class="resumen-start-val" id="raccFechaVal">1 de septiembre de 2026</span></div>
+          </div>
+        </div>
+
+        <!-- Datos del tomador — tras cDatos / cContacto / cDireccion -->
+        <div class="racc pending" id="raccTomador">
+          <div class="racc-header" onclick="toggleRacc('raccTomador')">
+            <span class="racc-hlabel">Datos del tomador</span>
+            <span class="racc-pending-tag">Pendiente</span>
+            <svg class="racc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="racc-body">
+            <p class="racc-strong" id="raccTomNombre"></p>
+            <p id="raccTomNif"></p>
+            <p id="raccTomDob"></p>
+            <p id="raccTomContact"></p>
+            <p id="raccTomDir"></p>
+          </div>
+        </div>
+        <!-- Asegurado 1 -->
+        <div class="racc pending" id="raccAseg1">
+          <div class="racc-header" onclick="toggleRacc('raccAseg1')">
+            <span class="racc-hlabel">Asegurado 1</span>
+            <span class="racc-pending-tag">Pendiente</span>
+            <svg class="racc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="racc-body">
+            <p class="racc-strong" id="raccAseg1Nombre"></p>
+            <p id="raccAseg1Nif"></p>
+            <p id="raccAseg1Dob"></p>
+          </div>
+        </div>
+        <!-- Asegurado 2 -->
+        <div class="racc pending" id="raccAseg2">
+          <div class="racc-header" onclick="toggleRacc('raccAseg2')">
+            <span class="racc-hlabel">Asegurado 2</span>
+            <span class="racc-pending-tag">Pendiente</span>
+            <svg class="racc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="racc-body">
+            <p class="racc-strong" id="raccAseg2Nombre"></p>
+            <p id="raccAseg2Nif"></p>
+            <p id="raccAseg2Dob"></p>
+          </div>
+        </div>
+        <!-- Forma de pago -->
+        <div class="racc pending" id="raccPago">
+          <div class="racc-header" onclick="toggleRacc('raccPago')">
+            <span class="racc-hlabel">Forma de pago</span>
+            <span class="racc-pending-tag">Pendiente</span>
+            <svg class="racc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="racc-body"><p class="racc-strong" id="raccPagoVal">—</p></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MODAL · Cuestionario de salud (una a una, progresivo) -->
+  <div class="side-modal" id="questModal" aria-hidden="true">
+    <div class="side-modal-backdrop" onclick="closeQuest()"></div>
+    <aside class="side-modal-panel" role="dialog" aria-label="Cuestionario de salud">
+      <button class="side-modal-close" onclick="closeQuest()" aria-label="Cerrar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="quest-modal-head">
+        <div class="side-modal-handle"></div>
+        <h2 class="quest-h">Cuestionario de salud</h2>
+        <p class="quest-name" id="questName">María García López</p>
+      </div>
+      <div class="quest-modal-scroll" id="questScroll">
+        <div class="quest-bio">
+          <div class="input-wrap">
+            <input type="text" inputmode="numeric" id="questPeso" placeholder=" " onclick="fillBio()" oninput="this.value=this.value.replace(/[^0-9]/g,'');calcIMCq();this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+            <label for="questPeso">Peso (kg)</label>
+          </div>
+          <div class="input-wrap">
+            <input type="text" inputmode="numeric" id="questAltura" placeholder=" " onclick="fillBio()" oninput="this.value=this.value.replace(/[^0-9]/g,'');calcIMCq();this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+            <label for="questAltura">Altura (cm)</label>
+          </div>
+        </div>
+        <div class="quest-imc" id="questIMC">
+          <span class="quest-imc-num" id="questIMCNum">—</span>
+          <span class="quest-imc-label">IMC (índice de masa corporal)</span>
+        </div>
+
+        <div class="quest-sep"></div>
+
+        <div class="quest-q show">
+          <span class="quest-q-num">Pregunta 1 de 7</span>
+          <span class="quest-q-label">¿Padece o ha padecido alguna enfermedad, malformación, trastorno o problema de salud?</span>
+          <div class="quest-yesno">
+            <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
+            <button type="button" class="quest-yn-btn" data-v="si" onclick="selectYNq(this)">Sí</button>
+          </div>
+          <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
+        </div>
+        <div class="quest-q">
+          <span class="quest-q-num">Pregunta 2 de 7</span>
+          <span class="quest-q-label">¿En los últimos 5 años ha padecido o padece cualquier tipo de cáncer, o ha recibido o está recibiendo algún tratamiento radical relacionado?</span>
+          <div class="quest-yesno">
+            <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
+            <button type="button" class="quest-yn-btn" data-v="si" onclick="selectYNq(this)">Sí</button>
+          </div>
+          <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
+        </div>
+        <div class="quest-q">
+          <span class="quest-q-num">Pregunta 3 de 7</span>
+          <span class="quest-q-label">¿Ha sido sometido a alguna prueba diagnóstica específica?</span>
+          <div class="quest-yesno">
+            <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
+            <button type="button" class="quest-yn-btn" data-v="si" onclick="selectYNq(this)">Sí</button>
+          </div>
+          <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
+        </div>
+        <div class="quest-q">
+          <span class="quest-q-num">Pregunta 4 de 7</span>
+          <span class="quest-q-label">¿Ha sufrido alguna intervención quirúrgica, accidente o ha estado ingresado en algún centro hospitalario?</span>
+          <div class="quest-yesno">
+            <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
+            <button type="button" class="quest-yn-btn" data-v="si" onclick="selectYNq(this)">Sí</button>
+          </div>
+          <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
+        </div>
+        <div class="quest-q">
+          <span class="quest-q-num">Pregunta 5 de 7</span>
+          <span class="quest-q-label">¿Le ha sido concedida, o está tramitando (o tiene previsto hacerlo), algún tipo de minusvalía o invalidez permanente?</span>
+          <div class="quest-yesno">
+            <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
+            <button type="button" class="quest-yn-btn" data-v="si" onclick="selectYNq(this)">Sí</button>
+          </div>
+          <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
+        </div>
+        <div class="quest-q">
+          <span class="quest-q-num">Pregunta 6 de 7</span>
+          <span class="quest-q-label">¿Toma algún tratamiento farmacológico o realiza cualquier otro tipo de tratamiento, rehabilitación o terapia física o psicológica?</span>
+          <div class="quest-yesno">
+            <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
+            <button type="button" class="quest-yn-btn" data-v="si" onclick="selectYNq(this)">Sí</button>
+          </div>
+          <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
+        </div>
+        <div class="quest-q">
+          <span class="quest-q-num">Pregunta 7 de 7</span>
+          <span class="quest-q-label">¿Tiene prevista alguna intervención quirúrgica o ingreso hospitalario, o pendiente realizarse alguna prueba o tratamiento?</span>
+          <div class="quest-yesno">
+            <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
+            <button type="button" class="quest-yn-btn" data-v="si" onclick="selectYNq(this)">Sí</button>
+          </div>
+          <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
+        </div>
+
+      </div><!-- /quest-modal-scroll -->
+      <div class="quest-modal-foot">
+        <div class="quest-counter">
+          <svg class="quest-counter-check" id="questCounterCheck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span id="questCounter">0 / 7</span>
+        </div>
+        <button class="btn-primary" id="questSaveBtn" style="margin-top:0;" onclick="saveQuest()" disabled>Guardar respuestas</button>
       </div>
     </aside>
   </div>
@@ -2274,6 +2824,13 @@
       document.querySelector('.app-header').classList.toggle('show-back', stepIdx > 0);
       document.getElementById('appMain').scrollTop = 0;
       updateStep0StickyBar();
+      // Volver a tarificación cierra la contratación: sin resumen flotante
+      contractMode = false;
+      document.querySelector('.app-header').classList.remove('contrat');
+      document.querySelector('.app-header-title').textContent = 'Calcula tu seguro de salud';
+      document.getElementById('resumenFab').classList.remove('visible');
+      document.body.classList.remove('resumen-active');
+      closeResumen();
     }
     function nextStep() {
       let i = stepIdx + 1;
@@ -2506,7 +3063,9 @@
         { q: '¿Puedo cambiar de plan más adelante?', a: 'Sí, puedes subir o bajar de plan en la renovación anual, sin coste de gestión.' },
         { q: '¿Cómo pido cita y consulto el cuadro médico?', a: 'Desde tu área privada o la app consultas el cuadro médico y pides cita con los profesionales y centros disponibles en tu zona.' },
         { q: '¿Cuándo me llega la tarjeta?', a: 'Al contratar recibes tu tarjeta digital enseguida y puedes usar el seguro aunque todavía no tengas la tarjeta física.' },
-        { q: '¿Necesito hacer un cuestionario de salud?', a: 'Sí, un breve cuestionario de salud. Si marcas algo, la plataforma médica lo amplía contigo; puedes aportar informes y no es vinculante.' },
+        { q: '¿Necesito hacer un cuestionario de salud?', a: 'Sí, un breve cuestionario. Si marcas algún "Sí", nuestro equipo médico lo completa contigo y te informa del resultado. Rellenarlo no te compromete a contratar.' },
+        { q: '¿Cuándo se hace el primer cargo y cuándo se renueva?', a: 'El primer cargo se realiza al emitir la póliza, cuando confirmas el pago. A partir de ahí se renueva cada año.' },
+        { q: '¿El código postal afecta al precio?', a: 'Sí. La zona donde resides influye en la prima, porque varía el cuadro médico y los costes sanitarios de cada área.' },
         { q: '¿Puedo cancelar cuando quiera?', a: 'Puedes cancelar con 30 días de preaviso antes de la renovación anual, sin penalización.' },
       ],
       asegurados: [
@@ -2515,8 +3074,15 @@
         { q: '¿Hasta qué edad puedo incluir a mis hijos?', a: 'Puedes incluir a tus hijos mientras convivan contigo; te confirmamos el límite exacto según tu situación.' },
         { q: '¿Cuánto baja el precio si somos más?', a: 'Cuantos más asegurados incluyes en la misma póliza, mayor es el descuento que se aplica al conjunto.' },
       ],
+      cuestionario: [
+        { q: '¿Qué pasa si marco un "Sí"?', a: 'Tu cuestionario pasa a nuestro equipo médico, que contacta contigo para completarlo y después te informa del resultado. Rellenarlo no te obliga a contratar.' },
+        { q: '¿Declarar algo afecta al precio?', a: 'El equipo médico valora lo que declaras. En algún caso puede aplicarse una exclusión; te informan del resultado antes de que decidas si continúas.' },
+        { q: '¿Qué no tengo que declarar?', a: 'Procesos ya resueltos como apendicitis, amigdalitis, parto o cesárea no hace falta declararlos.' },
+        { q: '¿Tengo que declarar la medicación que tomo?', a: 'Si tomas medicación de forma habitual, indícalo en la pregunta sobre tratamientos. No pasa nada por hacerlo: el equipo médico lo valora y te informa.' },
+        { q: '¿Rellenar el cuestionario me obliga a contratar?', a: 'No. Completarlo no te compromete: puedes no seguir con la contratación cuando quieras.' },
+      ],
     };
-    const FAQ_VISIBLE = { resultados: 4, asegurados: 2 }; // cuántas se ven antes del "Ver más"
+    const FAQ_VISIBLE = { resultados: 4, asegurados: 2, cuestionario: 5 }; // cuántas se ven antes del "Ver más"
     let faqCtx = 'resultados';
     function faqItemHTML(f, i, open) {
       return `<div class="faq-item${open ? ' open' : ''}" id="faq-item-${i}">
@@ -2637,8 +3203,10 @@
     function toggleDetailMore(btn) { btn.closest('.detail-more').classList.toggle('open'); }
 
     /* ── "Me interesa": confirma plan + tú tienes el control (arranque contratación) ── */
+    let interesCard = null; // card mostrada en "Me interesa" (para volver desde Hablemos)
     function openInteres(card) {
       if (!card) return;
+      interesCard = card;
       const priceEl = card.querySelector('.card-price strong');
       const tagEl = card.querySelector('.card-tag');
       document.getElementById('interesName').textContent = card.querySelector('.card-name').textContent.trim();
@@ -2652,6 +3220,157 @@
       m.classList.add('open');
     }
     function closeInteres() { document.getElementById('interesModal').classList.remove('open'); }
+    /* "Prefiero que me ayuden" → Hablemos con back que vuelve a "Me interesa".
+       Handoff de una sola animación: la capa que sale desaparece al instante (sin transición). */
+    /* Swap instantáneo entre capas: sin animación de salida NI de entrada.
+       Congelamos paneles Y backdrops para que el velo semiopaco quede estático (sin fundido). */
+    function swapPanels(out, inn, action) {
+      const frozen = [];
+      [out, inn].forEach(sel => {
+        const p = document.querySelector(sel + ' .side-modal-panel');
+        const b = document.querySelector(sel + ' .side-modal-backdrop');
+        if (p) { p.style.transition = 'none'; frozen.push(p); }
+        if (b) { b.style.transition = 'none'; frozen.push(b); }
+      });
+      action();
+      requestAnimationFrame(() => requestAnimationFrame(() => { frozen.forEach(e => e.style.transition = ''); }));
+    }
+    function interesToHablemos() {
+      swapPanels('#interesModal', '#hablemosModal', () => {
+        closeInteres();
+        openHablemos();
+        document.getElementById('hablemosMainBack').style.display = 'flex';
+      });
+    }
+    function hablemosMainBack() {
+      swapPanels('#hablemosModal', '#interesModal', () => {
+        document.getElementById('hablemosModal').classList.remove('open');
+        setHablemosView('main');
+        document.getElementById('hablemosMainBack').style.display = 'none';
+        openInteres(interesCard);
+      });
+    }
+    /* Fecha de nacimiento bloqueada: tooltip al pulsar (cierra los demás) */
+    function toggleDobTip(el) {
+      const open = el.classList.contains('show-tip');
+      document.querySelectorAll('.dob-locked.show-tip').forEach(d => d.classList.remove('show-tip'));
+      if (!open) el.classList.add('show-tip');
+    }
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.dob-locked')) document.querySelectorAll('.dob-locked.show-tip').forEach(d => d.classList.remove('show-tip'));
+    });
+    /* Dirección: Ciudad/Provincia aparecen (disabled) al poner el CP */
+    function handleContratCp(input) {
+      input.closest('.input-wrap').classList.toggle('filled', input.value.length > 0);
+      document.getElementById('cAddrAutofill').style.display = input.value.length >= 5 ? '' : 'none';
+    }
+
+    /* ── Cuestionario de salud (QW#18: una a una + textarea al Sí) ── */
+    const _questNames = ['María García López', 'Carlos Ruiz Soler'];
+    const questDone = [false, false];
+    let _questActive = 0;
+    function openQuest(idx) {
+      _questActive = idx;
+      document.getElementById('questName').textContent = _questNames[idx] || 'Asegurado';
+      resetQuestModal();
+      document.getElementById('questModal').classList.add('open');
+    }
+    function closeQuest() { document.getElementById('questModal').classList.remove('open'); }
+    function resetQuestModal() {
+      // Peso/altura vacíos; la pregunta 1 no aparece hasta rellenarlos
+      ['questPeso', 'questAltura'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.value = ''; el.closest('.input-wrap').classList.remove('filled'); }
+      });
+      calcIMCq();
+      // La pregunta 1 está visible desde el inicio (así se ve el IMC al rellenar peso/altura,
+      // sin que el scroll la tape); la animación de slide arranca al responder.
+      document.querySelectorAll('#questModal .quest-q').forEach((q, i) => {
+        q.classList.toggle('show', i === 0);
+        q.classList.remove('expand');
+        q.querySelectorAll('.quest-yn-btn').forEach(b => b.classList.remove('selected'));
+        const ta = q.querySelector('textarea'); if (ta) ta.value = '';
+      });
+      document.getElementById('questScroll').scrollTop = 0;
+      updateQuestFooter();
+    }
+    /* Demo: al clicar peso o altura se autorrellenan ambos (facilita enseñar el prototipo) */
+    function fillBio() {
+      const p = document.getElementById('questPeso'), a = document.getElementById('questAltura');
+      if (!p.value) { p.value = '72'; p.closest('.input-wrap').classList.add('filled'); }
+      if (!a.value) { a.value = '175'; a.closest('.input-wrap').classList.add('filled'); }
+      calcIMCq();
+    }
+    /* Tras rellenar (o dejar) el textarea de un "Sí", aparece la siguiente pregunta */
+    function revealNextAfter(q) {
+      const qs = [...document.querySelectorAll('#questModal .quest-q')];
+      const next = qs[qs.indexOf(q) + 1];
+      if (next && !next.classList.contains('show')) {
+        next.classList.add('show');
+        setTimeout(() => next.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+      }
+    }
+    /* La pregunta 1 aparece cuando peso Y altura tienen valor */
+    function revealFirstQuestion() {
+      if (!document.getElementById('questPeso').value || !document.getElementById('questAltura').value) return;
+      const q1 = document.querySelector('#questModal .quest-q');
+      if (q1 && !q1.classList.contains('show')) {
+        q1.classList.add('show');
+        setTimeout(() => q1.scrollIntoView({ behavior: 'smooth', block: 'start' }), 240);
+      }
+    }
+    function updateQuestFooter() {
+      const qs = [...document.querySelectorAll('#questModal .quest-q')];
+      const answered = qs.filter(x => x.querySelector('.quest-yn-btn.selected')).length;
+      document.getElementById('questCounter').textContent = answered + ' / ' + qs.length;
+      const done = answered === qs.length;
+      document.getElementById('questSaveBtn').disabled = !done;
+      document.querySelector('#questModal .quest-counter').classList.toggle('done', done);
+    }
+    function calcIMCq() {
+      const p = parseFloat(document.getElementById('questPeso').value);
+      const h = parseFloat(document.getElementById('questAltura').value);
+      const card = document.getElementById('questIMC');
+      if (p > 0 && h > 0) {
+        document.getElementById('questIMCNum').textContent = (p / Math.pow(h / 100, 2)).toFixed(1);
+        card.classList.add('visible');
+      } else card.classList.remove('visible');
+    }
+    function selectYNq(btn) {
+      const q = btn.closest('.quest-q');
+      const isSi = btn.dataset.v === 'si';
+      q.querySelectorAll('.quest-yn-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      q.classList.toggle('expand', isSi); // textarea al marcar "Sí"
+      const qs = [...document.querySelectorAll('#questModal .quest-q')];
+      const idx = qs.indexOf(q);
+      const next = qs[idx + 1];
+      if (isSi) {
+        // Foco en el textarea; la siguiente pregunta aparece al pulsar "Continuar"
+        // (la última pregunta no lleva "Continuar": se cierra con "Guardar respuestas")
+        const nb = q.querySelector('.quest-next-btn');
+        if (nb) nb.style.display = next ? '' : 'none';
+        const ta = q.querySelector('textarea');
+        setTimeout(() => { q.scrollIntoView({ behavior: 'smooth', block: 'start' }); if (ta) ta.focus({ preventScroll: true }); }, 240);
+      } else if (next) {
+        next.classList.add('show'); // revela la siguiente pregunta
+        setTimeout(() => next.scrollIntoView({ behavior: 'smooth', block: 'start' }), 240);
+      }
+      updateQuestFooter();
+    }
+    function saveQuest() {
+      questDone[_questActive] = true;
+      const card = document.querySelector('.ques-card[data-q-idx="' + _questActive + '"]');
+      const tag = card.querySelector('.ques-tag');
+      tag.className = 'ques-tag done';
+      tag.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Completado';
+      card.querySelector('.ques-progress').textContent = '7 / 7';
+      const cta = card.querySelector('.ques-cta');
+      cta.className = 'ques-cta edit';
+      cta.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Editar';
+      closeQuest();
+      if (questDone.every(Boolean)) document.getElementById('quesContinueBtn').style.display = 'block';
+    }
     /* Entrada a la fase de contratación (pendiente de construir) */
     /* ── Contratación (modo aparte, con su propio progreso) ── */
     let contractMode = false;
@@ -2659,7 +3378,53 @@
     // cDerogacion (camino "sí, otra compañía") y cAseg2 son condicionales.
     const CONTRAT_FLOW = ['cDatos', 'cContacto', 'cDireccion', 'cAseg1', 'cAseg2', 'cCuestionario', 'cFirma', 'cOtra', 'cDerogacion', 'cPago', 'cAntes', 'cTPV', 'cConfirm'];
     let contratIdx = 0;
-    function startContratacion() { closeInteres(); showContrat('cDatos'); }
+    function startContratacion() {
+      /* Copia la card del seguro desde "Me interesa" al resumen flotante */
+      document.getElementById('resumenName').textContent = document.getElementById('interesName').textContent;
+      const it = document.getElementById('interesTag'), rt = document.getElementById('resumenTag');
+      if (it.style.display !== 'none' && it.textContent.trim()) { rt.textContent = it.textContent.trim(); rt.style.display = 'inline-flex'; } else { rt.style.display = 'none'; }
+      document.getElementById('resumenPrice').innerHTML = document.getElementById('interesPrice').innerHTML;
+      document.getElementById('resumenNote').textContent = document.getElementById('interesNote').textContent;
+      const priceTxt = document.getElementById('interesPrice').textContent;
+      const nAseg = insuredCount || 1;
+      document.getElementById('resumenFabPrice').textContent = priceTxt;
+      document.getElementById('resumenCartPrice').textContent = priceTxt;
+      document.getElementById('raccAseg2').style.display = nAseg >= 2 ? '' : 'none';
+      document.getElementById('raccFechaVal').textContent = selectedStartDate || '1 de agosto de 2026';
+      closeInteres();
+      showContrat('cDatos');
+    }
+    function openResumen() { const m = document.getElementById('resumenModal'); m.querySelector('.side-modal-body').scrollTop = 0; m.classList.add('open'); }
+    function closeResumen() { document.getElementById('resumenModal').classList.remove('open'); }
+    function toggleRacc(id) { const el = document.getElementById(id); if (el.classList.contains('pending')) return; el.classList.toggle('open'); }
+    /* Rellena el resumen de forma acumulativa según el paso alcanzado (contratIdx).
+       Una sección deja de estar "pending" cuando su dato ya se ha recogido. */
+    function updateResumen() {
+      const set = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+      const done = id => { const el = document.getElementById(id); if (el) el.classList.remove('pending'); };
+      const val = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+      if (contratIdx >= 1) {
+        set('raccTomNombre', [val('cNombre'), val('cAp1'), val('cAp2')].filter(Boolean).join(' ') || 'María García López');
+        set('raccTomNif', 'NIF ' + (val('cNif') || '47854123X'));
+        set('raccTomDob', 'Fecha nac.: 12/03/1985');
+        done('raccTomador');
+      }
+      if (contratIdx >= 2) set('raccTomContact', '612 345 678 · maria@gmail.com');
+      if (contratIdx >= 3) set('raccTomDir', 'Diagonal 161, 08018 Barcelona');
+      if (contratIdx >= 4) {
+        set('raccAseg1Nombre', [val('a1Nombre'), val('a1Ap1'), val('a1Ap2')].filter(Boolean).join(' ') || 'Carlos Ruiz Soler');
+        set('raccAseg1Nif', 'NIF ' + (val('a1Nif') || '87654321B'));
+        set('raccAseg1Dob', 'Fecha nac.: 08/07/1988');
+        done('raccAseg1');
+      }
+      if (contratIdx >= 5) {
+        set('raccAseg2Nombre', 'Lucía García López');
+        set('raccAseg2Nif', 'NIF 11223344C');
+        set('raccAseg2Dob', 'Fecha nac.: 20/11/2015');
+        done('raccAseg2');
+      }
+      if (contratIdx >= 10) { set('raccPagoVal', 'Mensual'); done('raccPago'); }
+    }
     function showContrat(id) {
       const el = document.getElementById(id);
       if (!el) return;
@@ -2670,8 +3435,12 @@
       contratIdx = CONTRAT_FLOW.indexOf(id);
       const pct = Math.round(((contratIdx + 1) / CONTRAT_FLOW.length) * 100);
       document.getElementById('progressFill').style.width = pct + '%';
-      document.querySelector('.app-header').classList.add('show-back');
+      document.querySelector('.app-header').classList.add('show-back', 'contrat');
+      document.querySelector('.app-header-title').textContent = 'Contratación 100% online';
       document.getElementById('appMain').scrollTop = 0;
+      document.getElementById('resumenFab').classList.add('visible');
+      document.body.classList.add('resumen-active');
+      updateResumen();
     }
     function nextContrat() { const n = CONTRAT_FLOW[contratIdx + 1]; if (n && document.getElementById(n)) showContrat(n); }
     function prevContrat() {
@@ -2681,6 +3450,11 @@
     }
     function backToResults() {
       contractMode = false;
+      document.querySelector('.app-header').classList.remove('contrat');
+      document.querySelector('.app-header-title').textContent = 'Calcula tu seguro de salud';
+      document.getElementById('resumenFab').classList.remove('visible');
+      document.body.classList.remove('resumen-active');
+      closeResumen();
       document.querySelectorAll('.step, .step-loading').forEach(s => s.classList.remove('active'));
       document.getElementById('step7').classList.add('active');
       document.getElementById('appMain').classList.add('results-wide');
@@ -2688,6 +3462,20 @@
       document.getElementById('progressFill').style.width = '100%';
       document.getElementById('appMain').scrollTop = 0;
       requestAnimationFrame(() => centerFeatured(document.querySelector('#step7 .products-scroll.active')));
+    }
+    /* QW#17 · "¿Copiamos los datos del titular?" en asegurado 1 */
+    function copyTitular(prefix, on) {
+      const map = { Nombre: 'cNombre', Ap1: 'cAp1', Ap2: 'cAp2', Nif: 'cNif' };
+      const demo = { cNombre: 'María', cAp1: 'García', cAp2: 'López', cNif: '47854123X' };
+      Object.entries(map).forEach(([suffix, src]) => {
+        const dst = document.getElementById(prefix + suffix);
+        if (!dst) return;
+        const s = document.getElementById(src);
+        const v = on ? ((s && s.value) ? s.value : demo[src]) : '';
+        dst.value = v;
+        dst.closest('.input-wrap').classList.toggle('filled', !!v);
+        dst.disabled = on;
+      });
     }
 
     /* ── Acordeón "¿Por qué elegir FIATC?" ── */
@@ -2881,7 +3669,7 @@
     }
     function closeHablemos() {
       document.getElementById('hablemosModal').classList.remove('open');
-      setTimeout(function () { setHablemosView('main'); }, 300);
+      setTimeout(function () { setHablemosView('main'); document.getElementById('hablemosMainBack').style.display = 'none'; }, 300);
     }
     function setHablemosView(v) {
       const body = document.getElementById('hablemosBody');
@@ -2910,12 +3698,11 @@
     }
     /* Vuelve al exit desde Hablemos con una sola animación (mismo patrón que exitToHablemos). */
     function hablemosToExit() {
-      const hmPanel = document.querySelector('#hablemosModal .side-modal-panel');
-      hmPanel.style.transition = 'none';
-      document.getElementById('hablemosModal').classList.remove('open');
-      setHablemosView('main');
-      openExit();
-      requestAnimationFrame(() => requestAnimationFrame(() => { hmPanel.style.transition = ''; }));
+      swapPanels('#hablemosModal', '#exitModal', () => {
+        document.getElementById('hablemosModal').classList.remove('open');
+        setHablemosView('main');
+        openExit();
+      });
     }
     function hablemosConfirm() { setHablemosView('confirm'); }
 
@@ -2924,11 +3711,14 @@
     function openExit() {
       const btn = document.getElementById('exitSaveBtn');
       if (btn) btn.style.display = reachedResults ? 'inline-flex' : 'none';
+      document.getElementById('resumenFab').classList.remove('visible');
       document.getElementById('exitModal').classList.add('open');
     }
     function closeExit() {
       document.getElementById('exitModal').classList.remove('open');
       setTimeout(function () { document.getElementById('exitBody').classList.remove('view-saveform', 'view-saveconfirm'); }, 300);
+      // Si seguimos dentro de la contratación (cancelaron la salida), recuperamos el resumen
+      if (contractMode) document.getElementById('resumenFab').classList.add('visible');
     }
     /* QW#5 · Guardar presupuesto desde el exit-intent */
     function exitSaveBudget() {
@@ -2959,16 +3749,15 @@
        Hablemos), igual que abrir Hablemos desde la cabecera. */
     function exitToHablemos(view) {
       agendarOrigin = 'exit';
-      const exPanel = document.querySelector('#exitModal .side-modal-panel');
-      exPanel.style.transition = 'none';
-      closeExit();
-      setHablemosView(view || 'main');
-      openHablemos();
-      requestAnimationFrame(() => requestAnimationFrame(() => { exPanel.style.transition = ''; }));
+      swapPanels('#exitModal', '#hablemosModal', () => {
+        closeExit();
+        setHablemosView(view || 'main');
+        openHablemos();
+      });
     }
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { closeHablemos(); closeExit(); closeCalc(); closeFaq(); }
+      if (e.key === 'Escape') { closeHablemos(); closeExit(); closeCalc(); closeFaq(); closeResumen(); closeQuest(); }
     });
     document.getElementById('appMain').addEventListener('scroll', updateStep0StickyBar);
     window.addEventListener('load', function () { showStep('step0'); });

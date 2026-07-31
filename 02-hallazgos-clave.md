@@ -134,3 +134,38 @@
 **Descuentos a ya cliente**
 - En fase quick wins **no se puede hacer nada**; en fase 2 mejorarán el login para recuperar datos.
 - Mientras: **copy más genérico, sin hablar de descuentos** (afecta al paso "Identifícate como cliente", que hoy menciona "algún descuento").
+
+## Actualización doc ATC v2 (23 jul 2026) — correcciones y precisiones
+
+> Segunda versión del cuestionario a ATC, con "Nuevas preguntas a partir de las respuestas". Prevalece sobre v1 donde haya conflicto.
+
+**Cuestionario de salud — copy de tranquilización (CORRECCIÓN sobre QW#19)**
+- **NO usar la palabra "vinculante".** Formular: *"rellenar el cuestionario no compromete a seguir con la contratación"*.
+- **NO mencionar "puedes aportar informes"**: eso depende de que el equipo médico que hace el seguimiento lo solicite; no prometerlo en pantalla.
+- **Sí** está bien indicar el **proceso si hay algún "Sí"**: pasa a la plataforma médica, que contacta para completarlo y luego informa del resultado.
+- Lista de lo que NO declarar (apendicitis, amigdalitis, parto, cesárea): **pendiente confirmar si es publicable**. También hay dudas con **IMC** y con qué intervenciones/pruebas declarar.
+- Copy aplicado en el prototipo: *"Rellenar el cuestionario no te compromete a contratar. Si marcas algún 'Sí', nuestro equipo médico te contactará para completarlo contigo y te informará del resultado."*
+
+**Firma (ACLARADO) — usuario 100% online**
+- Flujo: rellena el cuestionario → indica teléfono → confirma teléfono → recibe **PIN por SMS** → lo introduce en la **pantalla de Evicertia**. (La "dificultad de firmar por email" que reportaron en v1 era del proceso **offline**; corregido.)
+- Sigue habiendo una **segunda firma**: el **contrato por email** tras el pago (mail de bienvenida). Sin ella → bloqueo de la app.
+- Si alguien no firma, igualmente llega al proveedor médico para contacto. Volumen de abandono en firma: pendiente.
+
+**Pago**
+- Online **solo TPV** por **decisión de empresa** (no técnica). Si el cliente pide **pago bancario**, se aplica sin frenar la contratación (circuito offline).
+- Nº de cuenta no hace falta (TPV sin intervención). "Hasta que no consta el pago no hay póliza."
+
+**NIE / pasaporte**
+- La contratación directa online **solo acepta DNI**. Con NIE/pasaporte: solo dan precio y **acaban offline**.
+
+**Derogación de carencias — documentos (PRECISADO, refina QW#24)**
+- Se solicita: **último recibo + copia de la tarjeta**. Si la tarjeta **no muestra la fecha de alta** en la compañía → se pide además el **recibo de hace un año**.
+
+**WhatsApp**
+- Existe un WhatsApp de ATC pero **NO está habilitado para recibir documentación** (coherente con ocultar el canal a corto plazo y mantener solo el consentimiento).
+
+**Validez del presupuesto**
+- **15 días.** Mismo precio si vuelve dentro de plazo, salvo: cambio de año, promoción activa, o cambio de tramo de edad del asegurado.
+
+**Leads / llamadas**
+- Al hacer un presupuesto se genera un **lead** y ATC contacta. Si no contestan, cierran el caso y **envían email** ("hemos intentado contactar, puedes devolvernos la llamada"). Excepción rara: cola de leads sin contactar.

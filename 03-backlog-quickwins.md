@@ -97,3 +97,23 @@
 - **Confirmación** — docs no descargables aún; si pagó → "ya eres de FIATC"; **priorizar descarga de la app** vs. alta de cliente; **aligerar** la pantalla + avisar de **correo para firmar**.
 - **Descuentos ya cliente** — fase 2 (login/recuperar datos). En quick wins, **copy genérico sin mencionar descuentos** (paso "Identifícate como cliente").
 - **WhatsApp** — sin canal a corto plazo en capas de contacto (**ocultar pero mantener código documentado**); **mantener la captación de consentimiento** de WhatsApp. Futuro: agente en vivo / agente de salud.
+
+## Mapeo doc ATC v2 (23 jul 2026) → pills/FAQs y pendiente de flujo
+
+> Repaso del doc v2 contra lo construido. Detalle de fuentes en `02-hallazgos-clave.md` (sección "Actualización doc ATC v2").
+
+**A resolver como PILLS / FAQs contextuales** (las 5+ dudas más repetidas tras cotizar — pág. 4 del doc)
+- **En resultados** (antes de decidir): ¿desde cuándo estoy cubierto? (carencias) · ¿tengo acceso a todo desde el principio? · ¿el precio es por persona o total? ✅ (ya) · ¿sube en la renovación? · ¿cuándo vence (mes de contratación vs. año natural)? · ¿el CP afecta al precio? · validez del presupuesto (15 días).
+- **En/junto al cuestionario**: ¿qué pasa si declaro una patología? (¿afecta al precio?, ¿me obliga a contratar?, ¿cómo sigue?, ¿cómo recibo el resultado?) · ¿qué NO declarar? (apendicitis…) ✅ (ya en el modal, pendiente confirmar publicación).
+- **En confirmación / post-venta**: ¿cuándo recibo la tarjeta? · ¿cómo uso el seguro sin tarjeta física? · ¿cuándo es el primer cargo? · ¿cómo consulto el cuadro médico? · ¿cómo pido cita (online/tel/presencial)?
+- Revisar solape con el set actual `FAQS = { resultados, asegurados }` antes de añadir; priorizar las de resultados y las del cuestionario.
+
+**Pendiente de FLUJO (mejoras no resueltas aún)**
+- **Claridad de precio (resto de QW#4)**: renovación, vencimiento, promocional vs. captación, baja con exclusión, si el CP afecta → capa/acordeón de "cómo funciona este precio" o FAQs.
+- **NIE / pasaporte**: online solo DNI. Añadir en el paso de identificación/tomador un **desvío claro** ("¿Tienes NIE o pasaporte? Te atendemos por teléfono/agenda"), en vez de dejar que choque.
+- **Pago bancario**: online es TPV, pero se puede pedir domiciliación. Valorar microcopy en el paso de pago ("¿Prefieres domiciliación? Te ayudamos por teléfono").
+- **Firma (cFirma, por construir)**: online = teléfono → confirmar teléfono → **PIN por SMS** → pantalla Evicertia. 2ª firma = contrato por email post-pago (avisar en confirmación).
+- **Derogación (QW#24)**: doc = último recibo + copia de tarjeta; si la tarjeta no tiene fecha de alta → + recibo de hace un año. Email web@fiatc.es.
+- **KO pedagógica (QW#22)**: sin construir.
+- **Simulaciones** (añadir recién nacido, quitar hijo, añadir asegurado que vence, completa↔copago): cubierto por la **calculadora** (add/quitar) + pestañas de modalidad; validar que cubre los casos.
+- **"El usuario no lee / pierde la pantalla"**: principio transversal → no abrir ventanas nuevas, no perder el contexto de tarificación (ya respetado en el prototipo con modales/capas).
