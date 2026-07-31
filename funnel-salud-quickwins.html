@@ -470,6 +470,20 @@
   .detail-more-text { font-size: 14px; color: var(--wf-90); line-height: 1.5; }
   .detail-more-phone { font-size: 14px; color: var(--wf-90); margin-top: 12px; }
   .detail-cta { margin-top: 28px; }
+  /* Modal "Me interesa": confirma plan + anticipa el proceso (arranque contratación) */
+  .interes-hero { background: var(--wf-10); margin: -40px -24px 0; padding: 32px 24px 24px; border-bottom: 1px solid var(--wf-20); }
+  @media (min-width: 601px) { .interes-hero { margin-left: -32px; margin-right: -32px; padding-left: 32px; padding-right: 32px; } }
+  .interes-eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--wf-60); }
+  .interes-name { font-size: 24px; font-weight: 700; color: var(--wf-100); margin-top: 4px; }
+  .interes-price { font-size: 14px; color: var(--wf-90); margin-top: 12px; }
+  .interes-price strong { font-size: 24px; font-weight: 700; color: var(--wf-100); }
+  .interes-lead { font-size: 16px; color: var(--wf-90); line-height: 1.4; margin: 24px 0 20px; }
+  .interes-note { font-size: 12px; color: var(--wf-60); text-align: center; margin-top: 8px; line-height: 1.4; }
+  .interes-help-btn { width: 100%; margin-top: 12px; }
+  .interes-divider { display: flex; align-items: center; gap: 12px; margin: 24px 0; color: var(--wf-60); font-size: 12px; }
+  .interes-divider::before, .interes-divider::after { content: ''; flex: 1; height: 1px; background: var(--wf-20); }
+  .interes-save { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; background: none; border: none; font-family: inherit; font-size: 14px; font-weight: 700; color: var(--wf-90); cursor: pointer; }
+  .interes-save:hover { color: var(--wf-100); }
   /* Bottombar del modal: aparece cuando el "Me interesa" del hero sale de vista al hacer scroll */
   #detailModal .side-modal-body { padding-bottom: calc(112px + env(safe-area-inset-bottom, 0px)); }
   .detail-stickybar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; display: flex; align-items: center; gap: 16px; padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--wf-0); border-top: 1px solid var(--wf-20); box-shadow: 0 -4px 16px rgba(39, 42, 48, 0.08); transform: translateY(100%); transition: transform 0.25s ease; }
@@ -1395,7 +1409,7 @@
                 <li class="feat-yes">3 primeros usos sin copago, luego desde 6€</li>
                 <li class="feat-no">Sin hospitalización</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card featured">
@@ -1408,7 +1422,7 @@
                 <li class="feat-yes">Copagos desde 10€</li>
                 <li class="feat-yes">Cuota mensual ajustada</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
@@ -1420,7 +1434,7 @@
                 <li class="feat-yes">Hospitalización incluida</li>
                 <li class="feat-yes">Sin copagos en toda la red</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
           </div>
@@ -1436,7 +1450,7 @@
                 <li class="feat-yes">3 primeros usos sin copago, luego desde 6€</li>
                 <li class="feat-no">Sin hospitalización</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card featured">
@@ -1449,7 +1463,7 @@
                 <li class="feat-yes">Copagos desde 10€</li>
                 <li class="feat-yes">Cuota mensual ajustada</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
@@ -1461,7 +1475,7 @@
                 <li class="feat-yes">Hospitalización incluida</li>
                 <li class="feat-yes">Copagos reducidos desde 2€</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
           </div>
@@ -1478,7 +1492,7 @@
                   <li class="feat-yes">Hospitalización incluida</li>
                   <li class="feat-yes">Copagos desde 10€</li>
                 </ul>
-                <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+                <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
                 <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
               </div>
               <div class="product-card">
@@ -1490,7 +1504,7 @@
                   <li class="feat-yes">Hospitalización incluida</li>
                   <li class="feat-yes">Copagos desde 4€</li>
                 </ul>
-                <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+                <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
                 <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
               </div>
             </div>
@@ -1508,7 +1522,7 @@
                 <li class="feat-yes">Hospitalización incluida</li>
                 <li class="feat-yes">Sin copagos en toda la red</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
@@ -1521,7 +1535,7 @@
                 <li class="feat-yes">Hospitalización incluida</li>
                 <li class="feat-yes">Sin copagos en toda la red</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
           </div>
@@ -1538,7 +1552,7 @@
                 <li class="feat-yes">Hospitalización incluida</li>
                 <li class="feat-yes">Amplio cuadro médico FIATC</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card featured">
@@ -1552,7 +1566,7 @@
                 <li class="feat-yes">Hospitalización incluida</li>
                 <li class="feat-yes">Cobertura completa en España y el extranjero</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
@@ -1565,7 +1579,7 @@
                 <li class="feat-yes">Hospitalización incluida</li>
                 <li class="feat-yes">Cobertura premium nacional e internacional</li>
               </ul>
-              <button class="card-cta" onclick="openHablemos()">Me interesa</button>
+              <button class="card-cta" onclick="openInteres(this.closest('.product-card'))">Me interesa</button>
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
           </div>
@@ -2064,7 +2078,7 @@
           </div>
           <div class="detail-hero-pricerow">
             <p class="detail-hero-price"><strong id="detailPrice">45<span class="price-dec">,90€</span></strong> al mes<span id="detailNote"></span></p>
-            <button class="btn-primary detail-hero-cta" onclick="closeDetail(); openHablemos();">Me interesa</button>
+            <button class="btn-primary detail-hero-cta" onclick="closeDetail(); openInteres(detailCard);">Me interesa</button>
           </div>
         </div>
 
@@ -2126,7 +2140,34 @@
       </div>
       <div class="detail-stickybar" id="detailStickybar">
         <p class="detail-stickybar-price"><strong id="detailStickyPrice">45<span class="price-dec">,78€</span></strong><span class="detail-stickybar-mes">al mes</span></p>
-        <button class="btn-primary" onclick="closeDetail(); openHablemos();">Me interesa</button>
+        <button class="btn-primary" onclick="closeDetail(); openInteres(detailCard);">Me interesa</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MODAL "ME INTERESA" (arranque de contratación · tú tienes el control) -->
+  <div class="side-modal" id="interesModal" aria-hidden="true">
+    <div class="side-modal-backdrop" onclick="closeInteres()"></div>
+    <aside class="side-modal-panel" role="dialog" aria-label="Me interesa">
+      <div class="side-modal-handle"></div>
+      <button class="side-modal-close" onclick="closeInteres()" aria-label="Cerrar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="side-modal-body">
+        <div class="interes-hero">
+          <p class="interes-eyebrow">Gran elección</p>
+          <p class="interes-name" id="interesName">Medifiatc P15</p>
+          <p class="interes-price"><strong id="interesPrice">45<span class="price-dec">,78€</span></strong> al mes<span id="interesNote"></span></p>
+        </div>
+        <p class="interes-lead">Tú tienes el control, ¿cómo quieres continuar?</p>
+        <button class="btn-primary" style="margin-top:0;" onclick="startContratacion()">Contratar online ahora</button>
+        <p class="interes-note">100% online. Incluye un breve cuestionario de salud (no es vinculante).</p>
+        <button class="btn-ghost interes-help-btn" onclick="closeInteres(); openHablemos();">Prefiero que me ayuden</button>
+        <div class="interes-divider"><span>¿Continuar más tarde?</span></div>
+        <button class="interes-save" onclick="closeInteres(); openExit(); exitSaveBudget();">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Guardar presupuesto
+        </button>
       </div>
     </aside>
   </div>
@@ -2462,8 +2503,10 @@
       'Sin copago': 'Para quien usa el seguro a menudo y prefiere no pagar nada en cada visita.',
       'Reembolso': 'Para quien quiere elegir libremente médico y clínica, dentro o fuera del cuadro médico.'
     };
+    let detailCard = null; // card del último "Detalles del seguro" abierto (para su CTA "Me interesa")
     function openDetail(btn) {
       const card = btn.closest('.product-card');
+      detailCard = card;
       const tagEl = card.querySelector('.card-tag');
       const tag = tagEl ? tagEl.textContent.trim() : '';
       const priceEl = card.querySelector('.card-price strong');
@@ -2507,6 +2550,22 @@
       bar.classList.toggle('visible', cta.getBoundingClientRect().bottom < body.getBoundingClientRect().top);
     }
     function toggleDetailMore(btn) { btn.closest('.detail-more').classList.toggle('open'); }
+
+    /* ── "Me interesa": confirma plan + tú tienes el control (arranque contratación) ── */
+    function openInteres(card) {
+      if (!card) return;
+      const priceEl = card.querySelector('.card-price strong');
+      document.getElementById('interesName').textContent = card.querySelector('.card-name').textContent.trim();
+      document.getElementById('interesPrice').innerHTML = priceEl ? priceEl.innerHTML : '';
+      const n = insuredCount || 1;
+      document.getElementById('interesNote').textContent = n > 1 ? ' · total para ' + n + ' asegurados' : '';
+      const m = document.getElementById('interesModal');
+      m.querySelector('.side-modal-body').scrollTop = 0;
+      m.classList.add('open');
+    }
+    function closeInteres() { document.getElementById('interesModal').classList.remove('open'); }
+    /* Entrada a la fase de contratación (pendiente de construir) */
+    function startContratacion() { closeInteres(); }
 
     /* ── Acordeón "¿Por qué elegir FIATC?" ── */
     function toggleWhy(btn) {
