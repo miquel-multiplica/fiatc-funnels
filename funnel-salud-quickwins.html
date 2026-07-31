@@ -224,8 +224,8 @@
   /* Tarjetas de preferencia (¿para quién?) */
   .pref-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
   .pref-card {
-    display: flex; align-items: center; gap: 12px;
-    padding: 16px; border: 1px solid var(--wf-40); border-radius: 8px;
+    display: flex; align-items: center; gap: 12px; min-height: 64px;
+    padding: 12px 16px; border: 1px solid var(--wf-40); border-radius: 8px;
     background: var(--wf-0); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
     cursor: pointer; transition: border-color 0.15s, background 0.15s;
   }
@@ -295,8 +295,8 @@
   /* Fecha de inicio (step4) */
   .date-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
   .date-card {
-    display: flex; align-items: center; gap: 12px;
-    padding: 16px; border: 1px solid var(--wf-40); border-radius: 8px;
+    display: flex; align-items: center; gap: 12px; min-height: 64px;
+    padding: 12px 16px; border: 1px solid var(--wf-40); border-radius: 8px;
     background: var(--wf-0); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
     cursor: pointer; transition: border-color 0.15s, background 0.15s;
   }
@@ -427,6 +427,9 @@
   .btn-primary:disabled { background: var(--wf-20); color: var(--wf-60); cursor: not-allowed; }
   /* step6b: el gap arriba/abajo del bloque de consentimiento lo define la pub-list (simétrico) */
   #step6b .btn-primary { margin-top: 0; }
+  /* Botón "Continuar" más pegado al campo en DNI y email */
+  #step6 .btn-primary, #stepDNI .btn-primary { margin-top: 12px; }
+  #stepDNI .input-wrap { margin-bottom: 0; }
   .btn-skip {
     display: block; width: 100%; margin-top: 12px; padding: 12px;
     background: none; border: none; font-family: inherit;
@@ -893,7 +896,7 @@
     .pub-row-body { flex-direction: column; align-items: flex-start; gap: 4px; }
     /* Gap simétrico: botón ↔ bloque = input ↔ bloque (24px) */
     .pub-list { margin: 24px 0 24px; }
-    #step6 .btn-primary { margin-top: 16px; }
+    #step6 .btn-primary { margin-top: 12px; }
     /* 16px de padding vertical entre canales en mobile */
     .pub-row { padding-top: 16px; padding-bottom: 16px; }
     /* FAQ pills alineadas a la izquierda en mobile */
