@@ -692,13 +692,13 @@
   .hablemos-back {
     display: flex; align-items: center; gap: 8px; background: none; border: none;
     cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 600;
-    color: var(--wf-90); padding: 0; margin-bottom: 16px;
+    color: var(--wf-90); padding: 0; margin-top: -24px; margin-bottom: 16px;
   }
   .hablemos-back:hover { color: var(--wf-100); }
 
   /* Exit-intent: vistas guardar presupuesto (QW#5) */
   #exitBody .exit-main { display: flex; flex-direction: column; flex: 1 0 auto; }
-  .exit-saveform, .exit-saveconfirm { display: none; }
+  .exit-saveform, .exit-saveconfirm { display: none; padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px)); }
   #exitBody.view-saveform .exit-main, #exitBody.view-saveconfirm .exit-main { display: none; }
   #exitBody.view-saveform .exit-saveform { display: block; }
   #exitBody.view-saveconfirm .exit-saveconfirm { display: block; text-align: center; }
@@ -723,7 +723,8 @@
   .toggle-switch input:checked + .toggle-track::before { transform: translateX(18px); }
 
   /* Confirmación */
-  .call-confirm-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--wf-20); display: flex; align-items: center; justify-content: center; margin: 8px auto 16px; color: var(--wf-90); }
+  .call-confirm-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--wf-20); display: flex; align-items: center; justify-content: center; margin: -16px auto 16px; color: var(--wf-90); }
+  .hablemos-confirm .btn-primary, .exit-saveconfirm .btn-primary { margin-top: 8px; }
   .call-confirm-icon svg { width: 22px; height: 22px; }
   .call-confirm-title { font-size: 21px; font-weight: 700; color: var(--wf-100); margin-bottom: 12px; line-height: 1.25; }
   .call-confirm-text { font-size: 14px; color: var(--wf-90); line-height: 1.6; margin-bottom: 32px; }
@@ -911,7 +912,7 @@
     /* Hablemos: bottom-sheet (como la propuesta original) */
     .side-modal-panel {
       top: auto; bottom: 0; left: 0; right: 0;
-      width: 100%; max-width: 100%; height: auto; max-height: 92vh; max-height: 90dvh;
+      width: 100%; max-width: 100%; height: auto; max-height: 94vh; max-height: 93dvh;
       border-radius: 20px 20px 0 0;
       box-shadow: 0 -8px 32px rgba(39, 42, 48, 0.15);
       transform: translateY(100%);
@@ -1825,7 +1826,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Guardar presupuesto
         </button>
-        <a class="btn-skip" style="cursor:pointer; display:block; text-align:center; margin:16px 0 16px; font-size:16px; color:var(--wf-90);" onclick="exitReset()">Salir y perder los datos</a>
+        <a class="btn-skip" style="cursor:pointer; display:block; text-align:center; margin:16px 0 8px; font-size:16px; color:var(--wf-90);" onclick="exitReset()">Salir y perder los datos</a>
 
         <div class="faq-help">
           <div class="faq-help-head">
