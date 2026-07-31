@@ -414,9 +414,10 @@
   }
   .step-promo strong { color: var(--wf-100); font-weight: 700; }
   /* Banner de campaña "2 meses gratis" (rev. cliente 31 jul). QUITA Y PON: es estacional (sep–feb); para bajarlo, ocultar los bloques .promo-banner. */
-  .promo-banner { display: flex; align-items: center; gap: 12px; background: var(--wf-20); border: 1px solid var(--wf-40); border-radius: 10px; padding: 12px; margin-bottom: 20px; }
-  .promo-banner-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: var(--wf-40); display: flex; align-items: center; justify-content: center; color: var(--wf-90); }
+  .promo-banner { display: flex; align-items: stretch; background: var(--wf-20); border: 1px solid var(--wf-40); border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+  .promo-banner-icon { flex-shrink: 0; width: 56px; background: var(--wf-40); display: flex; align-items: center; justify-content: center; color: var(--wf-90); }
   .promo-banner-icon svg { width: 24px; height: 24px; }
+  .promo-banner-text { padding: 12px 16px; }
   .promo-banner-text strong { display: block; font-size: 18px; font-weight: 700; color: var(--wf-100); line-height: 1.2; }
   .promo-banner-text span { font-size: 14px; color: var(--wf-90); }
   @media (min-width: 601px) { #step7 .promo-banner { max-width: 520px; margin-left: auto; margin-right: auto; } }
@@ -1268,7 +1269,7 @@
       <!-- PASO 5 · ¿Seguro previo con FIATC? -->
       <div class="step" id="step5">
         <h1 class="step-title">¿Tienes contratado algún seguro con FIATC?</h1>
-        <p class="step-subtitle">Podrías disfrutar de algún descuento adicional.</p>
+        <p class="step-subtitle">Si ya eres cliente, vinculamos esta póliza a tu ficha.</p>
         <div class="pref-list">
           <label class="pref-card" onclick="isClient=false; nextStep();">
             <div class="pref-body"><div class="pref-title">No, no soy cliente</div></div>
