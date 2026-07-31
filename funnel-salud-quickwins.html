@@ -210,7 +210,7 @@
   }
   .input-wrap:focus-within input, .input-wrap.filled input,
   .input-wrap:focus-within select, .input-wrap.filled select {
-    padding-top: 16px;
+    padding-top: 22px;
   }
   .select-wrap select { padding-right: 36px; cursor: pointer; }
   .select-arrow {
@@ -253,7 +253,7 @@
 
   .dob-row { display: grid; grid-template-columns: 64px 1fr 84px; gap: 8px; }
   .dob-row input {
-    width: 100%; height: 52px; padding: 0 10px;
+    width: 100%; height: 44px; padding: 0 10px;
     border: 1px solid var(--wf-40); border-radius: 8px;
     font-size: 14px; font-family: inherit; color: var(--wf-100);
     background: var(--wf-0); outline: none; appearance: none; transition: border-color 0.15s;
@@ -262,7 +262,7 @@
   .dob-row input:focus { border-color: var(--wf-60); }
   .dob-cs { position: relative; }
   .dob-cs-trigger {
-    width: 100%; height: 52px; padding: 0 32px 0 10px;
+    width: 100%; height: 44px; padding: 0 32px 0 10px;
     border: 1px solid var(--wf-40); border-radius: 8px;
     font-size: 14px; font-family: inherit; background: var(--wf-0);
     cursor: pointer; display: flex; align-items: center;
@@ -438,8 +438,8 @@
   .why-stats { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
   .why-stat { display: flex; align-items: center; gap: 12px; background: var(--wf-20); border-radius: 10px; padding: 16px; }
   .why-stat svg { flex-shrink: 0; width: 24px; height: 24px; color: var(--wf-90); }
-  .why-stat-text { font-size: 14px; color: var(--wf-90); line-height: 1.35; }
-  .why-stat-text strong { font-size: 16px; font-weight: 700; color: var(--wf-100); }
+  .why-stat-text { font-size: 16px; color: var(--wf-90); line-height: 1.35; }
+  .why-stat-text strong { font-size: 18px; font-weight: 700; color: var(--wf-100); }
   @media (min-width: 601px) { .why-stats { flex-direction: row; } .why-stat { flex: 1; min-width: 0; justify-content: center; } }
 
   /* Modal "Detalles del seguro" (QW#3) */
@@ -574,7 +574,7 @@
     background: var(--wf-10); border-radius: 50%;
     display: flex; align-items: center; justify-content: center; color: var(--wf-90);
   }
-  .why-trigger strong { flex: 1; font-size: 14px; font-weight: 400; color: var(--wf-100); line-height: 1.3; }
+  .why-trigger strong { flex: 1; font-size: 16px; font-weight: 400; color: var(--wf-100); line-height: 1.3; }
   .why-chevron { flex-shrink: 0; color: var(--wf-60); transition: transform 0.25s ease; }
   .why-item.open .why-chevron { transform: rotate(180deg); }
   .why-body { max-height: 0; overflow: hidden; padding: 0 40px; transition: max-height 0.3s ease, padding-bottom 0.3s ease; }
@@ -692,7 +692,7 @@
   .hablemos-back {
     display: flex; align-items: center; gap: 8px; background: none; border: none;
     cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 600;
-    color: var(--wf-90); padding: 0; margin-bottom: 24px;
+    color: var(--wf-90); padding: 0; margin-bottom: 16px;
   }
   .hablemos-back:hover { color: var(--wf-100); }
 
@@ -792,9 +792,10 @@
   .card-badge { display: block; margin: -24px -18px 18px; padding: 8px 12px; text-align: center; background: var(--wf-20); color: var(--wf-90); font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; }
   /* Header wf-90: un tono más claro que los CTA (ahora wf-100), sin competir */
   .product-card.featured .card-badge { background: var(--wf-90); color: var(--wf-0); }
-  .card-name { font-size: 18px; font-weight: 700; color: var(--wf-100); margin-bottom: 8px; line-height: 1.2; }
+  .card-head { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; }
+  .card-name { font-size: 18px; font-weight: 700; color: var(--wf-100); line-height: 1.2; }
   /* Tag de tipo (como las tabs de arriba): pill blanco con borde gris, entre título y precio */
-  .card-tag { display: inline-flex; align-self: flex-start; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-20); font-size: 12px; font-weight: 700; color: var(--wf-100); margin-bottom: 16px; }
+  .card-tag { display: inline-flex; flex-shrink: 0; align-items: center; padding: 4px 12px; border-radius: 100px; background: var(--wf-20); font-size: 12px; font-weight: 700; color: var(--wf-100); }
   .card-subtitle { font-size: 14px; color: var(--wf-90); margin-bottom: 16px; line-height: 1.35; }
   .card-price-row { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 16px; }
   .card-price { font-size: 12px; color: var(--wf-90); }
@@ -902,10 +903,15 @@
     .step-icon-badge { width: 48px; height: 48px; margin: 0 auto 12px; }
     .step-icon-badge svg { width: 22px; height: 22px; }
 
+    /* Tabs de modalidad: caben sin scroll en móviles estrechos (menos padding lateral) */
+    .filter-tab { padding: 8px 12px; }
+    /* Ristra de resultados: solo el CP, sin provincia, en mobile */
+    #step7 .results-meta-prov { display: none; }
+
     /* Hablemos: bottom-sheet (como la propuesta original) */
     .side-modal-panel {
       top: auto; bottom: 0; left: 0; right: 0;
-      width: 100%; max-width: 100%; height: auto; max-height: 96vh;
+      width: 100%; max-width: 100%; height: auto; max-height: 92vh; max-height: 90dvh;
       border-radius: 20px 20px 0 0;
       box-shadow: 0 -8px 32px rgba(39, 42, 48, 0.15);
       transform: translateY(100%);
@@ -1187,7 +1193,7 @@
           <p class="faq-pills-title">¿Tienes alguna duda?</p>
           <div class="faq-pills">
             <button class="faq-pill" onclick="openFaq('asegurados', 0)">¿Puedo incluir a mi familia?</button>
-            <button class="faq-pill" onclick="openFaq('asegurados', 1)">¿Puedo añadir o quitar asegurados más adelante?</button>
+            <button class="faq-pill" onclick="openFaq('asegurados', 1)">¿Puedo añadir o quitar asegurados?</button>
           </div>
         </div>
       </div>
@@ -1254,9 +1260,6 @@
 
       <!-- PASO 6 · Email -->
       <div class="step" id="step6">
-        <div class="step-icon-badge">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
-        </div>
         <p class="step-eyebrow" style="text-align:center;">¡Ya casi está!</p>
         <h1 class="step-title" style="text-align:center;">Además de mostrarte el precio, te lo enviaremos por email</h1>
         <p class="step-subtitle" style="text-align:center; margin-top:-12px;">Prometemos no enviarte spam :)</p>
@@ -1280,9 +1283,6 @@
 
       <!-- PASO 6b · Teléfono (incluye módulo WhatsApp) -->
       <div class="step" id="step6b">
-        <div class="step-icon-badge">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
         <h1 class="step-title" style="text-align:center;">Y si necesitamos llamarte...</h1>
         <p class="step-subtitle" style="text-align:center; margin-top:-12px;">Solo para gestionar tu solicitud, nada más :)</p>
         <div class="input-wrap tel-wrap" style="margin-top:24px; margin-bottom:0;">
@@ -1383,8 +1383,7 @@
           <!-- PARA TI -->
           <div class="products-scroll active" id="scroll-para-ti">
             <div class="product-card">
-              <h3 class="card-name">Start</h3>
-              <span class="card-tag">Básico</span>
+              <div class="card-head"><h3 class="card-name">Start</h3><span class="card-tag">Básico</span></div>
               <div class="card-price-row"><div class="card-price" data-save="20"><strong>28<span class="price-dec">,49€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1397,8 +1396,7 @@
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
-              <h3 class="card-name">Medifiatc P15</h3>
-              <span class="card-tag">Con copago</span>
+              <div class="card-head"><h3 class="card-name">Medifiatc P15</h3><span class="card-tag">Con copago</span></div>
               <div class="card-price-row"><div class="card-price" data-save="32"><strong>45<span class="price-dec">,78€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1410,8 +1408,7 @@
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <h3 class="card-name">Medifiatc</h3>
-              <span class="card-tag">Sin copago</span>
+              <div class="card-head"><h3 class="card-name">Medifiatc</h3><span class="card-tag">Sin copago</span></div>
               <div class="card-price-row"><div class="card-price" data-save="59"><strong>82<span class="price-dec">,47€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1427,8 +1424,7 @@
           <!-- CON COPAGO -->
           <div class="products-scroll" id="scroll-copago">
             <div class="product-card">
-              <h3 class="card-name">Start</h3>
-              <span class="card-tag">Básico</span>
+              <div class="card-head"><h3 class="card-name">Start</h3><span class="card-tag">Básico</span></div>
               <div class="card-price-row"><div class="card-price" data-save="20"><strong>28<span class="price-dec">,49€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1441,8 +1437,7 @@
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
-              <h3 class="card-name">Medifiatc P15</h3>
-              <span class="card-tag">Con copago</span>
+              <div class="card-head"><h3 class="card-name">Medifiatc P15</h3><span class="card-tag">Con copago</span></div>
               <div class="card-price-row"><div class="card-price" data-save="32"><strong>45<span class="price-dec">,78€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1454,8 +1449,7 @@
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <h3 class="card-name">Medifiatc P5</h3>
-              <span class="card-tag">Con copago mínimo</span>
+              <div class="card-head"><h3 class="card-name">Medifiatc P5</h3><span class="card-tag">Con copago mínimo</span></div>
               <div class="card-price-row"><div class="card-price" data-save="43"><strong>60<span class="price-dec">,33€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1472,8 +1466,7 @@
             <p class="diagonal-pretitle">Y si quieres acceso a la prestigiosa <strong>Clínica Diagonal</strong>…</p>
             <div class="products-scroll" id="scroll-copago-diagonal">
               <div class="product-card">
-                <h3 class="card-name">Medifiatc Diagonal P15</h3>
-                <span class="card-tag">Con copago</span>
+                <div class="card-head"><h3 class="card-name">Medifiatc Diagonal P15</h3><span class="card-tag">Con copago</span></div>
                 <div class="card-price-row"><div class="card-price" data-save="40"><strong>55<span class="price-dec">,48€</span></strong> al mes</div></div>
                 <div class="card-divider"></div>
                 <ul class="card-features">
@@ -1485,8 +1478,7 @@
                 <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
               </div>
               <div class="product-card">
-                <h3 class="card-name">Medifiatc Diagonal P4</h3>
-                <span class="card-tag">Con copago mínimo</span>
+                <div class="card-head"><h3 class="card-name">Medifiatc Diagonal P4</h3><span class="card-tag">Con copago mínimo</span></div>
                 <div class="card-price-row"><div class="card-price" data-save="52"><strong>72<span class="price-dec">,77€</span></strong> al mes</div></div>
                 <div class="card-divider"></div>
                 <ul class="card-features">
@@ -1504,8 +1496,7 @@
           <div class="products-scroll" id="scroll-sin-copago">
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
-              <h3 class="card-name">Medifiatc</h3>
-              <span class="card-tag">Sin copago</span>
+              <div class="card-head"><h3 class="card-name">Medifiatc</h3><span class="card-tag">Sin copago</span></div>
               <div class="card-price-row"><div class="card-price" data-save="59"><strong>82<span class="price-dec">,47€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1517,8 +1508,7 @@
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <h3 class="card-name">Medifiatc Diagonal</h3>
-              <span class="card-tag">Sin copago</span>
+              <div class="card-head"><h3 class="card-name">Medifiatc Diagonal</h3><span class="card-tag">Sin copago</span></div>
               <div class="card-price-row"><div class="card-price" data-save="71"><strong>98<span class="price-dec">,39€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1535,8 +1525,7 @@
           <!-- REEMBOLSO -->
           <div class="products-scroll" id="scroll-reembolso">
             <div class="product-card">
-              <h3 class="card-name">Selec</h3>
-              <span class="card-tag">Reembolso</span>
+              <div class="card-head"><h3 class="card-name">Selec</h3><span class="card-tag">Reembolso</span></div>
               <div class="card-price-row"><div class="card-price" data-save="27"><strong>38<span class="price-dec">,19€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1550,8 +1539,7 @@
             </div>
             <div class="product-card featured">
               <div class="card-badge">El más popular</div>
-              <h3 class="card-name">Multi125</h3>
-              <span class="card-tag">Reembolso</span>
+              <div class="card-head"><h3 class="card-name">Multi125</h3><span class="card-tag">Reembolso</span></div>
               <div class="card-price-row"><div class="card-price" data-save="45"><strong>63<span class="price-dec">,44€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1564,8 +1552,7 @@
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card">
-              <h3 class="card-name">Multi250</h3>
-              <span class="card-tag">Reembolso</span>
+              <div class="card-head"><h3 class="card-name">Multi250</h3><span class="card-tag">Reembolso</span></div>
               <div class="card-price-row"><div class="card-price" data-save="66"><strong>92<span class="price-dec">,17€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
               <ul class="card-features">
@@ -1759,9 +1746,9 @@
             <label>Mensaje (opcional)</label>
           </div>
 
-          <p class="legal-mini" style="margin-top:4px;">FIATC Mutua de Seguros tratará tus datos solo para gestionar esta solicitud de llamada. Puedes ejercer tus derechos de acceso, rectificación y supresión escribiéndonos. Más información en la <a onclick="return false;" href="#">Política de privacidad</a>.</p>
+          <p class="legal-mini" style="margin:4px 0 0;">FIATC Mutua de Seguros tratará tus datos solo para gestionar esta solicitud de llamada. Puedes ejercer tus derechos de acceso, rectificación y supresión escribiéndonos. Más información en la <a onclick="return false;" href="#">Política de privacidad</a>.</p>
 
-          <button class="btn-primary" onclick="hablemosConfirm()">Agendar llamada</button>
+          <button class="btn-primary" style="margin-top:16px;" onclick="hablemosConfirm()">Agendar llamada</button>
         </div>
 
         <!-- Vista: Confirmación -->
@@ -1772,7 +1759,7 @@
           <div class="call-confirm-title">¡Te llamamos pronto!</div>
           <p class="call-confirm-text">En menos de 24 h un asesor te llamará al teléfono que nos has dejado. Sin compromiso.</p>
 
-          <div class="pub-list" style="text-align:left; margin:28px 0 20px;">
+          <div class="pub-list" style="text-align:left; margin:28px 0 12px;">
             <div class="pub-head">
               <p class="pub-q">¡No te pierdas nada! ¿Quieres recibir novedades y ofertas?</p>
               <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
@@ -1834,8 +1821,11 @@
         <div class="hablemos-title">¿Seguro que quieres salir?</div>
         <div class="hablemos-subtitle">Si te marchas ahora perderás los datos que ya has introducido.</div>
         <button class="btn-primary" onclick="closeExit()">No, quiero seguir aquí</button>
-        <button class="btn-ghost" id="exitSaveBtn" style="width:100%; margin-top:12px; display:none;" onclick="exitSaveBudget()">Guardar presupuesto</button>
-        <a class="btn-skip" style="cursor:pointer; display:block; text-align:center; margin:16px 0 28px; font-size:16px; color:var(--wf-90);" onclick="exitReset()">Salir y perder los datos</a>
+        <button class="btn-ghost" id="exitSaveBtn" style="width:100%; margin-top:12px; display:none; align-items:center; justify-content:center; gap:8px;" onclick="exitSaveBudget()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Guardar presupuesto
+        </button>
+        <a class="btn-skip" style="cursor:pointer; display:block; text-align:center; margin:16px 0 16px; font-size:16px; color:var(--wf-90);" onclick="exitReset()">Salir y perder los datos</a>
 
         <div class="faq-help">
           <div class="faq-help-head">
@@ -1906,7 +1896,7 @@
           <div class="call-confirm-title">¡Presupuesto guardado!</div>
           <p class="call-confirm-text">Recupéralo cuando quieras desde <strong>«Recuperar presupuesto»</strong> en la pantalla de inicio, con tu email <strong id="exitSavedEmail">maria@email.com</strong>.</p>
 
-          <div class="pub-list" style="text-align:left; margin:28px 0 20px;">
+          <div class="pub-list" style="text-align:left; margin:28px 0 12px;">
             <div class="pub-head">
               <p class="pub-q">¡No te pierdas nada! ¿Quieres recibir novedades y ofertas?</p>
               <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
@@ -2302,10 +2292,10 @@
       const dob = i => (i <= calcBaseCount ? CALC_DOBS[(i - 1) % CALC_DOBS.length] : null);
       let html = '';
       if (withMe) {
-        html = calcBlockHTML('c1', 'Tú', false, dob(1));
-        for (let i = 2; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Asegurado ' + i, true, dob(i));
+        html = calcBlockHTML('c1', 'Tu edad', false, dob(1));
+        for (let i = 2; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Edad asegurado ' + i, true, dob(i));
       } else {
-        for (let i = 1; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Asegurado ' + i, i > 1, dob(i));
+        for (let i = 1; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Edad asegurado ' + i, i > 1, dob(i));
       }
       list.innerHTML = html;
     }
@@ -2313,7 +2303,7 @@
     function calcRelabel() {
       document.querySelectorAll('#calcInsuredList .insured-block').forEach((b, idx) => {
         const strong = b.querySelector('.insured-header strong');
-        if (strong) strong.textContent = (withMe && idx === 0) ? 'Tú' : 'Asegurado ' + (idx + 1);
+        if (strong) strong.textContent = (withMe && idx === 0) ? 'Tu edad' : 'Edad asegurado ' + (idx + 1);
       });
     }
     function openCalc() {
@@ -2338,7 +2328,7 @@
     function calcAdd() {
       calcCount++;
       const id = 'c' + (++calcSeq); // id monotónico → nunca choca aunque se hayan quitado bloques
-      document.getElementById('calcInsuredList').insertAdjacentHTML('beforeend', calcBlockHTML(id, 'Asegurado ' + calcCount, true, null));
+      document.getElementById('calcInsuredList').insertAdjacentHTML('beforeend', calcBlockHTML(id, 'Edad asegurado ' + calcCount, true, null));
     }
     function calcRemove(el) {
       const blocks = document.querySelectorAll('#calcInsuredList .insured-block');
@@ -2613,14 +2603,14 @@
       const title = document.getElementById('step2Title');
       let html = '';
       if (withMe && insuredCount === 1) {
-        html = dobFieldHTML(1);
+        html = insuredBlockHTML(1, 'Tu edad', false);
         title.textContent = 'Añade tu fecha de nacimiento';
       } else if (withMe) {
-        html = insuredBlockHTML(1, 'Tú', false);
-        for (let i = 2; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Asegurado ' + i, true);
+        html = insuredBlockHTML(1, 'Tu edad', false);
+        for (let i = 2; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Edad asegurado ' + i, true);
         title.textContent = 'Añade las fechas de nacimiento';
       } else {
-        for (let i = 1; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Asegurado ' + i, i > 1);
+        for (let i = 1; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Edad asegurado ' + i, i > 1);
         title.textContent = 'Añade las fechas de nacimiento';
       }
       list.innerHTML = html;
@@ -2747,7 +2737,7 @@
     let reachedResults = false; // "Guardar presupuesto" en el exit solo si ya se vio el precio
     function openExit() {
       const btn = document.getElementById('exitSaveBtn');
-      if (btn) btn.style.display = reachedResults ? '' : 'none';
+      if (btn) btn.style.display = reachedResults ? 'inline-flex' : 'none';
       document.getElementById('exitModal').classList.add('open');
     }
     function closeExit() {
