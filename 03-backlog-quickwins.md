@@ -112,7 +112,7 @@
 - **Claridad de precio (resto de QW#4)**: renovación, vencimiento, promocional vs. captación, baja con exclusión, si el CP afecta → capa/acordeón de "cómo funciona este precio" o FAQs.
 - **NIE / pasaporte**: online solo DNI. Añadir en el paso de identificación/tomador un **desvío claro** ("¿Tienes NIE o pasaporte? Te atendemos por teléfono/agenda"), en vez de dejar que choque.
 - **Pago bancario**: online es TPV, pero se puede pedir domiciliación. Valorar microcopy en el paso de pago ("¿Prefieres domiciliación? Te ayudamos por teléfono").
-- **Firma (cFirma, por construir)**: online = teléfono → confirmar teléfono → **PIN por SMS** → pantalla Evicertia. 2ª firma = contrato por email post-pago (avisar en confirmación).
+- **Firma (cFirma) — HECHA (simulada)**: modal de confirmación ("¿Confirmas el envío?") + **caja gris placeholder** "PROCESO DE FIRMA" (el iframe Evicertia real no se diseña) con loading 5 s que avanza solo. Real: teléfono → confirmar → PIN por SMS → Evicertia. 2ª firma = contrato por email post-pago (avisar en confirmación).
 - **Derogación (QW#24)**: doc = último recibo + copia de tarjeta; si la tarjeta no tiene fecha de alta → + recibo de hace un año. Email web@fiatc.es.
 - **KO pedagógica (QW#22)**: sin construir.
 - **Simulaciones** (añadir recién nacido, quitar hijo, añadir asegurado que vence, completa↔copago): cubierto por la **calculadora** (add/quitar) + pestañas de modalidad; validar que cubre los casos.

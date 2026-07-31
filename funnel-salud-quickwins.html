@@ -646,6 +646,13 @@
   .quest-counter { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--wf-90); }
   .quest-counter-check { display: none; color: #2E7D32; }
   .quest-counter.done .quest-counter-check { display: block; }
+
+  /* Confirmar firma + cajita gris de firma (iframe Evicertia simulado) */
+  .firma-confirm-icon { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; margin: 8px auto 20px; border-radius: 50%; background: var(--wf-10); border: 1px solid var(--wf-20); color: var(--wf-90); }
+  #firmaConfirmModal .btn-skip { margin-top: 12px; font-size: 16px; text-decoration: none; }
+  .firma-frame { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 24px; min-height: 380px; margin-top: 24px; background: var(--wf-10); border: 1px solid var(--wf-20); border-radius: 12px; padding: 48px 24px; }
+  .firma-frame-label { font-size: 18px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--wf-100); }
+  .firma-frame .loading-spinner { margin-bottom: 0; }
   .racc-body p { font-size: 14px; font-weight: 400; color: var(--wf-90); margin: 0 0 6px; line-height: 1.5; }
   .racc-body p:last-child { margin-bottom: 16px; }
 
@@ -785,8 +792,9 @@
     z-index: 200;
     visibility: hidden;
     overflow: hidden; /* clipa el panel cerrado (translateX 100%): si no, desborda a la dcha y corta header/modal */
+    transition: visibility 0s linear 0.3s; /* al cerrar, espera a que el panel deslice antes de ocultar (animación inversa) */
   }
-  .side-modal.open { visibility: visible; }
+  .side-modal.open { visibility: visible; transition-delay: 0s; }
 
   .side-modal-backdrop {
     position: absolute;
@@ -2079,7 +2087,7 @@
                 <span class="ques-progress">0 / 7</span>
               </div>
             </div>
-            <button class="ques-cta" onclick="openQuest(0)">Rellenar</button>
+            <button class="ques-cta" onclick="fillQuest(0)">Rellenar</button>
           </div>
           <div class="ques-card" data-q-idx="1">
             <div class="ques-card-info">
@@ -2089,10 +2097,20 @@
                 <span class="ques-progress">0 / 7</span>
               </div>
             </div>
-            <button class="ques-cta" onclick="openQuest(1)">Rellenar</button>
+            <button class="ques-cta" onclick="fillQuest(1)">Rellenar</button>
+          </div>
+          <div class="ques-card" data-q-idx="2">
+            <div class="ques-card-info">
+              <span class="ques-card-name">Lucía García López</span>
+              <div class="ques-card-state">
+                <span class="ques-tag pending">Pendiente</span>
+                <span class="ques-progress">0 / 7</span>
+              </div>
+            </div>
+            <button class="ques-cta" onclick="fillQuest(2)">Rellenar</button>
           </div>
         </div>
-        <button class="btn-primary" id="quesContinueBtn" style="display:none; margin-top:8px;" onclick="nextContrat()">Confirmar y firmar</button>
+        <button class="btn-primary" id="quesContinueBtn" style="display:none; margin-top:8px;" onclick="openFirmaConfirm()">Confirmar y firmar</button>
         <div class="faq-pills-section">
           <p class="faq-pills-title">¿Tienes dudas sobre el cuestionario?</p>
           <div class="faq-pills">
@@ -2100,6 +2118,15 @@
             <button class="faq-pill" onclick="openFaq('cuestionario', 2)">¿Qué no tengo que declarar?</button>
             <button class="faq-pill" onclick="openFaq('cuestionario', 3)">¿Tengo que declarar medicación?</button>
           </div>
+        </div>
+      </div>
+
+      <!-- CONTRATACIÓN · step14 · Firma del cuestionario (iframe Evicertia simulado) -->
+      <div class="step" id="cFirma">
+        <!-- Placeholder para el cliente: aquí va el proceso de firma (Evicertia); no se diseña en este proyecto -->
+        <div class="firma-frame">
+          <span class="firma-frame-label">Proceso de firma</span>
+          <div class="loading-spinner"></div>
         </div>
       </div>
 
@@ -2659,6 +2686,7 @@
             <p id="raccTomDob"></p>
             <p id="raccTomContact"></p>
             <p id="raccTomDir"></p>
+            <p id="raccTomCues"></p>
           </div>
         </div>
         <!-- Asegurado 1 -->
@@ -2672,6 +2700,7 @@
             <p class="racc-strong" id="raccAseg1Nombre"></p>
             <p id="raccAseg1Nif"></p>
             <p id="raccAseg1Dob"></p>
+            <p id="raccAseg1Cues"></p>
           </div>
         </div>
         <!-- Asegurado 2 -->
@@ -2685,6 +2714,7 @@
             <p class="racc-strong" id="raccAseg2Nombre"></p>
             <p id="raccAseg2Nif"></p>
             <p id="raccAseg2Dob"></p>
+            <p id="raccAseg2Cues"></p>
           </div>
         </div>
         <!-- Forma de pago -->
@@ -2801,6 +2831,24 @@
           <span id="questCounter">0 / 7</span>
         </div>
         <button class="btn-primary" id="questSaveBtn" style="margin-top:0;" onclick="saveQuest()" disabled>Guardar respuestas</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MODAL · Confirmar envío del cuestionario (antes de firmar) -->
+  <div class="side-modal" id="firmaConfirmModal" aria-hidden="true">
+    <div class="side-modal-backdrop" onclick="closeFirmaConfirm()"></div>
+    <aside class="side-modal-panel" role="dialog" aria-label="Confirmar envío">
+      <div class="side-modal-handle"></div>
+      <button class="side-modal-close" onclick="closeFirmaConfirm()" aria-label="Cerrar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="side-modal-body">
+        <span class="firma-confirm-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h2 class="hablemos-title" style="text-align:center;">¿Confirmas el envío?</h2>
+        <p class="hablemos-subtitle" style="text-align:center;">Una vez enviado el cuestionario de salud no podrás modificar las respuestas. Asegúrate de que son correctas antes de continuar.</p>
+        <button class="btn-primary" onclick="confirmFirma()">Sí, confirmar y firmar</button>
+        <button class="btn-skip" onclick="closeFirmaConfirm()">Quiero revisar antes</button>
       </div>
     </aside>
   </div>
@@ -3266,8 +3314,8 @@
     }
 
     /* ── Cuestionario de salud (QW#18: una a una + textarea al Sí) ── */
-    const _questNames = ['María García López', 'Carlos Ruiz Soler'];
-    const questDone = [false, false];
+    const _questNames = ['María García López', 'Carlos Ruiz Soler', 'Lucía García López'];
+    const questDone = [false, false, false];
     let _questActive = 0;
     function openQuest(idx) {
       _questActive = idx;
@@ -3358,9 +3406,9 @@
       }
       updateQuestFooter();
     }
-    function saveQuest() {
-      questDone[_questActive] = true;
-      const card = document.querySelector('.ques-card[data-q-idx="' + _questActive + '"]');
+    function markQuestDone(idx) {
+      questDone[idx] = true;
+      const card = document.querySelector('.ques-card[data-q-idx="' + idx + '"]');
       const tag = card.querySelector('.ques-tag');
       tag.className = 'ques-tag done';
       tag.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Completado';
@@ -3368,9 +3416,12 @@
       const cta = card.querySelector('.ques-cta');
       cta.className = 'ques-cta edit';
       cta.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Editar';
-      closeQuest();
       if (questDone.every(Boolean)) document.getElementById('quesContinueBtn').style.display = 'block';
+      updateResumen(); // refleja el estado del cuestionario en el resumen
     }
+    /* Demo: el 1º abre el modal; los demás asegurados se rellenan directo (sin abrir panel) */
+    function fillQuest(idx) { if (idx === 0) openQuest(0); else markQuestDone(idx); }
+    function saveQuest() { markQuestDone(_questActive); closeQuest(); }
     /* Entrada a la fase de contratación (pendiente de construir) */
     /* ── Contratación (modo aparte, con su propio progreso) ── */
     let contractMode = false;
@@ -3394,6 +3445,15 @@
       closeInteres();
       showContrat('cDatos');
     }
+    /* Firma del cuestionario: confirmación → cajita gris (Evicertia simulado) 5 s → avanza */
+    let _firmaTimer = null;
+    function openFirmaConfirm() { document.getElementById('firmaConfirmModal').classList.add('open'); }
+    function closeFirmaConfirm() { document.getElementById('firmaConfirmModal').classList.remove('open'); }
+    function confirmFirma() { closeFirmaConfirm(); showContrat('cFirma'); }
+    function startFirmaSim() {
+      clearTimeout(_firmaTimer);
+      _firmaTimer = setTimeout(() => { if (document.getElementById('cFirma').classList.contains('active')) nextContrat(); }, 5000);
+    }
     function openResumen() { const m = document.getElementById('resumenModal'); m.querySelector('.side-modal-body').scrollTop = 0; m.classList.add('open'); }
     function closeResumen() { document.getElementById('resumenModal').classList.remove('open'); }
     function toggleRacc(id) { const el = document.getElementById(id); if (el.classList.contains('pending')) return; el.classList.toggle('open'); }
@@ -3406,7 +3466,7 @@
       if (contratIdx >= 1) {
         set('raccTomNombre', [val('cNombre'), val('cAp1'), val('cAp2')].filter(Boolean).join(' ') || 'María García López');
         set('raccTomNif', 'NIF ' + (val('cNif') || '47854123X'));
-        set('raccTomDob', 'Fecha nac.: 12/03/1985');
+        set('raccTomDob', 'Fecha de nacimiento: 12/03/1985');
         done('raccTomador');
       }
       if (contratIdx >= 2) set('raccTomContact', '612 345 678 · maria@gmail.com');
@@ -3414,14 +3474,19 @@
       if (contratIdx >= 4) {
         set('raccAseg1Nombre', [val('a1Nombre'), val('a1Ap1'), val('a1Ap2')].filter(Boolean).join(' ') || 'Carlos Ruiz Soler');
         set('raccAseg1Nif', 'NIF ' + (val('a1Nif') || '87654321B'));
-        set('raccAseg1Dob', 'Fecha nac.: 08/07/1988');
+        set('raccAseg1Dob', 'Fecha de nacimiento: 08/07/1988');
         done('raccAseg1');
       }
       if (contratIdx >= 5) {
         set('raccAseg2Nombre', 'Lucía García López');
         set('raccAseg2Nif', 'NIF 11223344C');
-        set('raccAseg2Dob', 'Fecha nac.: 20/11/2015');
+        set('raccAseg2Dob', 'Fecha de nacimiento: 20/11/2015');
         done('raccAseg2');
+        // Estado del cuestionario de salud, una línea por asegurado
+        const cq = i => 'Cuestionario de salud: ' + (questDone[i] ? 'Completado' : 'Pendiente');
+        set('raccTomCues', cq(0));
+        set('raccAseg1Cues', cq(1));
+        set('raccAseg2Cues', cq(2));
       }
       if (contratIdx >= 10) { set('raccPagoVal', 'Mensual'); done('raccPago'); }
     }
@@ -3441,6 +3506,7 @@
       document.getElementById('resumenFab').classList.add('visible');
       document.body.classList.add('resumen-active');
       updateResumen();
+      if (id === 'cFirma') startFirmaSim(); // firma simulada: 5 s y avanza solo
     }
     function nextContrat() { const n = CONTRAT_FLOW[contratIdx + 1]; if (n && document.getElementById(n)) showContrat(n); }
     function prevContrat() {
@@ -3757,7 +3823,7 @@
     }
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { closeHablemos(); closeExit(); closeCalc(); closeFaq(); closeResumen(); closeQuest(); }
+      if (e.key === 'Escape') { closeHablemos(); closeExit(); closeCalc(); closeFaq(); closeResumen(); closeQuest(); closeFirmaConfirm(); }
     });
     document.getElementById('appMain').addEventListener('scroll', updateStep0StickyBar);
     window.addEventListener('load', function () { showStep('step0'); });
