@@ -85,3 +85,15 @@
 | Respuestas a las 18 repreguntas de ATC (Start, firma, WhatsApp ATC, validez cotización...) | ATC |
 | Tema legal del cliente identificado | FIATC (en curso) |
 | ¿Estados W = foto o acumulado? | Diana |
+
+## Ajustes y nuevos (revisión de prototipo con cliente, 31 jul 2026)
+
+- **NUEVO · Banner de campaña "2 meses gratis" ("quita y pon")** — mostrar de **septiembre a febrero** en **inicio, resultados y periodicidad de pago**.
+- **Fecha de inicio** — se mantiene (determina cobertura). Valorar badge tipo "En promoción".
+- **DOB en contratación** — campos de fecha de nacimiento **deshabilitados** (vienen de la tarificación); mensaje "para cambiarla, vuelve a tarificar".
+- **QW#18 cuestionario** — al marcar "Sí" → **textarea**; presentación **progresiva** (aparece la siguiente pregunta + scroll de foco; se puede revisar hacia arriba).
+- **QW#24 derogación** — añadir la **pantalla del PPT** (solo si "Sí") con el copy oficial + **subida opcional de documentos** (póliza anterior o tarjeta con fecha de alta + último recibo; email web@fiatc.es).
+- **Pago (Sabadell iframe)** — **unificar** el "ir a pagar" con los datos legales del precio del paso anterior; dejar el **TPV en un paso limpio** aparte.
+- **Confirmación** — docs no descargables aún; si pagó → "ya eres de FIATC"; **priorizar descarga de la app** vs. alta de cliente; **aligerar** la pantalla + avisar de **correo para firmar**.
+- **Descuentos ya cliente** — fase 2 (login/recuperar datos). En quick wins, **copy genérico sin mencionar descuentos** (paso "Identifícate como cliente").
+- **WhatsApp** — sin canal a corto plazo en capas de contacto (**ocultar pero mantener código documentado**); **mantener la captación de consentimiento** de WhatsApp. Futuro: agente en vivo / agente de salud.

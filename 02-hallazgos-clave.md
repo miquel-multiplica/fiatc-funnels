@@ -96,3 +96,41 @@
   El WhatsApp actual de contacto es de ATC con árbol de decisión. [IT]
 - Ley ATC (octubre 2026) restringe llamadas comerciales no consentidas → urgencia de captura
   de preferencia de canal y consentimiento trazable.
+
+## Revisión de prototipo con cliente (31 jul 2026)
+
+> Fuente nueva: sesión de revisión del prototipo con FIATC. Decisiones y peticiones.
+
+**Canales / WhatsApp**
+- WhatsApp **no** estará como canal a corto plazo en las capas de contacto/ayuda. PERO **siguen queriendo captar el consentimiento** de WhatsApp para el futuro. Build: dejar el código del canal WhatsApp **oculto y documentado** para poder rescatarlo (distinguir: consentimiento WhatsApp = se mantiene; WhatsApp como canal de contacto = ocultar).
+- A futuro el canal en vivo podría ser con **agentes** (contestar en directo es complejo) o vía el **agente de salud** que están creando.
+
+**Fecha de inicio**
+- Determina desde cuándo estás cubierto (se mantiene).
+- Idea a validar: en el badge poner algo tipo "En promoción".
+
+**Fechas de nacimiento en contratación**
+- Las fechas de nacimiento de la tarificación **no se pueden cambiar** en contratación → deben ir **deshabilitadas**. Valorar mensaje: "si quieres cambiarla, vuelve a tarificar".
+
+**Cuestionario de salud**
+- Al responder **"Sí"** a una pregunta debe aparecer un **textarea** para ampliar.
+- Presentación **progresiva**: al responder aparece la siguiente pregunta con un pequeño scroll de foco hacia abajo; el scroll permite revisar respuestas anteriores. (Refuerza QW#18, "una a una".)
+
+**Vengo de otra compañía (derogación)**
+- Falta añadir la **pantalla del PPT** (solo si marca "Sí"). Copy oficial (captura): título *"¡Estás a un paso de proteger tu salud!"*; *"Si provienes de otra aseguradora, para que puedas disfrutar de tu nuevo seguro de salud desde el primer día, podemos eliminar los periodos de carencia. Una vez hayas finalizado el proceso de contratación, envíanos la siguiente documentación vía email a **web@fiatc.es**: · Póliza de salud con tu anterior compañía o la tarjeta de salud donde conste la fecha de alta. · Recibo del último pago de tu seguro de salud anterior."* + **propuesta de subida de documentos opcional** (QW#24).
+
+**Banner de promoción "quita y pon" (2 meses gratis)**
+- Necesitan un **banner de campaña** (de **septiembre a febrero**) indicando los **2 meses gratis**. Ubicaciones: **inicio, resultados y periodicidad de pago**.
+
+**Pasarela de pago (Sabadell)**
+- Es un **iframe del Sabadell**. Propuesta: **unificar** el paso de "ir a pagar" con los **datos legales del precio** del paso anterior, y dejar el paso siguiente **limpio, solo con el TPV**.
+
+**Pantalla de confirmación**
+- La documentación **aún no está preparada** (no se puede descargar todavía).
+- Si ya ha pagado, decirle que **"ya es de FIATC"**.
+- **Priorizar la descarga de la app** frente al alta de cliente.
+- **Aligerar** la pantalla y avisar de que **recibirá un correo para firmar** (segunda firma).
+
+**Descuentos a ya cliente**
+- En fase quick wins **no se puede hacer nada**; en fase 2 mejorarán el login para recuperar datos.
+- Mientras: **copy más genérico, sin hablar de descuentos** (afecta al paso "Identifícate como cliente", que hoy menciona "algún descuento").
