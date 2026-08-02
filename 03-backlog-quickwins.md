@@ -89,6 +89,9 @@
 ## Ajustes y nuevos (revisión de prototipo con cliente, 31 jul 2026)
 
 - **NUEVO · Banner de campaña "2 meses gratis" ("quita y pon")** — mostrar de **septiembre a febrero** en **inicio, resultados y periodicidad de pago**.
+  - **Cómo funciona la campaña** (contexto FIATC): el requisito aplica a la **fecha de contratación** (efecto de póliza dentro del periodo de campaña), NO a la fecha de inicio. El **inicio de cobertura puede diferirse ~2-3 meses** desde la firma (p. ej. para esperar al vencimiento de la póliza anterior); si se pasa de ese margen, se pierde la promo. Gama Medifiatc (excepto dental, colectivos, grupos con tarifa especial, federaciones). Abono en 2 pagos en cuenta.
+  - **Copy del banner** → sobre la contratación: *"Si contratas antes del [fecha]"* (no "como fecha de inicio").
+  - **Tags en las fechas de inicio** (decisión: *badge en todas las que aplican*): si ambas fechas caen dentro del margen → badge en las dos; si una sí y otra no → badge solo en la que entra; si ninguna (fuera de temporada) → sin banner ni badge.
 - **Fecha de inicio** — se mantiene (determina cobertura). Valorar badge tipo "En promoción".
 - **DOB en contratación** — campos de fecha de nacimiento **deshabilitados** (vienen de la tarificación); mensaje "para cambiarla, vuelve a tarificar".
 - **QW#18 cuestionario** — al marcar "Sí" → **textarea**; presentación **progresiva** (aparece la siguiente pregunta + scroll de foco; se puede revisar hacia arriba).

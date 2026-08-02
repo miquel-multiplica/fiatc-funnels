@@ -289,7 +289,7 @@
   /* Etiqueta de sección de campos */
   .field-section-label { display: block; font-size: 14px; font-weight: 400; color: var(--wf-90); margin: 16px 0 8px; }
   /* Toggle "¿Copiamos los datos del titular?" (asegurados) — solo línea inferior, como el proto */
-  .aseg-toggle-wrap { display: flex; align-items: center; gap: 12px; margin: 8px 0 20px; padding-bottom: 16px; border-bottom: 1px solid var(--wf-20); }
+  .aseg-toggle-wrap { display: flex; align-items: center; gap: 12px; margin: 8px 0 12px; padding-bottom: 16px; border-bottom: 1px solid var(--wf-20); }
   .aseg-toggle-label { flex: 1; font-size: 14px; font-weight: 500; color: var(--wf-100); }
   .dob-chevron {
     position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
@@ -379,10 +379,9 @@
     background: var(--wf-10); border: none; border-right: 1px solid var(--wf-40);
     border-radius: 8px 0 0 8px; font-family: inherit; font-size: 14px; color: var(--wf-90); cursor: pointer;
   }
-  .tel-wrap .tel-prefix .cc-flag { font-size: 16px; line-height: 1; }
   .tel-wrap .tel-prefix .cc-chevron { display: flex; color: var(--wf-60); }
-  .tel-wrap input { left: 100px; }
-  .tel-wrap label { left: 112px; }
+  .tel-wrap input { left: 76px; }
+  .tel-wrap label { left: 88px; }
   .cc-list {
     display: none; position: absolute; top: calc(100% + 4px); left: 0; z-index: 300;
     min-width: 240px; max-height: 220px; overflow-y: auto;
@@ -519,7 +518,7 @@
   .interes-lead { font-size: 16px; color: var(--wf-90); line-height: 1.4; margin: 24px 0 20px; }
   .interes-help-btn { width: 100%; margin-top: 20px; }
   .interes-divider { display: flex; justify-content: center; margin: 28px 0 8px; color: var(--wf-60); font-size: 14px; }
-  .interes-save { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; background: none; border: none; font-family: inherit; font-size: 14px; font-weight: 700; color: var(--wf-90); cursor: pointer; }
+  .interes-save { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; background: none; border: none; font-family: inherit; font-size: 16px; font-weight: 700; color: var(--wf-90); cursor: pointer; }
   .interes-save:hover { color: var(--wf-100); }
   /* ══════════════════════════════════════════
      RESUMEN FLOTANTE (contratación) — se va rellenando paso a paso
@@ -603,12 +602,15 @@
   .ques-cta.edit { background: none; color: var(--wf-90); display: inline-flex; align-items: center; gap: 6px; padding: 10px 4px; }
 
   /* Modal del cuestionario — cabecera fija + scroll (Typeform) + footer fijo */
-  .quest-modal-head { flex-shrink: 0; position: relative; padding: 22px 24px; border-bottom: 1px solid var(--wf-20); }
+  .quest-modal-head { flex-shrink: 0; position: relative; padding: 22px 24px; border-bottom: 1px solid var(--wf-20); background: var(--wf-0); z-index: 6; }
+  #questModal .side-modal-close { z-index: 10; } /* por encima del header opaco */
   .quest-h { font-size: 21px; font-weight: 700; color: var(--wf-100); margin-bottom: 6px; }
   .quest-name { font-size: 16px; color: var(--wf-90); }
   /* padding-bottom generoso: cualquier pregunta puede subir hasta arriba (las respondidas quedan ocultas) */
   .quest-modal-scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 24px 24px 65vh; scroll-behavior: smooth; }
-  .quest-modal-foot { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--wf-20); }
+  /* Degradado anclado al fondo del header: difumina la pregunta anterior que asoma (pista de scroll) */
+  .quest-scroll-fade { position: absolute; top: calc(100% + 1px); left: 0; right: 0; height: 110px; z-index: 5; pointer-events: none; opacity: 0; transition: opacity 0.2s ease; background: linear-gradient(to bottom, var(--wf-0), transparent); }
+  .quest-modal-foot { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--wf-20); background: var(--wf-0); z-index: 6; }
   .quest-modal-foot .btn-primary { width: auto; flex-shrink: 0; }
   @media (min-width: 601px) {
     #questModal .side-modal-panel { width: 640px; }
@@ -628,11 +630,11 @@
   .quest-nodeclare { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: var(--wf-90); line-height: 1.5; margin-top: 4px; }
   .quest-nodeclare svg { flex-shrink: 0; margin-top: 2px; color: var(--wf-90); }
   .quest-sep { height: 1px; background: var(--wf-20); margin: 24px 0; }
-  .quest-q { display: none; margin-bottom: 56px; scroll-margin-top: 44px; }
+  .quest-q { display: none; margin-bottom: 72px; scroll-margin-top: 112px; } /* separación entre preguntas + el scroll deja asomar ~40px de la anterior */
   .quest-q.show { display: block; animation: questIn 0.3s ease; }
   @keyframes questIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-  .quest-q-num { display: block; font-size: 12px; font-weight: 700; color: var(--wf-60); margin-bottom: 6px; letter-spacing: 0.02em; }
-  .quest-q-label { display: block; font-size: 16px; color: var(--wf-100); line-height: 1.4; margin-bottom: 12px; }
+  .quest-q-num { display: block; font-size: 14px; font-weight: 700; color: var(--wf-60); margin-bottom: 6px; letter-spacing: 0.02em; }
+  .quest-q-label { display: block; font-size: 18px; color: var(--wf-100); line-height: 1.4; margin-bottom: 20px; }
   .quest-yesno { display: flex; gap: 8px; }
   .quest-yn-btn { flex: 1; padding: 12px; border: 1px solid var(--wf-40); border-radius: 8px; background: var(--wf-0); font-size: 14px; font-weight: 600; color: var(--wf-90); cursor: pointer; font-family: inherit; transition: all 0.15s; }
   .quest-yn-btn.selected { border-color: var(--wf-90); background: var(--wf-20); color: var(--wf-100); }
@@ -848,6 +850,8 @@
   #exitModal .hablemos-subtitle { margin-bottom: 4px; }
   #exitModal .btn-primary { margin-top: 16px; }
   @media (min-width: 601px) { #exitModal .btn-primary { margin-top: 24px; } }
+  /* Desktop: 8px más entre "No, quiero seguir aquí" y "Guardar presupuesto" */
+  @media (min-width: 601px) { #exitModal .exit-main .btn-ghost { margin-top: 20px !important; } }
 
   /* Divisor del exit-intent ("o si necesitas ayuda") */
   .exit-divider { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
@@ -920,6 +924,11 @@
   .call-confirm-icon svg { width: 22px; height: 22px; }
   .call-confirm-title { font-size: 21px; font-weight: 700; color: var(--wf-100); margin-bottom: 12px; line-height: 1.25; }
   .call-confirm-text { font-size: 14px; color: var(--wf-90); line-height: 1.6; margin-bottom: 32px; }
+  /* Modal "te llamamos": menos aire entre el texto y la card de consentimiento */
+  .hablemos-confirm .call-confirm-text { margin-bottom: 16px; }
+  .hablemos-confirm .pub-list { margin-top: 8px !important; }
+  /* Aviso: hay que marcar al menos un canal para aceptar */
+  .consent-hint { font-size: 14px; font-weight: 400; color: #DC2626; text-align: center; margin: 16px 0 10px; }
 
   /* ══════════════════════════════════════════
      RESPONSIVE — el mismo sitio a ancho estrecho
@@ -1130,8 +1139,9 @@
       transform: translateY(100%);
     }
     .side-modal.open .side-modal-panel { transform: translateY(0); }
-    /* El resumen y el cuestionario abren a altura máxima fija (header/footer fijos, scroll interno) */
-    #resumenModal .side-modal-panel, #questModal .side-modal-panel { height: 93dvh; }
+    /* El resumen y el cuestionario abren a altura máxima fija (header/footer fijos, scroll interno).
+       svh = viewport estable con la barra del navegador visible → el footer no queda cortado al abrir. */
+    #resumenModal .side-modal-panel, #questModal .side-modal-panel { height: 92dvh; height: 90svh; }
     /* Más aire bajo la bottom bar del cuestionario en mobile (no pegar al borde/barra nativa) */
     .quest-modal-foot { padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
     .side-modal-handle {
@@ -1191,7 +1201,7 @@
         <!-- BANNER CAMPAÑA "2 meses gratis" (quita y pon · estacional sep–feb) -->
         <div class="promo-banner">
           <span class="promo-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
-          <div class="promo-banner-text"><strong>¡Consigue 2 meses gratis!</strong><span>Sólo hasta el 30/9/2026 como fecha de inicio</span></div>
+          <div class="promo-banner-text"><strong>¡Consigue 2 meses gratis!</strong><span>Si contratas antes del 30 de septiembre de 2026</span></div>
         </div>
         <h1 class="step-title">Hola, estás a 2 min de saber el precio de tu seguro de salud ideal</h1>
         <div class="step-hero-msg" style="margin-top:28px;">
@@ -1448,10 +1458,10 @@
         <!-- BANNER CAMPAÑA "2 meses gratis" (quita y pon · estacional sep–feb) -->
         <div class="promo-banner">
           <span class="promo-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
-          <div class="promo-banner-text"><strong>¡Consigue 2 meses gratis!</strong><span>Sólo hasta el 30/9/2026 como fecha de inicio</span></div>
+          <div class="promo-banner-text"><strong>¡Consigue 2 meses gratis!</strong><span>Si contratas antes del 30 de septiembre de 2026</span></div>
         </div>
         <h1 class="step-title">¿Cuándo quieres empezar?</h1>
-        <p class="step-subtitle">Elige la fecha de inicio de tu cobertura</p>
+        <p class="step-subtitle">Elige la fecha de inicio de la cobertura de tu seguro.</p>
         <div class="date-list">
           <label class="date-card" onclick="selectedStartDate='1 de agosto de 2026';nextStep()">
             <span class="date-label">1 agosto 2026</span>
@@ -1459,11 +1469,8 @@
           </label>
           <label class="date-card" onclick="selectedStartDate='1 de septiembre de 2026';nextStep()">
             <span class="date-label">1 septiembre 2026</span>
+            <span class="date-badge">2 MESES GRATIS</span>
           </label>
-        </div>
-        <div class="cp-info">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <span>La fecha de inicio determina desde cuándo estás cubierto.</span>
         </div>
       </div>
 
@@ -1484,9 +1491,9 @@
       <!-- PASO DNI · Solo si "ya soy cliente" -->
       <div class="step" id="stepDNI">
         <h1 class="step-title">¡Nos alegra que ya seas de FIATC!</h1>
-        <p class="step-subtitle">Introduce tu DNI y vinculamos esta póliza a tu ficha de cliente.</p>
+        <p class="step-subtitle">Introduce tu DNI para encontrar tu ficha.</p>
         <div class="step-promo">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-680,-253)"><path fill-rule="evenodd" clip-rule="evenodd" d="M682.75 261C682.75 258.995 683.019 258.042 683.53 257.53C684.042 257.019 684.995 256.75 687 256.75H697C699.005 256.75 699.958 257.019 700.47 257.53C700.981 258.042 701.25 258.995 701.25 261V269C701.25 271.005 700.981 271.958 700.47 272.47C699.958 272.981 699.005 273.25 697 273.25H687C684.995 273.25 684.042 272.981 683.53 272.47C683.019 271.958 682.75 271.005 682.75 269V261ZM687 255.25C685.005 255.25 683.458 255.481 682.47 256.47C681.481 257.458 681.25 259.005 681.25 261V269C681.25 270.995 681.481 272.542 682.47 273.53C683.458 274.519 685.005 274.75 687 274.75H697C698.995 274.75 700.542 274.519 701.53 273.53C702.519 272.542 702.75 270.995 702.75 269V261C702.75 259.005 702.519 257.458 701.53 256.47C700.542 255.481 698.995 255.25 697 255.25H687ZM694 260.25C693.586 260.25 693.25 260.586 693.25 261C693.25 261.414 693.586 261.75 694 261.75H699C699.414 261.75 699.75 261.414 699.75 261C699.75 260.586 699.414 260.25 699 260.25H694ZM694.25 265C694.25 264.586 694.586 264.25 695 264.25H699C699.414 264.25 699.75 264.586 699.75 265C699.75 265.414 699.414 265.75 699 265.75H695C694.586 265.75 694.25 265.414 694.25 265ZM697 268.25C696.586 268.25 696.25 268.586 696.25 269C696.25 269.414 696.586 269.75 697 269.75H699C699.414 269.75 699.75 269.414 699.75 269C699.75 268.586 699.414 268.25 699 268.25H697ZM688.5 261.42C687.915 261.42 687.44 261.895 687.44 262.48C687.44 263.065 687.915 263.54 688.5 263.54C689.085 263.54 689.56 263.065 689.56 262.48C689.56 261.895 689.085 261.42 688.5 261.42ZM685.94 262.48C685.94 261.066 687.086 259.92 688.5 259.92C689.914 259.92 691.06 261.066 691.06 262.48C691.06 263.894 689.914 265.04 688.5 265.04C687.086 265.04 685.94 263.894 685.94 262.48ZM692.747 269.258C692.572 267.45 691.138 266.027 689.331 265.863C688.782 265.809 688.224 265.809 687.667 265.864C685.867 266.038 684.429 267.444 684.253 269.258C684.214 269.67 684.516 270.037 684.928 270.077C685.34 270.116 685.707 269.814 685.747 269.402C685.851 268.316 686.713 267.463 687.812 267.357L687.813 267.356C688.275 267.311 688.735 267.311 689.185 267.356L689.185 267.356L689.193 267.357C690.284 267.455 691.148 268.312 691.253 269.402C691.293 269.814 691.66 270.116 692.072 270.077C692.484 270.037 692.786 269.67 692.747 269.258Z" fill="currentColor"/></g></svg>
           <span>Como ya eres cliente, vinculamos esta póliza a tu <strong>ficha de FIATC</strong>.</span>
         </div>
         <div class="input-wrap">
@@ -1524,22 +1531,22 @@
         <h1 class="step-title" style="text-align:center;">Y si necesitamos llamarte...</h1>
         <p class="step-subtitle" style="text-align:center; margin-top:-12px;">Solo para gestionar tu solicitud, nada más :)</p>
         <div class="input-wrap tel-wrap" style="margin-top:24px; margin-bottom:0;">
-          <button type="button" class="tel-prefix" onclick="toggleCcList(event)">
-            <span class="cc-flag" id="ccFlag">🇪🇸</span><span id="ccCode">+34</span>
+          <button type="button" class="tel-prefix" onmousedown="event.preventDefault();" onclick="toggleCcList(event)">
+            <span id="ccCode">+34</span>
             <span class="cc-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </button>
           <input type="text" autocomplete="tel" id="contactPhone" placeholder=" " maxlength="9" inputmode="numeric" onclick="if(!this.value){this.value='612 345 678';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
           <label for="contactPhone">Teléfono</label>
           <div class="cc-list" id="ccList">
-            <button type="button" class="cc-option" onclick="selectCc('🇪🇸','+34')"><span class="cc-opt-flag">🇪🇸</span>España<span class="cc-opt-code">+34</span></button>
-            <button type="button" class="cc-option" onclick="selectCc('🇵🇹','+351')"><span class="cc-opt-flag">🇵🇹</span>Portugal<span class="cc-opt-code">+351</span></button>
-            <button type="button" class="cc-option" onclick="selectCc('🇫🇷','+33')"><span class="cc-opt-flag">🇫🇷</span>Francia<span class="cc-opt-code">+33</span></button>
-            <button type="button" class="cc-option" onclick="selectCc('🇮🇹','+39')"><span class="cc-opt-flag">🇮🇹</span>Italia<span class="cc-opt-code">+39</span></button>
-            <button type="button" class="cc-option" onclick="selectCc('🇩🇪','+49')"><span class="cc-opt-flag">🇩🇪</span>Alemania<span class="cc-opt-code">+49</span></button>
-            <button type="button" class="cc-option" onclick="selectCc('🇬🇧','+44')"><span class="cc-opt-flag">🇬🇧</span>Reino Unido<span class="cc-opt-code">+44</span></button>
-            <button type="button" class="cc-option" onclick="selectCc('🇲🇦','+212')"><span class="cc-opt-flag">🇲🇦</span>Marruecos<span class="cc-opt-code">+212</span></button>
-            <button type="button" class="cc-option" onclick="selectCc('🇷🇴','+40')"><span class="cc-opt-flag">🇷🇴</span>Rumanía<span class="cc-opt-code">+40</span></button>
-            <button type="button" class="cc-option" onclick="selectCc('🇨🇴','+57')"><span class="cc-opt-flag">🇨🇴</span>Colombia<span class="cc-opt-code">+57</span></button>
+            <button type="button" class="cc-option" onclick="selectCc('+34')">España<span class="cc-opt-code">+34</span></button>
+            <button type="button" class="cc-option" onclick="selectCc('+351')">Portugal<span class="cc-opt-code">+351</span></button>
+            <button type="button" class="cc-option" onclick="selectCc('+33')">Francia<span class="cc-opt-code">+33</span></button>
+            <button type="button" class="cc-option" onclick="selectCc('+39')">Italia<span class="cc-opt-code">+39</span></button>
+            <button type="button" class="cc-option" onclick="selectCc('+49')">Alemania<span class="cc-opt-code">+49</span></button>
+            <button type="button" class="cc-option" onclick="selectCc('+44')">Reino Unido<span class="cc-opt-code">+44</span></button>
+            <button type="button" class="cc-option" onclick="selectCc('+212')">Marruecos<span class="cc-opt-code">+212</span></button>
+            <button type="button" class="cc-option" onclick="selectCc('+40')">Rumanía<span class="cc-opt-code">+40</span></button>
+            <button type="button" class="cc-option" onclick="selectCc('+57')">Colombia<span class="cc-opt-code">+57</span></button>
           </div>
         </div>
 
@@ -1599,7 +1606,7 @@
         <!-- BANNER CAMPAÑA "2 meses gratis" (quita y pon · estacional sep–feb) -->
         <div class="promo-banner">
           <span class="promo-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
-          <div class="promo-banner-text"><strong>¡Consigue 2 meses gratis!</strong><span>Sólo hasta el 30/9/2026 como fecha de inicio</span></div>
+          <div class="promo-banner-text"><strong>¡Consigue 2 meses gratis!</strong><span>Si contratas antes del 30 de septiembre de 2026</span></div>
         </div>
         <div class="filter-tabs">
           <button class="filter-tab active" onclick="selectFilter('para-ti',this)" data-title="Las opciones más populares en clientes como tú" data-sub="Ideales para parejas jóvenes en Barcelona">Para ti</button>
@@ -2084,7 +2091,7 @@
               <span class="ques-card-name">María García López</span>
               <div class="ques-card-state">
                 <span class="ques-tag pending">Pendiente</span>
-                <span class="ques-progress">0 / 7</span>
+                <span class="ques-progress">0 / 8</span>
               </div>
             </div>
             <button class="ques-cta" onclick="fillQuest(0)">Rellenar</button>
@@ -2094,7 +2101,7 @@
               <span class="ques-card-name">Carlos Ruiz Soler</span>
               <div class="ques-card-state">
                 <span class="ques-tag pending">Pendiente</span>
-                <span class="ques-progress">0 / 7</span>
+                <span class="ques-progress">0 / 8</span>
               </div>
             </div>
             <button class="ques-cta" onclick="fillQuest(1)">Rellenar</button>
@@ -2104,7 +2111,7 @@
               <span class="ques-card-name">Lucía García López</span>
               <div class="ques-card-state">
                 <span class="ques-tag pending">Pendiente</span>
-                <span class="ques-progress">0 / 7</span>
+                <span class="ques-progress">0 / 8</span>
               </div>
             </div>
             <button class="ques-cta" onclick="fillQuest(2)">Rellenar</button>
@@ -2284,7 +2291,8 @@
             </label>
           </div>
 
-          <button class="btn-primary" onclick="closeHablemos()">Guardar preferencias</button>
+          <p class="consent-hint" style="display:none;">Marca al menos un canal para poder avisarte.</p>
+          <button class="btn-primary consent-accept" onclick="acceptConsent(this, closeHablemos)">Sí, avisadme de las ofertas</button>
           <a class="btn-skip" style="cursor:pointer; display:block; text-align:center; margin-top:16px; font-size:16px;" onclick="closeHablemos()">No, gracias</a>
         </div>
       </div>
@@ -2421,7 +2429,8 @@
             </label>
           </div>
 
-          <button class="btn-primary" onclick="closeExit()">Guardar preferencias</button>
+          <p class="consent-hint" style="display:none;">Marca al menos un canal para poder avisarte.</p>
+          <button class="btn-primary consent-accept" onclick="acceptConsent(this, closeExit)">Sí, avisadme de las ofertas</button>
           <a class="btn-skip" style="cursor:pointer; display:block; text-align:center; margin-top:16px; font-size:16px;" onclick="closeExit()">No, gracias</a>
         </div>
       </div>
@@ -2741,27 +2750,11 @@
         <div class="side-modal-handle"></div>
         <h2 class="quest-h">Cuestionario de salud</h2>
         <p class="quest-name" id="questName">María García López</p>
+        <div class="quest-scroll-fade" aria-hidden="true"></div>
       </div>
       <div class="quest-modal-scroll" id="questScroll">
-        <div class="quest-bio">
-          <div class="input-wrap">
-            <input type="text" inputmode="numeric" id="questPeso" placeholder=" " onclick="fillBio()" oninput="this.value=this.value.replace(/[^0-9]/g,'');calcIMCq();this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
-            <label for="questPeso">Peso (kg)</label>
-          </div>
-          <div class="input-wrap">
-            <input type="text" inputmode="numeric" id="questAltura" placeholder=" " onclick="fillBio()" oninput="this.value=this.value.replace(/[^0-9]/g,'');calcIMCq();this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
-            <label for="questAltura">Altura (cm)</label>
-          </div>
-        </div>
-        <div class="quest-imc" id="questIMC">
-          <span class="quest-imc-num" id="questIMCNum">—</span>
-          <span class="quest-imc-label">IMC (índice de masa corporal)</span>
-        </div>
-
-        <div class="quest-sep"></div>
-
         <div class="quest-q show">
-          <span class="quest-q-num">Pregunta 1 de 7</span>
+          <span class="quest-q-num">Pregunta 1 de 8</span>
           <span class="quest-q-label">¿Padece o ha padecido alguna enfermedad, malformación, trastorno o problema de salud?</span>
           <div class="quest-yesno">
             <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
@@ -2770,7 +2763,7 @@
           <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
         </div>
         <div class="quest-q">
-          <span class="quest-q-num">Pregunta 2 de 7</span>
+          <span class="quest-q-num">Pregunta 2 de 8</span>
           <span class="quest-q-label">¿En los últimos 5 años ha padecido o padece cualquier tipo de cáncer, o ha recibido o está recibiendo algún tratamiento radical relacionado?</span>
           <div class="quest-yesno">
             <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
@@ -2779,7 +2772,7 @@
           <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
         </div>
         <div class="quest-q">
-          <span class="quest-q-num">Pregunta 3 de 7</span>
+          <span class="quest-q-num">Pregunta 3 de 8</span>
           <span class="quest-q-label">¿Ha sido sometido a alguna prueba diagnóstica específica?</span>
           <div class="quest-yesno">
             <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
@@ -2788,7 +2781,7 @@
           <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
         </div>
         <div class="quest-q">
-          <span class="quest-q-num">Pregunta 4 de 7</span>
+          <span class="quest-q-num">Pregunta 4 de 8</span>
           <span class="quest-q-label">¿Ha sufrido alguna intervención quirúrgica, accidente o ha estado ingresado en algún centro hospitalario?</span>
           <div class="quest-yesno">
             <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
@@ -2797,7 +2790,7 @@
           <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
         </div>
         <div class="quest-q">
-          <span class="quest-q-num">Pregunta 5 de 7</span>
+          <span class="quest-q-num">Pregunta 5 de 8</span>
           <span class="quest-q-label">¿Le ha sido concedida, o está tramitando (o tiene previsto hacerlo), algún tipo de minusvalía o invalidez permanente?</span>
           <div class="quest-yesno">
             <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
@@ -2806,7 +2799,7 @@
           <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
         </div>
         <div class="quest-q">
-          <span class="quest-q-num">Pregunta 6 de 7</span>
+          <span class="quest-q-num">Pregunta 6 de 8</span>
           <span class="quest-q-label">¿Toma algún tratamiento farmacológico o realiza cualquier otro tipo de tratamiento, rehabilitación o terapia física o psicológica?</span>
           <div class="quest-yesno">
             <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
@@ -2815,7 +2808,7 @@
           <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
         </div>
         <div class="quest-q">
-          <span class="quest-q-num">Pregunta 7 de 7</span>
+          <span class="quest-q-num">Pregunta 7 de 8</span>
           <span class="quest-q-label">¿Tiene prevista alguna intervención quirúrgica o ingreso hospitalario, o pendiente realizarse alguna prueba o tratamiento?</span>
           <div class="quest-yesno">
             <button type="button" class="quest-yn-btn" data-v="no" onclick="selectYNq(this)">No</button>
@@ -2823,12 +2816,31 @@
           </div>
           <div class="quest-textarea"><textarea placeholder="Añade los detalles que quieras aportar"></textarea><button type="button" class="quest-next-btn" onclick="revealNextAfter(this.closest('.quest-q'));this.style.display='none'">Continuar</button></div>
         </div>
+        <!-- Pregunta 8: peso y altura + IMC -->
+        <div class="quest-q" data-bio>
+          <span class="quest-q-num">Pregunta 8 de 8</span>
+          <span class="quest-q-label">Por último, indícanos tu peso y altura.</span>
+          <div class="quest-bio">
+            <div class="input-wrap">
+              <input type="text" inputmode="numeric" id="questPeso" placeholder=" " onclick="fillBio()" oninput="this.value=this.value.replace(/[^0-9]/g,'');calcIMCq();this.closest('.input-wrap').classList.toggle('filled',this.value.length>0);updateQuestFooter()">
+              <label for="questPeso">Peso (kg)</label>
+            </div>
+            <div class="input-wrap">
+              <input type="text" inputmode="numeric" id="questAltura" placeholder=" " onclick="fillBio()" oninput="this.value=this.value.replace(/[^0-9]/g,'');calcIMCq();this.closest('.input-wrap').classList.toggle('filled',this.value.length>0);updateQuestFooter()">
+              <label for="questAltura">Altura (cm)</label>
+            </div>
+          </div>
+          <div class="quest-imc" id="questIMC">
+            <span class="quest-imc-num" id="questIMCNum">—</span>
+            <span class="quest-imc-label">IMC (índice de masa corporal)</span>
+          </div>
+        </div>
 
       </div><!-- /quest-modal-scroll -->
       <div class="quest-modal-foot">
         <div class="quest-counter">
           <svg class="quest-counter-check" id="questCounterCheck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span id="questCounter">0 / 7</span>
+          <span id="questCounter">0 / 8</span>
         </div>
         <button class="btn-primary" id="questSaveBtn" style="margin-top:0;" onclick="saveQuest()" disabled>Guardar respuestas</button>
       </div>
@@ -2879,6 +2891,7 @@
       document.getElementById('resumenFab').classList.remove('visible');
       document.body.classList.remove('resumen-active');
       closeResumen();
+      if (id === 'step6b') requestAnimationFrame(syncTelPrefix); // ajusta el input al ancho del prefijo (ya visible)
     }
     function nextStep() {
       let i = stepIdx + 1;
@@ -3321,9 +3334,26 @@
       _questActive = idx;
       document.getElementById('questName').textContent = _questNames[idx] || 'Asegurado';
       resetQuestModal();
+      sizeQuestModal(); // fija el alto por JS (innerHeight) → footer bien colocado al abrir, sin esperar a interactuar
       document.getElementById('questModal').classList.add('open');
     }
-    function closeQuest() { document.getElementById('questModal').classList.remove('open'); }
+    /* En mobile, el alto CSS (svh/dvh) llega "stale" al abrir en Safari y recoloca el footer al interactuar.
+       Lo fijamos con window.innerHeight (fiable en ese momento). */
+    function sizeQuestModal() {
+      const m = document.getElementById('questModal');
+      const p = m.querySelector('.side-modal-panel');
+      if (window.matchMedia('(max-width: 600px)').matches) {
+        const vh = window.innerHeight;
+        m.style.height = vh + 'px';
+        p.style.height = Math.round(vh * 0.94) + 'px';
+      } else { m.style.height = ''; p.style.height = ''; }
+    }
+    window.addEventListener('resize', function () { if (document.getElementById('questModal').classList.contains('open')) sizeQuestModal(); });
+    function closeQuest() {
+      const m = document.getElementById('questModal');
+      m.classList.remove('open');
+      m.style.height = ''; m.querySelector('.side-modal-panel').style.height = '';
+    }
     function resetQuestModal() {
       // Peso/altura vacíos; la pregunta 1 no aparece hasta rellenarlos
       ['questPeso', 'questAltura'].forEach(id => {
@@ -3340,14 +3370,20 @@
         const ta = q.querySelector('textarea'); if (ta) ta.value = '';
       });
       document.getElementById('questScroll').scrollTop = 0;
+      document.querySelector('.quest-scroll-fade').style.opacity = 0;
       updateQuestFooter();
     }
+    /* El degradado superior solo aparece al hacer scroll (no tapa la 1ª pregunta) */
+    document.getElementById('questScroll').addEventListener('scroll', function () {
+      document.querySelector('.quest-scroll-fade').style.opacity = Math.min(this.scrollTop / 40, 1);
+    });
     /* Demo: al clicar peso o altura se autorrellenan ambos (facilita enseñar el prototipo) */
     function fillBio() {
       const p = document.getElementById('questPeso'), a = document.getElementById('questAltura');
       if (!p.value) { p.value = '72'; p.closest('.input-wrap').classList.add('filled'); }
       if (!a.value) { a.value = '175'; a.closest('.input-wrap').classList.add('filled'); }
       calcIMCq();
+      updateQuestFooter();
     }
     /* Tras rellenar (o dejar) el textarea de un "Sí", aparece la siguiente pregunta */
     function revealNextAfter(q) {
@@ -3369,7 +3405,8 @@
     }
     function updateQuestFooter() {
       const qs = [...document.querySelectorAll('#questModal .quest-q')];
-      const answered = qs.filter(x => x.querySelector('.quest-yn-btn.selected')).length;
+      const bioOk = !!(document.getElementById('questPeso').value && document.getElementById('questAltura').value);
+      const answered = qs.filter(x => x.hasAttribute('data-bio') ? bioOk : x.querySelector('.quest-yn-btn.selected')).length;
       document.getElementById('questCounter').textContent = answered + ' / ' + qs.length;
       const done = answered === qs.length;
       document.getElementById('questSaveBtn').disabled = !done;
@@ -3412,7 +3449,7 @@
       const tag = card.querySelector('.ques-tag');
       tag.className = 'ques-tag done';
       tag.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Completado';
-      card.querySelector('.ques-progress').textContent = '7 / 7';
+      card.querySelector('.ques-progress').textContent = '8 / 8';
       const cta = card.querySelector('.ques-cta');
       cta.className = 'ques-cta edit';
       cta.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Editar';
@@ -3719,10 +3756,21 @@
       e.stopPropagation();
       document.getElementById('ccList').classList.toggle('open');
     }
-    function selectCc(flag, code) {
-      document.getElementById('ccFlag').textContent = flag;
+    function selectCc(code) {
       document.getElementById('ccCode').textContent = code;
       document.getElementById('ccList').classList.remove('open');
+      syncTelPrefix();
+    }
+    /* El prefijo crece con códigos de 3 cifras (+351): empuja el input y su label a la derecha.
+       Guarda: si el paso está oculto, offsetWidth es 0 → no tocar (dejamos el left del CSS). */
+    function syncTelPrefix() {
+      document.querySelectorAll('.tel-wrap').forEach(w => {
+        const prefix = w.querySelector('.tel-prefix'), input = w.querySelector('input'), label = w.querySelector('label');
+        if (!prefix || !input || !prefix.offsetWidth) return;
+        const pw = prefix.offsetWidth;
+        input.style.left = pw + 'px';
+        if (label) label.style.left = (pw + 12) + 'px';
+      });
     }
     document.addEventListener('click', function (e) {
       const l = document.getElementById('ccList');
@@ -3744,6 +3792,19 @@
       if (v === 'confirm') body.classList.add('view-confirm');
       body.scrollTop = 0;
     }
+    /* Consentimiento (modales): "Sí, avisadme…" solo procede con ≥1 canal marcado; si no, avisa */
+    function acceptConsent(btn, closeFn) {
+      const wrap = btn.parentElement;
+      const card = wrap.querySelector('.pub-list');
+      const hint = wrap.querySelector('.consent-hint');
+      if (card && card.querySelector('input[type="checkbox"]:checked')) { if (hint) hint.style.display = 'none'; closeFn(); }
+      else if (hint) hint.style.display = 'block';
+    }
+    document.querySelectorAll('.pub-list input[type="checkbox"]').forEach(cb =>
+      cb.addEventListener('change', () => {
+        const hint = cb.closest('.pub-list').parentElement.querySelector('.consent-hint');
+        if (hint && cb.checked) hint.style.display = 'none';
+      }));
     /* Origen del agendar: 'hablemos' (lista de canales) o 'exit' (modal de salida).
        El botón Atrás del agendar vuelve a donde toca según esto. */
     let agendarOrigin = 'hablemos';
