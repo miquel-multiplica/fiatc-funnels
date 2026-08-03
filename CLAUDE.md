@@ -23,7 +23,7 @@ Evoluciona el prototipo original `wireframe_propuesta.html` (documentado en `PRO
 - Animación de paso: fade + `translateX(24px)` (dcha→izq), 0.35s.
 
 ## Estado por pantalla y pendientes
-Ver la memoria `project_funnel_build.md` (estado vivo por pantalla + "para mañana" + decisión de calculadora QW#1). Resumen: step0→step7 (resultados) HECHOS; contratación EN CONSTRUCCIÓN — hechos cDatos→cAseg2, cuestionario de salud, KO/Teladoc (QW#22), firma (simulada), cOtra, derogación (QW#24) y forma de pago; pendientes cAntes (condiciones + ventajas de pago), cTPV (Sabadell simulado) y cConfirm. Hay un índice de navegación del prototipo (página inicial al recargar) para saltar a cualquier paso con datos demo sembrados.
+Ver la memoria `project_funnel_build.md` (estado vivo por pantalla + "para mañana" + decisión de calculadora QW#1). Resumen: step0→step7 (resultados) HECHOS; contratación COMPLETA de punta a punta (cDatos→cContacto→cDireccion→cAseg1→cAseg2→cCuestionario→[cKO si "Sí"]→cTelefono→cFirma→cOtra→[cDerogacion]→cPago→cAntes→cTPV→cConfirm). Firma y TPV son placeholders simulados (iframes reales de Evicertia/Sabadell). Hay un índice de navegación del prototipo (página inicial al recargar) para saltar a cualquier paso con datos demo sembrados. Falta: pulido/feedback de cliente y las capas de resultados aún pendientes (ver memoria).
 
 ## Convenciones de edición
 - Editar solo `funnel-salud-quickwins.html`. No crear archivos nuevos ni dependencias.
