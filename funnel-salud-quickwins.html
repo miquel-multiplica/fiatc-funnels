@@ -22,6 +22,7 @@
     --content-max: 560px;
     --side-panel-w: 536px;
   }
+  @media (max-width: 600px) { :root { --header-h: 56px; } }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -434,7 +435,7 @@
   }
   .step-promo strong { color: var(--wf-100); font-weight: 700; }
   /* Variante de dos líneas (cuestionario): dos checks en la misma card */
-  .step-promo.quest-promo { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .step-promo.quest-promo { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px 16px; }
   .quest-promo .promo-line { display: flex; align-items: flex-start; gap: 12px; }
   .quest-promo .promo-line svg { flex-shrink: 0; margin-top: 1px; }
   /* Banner de campaña "2 meses gratis" (rev. cliente 31 jul). QUITA Y PON: es estacional (sep–feb); para bajarlo, ocultar los bloques .promo-banner. */
@@ -662,11 +663,11 @@
   .deroga-docs-title span { color: var(--wf-60); }
   .deroga-doc-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--wf-90); line-height: 1.45; }
   .deroga-doc-item + .deroga-doc-item { margin-top: 10px; }
-  .deroga-doc-item svg { flex-shrink: 0; margin-top: 1px; color: var(--wf-60); }
+  .deroga-doc-item svg { flex-shrink: 0; margin-top: 1px; color: var(--wf-90); }
   .deroga-doc-item strong { color: var(--wf-100); font-weight: 600; }
   .deroga-upload-title { font-size: 14px; font-weight: 700; color: var(--wf-100); margin: 0 0 12px; }
   .deroga-upload-title span { font-weight: 400; color: var(--wf-60); }
-  .upload-box { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 28px 20px; border: 1.5px dashed var(--wf-40); border-radius: 12px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .upload-box { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 28px 20px; border: 2px dashed var(--wf-40); border-radius: 12px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
   .upload-box:hover { border-color: var(--wf-60); background: var(--wf-10); }
   .upload-box svg { color: var(--wf-60); }
   .upload-box-text { font-size: 14px; color: var(--wf-90); }
@@ -1029,6 +1030,14 @@
   .card-price-note { font-size: 12px; font-weight: 400; color: var(--wf-90); }
   .card-annual-badge { font-size: 14px; font-weight: 400; color: var(--wf-90); }
   .card-annual-badge strong { font-weight: 700; color: var(--wf-100); }
+  /* Forma de pago (periodicidad + ahorro) */
+  .pago-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .pago-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .pago-left .date-label { min-width: 96px; } /* fija el ancho para que los badges de ahorro queden alineados entre cards */
+  .pago-badge { display: inline-flex; align-items: center; padding: 4px 11px; border-radius: 100px; background: var(--wf-20); font-size: 14px; font-weight: 700; color: var(--wf-100); }
+  .pago-right { text-align: right; flex-shrink: 0; }
+  .pago-total { display: block; font-size: 16px; font-weight: 700; color: var(--wf-100); }
+  .pago-mes { display: block; font-size: 12px; font-weight: 400; color: var(--wf-60); margin-top: 4px; }
   .card-divider { height: 1px; background: var(--wf-20); margin-bottom: 12px; }
   .card-features { list-style: none; display: flex; flex-direction: column; gap: 8px; flex: 1; margin-bottom: 16px; }
   .card-features li { font-size: 14px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.35; }
@@ -2129,18 +2138,8 @@
             </div>
             <button class="ques-cta" onclick="fillQuest(1)">Rellenar</button>
           </div>
-          <div class="ques-card" data-q-idx="2">
-            <div class="ques-card-info">
-              <span class="ques-card-name">Lucía García López</span>
-              <div class="ques-card-state">
-                <span class="ques-tag pending">Pendiente</span>
-                <span class="ques-progress">0 / 8</span>
-              </div>
-            </div>
-            <button class="ques-cta" onclick="fillQuest(2)">Rellenar</button>
-          </div>
         </div>
-        <button class="btn-primary" id="quesContinueBtn" style="display:none; margin-top:8px;" onclick="openFirmaConfirm()">Confirmar y firmar</button>
+        <button class="btn-primary" id="quesContinueBtn" style="display:none; margin-top:8px;" onclick="openFirmaConfirm()">Confirmar y firmar cuestionarios</button>
         <div class="faq-pills-section">
           <p class="faq-pills-title">¿Tienes dudas sobre el cuestionario?</p>
           <div class="faq-pills">
@@ -2152,6 +2151,17 @@
       </div>
 
       <!-- CONTRATACIÓN · step14 · Firma del cuestionario (iframe Evicertia simulado) -->
+      <!-- CONTRATACIÓN · step14b · Confirmar teléfono para firmar (PIN por SMS) -->
+      <div class="step" id="cTelefono">
+        <h1 class="step-title">Confirma tu número de teléfono para poder firmar online</h1>
+        <p class="step-subtitle">Te enviaremos un <strong>SMS</strong> con un código de seguridad al número que confirmes.</p>
+        <div class="input-wrap filled" style="margin-top:24px;">
+          <input type="tel" value="612 345 678" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+          <label>Teléfono</label>
+        </div>
+        <button class="btn-primary" onclick="showContrat('cFirma')">Confirmar número</button>
+      </div>
+
       <div class="step" id="cFirma">
         <!-- Placeholder para el cliente: aquí va el proceso de firma (Evicertia); no se diseña en este proyecto -->
         <div class="firma-frame">
@@ -2176,16 +2186,16 @@
 
       <!-- CONTRATACIÓN · step17 · Derogación de carencias (QW#24 · solo si viene de otra compañía) -->
       <div class="step" id="cDerogacion">
-        <h1 class="step-title">¡Estás a un paso de proteger tu salud!</h1>
+        <h1 class="step-title">Sigue cubierto desde el primer día</h1>
         <p class="step-subtitle">Como vienes de otra aseguradora, podemos eliminar los periodos de carencia para que disfrutes de tu seguro <strong>desde el primer día</strong>.</p>
         <div class="deroga-docs">
           <p class="deroga-docs-title">¿Tienes a mano estos documentos? Súbelos ahora o más tarde:</p>
           <div class="deroga-doc-item">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-680,-253)"><path fill-rule="evenodd" clip-rule="evenodd" d="M682.75 261C682.75 258.995 683.019 258.042 683.53 257.53C684.042 257.019 684.995 256.75 687 256.75H697C699.005 256.75 699.958 257.019 700.47 257.53C700.981 258.042 701.25 258.995 701.25 261V269C701.25 271.005 700.981 271.958 700.47 272.47C699.958 272.981 699.005 273.25 697 273.25H687C684.995 273.25 684.042 272.981 683.53 272.47C683.019 271.958 682.75 271.005 682.75 269V261ZM687 255.25C685.005 255.25 683.458 255.481 682.47 256.47C681.481 257.458 681.25 259.005 681.25 261V269C681.25 270.995 681.481 272.542 682.47 273.53C683.458 274.519 685.005 274.75 687 274.75H697C698.995 274.75 700.542 274.519 701.53 273.53C702.519 272.542 702.75 270.995 702.75 269V261C702.75 259.005 702.519 257.458 701.53 256.47C700.542 255.481 698.995 255.25 697 255.25H687ZM694 260.25C693.586 260.25 693.25 260.586 693.25 261C693.25 261.414 693.586 261.75 694 261.75H699C699.414 261.75 699.75 261.414 699.75 261C699.75 260.586 699.414 260.25 699 260.25H694ZM694.25 265C694.25 264.586 694.586 264.25 695 264.25H699C699.414 264.25 699.75 264.586 699.75 265C699.75 265.414 699.414 265.75 699 265.75H695C694.586 265.75 694.25 265.414 694.25 265ZM697 268.25C696.586 268.25 696.25 268.586 696.25 269C696.25 269.414 696.586 269.75 697 269.75H699C699.414 269.75 699.75 269.414 699.75 269C699.75 268.586 699.414 268.25 699 268.25H697ZM688.5 261.42C687.915 261.42 687.44 261.895 687.44 262.48C687.44 263.065 687.915 263.54 688.5 263.54C689.085 263.54 689.56 263.065 689.56 262.48C689.56 261.895 689.085 261.42 688.5 261.42ZM685.94 262.48C685.94 261.066 687.086 259.92 688.5 259.92C689.914 259.92 691.06 261.066 691.06 262.48C691.06 263.894 689.914 265.04 688.5 265.04C687.086 265.04 685.94 263.894 685.94 262.48ZM692.747 269.258C692.572 267.45 691.138 266.027 689.331 265.863C688.782 265.809 688.224 265.809 687.667 265.864C685.867 266.038 684.429 267.444 684.253 269.258C684.214 269.67 684.516 270.037 684.928 270.077C685.34 270.116 685.707 269.814 685.747 269.402C685.851 268.316 686.713 267.463 687.812 267.357L687.813 267.356C688.275 267.311 688.735 267.311 689.185 267.356L689.185 267.356L689.193 267.357C690.284 267.455 691.148 268.312 691.253 269.402C691.293 269.814 691.66 270.116 692.072 270.077C692.484 270.037 692.786 269.67 692.747 269.258Z" fill="currentColor"/></g></svg>
             <span>Tu <strong>póliza anterior</strong> o la <strong>tarjeta sanitaria</strong> donde conste la fecha de alta.</span>
           </div>
           <div class="deroga-doc-item">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-168,-381)"><path fill-rule="evenodd" clip-rule="evenodd" d="M174 382.25C172.346 382.25 171.112 382.749 170.307 383.681C169.52 384.592 169.25 385.797 169.25 387V402C169.25 403.443 170.893 404.274 172.051 403.399L172.053 403.398L173.76 402.12C173.858 402.047 174 402.052 174.1 402.15L175.758 403.819L175.76 403.82C176.443 404.503 177.557 404.503 178.24 403.82L179.92 402.14C180.009 402.052 180.146 402.048 180.233 402.115L181.951 403.4L181.953 403.402C183.103 404.256 184.75 403.442 184.75 402V392.75H187.42C188.371 392.75 189.22 392.446 189.833 391.833C190.446 391.22 190.75 390.371 190.75 389.42V387C190.75 385.691 190.214 384.505 189.364 383.643L189.364 383.643L189.36 383.64C188.503 382.783 187.316 382.262 186.027 382.25L186.027 382.25H186.02L186.007 382.25L186 382.25H174ZM184.75 385.01V391.25H187.42C188.049 391.25 188.49 391.054 188.772 390.772C189.054 390.49 189.25 390.049 189.25 389.42V387C189.25 386.11 188.887 385.297 188.298 384.699C187.716 384.117 186.905 383.759 186.017 383.75C185.318 383.752 184.75 384.32 184.75 385.01ZM183.25 385.01V385C183.25 384.55 183.359 384.125 183.552 383.75H174C172.654 383.75 171.888 384.146 171.443 384.661C170.98 385.198 170.75 385.993 170.75 387V402C170.75 402.216 170.985 402.325 171.147 402.202L171.151 402.2L172.86 400.92C173.562 400.393 174.54 400.469 175.16 401.09L175.162 401.091L176.82 402.76C176.917 402.856 177.083 402.857 177.18 402.76L178.86 401.08C179.47 400.469 180.449 400.392 181.143 400.922L182.847 402.198L182.848 402.198C183.017 402.323 183.25 402.198 183.25 402V392V385.01ZM173.25 390C173.25 389.586 173.586 389.25 174 389.25H180C180.414 389.25 180.75 389.586 180.75 390C180.75 390.414 180.414 390.75 180 390.75H174C173.586 390.75 173.25 390.414 173.25 390ZM174.75 393.25C174.336 393.25 174 393.586 174 394C174 394.414 174.336 394.75 174.75 394.75H179.25C179.664 394.75 180 394.414 180 394C180 393.586 179.664 393.25 179.25 393.25H174.75Z" fill="currentColor"/></g></svg>
             <span>El <strong>último recibo</strong> de tu seguro de salud anterior.</span>
           </div>
         </div>
@@ -2202,6 +2212,30 @@
           </div>
         </div>
         <button class="btn-primary" id="derogaCta" onclick="nextContrat()">Prefiero enviarlos más tarde</button>
+      </div>
+
+      <!-- CONTRATACIÓN · step18 · Forma de pago (periodicidad + ahorro QW#10) -->
+      <div class="step" id="cPago">
+        <h1 class="step-title">Elige la modalidad de pago que quieras</h1>
+        <p class="step-subtitle">Elige el plazo que mejor se adapte a ti; cuanto más largo, más ahorras.</p>
+        <div class="date-list" style="margin-top:24px;">
+          <label class="date-card pago-card" onclick="selectPago('Mensual','45,78 €/mes'); nextContrat();">
+            <span class="pago-left"><span class="date-label">Mensual</span></span>
+            <span class="pago-right"><span class="pago-total">45,78 €</span><span class="pago-mes">al mes</span></span>
+          </label>
+          <label class="date-card pago-card" onclick="selectPago('Trimestral','45,32 €/mes'); nextContrat();">
+            <span class="pago-left"><span class="date-label">Trimestral</span><span class="pago-badge">-1%</span></span>
+            <span class="pago-right"><span class="pago-total">135,97 €</span><span class="pago-mes">45,32 €/mes</span></span>
+          </label>
+          <label class="date-card pago-card" onclick="selectPago('Semestral','44,86 €/mes'); nextContrat();">
+            <span class="pago-left"><span class="date-label">Semestral</span><span class="pago-badge">-2%</span></span>
+            <span class="pago-right"><span class="pago-total">269,19 €</span><span class="pago-mes">44,86 €/mes</span></span>
+          </label>
+          <label class="date-card pago-card" onclick="selectPago('Anual','43,03 €/mes'); nextContrat();">
+            <span class="pago-left"><span class="date-label">Anual</span><span class="pago-badge">-6%</span></span>
+            <span class="pago-right"><span class="pago-total">516,40 €</span><span class="pago-mes">43,03 €/mes</span></span>
+          </label>
+        </div>
       </div>
 
     </div>
@@ -2923,8 +2957,8 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="side-modal-body">
-        <span class="firma-confirm-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-        <h2 class="hablemos-title" style="text-align:center;">¿Confirmas el envío?</h2>
+        <span class="firma-confirm-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1064,-253)"><path fill-rule="evenodd" clip-rule="evenodd" d="M1082.2 254.014C1083.31 253.904 1084.41 254.393 1085.51 255.49C1086.61 256.586 1087.1 257.69 1086.99 258.803C1086.88 259.877 1086.23 260.767 1085.51 261.49L1084.39 262.61C1084.38 262.617 1084.38 262.623 1084.37 262.63L1077.62 269.379C1077.4 269.597 1077.1 269.787 1076.82 269.93C1076.54 270.072 1076.2 270.197 1075.89 270.242L1072.87 270.673C1072.13 270.775 1071.42 270.572 1070.92 270.076C1070.42 269.579 1070.22 268.869 1070.33 268.122L1070.33 268.121L1070.76 265.116L1070.76 265.115C1070.8 264.794 1070.93 264.459 1071.07 264.174C1071.21 263.889 1071.41 263.593 1071.63 263.37L1078.37 256.629C1078.38 256.622 1078.38 256.616 1078.39 256.609L1079.51 255.49C1080.23 254.767 1081.12 254.119 1082.2 254.014ZM1078.61 258.509L1072.69 264.43C1072.61 264.507 1072.51 264.655 1072.41 264.848C1072.31 265.041 1072.26 265.215 1072.24 265.324L1072.24 265.326L1071.81 268.336L1071.81 268.339C1071.76 268.682 1071.86 268.896 1071.98 269.014C1072.1 269.132 1072.32 269.234 1072.67 269.187L1072.67 269.187L1075.67 268.757C1075.78 268.743 1075.95 268.688 1076.14 268.59C1076.34 268.494 1076.49 268.386 1076.57 268.304L1082.49 262.386C1080.78 261.598 1079.4 260.221 1078.61 258.509ZM1083.64 261.237C1081.83 260.589 1080.4 259.163 1079.76 257.358L1080.57 256.55C1081.21 255.913 1081.79 255.561 1082.34 255.506C1082.86 255.456 1083.55 255.647 1084.45 256.55C1085.35 257.454 1085.54 258.14 1085.49 258.657C1085.44 259.213 1085.09 259.793 1084.45 260.43L1083.64 261.237ZM1067.09 256.095C1068.43 254.76 1070.43 254.25 1073 254.25H1075C1075.41 254.25 1075.75 254.586 1075.75 255C1075.75 255.414 1075.41 255.75 1075 255.75H1073C1070.57 255.75 1069.07 256.24 1068.16 257.155C1067.24 258.071 1066.75 259.574 1066.75 262V268C1066.75 270.426 1067.24 271.929 1068.16 272.845C1069.07 273.76 1070.57 274.25 1073 274.25H1079C1081.43 274.25 1082.93 273.76 1083.84 272.845C1084.76 271.929 1085.25 270.426 1085.25 268V266C1085.25 265.586 1085.59 265.25 1086 265.25C1086.41 265.25 1086.75 265.586 1086.75 266V268C1086.75 270.574 1086.24 272.571 1084.91 273.905C1083.57 275.24 1081.57 275.75 1079 275.75H1073C1070.43 275.75 1068.43 275.24 1067.09 273.905C1065.76 272.571 1065.25 270.574 1065.25 268V262C1065.25 259.426 1065.76 257.429 1067.09 256.095Z" fill="currentColor"/></g></svg></span>
+        <h2 class="hablemos-title" style="text-align:center;">¿Estás listo para firmar los cuestionarios de salud?</h2>
         <p class="hablemos-subtitle" style="text-align:center;">Una vez enviado el cuestionario de salud no podrás modificar las respuestas. Asegúrate de que son correctas antes de continuar.</p>
         <button class="btn-primary" onclick="confirmFirma()">Sí, confirmar y firmar</button>
         <button class="btn-skip" onclick="closeFirmaConfirm()">Quiero revisar antes</button>
@@ -3394,8 +3428,8 @@
     }
 
     /* ── Cuestionario de salud (QW#18: una a una + textarea al Sí) ── */
-    const _questNames = ['María García López', 'Carlos Ruiz Soler', 'Lucía García López'];
-    const questDone = [false, false, false];
+    const _questNames = ['María García López', 'Carlos Ruiz Soler'];
+    const questDone = [false, false];
     let _questActive = 0;
     function openQuest(idx) {
       _questActive = idx;
@@ -3520,7 +3554,11 @@
       const cta = card.querySelector('.ques-cta');
       cta.className = 'ques-cta edit';
       cta.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Editar';
-      if (questDone.every(Boolean)) document.getElementById('quesContinueBtn').style.display = 'block';
+      if (questDone.every(Boolean)) {
+        const btn = document.getElementById('quesContinueBtn');
+        btn.textContent = 'Confirmar y firmar ' + (_questNames.length > 1 ? 'cuestionarios' : 'cuestionario');
+        btn.style.display = 'block';
+      }
       updateResumen(); // refleja el estado del cuestionario en el resumen
     }
     /* Demo: el 1º abre el modal; los demás asegurados se rellenan directo (sin abrir panel) */
@@ -3531,9 +3569,10 @@
     let contractMode = false;
     // Orden del proto original (step8→20); showContrat/nextContrat solo navegan a los que ya existen.
     // cDerogacion (camino "sí, otra compañía") y cAseg2 son condicionales.
-    const CONTRAT_FLOW = ['cDatos', 'cContacto', 'cDireccion', 'cAseg1', 'cAseg2', 'cCuestionario', 'cFirma', 'cOtra', 'cDerogacion', 'cPago', 'cAntes', 'cTPV', 'cConfirm'];
+    const CONTRAT_FLOW = ['cDatos', 'cContacto', 'cDireccion', 'cAseg1', 'cAseg2', 'cCuestionario', 'cTelefono', 'cFirma', 'cOtra', 'cDerogacion', 'cPago', 'cAntes', 'cTPV', 'cConfirm'];
     let contratIdx = 0;
     let comesFromOther = false; // ¿viene de otra compañía? (cOtra) → decide si pasa por cDerogacion
+    let pagoSelected = false, pagoText = ''; // forma de pago elegida (cPago) → resumen
     function startContratacion() {
       /* Copia la card del seguro desde "Me interesa" al resumen flotante */
       document.getElementById('resumenName').textContent = document.getElementById('interesName').textContent;
@@ -3545,8 +3584,9 @@
       const nAseg = insuredCount || 1;
       document.getElementById('resumenFabPrice').textContent = priceTxt;
       document.getElementById('resumenCartPrice').textContent = priceTxt;
-      document.getElementById('raccAseg2').style.display = nAseg >= 2 ? '' : 'none';
+      document.getElementById('raccAseg2').style.display = 'none'; // demo: 2 asegurados (tomador + Asegurado 1)
       document.getElementById('raccFechaVal').textContent = selectedStartDate || '1 de agosto de 2026';
+      comesFromOther = false; pagoSelected = false; pagoText = ''; // estado limpio de contratación
       closeInteres();
       showContrat('cDatos');
     }
@@ -3554,7 +3594,7 @@
     let _firmaTimer = null;
     function openFirmaConfirm() { document.getElementById('firmaConfirmModal').classList.add('open'); }
     function closeFirmaConfirm() { document.getElementById('firmaConfirmModal').classList.remove('open'); }
-    function confirmFirma() { closeFirmaConfirm(); showContrat('cFirma'); }
+    function confirmFirma() { closeFirmaConfirm(); showContrat('cTelefono'); }
     function startFirmaSim() {
       clearTimeout(_firmaTimer);
       _firmaTimer = setTimeout(() => { if (document.getElementById('cFirma').classList.contains('active')) nextContrat(); }, 5000);
@@ -3583,17 +3623,18 @@
         done('raccAseg1');
       }
       if (contratIdx >= 5) {
-        set('raccAseg2Nombre', 'Lucía García López');
-        set('raccAseg2Nif', 'NIF 11223344C');
-        set('raccAseg2Dob', 'Fecha de nacimiento: 20/11/2015');
-        done('raccAseg2');
-        // Estado del cuestionario de salud, una línea por asegurado
+        // Estado del cuestionario de salud (escenario demo: 2 asegurados)
         const cq = i => 'Cuestionario de salud: ' + (questDone[i] ? 'Completado' : 'Pendiente');
         set('raccTomCues', cq(0));
         set('raccAseg1Cues', cq(1));
-        set('raccAseg2Cues', cq(2));
       }
-      if (contratIdx >= 10) { set('raccPagoVal', 'Mensual'); done('raccPago'); }
+      if (pagoSelected) { set('raccPagoVal', pagoText); done('raccPago'); }
+    }
+    /* Forma de pago elegida (cPago) → se refleja en el resumen */
+    function selectPago(periodo, mes) {
+      pagoSelected = true;
+      pagoText = periodo + ' · ' + mes;
+      updateResumen();
     }
     function showContrat(id) {
       const el = document.getElementById(id);
