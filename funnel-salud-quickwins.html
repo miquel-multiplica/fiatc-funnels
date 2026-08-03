@@ -212,6 +212,8 @@
     padding-top: 22px;
   }
   /* Campos autorrellenados no editables (Ciudad/Provincia tras CP) */
+  #cAddrAutofill { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  #cAddrAutofill .input-wrap { margin-bottom: 0; }
   .input-wrap:has(input:disabled), .input-wrap:has(select:disabled) { background: var(--wf-20); border-color: var(--wf-30); }
   .input-wrap input:disabled, .input-wrap select:disabled {
     color: var(--wf-90); cursor: not-allowed; -webkit-text-fill-color: var(--wf-90); opacity: 1;
@@ -658,6 +660,12 @@
   .firma-frame .loading-spinner { margin-bottom: 0; }
 
   /* Derogación de carencias (QW#24): docs necesarios + subida opcional */
+  /* La subida de documentos es OPCIONAL → destacado gris para que no se confunda con un paso obligatorio */
+  .deroga-optional { background: var(--wf-20); border-radius: 12px; padding: 16px; margin: 24px 0; }
+  .deroga-optional-label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--wf-0); background: var(--wf-90); padding: 3px 10px; border-radius: 999px; margin-bottom: 12px; }
+  .deroga-optional .deroga-docs { margin: 0 0 14px; }
+  .deroga-optional .deroga-upload { margin: 0; }
+  .deroga-optional .upload-box { background: var(--wf-0); }
   .deroga-docs { margin: 24px 0; }
   .deroga-docs-title { font-size: 14px; font-weight: 400; color: var(--wf-90); line-height: 1.5; margin: 0 0 14px; }
   .deroga-docs-title span { color: var(--wf-60); }
@@ -674,6 +682,18 @@
   .upload-box-text strong { color: var(--wf-100); font-weight: 700; }
   .upload-box-hint { font-size: 12px; color: var(--wf-60); }
   .upload-files { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .upload-files:empty { margin-top: 0; }
+  /* Pantalla KO (QW#22): derivación pedagógica tras un "Sí" en el cuestionario */
+  .ko-head { text-align: center; }
+  .ko-hero-icon { width: 56px; height: 56px; border-radius: 14px; background: var(--wf-20); color: var(--wf-90); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+  .ko-steps { display: flex; flex-direction: column; gap: 16px; margin: 24px 0; background: var(--wf-20); border-radius: 12px; padding: 18px 16px; }
+  .ko-step { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--wf-90); line-height: 1.5; }
+  .ko-step svg { flex-shrink: 0; margin-top: 1px; color: var(--wf-90); }
+  .ko-step strong { color: var(--wf-100); font-weight: 700; }
+  /* Bloque de ayuda del KO: caja blanca, mismo ancho que el contenido, con más padding lateral */
+  #cKO .faq-help { margin: 28px 0 0; padding: 22px 28px; background: var(--wf-0); border: 1px solid var(--wf-30); border-radius: 12px; }
+  @media (min-width: 601px) { #cKO .faq-help { margin-left: 0; margin-right: 0; padding-left: 28px; padding-right: 28px; } }
+  @media (max-width: 600px) { #cKO .faq-help { padding: 18px 16px; } }
   .upload-chip { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--wf-0); border: 1px solid var(--wf-40); border-radius: 8px; font-size: 14px; color: var(--wf-100); }
   .upload-chip svg { flex-shrink: 0; color: var(--wf-60); }
   .upload-chip-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -1034,7 +1054,8 @@
   .pago-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .pago-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
   .pago-left .date-label { min-width: 96px; } /* fija el ancho para que los badges de ahorro queden alineados entre cards */
-  .pago-badge { display: inline-flex; align-items: center; padding: 4px 11px; border-radius: 100px; background: var(--wf-20); font-size: 14px; font-weight: 700; color: var(--wf-100); }
+  .pago-badge { display: inline-flex; align-items: center; padding: 4px 11px; border-radius: 100px; background: var(--wf-20); font-size: 14px; font-weight: 700; color: var(--wf-100); transition: background 0.15s; }
+  .pago-card:hover .pago-badge { background: var(--wf-40); } /* el hover de la card es wf-20 → oscurece el badge para que no se funda */
   .pago-right { text-align: right; flex-shrink: 0; }
   .pago-total { display: block; font-size: 16px; font-weight: 700; color: var(--wf-100); }
   .pago-mes { display: block; font-size: 12px; font-weight: 400; color: var(--wf-60); margin-top: 4px; }
@@ -1188,6 +1209,18 @@
     /* La barra mobile es más alta → más colchón abajo en step0 para no tapar la última FAQ */
     #step0 { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
   }
+
+  /* ── Índice del prototipo: listado crudo (solo demo). Deliberadamente sin diseño para no confundirlo con el funnel. ── */
+  .dev-index { position: fixed; inset: 0; z-index: 500; background: #fff; overflow-y: auto; display: none; font-family: -apple-system, "Segoe UI", Arial, sans-serif; color: #000; }
+  .dev-index.show { display: block; }
+  .dev-index-inner { max-width: 560px; margin: 0; padding: 24px 28px 48px; }
+  .dev-index h1 { font-size: 18px; font-weight: 700; margin: 0 0 2px; }
+  .dev-index-sub { font-size: 13px; color: #555; margin: 0 0 20px; }
+  .dev-index-group { font-size: 13px; font-weight: 700; margin: 22px 0 6px; }
+  .dev-index ol { margin: 0; padding-left: 22px; }
+  .dev-index li { margin: 2px 0; font-size: 14px; }
+  .dev-index a { color: #0645ad; text-decoration: underline; cursor: pointer; }
+  .dev-index a:hover { color: #0b0080; }
 </style>
 </head>
 <body>
@@ -2139,13 +2172,70 @@
             <button class="ques-cta" onclick="fillQuest(1)">Rellenar</button>
           </div>
         </div>
-        <button class="btn-primary" id="quesContinueBtn" style="display:none; margin-top:8px;" onclick="openFirmaConfirm()">Confirmar y firmar cuestionarios</button>
+        <button class="btn-primary" id="quesContinueBtn" style="display:none; margin-top:8px;" onclick="proceedFromQuest()">Confirmar y firmar cuestionarios</button>
         <div class="faq-pills-section">
           <p class="faq-pills-title">¿Tienes dudas sobre el cuestionario?</p>
           <div class="faq-pills">
             <button class="faq-pill" onclick="openFaq('cuestionario', 0)">¿Qué pasa si marco un "Sí"?</button>
             <button class="faq-pill" onclick="openFaq('cuestionario', 2)">¿Qué no tengo que declarar?</button>
             <button class="faq-pill" onclick="openFaq('cuestionario', 3)">¿Tengo que declarar medicación?</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTRATACIÓN · KO (QW#22) · derivación pedagógica a Teladoc tras un "Sí" en el cuestionario -->
+      <div class="step" id="cKO">
+        <div class="ko-head">
+          <span class="ko-hero-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <h1 class="step-title">Un médico te llamará para revisar tu solicitud</h1>
+          <p class="step-subtitle">Como has indicado alguna cuestión de salud, ampliaremos la información por teléfono antes de continuar. Es un paso habitual.</p>
+        </div>
+        <div class="ko-steps">
+          <div class="ko-step">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>Te llamaremos en <strong>1-2 días laborables</strong>.</span>
+          </div>
+          <div class="ko-step">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span><strong>No es vinculante</strong>: puedes decidir no contratar en cualquier momento.</span>
+          </div>
+          <div class="ko-step">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg>
+            <span>Si algo no quedara cubierto, podrás <strong>aportar informes médicos</strong> para revisarlo.</span>
+          </div>
+        </div>
+        <div class="faq-help">
+          <div class="faq-help-head">
+            <p class="faq-help-title">¿Necesitas más ayuda?</p>
+            <div class="avatar-stack">
+              <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-40)"/><circle cx="19" cy="15" r="7" fill="var(--wf-60)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-60)"/></svg></div>
+              <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-20)"/><circle cx="19" cy="15" r="7" fill="var(--wf-40)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-40)"/></svg></div>
+              <div class="av"><svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="19" cy="19" r="19" fill="var(--wf-40)"/><circle cx="19" cy="15" r="7" fill="var(--wf-60)"/><ellipse cx="19" cy="34" rx="13" ry="10" fill="var(--wf-60)"/></svg></div>
+            </div>
+          </div>
+          <div class="hablemos-links">
+            <button class="hablemos-link" onclick="openHablemos(); hablemosAgendar();">
+              <div class="hablemos-link-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div>
+                Agenda una llamada
+                <div class="hablemos-hours">Un asesor resuelve todas tus dudas</div>
+              </div>
+              <svg class="hablemos-link-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <button class="hablemos-link" onclick="return false;">
+              <div class="hablemos-link-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.17h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l1.13-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                Llámanos al 900 123 456
+                <div class="hablemos-hours">Lunes a viernes, de 9h a 20h</div>
+              </div>
+              <svg class="hablemos-link-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -2188,6 +2278,8 @@
       <div class="step" id="cDerogacion">
         <h1 class="step-title">Sigue cubierto desde el primer día</h1>
         <p class="step-subtitle">Como vienes de otra aseguradora, podemos eliminar los periodos de carencia para que disfrutes de tu seguro <strong>desde el primer día</strong>.</p>
+        <div class="deroga-optional">
+        <span class="deroga-optional-label">Opcional</span>
         <div class="deroga-docs">
           <p class="deroga-docs-title">¿Tienes a mano estos documentos? Súbelos ahora o más tarde:</p>
           <div class="deroga-doc-item">
@@ -2206,17 +2298,18 @@
             <span class="upload-box-hint">PDF o imagen · máx. 10 MB por archivo</span>
           </label>
           <div class="upload-files" id="derogaFiles"></div>
-          <div class="cp-info" style="margin-top:12px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            <span>La documentación tendrá que ser validada. Si prefieres, también puedes enviárnosla más tarde a <strong>web@fiatc.es</strong>.</span>
-          </div>
+        </div>
+        </div>
+        <div class="cp-info" style="margin-top:16px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>La documentación tendrá que ser validada. Si prefieres, también puedes enviárnosla más tarde a <strong>web@fiatc.es</strong>.</span>
         </div>
         <button class="btn-primary" id="derogaCta" onclick="nextContrat()">Prefiero enviarlos más tarde</button>
       </div>
 
       <!-- CONTRATACIÓN · step18 · Forma de pago (periodicidad + ahorro QW#10) -->
       <div class="step" id="cPago">
-        <h1 class="step-title">Elige la modalidad de pago que quieras</h1>
+        <h1 class="step-title">¿Qué modalidad de pago quieres?</h1>
         <p class="step-subtitle">Elige el plazo que mejor se adapte a ti; cuanto más largo, más ahorras.</p>
         <div class="date-list" style="margin-top:24px;">
           <label class="date-card pago-card" onclick="selectPago('Mensual','45,78 €/mes'); nextContrat();">
@@ -3430,13 +3523,46 @@
     /* ── Cuestionario de salud (QW#18: una a una + textarea al Sí) ── */
     const _questNames = ['María García López', 'Carlos Ruiz Soler'];
     const questDone = [false, false];
+    const questAnswers = [null, null]; // snapshot de respuestas por asegurado → permite reabrir para editar
     let _questActive = 0;
     function openQuest(idx) {
       _questActive = idx;
       document.getElementById('questName').textContent = _questNames[idx] || 'Asegurado';
       resetQuestModal();
+      if (questDone[idx] && questAnswers[idx]) restoreQuest(questAnswers[idx]); // editar: reabre relleno
       sizeQuestModal(); // fija el alto por JS (innerHeight) → footer bien colocado al abrir, sin esperar a interactuar
       document.getElementById('questModal').classList.add('open');
+    }
+    /* Captura el estado actual del cuestionario (para reabrirlo y editarlo) */
+    function captureQuest() {
+      const yn = [], notes = [];
+      document.querySelectorAll('#questModal .quest-q').forEach(q => {
+        if (q.hasAttribute('data-bio')) return;
+        const sel = q.querySelector('.quest-yn-btn.selected');
+        yn.push(sel ? sel.dataset.v : 'no');
+        const ta = q.querySelector('textarea'); notes.push(ta ? ta.value : '');
+      });
+      return { yn, notes, peso: document.getElementById('questPeso').value, altura: document.getElementById('questAltura').value };
+    }
+    /* Restaura un snapshot: muestra todas las preguntas ya respondidas, listo para modificar */
+    function restoreQuest(a) {
+      let i = 0;
+      document.querySelectorAll('#questModal .quest-q').forEach(q => {
+        q.classList.add('show');
+        if (q.hasAttribute('data-bio')) return;
+        const v = a.yn[i] || 'no';
+        q.querySelectorAll('.quest-yn-btn').forEach(b => b.classList.toggle('selected', b.dataset.v === v));
+        q.classList.toggle('expand', v === 'si');
+        const ta = q.querySelector('textarea'); if (ta) ta.value = a.notes[i] || '';
+        const nb = q.querySelector('.quest-next-btn'); if (nb) nb.style.display = 'none'; // ya está todo desplegado
+        i++;
+      });
+      const p = document.getElementById('questPeso'), al = document.getElementById('questAltura');
+      p.value = a.peso || ''; al.value = a.altura || '';
+      p.closest('.input-wrap').classList.toggle('filled', !!a.peso);
+      al.closest('.input-wrap').classList.toggle('filled', !!a.altura);
+      calcIMCq();
+      updateQuestFooter();
     }
     /* En mobile, el alto CSS (svh/dvh) llega "stale" al abrir en Safari y recoloca el footer al interactuar.
        Lo fijamos con window.innerHeight (fiable en ese momento). */
@@ -3561,9 +3687,15 @@
       }
       updateResumen(); // refleja el estado del cuestionario en el resumen
     }
-    /* Demo: el 1º abre el modal; los demás asegurados se rellenan directo (sin abrir panel) */
-    function fillQuest(idx) { if (idx === 0) openQuest(0); else markQuestDone(idx); }
-    function saveQuest() { markQuestDone(_questActive); closeQuest(); }
+    /* Demo: el 1º abre el modal; los demás se rellenan directo. Ya completado → reabre para editar (relleno). */
+    const _questDefault = { yn: ['no', 'no', 'no', 'no', 'no', 'no', 'no'], notes: ['', '', '', '', '', '', ''], peso: '72', altura: '175' };
+    function fillQuest(idx) {
+      if (questDone[idx]) { openQuest(idx); return; }        // Editar → reabre relleno
+      if (idx === 0) { openQuest(0); return; }               // 1º: rellena en el modal
+      questAnswers[idx] = _questDefault;                     // demás: respuestas por defecto (todo "No")
+      markQuestDone(idx);
+    }
+    function saveQuest() { questAnswers[_questActive] = captureQuest(); markQuestDone(_questActive); closeQuest(); }
     /* Entrada a la fase de contratación (pendiente de construir) */
     /* ── Contratación (modo aparte, con su propio progreso) ── */
     let contractMode = false;
@@ -3573,6 +3705,7 @@
     let contratIdx = 0;
     let comesFromOther = false; // ¿viene de otra compañía? (cOtra) → decide si pasa por cDerogacion
     let pagoSelected = false, pagoText = ''; // forma de pago elegida (cPago) → resumen
+    let _devFull = false; // entrada por el índice del prototipo → resumen completo con datos fake
     function startContratacion() {
       /* Copia la card del seguro desde "Me interesa" al resumen flotante */
       document.getElementById('resumenName').textContent = document.getElementById('interesName').textContent;
@@ -3586,12 +3719,17 @@
       document.getElementById('resumenCartPrice').textContent = priceTxt;
       document.getElementById('raccAseg2').style.display = 'none'; // demo: 2 asegurados (tomador + Asegurado 1)
       document.getElementById('raccFechaVal').textContent = selectedStartDate || '1 de agosto de 2026';
-      comesFromOther = false; pagoSelected = false; pagoText = ''; // estado limpio de contratación
+      comesFromOther = false; pagoSelected = false; pagoText = ''; _devFull = false; // estado limpio de contratación
       closeInteres();
       showContrat('cDatos');
     }
     /* Firma del cuestionario: confirmación → cajita gris (Evicertia simulado) 5 s → avanza */
     let _firmaTimer = null;
+    /* Salida del cuestionario: si algún asegurado marcó un "Sí" → KO (derivación a Teladoc); si no → firma */
+    function proceedFromQuest() {
+      const hasSi = questAnswers.some(a => a && a.yn && a.yn.includes('si'));
+      if (hasSi) showContrat('cKO'); else openFirmaConfirm();
+    }
     function openFirmaConfirm() { document.getElementById('firmaConfirmModal').classList.add('open'); }
     function closeFirmaConfirm() { document.getElementById('firmaConfirmModal').classList.remove('open'); }
     function confirmFirma() { closeFirmaConfirm(); showContrat('cTelefono'); }
@@ -3608,23 +3746,31 @@
       const set = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
       const done = id => { const el = document.getElementById(id); if (el) el.classList.remove('pending'); };
       const val = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
-      if (contratIdx >= 1) {
+      // Etiquetas según casuística: si el tomador es también asegurado (withMe) → "Asegurado 1 (tomador)";
+      // si contrata solo para otros → "Datos del tomador" aparte y los demás numerados desde 1.
+      const setLabel = (racc, t) => { const el = document.querySelector('#' + racc + ' .racc-hlabel'); if (el) el.textContent = t; };
+      if (withMe) { setLabel('raccTomador', 'Asegurado 1 (tomador)'); setLabel('raccAseg1', 'Asegurado 2'); setLabel('raccAseg2', 'Asegurado 3'); }
+      else { setLabel('raccTomador', 'Datos del tomador'); setLabel('raccAseg1', 'Asegurado 1'); setLabel('raccAseg2', 'Asegurado 2'); }
+      // Al entrar por el índice del prototipo (_devFull) rellenamos el resumen completo con datos fake,
+      // en vez de acumular según el paso alcanzado (que dejaría secciones en "Pendiente").
+      const eff = _devFull ? 99 : contratIdx;
+      if (eff >= 1) {
         set('raccTomNombre', [val('cNombre'), val('cAp1'), val('cAp2')].filter(Boolean).join(' ') || 'María García López');
         set('raccTomNif', 'NIF ' + (val('cNif') || '47854123X'));
         set('raccTomDob', 'Fecha de nacimiento: 12/03/1985');
         done('raccTomador');
       }
-      if (contratIdx >= 2) set('raccTomContact', '612 345 678 · maria@gmail.com');
-      if (contratIdx >= 3) set('raccTomDir', 'Diagonal 161, 08018 Barcelona');
-      if (contratIdx >= 4) {
+      if (eff >= 2) set('raccTomContact', '612 345 678 · maria@gmail.com');
+      if (eff >= 3) set('raccTomDir', 'Diagonal 161, 08018 Barcelona');
+      if (eff >= 4) {
         set('raccAseg1Nombre', [val('a1Nombre'), val('a1Ap1'), val('a1Ap2')].filter(Boolean).join(' ') || 'Carlos Ruiz Soler');
         set('raccAseg1Nif', 'NIF ' + (val('a1Nif') || '87654321B'));
         set('raccAseg1Dob', 'Fecha de nacimiento: 08/07/1988');
         done('raccAseg1');
       }
-      if (contratIdx >= 5) {
+      if (eff >= 5) {
         // Estado del cuestionario de salud (escenario demo: 2 asegurados)
-        const cq = i => 'Cuestionario de salud: ' + (questDone[i] ? 'Completado' : 'Pendiente');
+        const cq = i => 'Cuestionario de salud: ' + ((questDone[i] || _devFull) ? 'Completado' : 'Pendiente');
         set('raccTomCues', cq(0));
         set('raccAseg1Cues', cq(1));
       }
@@ -3644,7 +3790,9 @@
       document.getElementById('appMain').classList.remove('results-wide');
       el.classList.add('active');
       contratIdx = CONTRAT_FLOW.indexOf(id);
-      const pct = Math.round(((contratIdx + 1) / CONTRAT_FLOW.length) * 100);
+      // cKO es una bifurcación (fuera de CONTRAT_FLOW) → la barra se queda en el punto del cuestionario
+      const progIdx = (id === 'cKO') ? CONTRAT_FLOW.indexOf('cCuestionario') : contratIdx;
+      const pct = Math.round(((progIdx + 1) / CONTRAT_FLOW.length) * 100);
       document.getElementById('progressFill').style.width = pct + '%';
       document.querySelector('.app-header').classList.add('show-back', 'contrat');
       document.querySelector('.app-header-title').textContent = 'Contratación 100% online';
@@ -4020,8 +4168,85 @@
       if (e.key === 'Escape') { closeHablemos(); closeExit(); closeCalc(); closeFaq(); closeResumen(); closeQuest(); closeFirmaConfirm(); }
     });
     document.getElementById('appMain').addEventListener('scroll', updateStep0StickyBar);
-    window.addEventListener('load', function () { showStep('step0'); });
+    // Al cargar, mostramos el ÍNDICE del prototipo (portada de navegación); step0 queda preparado debajo.
+    window.addEventListener('load', function () { showStep('step0'); document.getElementById('devIndex').classList.add('show'); });
+
+    /* ── Índice del prototipo: salto directo a cualquier paso ──
+       Antes de saltar sembramos un escenario demo (2 asegurados, fecha, etc.) y poblamos
+       las listas que dependen de pasos anteriores, para que cualquier paso se renderice bien. */
+    function seedDemo() {
+      insuredCount = 2; withMe = true; intentMode = 'me-others'; isClient = true;
+      if (!selectedStartDate) selectedStartDate = '1 de agosto de 2026';
+      renderInsured();      // puebla las fechas de nacimiento (step2)
+      updateResultsMeta();  // ristra de resultados (CP · N asegurados)
+    }
+    /* Siembra la card del resumen flotante con datos demo (al entrar por el índice, sin pasar por "Me interesa") */
+    function seedResumenHeader() {
+      const rt = document.getElementById('resumenTag');
+      document.getElementById('resumenName').textContent = 'Medifiatc P15';
+      rt.textContent = 'Con copago'; rt.style.display = 'inline-flex';
+      document.getElementById('resumenPrice').innerHTML = '45<span class="price-dec">,78€</span>';
+      document.getElementById('resumenNote').textContent = ' · total para 2 asegurados';
+      document.getElementById('resumenFabPrice').textContent = '45,78€';
+      document.getElementById('resumenCartPrice').textContent = '45,78€';
+      document.getElementById('raccFechaVal').textContent = selectedStartDate || '1 de agosto de 2026';
+    }
+    function devJump(id) {
+      seedDemo();
+      _devFull = false;
+      if (id === 'step7') { backToResults(); updateResultsMeta(); }
+      else if (CONTRAT_FLOW.includes(id) || id === 'cKO') {
+        comesFromOther = true;                                   // deja alcanzable la derogación
+        _devFull = true;                                         // resumen completo con datos fake
+        seedResumenHeader();                                     // precio/total demo (no venimos de "Me interesa")
+        document.getElementById('raccAseg2').style.display = 'none'; // demo: 2 asegurados (tomador + Asegurado 1)
+        showContrat(id);
+      } else { showStep(id); }
+      document.getElementById('devIndex').classList.remove('show');
+    }
   </script>
+
+  <!-- ÍNDICE DEL PROTOTIPO — listado crudo de navegación (solo demo). Recargar el HTML para volver aquí. -->
+  <div class="dev-index" id="devIndex">
+    <div class="dev-index-inner">
+      <h1>Índice del prototipo — FIATC Salud</h1>
+      <p class="dev-index-sub">Recarga la página para volver a este índice.</p>
+
+      <div class="dev-index-group">Tarificación</div>
+      <ol>
+        <li><a onclick="devJump('step0')">Portada</a></li>
+        <li><a onclick="devJump('stepCP')">Código postal</a></li>
+        <li><a onclick="devJump('step1')">¿Para quién?</a></li>
+        <li><a onclick="devJump('step2')">Edades</a></li>
+        <li><a onclick="devJump('step4')">Fecha de inicio</a></li>
+        <li><a onclick="devJump('step5')">¿Ya cliente?</a></li>
+        <li><a onclick="devJump('stepDNI')">DNI (cliente)</a></li>
+        <li><a onclick="devJump('step6')">Email</a></li>
+        <li><a onclick="devJump('step6b')">Teléfono</a></li>
+      </ol>
+
+      <div class="dev-index-group">Resultados</div>
+      <ol start="10">
+        <li><a onclick="devJump('step7')">Resultados</a></li>
+      </ol>
+
+      <div class="dev-index-group">Contratación</div>
+      <ol start="11">
+        <li><a onclick="devJump('cDatos')">Datos del tomador</a></li>
+        <li><a onclick="devJump('cContacto')">Contacto</a></li>
+        <li><a onclick="devJump('cDireccion')">Dirección</a></li>
+        <li><a onclick="devJump('cAseg1')">Asegurado 1</a></li>
+        <li><a onclick="devJump('cAseg2')">Asegurado 2</a></li>
+        <li><a onclick="devJump('cCuestionario')">Cuestionario de salud</a></li>
+        <li><a onclick="devJump('cKO')">KO · derivación a Teladoc</a></li>
+        <li><a onclick="devJump('cTelefono')">Confirmar teléfono</a></li>
+        <li><a onclick="devJump('cFirma')">Firma</a></li>
+        <li><a onclick="devJump('cOtra')">¿Otra compañía?</a></li>
+        <li><a onclick="devJump('cDerogacion')">Derogación de carencias</a></li>
+        <li><a onclick="devJump('cPago')">Forma de pago</a></li>
+      </ol>
+    </div>
+  </div>
 
 </body>
 </html>

@@ -23,7 +23,7 @@ Evoluciona el prototipo original `wireframe_propuesta.html` (documentado en `PRO
 - Animación de paso: fade + `translateX(24px)` (dcha→izq), 0.35s.
 
 ## Estado por pantalla y pendientes
-Ver la memoria `project_funnel_build.md` (estado vivo por pantalla + "para mañana" + decisión de calculadora QW#1). Resumen: step0→step7 (resultados) HECHOS; contratación EN CONSTRUCCIÓN — hechos cDatos→cAseg2, cuestionario de salud, firma (simulada), cOtra, derogación (QW#24) y forma de pago; pendientes cAntes (condiciones + ventajas de pago), cTPV (Sabadell simulado) y cConfirm.
+Ver la memoria `project_funnel_build.md` (estado vivo por pantalla + "para mañana" + decisión de calculadora QW#1). Resumen: step0→step7 (resultados) HECHOS; contratación EN CONSTRUCCIÓN — hechos cDatos→cAseg2, cuestionario de salud, KO/Teladoc (QW#22), firma (simulada), cOtra, derogación (QW#24) y forma de pago; pendientes cAntes (condiciones + ventajas de pago), cTPV (Sabadell simulado) y cConfirm. Hay un índice de navegación del prototipo (página inicial al recargar) para saltar a cualquier paso con datos demo sembrados.
 
 ## Convenciones de edición
 - Editar solo `funnel-salud-quickwins.html`. No crear archivos nuevos ni dependencias.
