@@ -645,7 +645,7 @@
   .quest-textarea textarea:focus { outline: none; border-color: var(--wf-60); }
   .quest-next-btn { margin-top: 12px; padding: 12px 28px; border: none; border-radius: 8px; background: var(--wf-100); color: var(--wf-0); font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
   .quest-next-btn:hover { background: var(--wf-90); }
-  .quest-counter { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--wf-90); }
+  .quest-counter { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; color: var(--wf-90); }
   .quest-counter-check { display: none; color: #2E7D32; }
   .quest-counter.done .quest-counter-check { display: block; }
 
@@ -655,6 +655,29 @@
   .firma-frame { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 24px; min-height: 380px; margin-top: 24px; background: var(--wf-10); border: 1px solid var(--wf-20); border-radius: 12px; padding: 48px 24px; }
   .firma-frame-label { font-size: 18px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--wf-100); }
   .firma-frame .loading-spinner { margin-bottom: 0; }
+
+  /* Derogación de carencias (QW#24): docs necesarios + subida opcional */
+  .deroga-docs { margin: 24px 0; }
+  .deroga-docs-title { font-size: 14px; font-weight: 400; color: var(--wf-90); line-height: 1.5; margin: 0 0 14px; }
+  .deroga-docs-title span { color: var(--wf-60); }
+  .deroga-doc-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--wf-90); line-height: 1.45; }
+  .deroga-doc-item + .deroga-doc-item { margin-top: 10px; }
+  .deroga-doc-item svg { flex-shrink: 0; margin-top: 1px; color: var(--wf-60); }
+  .deroga-doc-item strong { color: var(--wf-100); font-weight: 600; }
+  .deroga-upload-title { font-size: 14px; font-weight: 700; color: var(--wf-100); margin: 0 0 12px; }
+  .deroga-upload-title span { font-weight: 400; color: var(--wf-60); }
+  .upload-box { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 28px 20px; border: 1.5px dashed var(--wf-40); border-radius: 12px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .upload-box:hover { border-color: var(--wf-60); background: var(--wf-10); }
+  .upload-box svg { color: var(--wf-60); }
+  .upload-box-text { font-size: 14px; color: var(--wf-90); }
+  .upload-box-text strong { color: var(--wf-100); font-weight: 700; }
+  .upload-box-hint { font-size: 12px; color: var(--wf-60); }
+  .upload-files { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .upload-chip { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--wf-0); border: 1px solid var(--wf-40); border-radius: 8px; font-size: 14px; color: var(--wf-100); }
+  .upload-chip svg { flex-shrink: 0; color: var(--wf-60); }
+  .upload-chip-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .upload-chip-remove { flex-shrink: 0; background: none; border: none; cursor: pointer; color: var(--wf-60); padding: 4px; display: flex; }
+  .upload-chip-remove:hover { color: var(--wf-100); }
   .racc-body p { font-size: 14px; font-weight: 400; color: var(--wf-90); margin: 0 0 6px; line-height: 1.5; }
   .racc-body p:last-child { margin-bottom: 16px; }
 
@@ -2137,6 +2160,50 @@
         </div>
       </div>
 
+      <!-- CONTRATACIÓN · step16 · ¿Seguro con otra compañía? (portabilidad) -->
+      <div class="step" id="cOtra">
+        <h1 class="step-title">¿Tienes seguro de salud con otra compañía?</h1>
+        <p class="step-subtitle">Si vienes de otra aseguradora, podemos eliminar tus carencias para que uses el seguro desde el primer día.</p>
+        <div class="date-list" style="margin-top:24px;">
+          <label class="date-card" onclick="comesFromOther=true; nextContrat();">
+            <span class="date-label">Sí, tengo un seguro activo</span>
+          </label>
+          <label class="date-card" onclick="comesFromOther=false; nextContrat();">
+            <span class="date-label">No, soy nuevo asegurado</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- CONTRATACIÓN · step17 · Derogación de carencias (QW#24 · solo si viene de otra compañía) -->
+      <div class="step" id="cDerogacion">
+        <h1 class="step-title">¡Estás a un paso de proteger tu salud!</h1>
+        <p class="step-subtitle">Como vienes de otra aseguradora, podemos eliminar los periodos de carencia para que disfrutes de tu seguro <strong>desde el primer día</strong>.</p>
+        <div class="deroga-docs">
+          <p class="deroga-docs-title">¿Tienes a mano estos documentos? Súbelos ahora o más tarde:</p>
+          <div class="deroga-doc-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>Tu <strong>póliza anterior</strong> o la <strong>tarjeta sanitaria</strong> donde conste la fecha de alta.</span>
+          </div>
+          <div class="deroga-doc-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>El <strong>último recibo</strong> de tu seguro de salud anterior.</span>
+          </div>
+        </div>
+        <div class="deroga-upload">
+          <label class="upload-box" onclick="fakeUpload(event)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span class="upload-box-text">Arrastra o <strong>selecciona tus archivos</strong></span>
+            <span class="upload-box-hint">PDF o imagen · máx. 10 MB por archivo</span>
+          </label>
+          <div class="upload-files" id="derogaFiles"></div>
+          <div class="cp-info" style="margin-top:12px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>La documentación tendrá que ser validada. Si prefieres, también puedes enviárnosla más tarde a <strong>web@fiatc.es</strong>.</span>
+          </div>
+        </div>
+        <button class="btn-primary" id="derogaCta" onclick="nextContrat()">Prefiero enviarlos más tarde</button>
+      </div>
+
     </div>
     <!-- PIE LEGAL (dentro del scroll, al final del contenido) -->
     <footer class="legal-footer">
@@ -3466,6 +3533,7 @@
     // cDerogacion (camino "sí, otra compañía") y cAseg2 son condicionales.
     const CONTRAT_FLOW = ['cDatos', 'cContacto', 'cDireccion', 'cAseg1', 'cAseg2', 'cCuestionario', 'cFirma', 'cOtra', 'cDerogacion', 'cPago', 'cAntes', 'cTPV', 'cConfirm'];
     let contratIdx = 0;
+    let comesFromOther = false; // ¿viene de otra compañía? (cOtra) → decide si pasa por cDerogacion
     function startContratacion() {
       /* Copia la card del seguro desde "Me interesa" al resumen flotante */
       document.getElementById('resumenName').textContent = document.getElementById('interesName').textContent;
@@ -3545,11 +3613,35 @@
       updateResumen();
       if (id === 'cFirma') startFirmaSim(); // firma simulada: 5 s y avanza solo
     }
-    function nextContrat() { const n = CONTRAT_FLOW[contratIdx + 1]; if (n && document.getElementById(n)) showContrat(n); }
+    function nextContrat() {
+      let i = contratIdx + 1;
+      while (CONTRAT_FLOW[i] === 'cDerogacion' && !comesFromOther) i++; // salta derogación si no viene de otra compañía
+      const n = CONTRAT_FLOW[i];
+      if (n && document.getElementById(n)) showContrat(n);
+    }
     function prevContrat() {
       if (contratIdx <= 0) { backToResults(); return; }
-      const p = CONTRAT_FLOW[contratIdx - 1];
+      let i = contratIdx - 1;
+      while (CONTRAT_FLOW[i] === 'cDerogacion' && !comesFromOther) i--;
+      const p = CONTRAT_FLOW[i];
       if (p) showContrat(p);
+    }
+    /* Subida opcional de docs de derogación (wireframe: simula adjuntar un archivo) */
+    function fakeUpload(e) {
+      e.preventDefault();
+      const box = document.getElementById('derogaFiles');
+      const n = box.children.length + 1;
+      const chip = document.createElement('div');
+      chip.className = 'upload-chip';
+      chip.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span class="upload-chip-name">documento-' + n + '.pdf</span><button type="button" class="upload-chip-remove" aria-label="Quitar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>';
+      chip.querySelector('.upload-chip-remove').addEventListener('click', () => { chip.remove(); updateDerogaCta(); });
+      box.appendChild(chip);
+      updateDerogaCta();
+    }
+    /* CTA de derogación: sin archivos → "Prefiero enviarlos más tarde"; con archivos → "Continuar" */
+    function updateDerogaCta() {
+      const has = document.getElementById('derogaFiles').children.length > 0;
+      document.getElementById('derogaCta').textContent = has ? 'Continuar' : 'Prefiero enviarlos más tarde';
     }
     function backToResults() {
       contractMode = false;
