@@ -562,6 +562,8 @@
   @media (min-width: 900px) {
     .app-header.contrat .hcart { display: flex; }
     .app-header.contrat .hactions-sep { display: block; }
+    /* En confirmación el resumen solo se abre desde la card central: sin carrito de cabecera */
+    .app-header.contrat.no-cart .hcart, .app-header.contrat.no-cart .hactions-sep { display: none; }
   }
 
   /* Card del seguro dentro del resumen (mismo estilo que "Me interesa") */
@@ -738,27 +740,36 @@
   .tpv-legal { font-size: 12px; color: var(--wf-60); line-height: 1.5; margin: 16px 0 0; }
   /* cConfirm: confirmación aligerada (docs por email, priorizar app) */
   .confirm-hero { text-align: center; margin-bottom: 24px; }
-  .confirm-hero-icon { width: 60px; height: 60px; border-radius: 50%; background: var(--wf-90); color: var(--wf-0); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-  .confirm-summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--wf-20); border-radius: 12px; padding: 14px 16px; margin: 0 0 4px; }
+  .confirm-hero-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--wf-90); color: var(--wf-0); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+  .confirm-summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0; }
+  @media (max-width: 600px) { .confirm-summary { align-items: flex-end; } }
   .confirm-poliza { display: flex; flex-direction: column; }
   .confirm-poliza-label { font-size: 13px; color: var(--wf-90); }
-  .confirm-poliza-num { font-size: 16px; font-weight: 700; color: var(--wf-100); margin-top: 2px; }
+  .confirm-poliza-num { font-size: 14px; font-weight: 700; color: var(--wf-100); margin-top: 2px; }
+  @media (min-width: 601px) { .confirm-poliza { flex-direction: row; align-items: baseline; gap: 8px; } .confirm-poliza-num { margin-top: 0; } }
   /* Stepper de la confirmación: contratado → firma del contrato → app */
   .confirm-stepper { margin: 0 0 8px; }
   .confirm-step-row { display: flex; gap: 14px; }
-  .confirm-step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
-  .confirm-step-dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--wf-40); background: var(--wf-0); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--wf-90); }
+  .confirm-step-row:not(:last-child) { margin-bottom: 16px; }
+  .confirm-step-left { position: relative; flex-shrink: 0; width: 26px; display: flex; flex-direction: column; align-items: center; }
+  .confirm-step-dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--wf-40); background: var(--wf-0); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--wf-90); margin-top: 14px; position: relative; z-index: 1; }
   .confirm-step-dot.done { background: var(--wf-90); border-color: var(--wf-90); color: var(--wf-0); }
-  .confirm-step-line { flex: 1; width: 2px; background: var(--wf-30); margin: 4px 0; }
-  .confirm-step-body { flex: 1; min-width: 0; padding-bottom: 28px; }
-  .confirm-step-row:last-child .confirm-step-body { padding-bottom: 0; }
-  .confirm-step-head { font-size: 16px; font-weight: 700; color: var(--wf-100); margin: 2px 0 10px; }
+  /* La línea conecta hasta el número siguiente (cruza el hueco entre cards) */
+  .confirm-step-line { position: absolute; left: 12px; top: 44px; bottom: -30px; width: 2px; background: var(--wf-30); }
+  .confirm-step-body { flex: 1; min-width: 0; background: var(--wf-0); border: 1px solid var(--wf-30); border-radius: 12px; padding: 16px; }
+  /* Primera card = paso ya hecho: borde más marcado */
+  .confirm-step-row:first-child .confirm-step-body { border-width: 2px; border-color: var(--wf-40); }
+  .confirm-step-headrow { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .confirm-step-head { font-size: 16px; font-weight: 700; color: var(--wf-100); margin: 0; }
   .confirm-step-desc { font-size: 14px; color: var(--wf-90); line-height: 1.45; margin: 0 0 12px; }
+  .confirm-step-desc:last-child { margin-bottom: 0; }
   .confirm-step-desc strong { color: var(--wf-100); font-weight: 700; }
-  .confirm-step-body .btn-primary { margin-top: 0; width: auto; display: inline-flex; padding-left: 24px; padding-right: 24px; }
-  .confirm-firma-tag { display: inline-block; font-size: 12px; font-weight: 700; color: #92400E; background: #FEF3C7; border-radius: 100px; padding: 3px 10px; margin-bottom: 10px; }
+  .confirm-step-body .btn-primary { margin-top: 0; width: auto; display: inline-flex; padding: 12px 24px; font-size: 14px; }
+  .confirm-firma-tag { flex-shrink: 0; margin-top: 2px; display: inline-block; font-size: 12px; font-weight: 700; color: #92400E; background: #FEF3C7; border-radius: 100px; padding: 3px 10px; }
+  .confirm-help-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 24px; }
+  @media (min-width: 601px) { .confirm-help-btn { width: fit-content; margin-left: auto; margin-right: auto; padding: 12px 24px; font-size: 14px; } }
   /* Modal descargar app (QR, desktop) */
-  .app-checks { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 4px 0 20px; }
+  .app-checks { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 4px 0 20px; }
   .app-checks li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--wf-90); line-height: 1.4; }
   .app-checks svg { flex-shrink: 0; color: var(--wf-90); margin-top: 1px; }
   .appqr-box { display: flex; align-items: center; gap: 20px; background: var(--wf-10); border: 1px solid var(--wf-30); border-radius: 12px; padding: 20px; margin: 4px 0 20px; }
@@ -767,6 +778,20 @@
   @media (max-width: 600px) { .appqr-box { flex-direction: column; align-items: flex-start; } }
   .app-detail-link { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 700; color: var(--wf-100); text-decoration: none; cursor: pointer; }
   .app-detail-link svg { color: var(--wf-60); }
+  /* Botones de store (solo mobile; sustituyen al QR). Placeholder en grises (la skill no trae el badge oficial). */
+  .app-stores { display: none; }
+  .store-btn { display: flex; align-items: center; justify-content: center; gap: 12px; background: var(--wf-100); color: var(--wf-0); border-radius: 10px; padding: 10px 18px; text-decoration: none; }
+  .store-btn svg { flex-shrink: 0; }
+  .store-btn-text { display: flex; flex-direction: column; line-height: 1.15; }
+  .store-btn-text small { font-size: 11px; font-weight: 400; }
+  .store-btn-text strong { font-size: 17px; font-weight: 700; }
+  @media (max-width: 600px) {
+    .appqr-box { display: none; }
+    .app-actions { display: flex; align-items: center; gap: 32px; margin-top: 4px; }
+    .app-stores { display: block; flex: 1; }
+    .app-stores .store-btn { width: 100%; }
+    .app-detail-link { flex-shrink: 0; }
+  }
   /* Bloque de ayuda del KO: caja blanca, mismo ancho que el contenido, con más padding lateral */
   #cKO .faq-help { margin: 28px 0 0; padding: 24px 28px; background: var(--wf-0); border: 1px solid var(--wf-30); border-radius: 12px; }
   @media (min-width: 601px) { #cKO .faq-help { margin-left: 0; margin-right: 0; padding-left: 28px; padding-right: 28px; } }
@@ -2497,10 +2522,10 @@
       <div class="step" id="cConfirm">
         <div class="confirm-hero">
           <span class="confirm-hero-icon">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
           <h1 class="step-title">¡Ya eres de FIATC, María!</h1>
-          <p class="step-subtitle">Tu seguro está contratado. La cobertura empieza el <strong>1 de agosto de 2026</strong>.</p>
+          <p class="step-subtitle">La cobertura empieza el <strong>1 de agosto de 2026</strong>.</p>
         </div>
         <div class="confirm-stepper">
           <div class="confirm-step-row">
@@ -2509,7 +2534,9 @@
               <div class="confirm-step-line"></div>
             </div>
             <div class="confirm-step-body">
-              <p class="confirm-step-head">Tu seguro ya está contratado</p>
+              <div class="confirm-step-headrow">
+                <p class="confirm-step-head">Tu seguro de salud ya está contratado</p>
+              </div>
               <div class="confirm-summary">
                 <div class="confirm-poliza">
                   <span class="confirm-poliza-label">Número de póliza</span>
@@ -2528,9 +2555,11 @@
               <div class="confirm-step-line"></div>
             </div>
             <div class="confirm-step-body">
-              <span class="confirm-firma-tag">Pendiente</span>
-              <p class="confirm-step-head">Firma tu contrato</p>
-              <p class="confirm-step-desc">Te enviaremos un correo a <strong>maria@gmail.com</strong> con tu documentación y el contrato para firmar. Firmarlo es el <strong>último paso para activar tu seguro</strong>.</p>
+              <div class="confirm-step-headrow">
+                <p class="confirm-step-head">Firma tu contrato para activar tu seguro</p>
+                <span class="confirm-firma-tag">Pendiente</span>
+              </div>
+              <p class="confirm-step-desc">Recibirás un correo a <strong>maria@gmail.com</strong> con tu documentación y contrato para firmar.</p>
             </div>
           </div>
           <div class="confirm-step-row">
@@ -2538,7 +2567,10 @@
               <div class="confirm-step-dot">3</div>
             </div>
             <div class="confirm-step-body">
-              <p class="confirm-step-head">Descarga la app de FIATC</p>
+              <div class="confirm-step-headrow">
+                <p class="confirm-step-head">Descarga la app de FIATC</p>
+                <span class="confirm-firma-tag">Pendiente</span>
+              </div>
               <p class="confirm-step-desc">Date de alta, gestiona tu seguro, pide cita y consulta tu cuadro médico desde el móvil.</p>
               <button class="btn-primary" onclick="openApp()">Descargar la app</button>
             </div>
@@ -2547,14 +2579,16 @@
         <div class="faq-pills-section">
           <p class="faq-pills-title">¿Tienes dudas sobre los próximos pasos?</p>
           <div class="faq-pills">
-            <button class="faq-pill" onclick="openFaq('confirmacion', 5)">¿Qué me falta por firmar?</button>
-
-            <button class="faq-pill" onclick="openFaq('confirmacion', 0)">¿Cuándo recibo la tarjeta?</button>
-            <button class="faq-pill" onclick="openFaq('confirmacion', 2)">¿Cuándo es el primer cargo?</button>
+            <button class="faq-pill" onclick="openFaq('confirmacion', 0)">¿Qué me falta por firmar?</button>
+            <button class="faq-pill" onclick="openFaq('confirmacion', 1)">¿Cuándo recibo la tarjeta?</button>
+            <button class="faq-pill" onclick="openFaq('confirmacion', 3)">¿Cuándo es el primer cargo?</button>
             <button class="faq-pill" onclick="openFaq('confirmacion', 0)">Ver todas</button>
           </div>
         </div>
-        <button class="btn-ghost" style="width:100%; justify-content:center; margin-top:24px;" onclick="openHablemos()">¿Tienes dudas? Hablemos</button>
+        <button class="btn-ghost confirm-help-btn" onclick="openHablemos()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Te ayudamos
+        </button>
       </div>
 
     </div>
@@ -3295,11 +3329,13 @@
       </button>
       <div class="side-modal-body">
         <h2 class="hablemos-title">Descarga la app de FIATC</h2>
-        <p class="hablemos-subtitle">Gestiona tu seguro de salud desde el móvil:</p>
+        <p class="hablemos-subtitle">Gestiona tu salud desde el móvil:</p>
         <ul class="app-checks">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Pide cita con tu cuadro médico</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Sigue el estado de tus partes</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Consulta y gestiona tu póliza</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Pide cita con tu cuadro médico</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Chat médico y videoconsulta</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg><span>Solicita autorizaciones médicas</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><span>Tu tarjeta digital, siempre a mano</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg><span>Tu experto en nutrición</span></li>
         </ul>
         <div class="appqr-box">
           <svg class="appqr-code" viewBox="0 0 164 164" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -3314,10 +3350,22 @@
           </svg>
           <p class="appqr-caption">Escanea el código con la cámara de tu móvil para descargar la app.</p>
         </div>
-        <a class="app-detail-link" href="#" onclick="return false;">
-          Ver más detalles de la app
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
+        <div class="app-actions">
+          <div class="app-stores">
+            <a class="store-btn" id="storeApple" href="#" onclick="return false;" aria-label="Descárgalo en el App Store">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.08l-.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+              <span class="store-btn-text"><small>Descárgalo en el</small><strong>App Store</strong></span>
+            </a>
+            <a class="store-btn" id="storeGoogle" href="#" onclick="return false;" aria-label="Disponible en Google Play">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.2.2-.32.52-.32.92v17.76c0 .4.12.72.33.92l.06.05L13.7 12v-.02L3.66 2.15l-.06.05zM17.05 15.35l-3.35-3.34v-.02l3.35-3.34.08.04 3.96 2.25c1.13.64 1.13 1.69 0 2.34l-3.96 2.25-.08.03zM12.7 12.98L3.66 21.8c.37.4.98.45 1.67.06l10.72-6.09-3.35-2.79zM16.05 8.66L5.33 2.57c-.69-.39-1.3-.34-1.67.06l9.04 8.82 3.35-2.79z"/></svg>
+              <span class="store-btn-text"><small>Disponible en</small><strong>Google Play</strong></span>
+            </a>
+          </div>
+          <a class="app-detail-link" href="#" onclick="return false;">
+            Ver más detalles
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
       </div>
     </aside>
   </div>
@@ -3343,7 +3391,7 @@
       updateStep0StickyBar();
       // Volver a tarificación cierra la contratación: sin resumen flotante
       contractMode = false;
-      document.querySelector('.app-header').classList.remove('contrat');
+      document.querySelector('.app-header').classList.remove('contrat', 'no-cart');
       document.querySelector('.app-header-title').textContent = 'Calcula tu seguro de salud';
       document.getElementById('resumenFab').classList.remove('visible');
       document.body.classList.remove('resumen-active');
@@ -3600,12 +3648,12 @@
         { q: '¿Rellenar el cuestionario me obliga a contratar?', a: 'No. Completarlo no te compromete: puedes no seguir con la contratación cuando quieras.' },
       ],
       confirmacion: [
+        { q: '¿Qué me falta por firmar?', a: 'Te enviaremos por email el contrato para firmar; es el último paso para activar tu seguro. Hasta que no lo firmes, no podrás usar la app.' },
         { q: '¿Cuándo recibo la tarjeta?', a: 'Al contratar recibes tu tarjeta digital enseguida; la física llega más adelante. Puedes usar el seguro aunque todavía no tengas la tarjeta física.' },
         { q: '¿Cómo uso el seguro sin la tarjeta física?', a: 'Con la tarjeta digital, desde tu área privada o la app, puedes identificarte en los centros desde el primer día.' },
         { q: '¿Cuándo es el primer cargo?', a: 'El primer cargo se hace al emitir la póliza, cuando confirmas el pago. Los siguientes se cobran según la periodicidad que elegiste, con la misma tarjeta.' },
         { q: '¿Cómo consulto el cuadro médico?', a: 'Desde tu área privada o la app consultas el cuadro médico de profesionales y centros de tu zona.' },
         { q: '¿Cómo pido cita?', a: 'Desde el área privada o la app puedes pedir cita con los profesionales y centros disponibles; también por teléfono.' },
-        { q: '¿Qué me falta por firmar?', a: 'Te enviaremos por email el contrato para firmar; es el último paso para activar tu seguro. Hasta que no lo firmes, no podrás usar la app.' },
       ],
     };
     const FAQ_VISIBLE = { resultados: 4, asegurados: 2, cuestionario: 5, confirmacion: 6 }; // cuántas se ven antes del "Ver más"
@@ -4011,7 +4059,10 @@
     }
     /* Botón "Descargar la app": mobile → app store; desktop → modal con QR */
     function openApp() {
-      if (window.matchMedia('(max-width: 600px)').matches) return; // mobile: aquí iría el enlace a la App Store / Google Play
+      // Mobile: bottom-sheet con UN botón de store según el SO (el QR se oculta por CSS). Desktop: QR.
+      const android = /android/i.test(navigator.userAgent);
+      document.getElementById('storeApple').style.display = android ? 'none' : '';
+      document.getElementById('storeGoogle').style.display = android ? '' : 'none';
       document.getElementById('appModal').classList.add('open');
     }
     function closeApp() { document.getElementById('appModal').classList.remove('open'); }
@@ -4117,8 +4168,11 @@
       document.querySelector('.app-header').classList.add('show-back', 'contrat');
       document.querySelector('.app-header-title').textContent = 'Contratación 100% online';
       document.getElementById('appMain').scrollTop = 0;
-      document.getElementById('resumenFab').classList.add('visible');
-      document.body.classList.add('resumen-active');
+      // En cConfirm el resumen solo se abre desde la card central (sin FAB ni carrito de cabecera)
+      const noCart = (id === 'cConfirm');
+      document.getElementById('resumenFab').classList.toggle('visible', !noCart);
+      document.body.classList.toggle('resumen-active', !noCart);
+      document.querySelector('.app-header').classList.toggle('no-cart', noCart);
       updateResumen();
       if (id === 'cFirma') startFirmaSim(); // firma simulada: 5 s y avanza solo
       if (id === 'cAntes') fillAntes();     // resumen del cargo según la forma de pago
@@ -4156,7 +4210,7 @@
     }
     function backToResults() {
       contractMode = false;
-      document.querySelector('.app-header').classList.remove('contrat');
+      document.querySelector('.app-header').classList.remove('contrat', 'no-cart');
       document.querySelector('.app-header-title').textContent = 'Calcula tu seguro de salud';
       document.getElementById('resumenFab').classList.remove('visible');
       document.body.classList.remove('resumen-active');
