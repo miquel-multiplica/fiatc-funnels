@@ -5,6 +5,29 @@
 
 Evoluciona el prototipo original `wireframe_propuesta.html` (documentado en `PROTOTIPO-PROPUESTA.md`), reutilizando piezas de UX/copy **sin** la carcasa de iPhone ni el chatbot.
 
+### `funnel-salud-estilos-app.html` — prueba de estilos (NO es el archivo activo)
+Copia del funnel con el design system del área privada de FIATC aplicado, para
+validar el salto de wireframe a marca. Toda la traducción vive en un único bloque
+`<style id="tema-app">` al final del `<head>`: solo presentación, sin tocar markup
+ni JS, para que siga siendo diffeable contra el original.
+
+- **Alcance**: step0 · stepCP · step1 · step2 · step4 · step5 · stepDNI · step6 ·
+  step6b · stepRecover · loading. Resultados (step7) y contratación siguen en
+  wireframe a propósito.
+- **Fuente**: `css app/style_app.css` (Bootstrap 5 + capa `app-*`). Está en
+  `.gitignore`: es CSS interno del cliente y el repo es público. Si hay que
+  releerlo, ojo con la última línea — es un sourcemap base64 de 960 KB.
+- **Regla de affordance** (desviación deliberada del DS, que pone los h2–h6 en
+  azul y confunde texto con enlace): `#2F5595` azul = clicable · `#041e42` navy =
+  titulares · `#7C878E` gris = decorativo · `#DA291C` rojo = progreso y badges
+  (es el acento de "activo" del DS, distinto del `#d04437` de error).
+- **Regla de cajas**: azul claro `#CEE1F2` sin borde y sin ancho completo =
+  informativo · blanco con borde `#C5CBD2` y ancho completo = seleccionable.
+
+Si el cliente valida el tema, el camino es portarlo a `funnel-salud-quickwins.html`
+y retirar esta copia; mientras siga siendo una prueba, no dividir el trabajo entre
+los dos archivos.
+
 ## Base de conocimiento (inputs de la inmersión — NO editar como diario)
 `README.md`, `00-contexto.md`, `01-embudo-y-datos.md`, `02-hallazgos-clave.md`, `03-backlog-quickwins.md` (26 quick wins priorizados). Fuente canónica del proyecto; leer ahí antes de decidir. Prioridad = página de resultados (fuga 63-72%).
 
