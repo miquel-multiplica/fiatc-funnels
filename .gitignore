@@ -2,3 +2,7 @@ wireframe_mobile_generico.html
 .DS_Store
 .claude/
 pruebas-descartadas/
+# Design system interno de FIATC (área privada). El repo es público y este CSS
+# no es nuestro: se consulta en local, no se publica. El tema ya va inline en
+# funnel-salud-estilos-app.html.
+css app/
