@@ -766,8 +766,13 @@
   .confirm-step-desc strong { color: var(--wf-100); font-weight: 700; }
   .confirm-step-body .btn-primary { margin-top: 0; width: auto; display: inline-flex; padding: 12px 24px; font-size: 14px; }
   .confirm-firma-tag { flex-shrink: 0; margin-top: 2px; display: inline-block; font-size: 12px; font-weight: 700; color: #92400E; background: #FEF3C7; border-radius: 100px; padding: 3px 10px; }
-  .confirm-help-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 24px; }
-  @media (min-width: 601px) { .confirm-help-btn { width: fit-content; margin-left: auto; margin-right: auto; padding: 12px 24px; font-size: 14px; } }
+  /* Acción terciaria: no debe pesar como el CTA de descargar la app, así que baja de
+     escala y no ocupa el ancho completo (heredaba los 52px de .btn-ghost). */
+  .confirm-help-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: fit-content; margin: 24px auto 0; padding: 10px 18px; font-size: 14px;
+  }
+  @media (min-width: 601px) { .confirm-help-btn { padding: 12px 24px; } }
   /* Modal descargar app (QR, desktop) */
   .app-checks { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 4px 0 32px; }
   .app-checks li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--wf-90); line-height: 1.4; }
@@ -2509,7 +2514,7 @@
                 </div>
                 <div class="tpv-actions">
                   <button class="btn-ghost" onclick="prevContrat()">Cancelar</button>
-                  <button class="btn-primary" onclick="nextContrat()">Pagar</button>
+                  <button class="btn-primary" onclick="payAndConfirm()">Pagar</button>
                 </div>
               </div>
             </div>
@@ -3434,6 +3439,7 @@
       document.querySelector('.app-header').classList.remove('show-back');
       document.getElementById('progressFill').style.width = '100%';
       const ld = document.getElementById('stepLoading');
+      ld.querySelector('.loading-title').textContent = 'Ya lo tenemos...'; // el pago y el recálculo mutan este título
       ld.classList.add('active');
       document.getElementById('appMain').scrollTop = 0;
       const texts = ['Médico en 24h, sin desplazarte...', 'Teleconsulta incluida en tu plan...', 'Calculando el precio para ti...', 'Casi listo...'];
@@ -4072,6 +4078,35 @@
     function startFirmaSim() {
       clearTimeout(_firmaTimer);
       _firmaTimer = setTimeout(() => { if (document.getElementById('cFirma').classList.contains('active')) nextContrat(); }, 5000);
+    }
+
+    /* ── Pago: TPV → loading → confirmación. Mismo loading que el previo a resultados.
+       Oculta atrás, carrito y FAB: con un cobro en vuelo no hay marcha atrás. */
+    function payAndConfirm() {
+      document.querySelectorAll('.step, .step-loading').forEach(s => s.classList.remove('active'));
+      document.querySelector('.app-header').classList.remove('show-back');
+      document.querySelector('.app-header').classList.add('no-cart');
+      document.getElementById('resumenFab').classList.remove('visible');
+      document.body.classList.remove('resumen-active');
+      document.getElementById('progressFill').style.width = '97%';
+      const ld = document.getElementById('stepLoading');
+      ld.querySelector('.loading-title').textContent = 'Estamos confirmando tu pago';
+      ld.classList.add('active');
+      document.getElementById('appMain').scrollTop = 0;
+      const texts = ['Autorizando el pago con tu banco...', 'Emitiendo tu póliza...', 'No cierres esta página, ya casi está...'];
+      let idx = 0;
+      const textEl = document.getElementById('loadingText');
+      textEl.textContent = texts[0];
+      textEl.classList.remove('fade');
+      const interval = setInterval(function () {
+        textEl.classList.add('fade');
+        setTimeout(function () { idx = (idx + 1) % texts.length; textEl.textContent = texts[idx]; textEl.classList.remove('fade'); }, 400);
+      }, 1600);
+      setTimeout(function () {
+        clearInterval(interval);
+        ld.classList.remove('active');
+        showContrat('cConfirm');
+      }, 4800);
     }
     function openResumen() { const m = document.getElementById('resumenModal'); m.querySelector('.side-modal-body').scrollTop = 0; m.classList.add('open'); }
     function closeResumen() { document.getElementById('resumenModal').classList.remove('open'); }
