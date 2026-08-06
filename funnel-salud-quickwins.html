@@ -786,8 +786,6 @@
   .appqr-code { flex-shrink: 0; display: block; width: 140px; height: 140px; }
   .appqr-caption { font-size: 16px; color: var(--wf-90); line-height: 1.5; margin: 0; }
   @media (max-width: 600px) { .appqr-box { flex-direction: column; align-items: flex-start; } }
-  .app-detail-link { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 700; color: var(--wf-100); text-decoration: none; cursor: pointer; }
-  .app-detail-link svg { color: var(--wf-60); }
   /* Botones de store (solo mobile; sustituyen al QR). Placeholder en grises (la skill no trae el badge oficial). */
   .app-stores { display: none; }
   .store-btn { display: flex; align-items: center; justify-content: center; gap: 12px; background: var(--wf-100); color: var(--wf-0); border-radius: 10px; padding: 10px 18px; text-decoration: none; }
@@ -797,10 +795,10 @@
   .store-btn-text strong { font-size: 17px; font-weight: 700; }
   @media (max-width: 600px) {
     .appqr-box { display: none; }
-    .app-actions { display: flex; align-items: center; gap: 32px; margin-top: 4px; }
-    .app-stores { display: block; flex: 1; }
+    /* Solo se muestra el botón del store del SO (lo decide openApp), a todo el ancho */
+    .app-actions { margin-top: 4px; }
+    .app-stores { display: block; }
     .app-stores .store-btn { width: 100%; }
-    .app-detail-link { flex-shrink: 0; }
   }
   /* Bloque de ayuda del KO: caja blanca, mismo ancho que el contenido, con más padding lateral */
   #cKO .faq-help { margin: 28px 0 0; padding: 24px 28px; background: var(--wf-0); border: 1px solid var(--wf-30); border-radius: 12px; }
@@ -3422,10 +3420,6 @@
               <span class="store-btn-text"><small>Disponible en</small><strong>Google Play</strong></span>
             </a>
           </div>
-          <a class="app-detail-link" href="#" onclick="return false;">
-            Ver más detalles
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </a>
         </div>
       </div>
     </aside>
