@@ -1088,9 +1088,7 @@
 
   /* Franjas horarias del agendar (reutilizado de wireframe_propuesta.html) */
   .call-slot-label { display: block; font-size: 14px; font-weight: 600; color: var(--wf-90); margin: 20px 0 10px; }
-  .call-slots { display: flex; flex-direction: column; gap: 6px; }
-  .slot-turno { font-size: 14px; font-weight: 400; color: var(--wf-90); margin-top: 6px; }
-  .slot-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .call-slots { display: flex; flex-wrap: wrap; gap: 8px; }
   .call-chip {
     padding: 10px 14px; border-radius: 100px;
     border: 1.5px solid var(--wf-40); background: var(--wf-0);
@@ -2809,20 +2807,15 @@
           </div>
 
           <span class="call-slot-label">¿Cuándo te llamamos?</span>
-          <!-- Agrupado por turno con las horas como chips: 5 franjas en 2 filas en vez de
-               5, y sin esconder ninguna detrás de una pestaña. -->
+          <!-- Sin agrupar por turno: las horas ya dicen si es mañana o tarde, así que las
+               etiquetas eran dos filas de texto redundante. El turno sí se conserva en
+               data-slot, que es donde aporta: la frase de la confirmación. -->
           <div class="call-slots" style="margin-bottom:20px;">
-            <span class="slot-turno">Mañana</span>
-            <div class="slot-chips">
-              <button type="button" class="call-chip selected" onclick="selectSlot(this)" data-slot="por la mañana, de 10h a 12h">10h a 12h</button>
-              <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la mañana, de 12h a 14h">12h a 14h</button>
-            </div>
-            <span class="slot-turno">Tarde</span>
-            <div class="slot-chips">
-              <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la tarde, de 14h a 16h">14h a 16h</button>
-              <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la tarde, de 16h a 18h">16h a 18h</button>
-              <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la tarde, de 18h a 20h">18h a 20h</button>
-            </div>
+            <button type="button" class="call-chip selected" onclick="selectSlot(this)" data-slot="por la mañana, de 10h a 12h">10h a 12h</button>
+            <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la mañana, de 12h a 14h">12h a 14h</button>
+            <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la tarde, de 14h a 16h">14h a 16h</button>
+            <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la tarde, de 16h a 18h">16h a 18h</button>
+            <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la tarde, de 18h a 20h">18h a 20h</button>
           </div>
 
           <button class="btn-primary" style="margin-top:4px;" onclick="hablemosConfirm()">Agendar llamada</button>
