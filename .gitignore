@@ -6,3 +6,5 @@ pruebas-descartadas/
 # no es nuestro: se consulta en local, no se publica. El tema ya va inline en
 # funnel-salud-estilos-app.html.
 css app/
+# Prueba de estilos con el DS del cliente: no se publica (repo público)
+funnel-salud-estilos-app.html
