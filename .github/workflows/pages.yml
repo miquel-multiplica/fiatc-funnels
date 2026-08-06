@@ -25,9 +25,61 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      # Deja constancia de QUÉ se publica. Si un deploy se atasca, lo primero que
+      # hay que descartar es que el artefacto sea enorme o traiga algo raro.
+      - name: Inventario de lo que se publica
+        run: |
+          echo "::group::Recuento y peso"
+          echo "archivos: $(find . -type f -not -path './.git/*' -not -path './.github/*' | wc -l)"
+          echo "peso total: $(du -sh --exclude=.git --exclude=.github . | cut -f1)"
+          echo "::endgroup::"
+          echo "::group::Los 15 más grandes"
+          find . -type f -not -path './.git/*' -not -path './.github/*' -printf '%10s  %p\n' | sort -rn | head -15
+          echo "::endgroup::"
+          echo "::group::Nombres problemáticos (espacios, no-ASCII)"
+          find . -type f -not -path './.git/*' -not -path './.github/*' | grep -P '[^\x20-\x7E]|\s' || echo "ninguno"
+          echo "::endgroup::"
+
       - uses: actions/configure-pages@v5
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
+
+      # Estado de Pages ANTES de desplegar: si ya viene en "building" o "errored"
+      # de un intento anterior, el nuestro se va a quedar esperando.
+      - name: Estado de Pages antes del deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api repos/${{ github.repository }}/pages || echo "(sin datos)"
+
+      # timeout de 5 min en vez de los 10 por defecto: si el backend está atascado
+      # preferimos saberlo pronto y no tener el job ocupado media hora.
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 300000
+          error_count: 5
+
+      # Lo que faltaba hoy: el action solo repite "Current status" sin decir por qué.
+      # Esto pregunta a la API por el estado real del sitio y del deployment.
+      - name: Diagnóstico (siempre, sobre todo si falla)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "::group::Estado del sitio"
+          gh api repos/${{ github.repository }}/pages || echo "(sin datos)"
+          echo "::endgroup::"
+          echo "::group::Deployment de este commit"
+          gh api repos/${{ github.repository }}/pages/deployments/${{ github.sha }} || echo "(sin datos)"
+          echo "::endgroup::"
+          echo "::group::Últimos deployments del entorno"
+          gh api "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=5" \
+            --jq '.[] | "\(.id) \(.sha[0:7]) \(.created_at)"' || echo "(sin datos)"
+          echo "::endgroup::"
+          echo "::group::¿Sirve algo la URL?"
+          curl -sS -o /tmp/live.html -w 'HTTP %{http_code} · %{size_download} bytes\n' \
+            "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name || 'fiatc-funnels' }}/funnel-salud-quickwins.html" || true
+          echo "::endgroup::"
