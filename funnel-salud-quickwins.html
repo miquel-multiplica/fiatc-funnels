@@ -447,6 +447,11 @@
   .promo-banner-text strong { display: block; font-size: 18px; font-weight: 700; color: var(--wf-100); line-height: 1.2; }
   .promo-banner-text span { font-size: 14px; color: var(--wf-90); }
   @media (min-width: 601px) { #step7 .promo-banner { max-width: 520px; margin-left: auto; margin-right: auto; } }
+  /* Desktop: el banner sube hacia el header (la columna trae 40px de padding) y deja
+     más aire hasta el título del paso. Solo si abre el paso, no en cualquier posición. */
+  @media (min-width: 601px) {
+    .step > .promo-banner:first-child { margin-top: -16px; margin-bottom: 32px; }
+  }
   .step-promo svg { flex-shrink: 0; color: var(--wf-100); }
 
   /* CTAs */
@@ -1256,7 +1261,9 @@
      La X del panel ya cae sobre la columna gris.
      ══════════════════════════════════════════ */
   @media (min-width: 901px) {
-    #faqModal.faq-2col .side-modal-panel { width: 920px; }
+    /* Panel ancho a propósito: la columna de preguntas necesita sitio para que los
+       enunciados largos no partan a dos líneas. */
+    #faqModal.faq-2col .side-modal-panel { width: 1060px; }
     #faqModal.faq-2col .side-modal-body {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 400px;
@@ -1267,9 +1274,7 @@
     /* El padding derecho es mayor que el izquierdo a propósito: la X ocupa de 16 a
        48px desde el borde, así que todo el bloque —no solo la cabecera— la esquiva. */
     #faqModal.faq-2col .faq-help {
-      /* padding-top 100 (no 40): alinea "¿Te ayudamos?" con el texto de la primera
-         pregunta, que cae a 109px del techo del panel por el título de la izquierda. */
-      margin: 0; padding: 100px 56px 32px 40px;
+      margin: 0; padding: 80px 56px 32px 40px;
       border-top: none; border-left: 1px solid var(--wf-30);
       overflow-y: auto;
     }
@@ -1277,8 +1282,9 @@
        leyendo. Pierde el borde para leerse como una pieza y no como una fila más. */
     /* Separadoras al mismo tono que la divisoria de columnas (--wf-30) */
     #faqModal.faq-2col .faq-item { padding: 0 16px; border-color: var(--wf-30); transition: background 0.34s cubic-bezier(0.4, 0, 0.2, 1); }
-    #faqModal.faq-2col .faq-item.open { background: var(--wf-10); border-bottom-color: transparent; }
-    #faqModal.faq-2col .faq-item.open + .faq-item { border-top: none; }
+    #faqModal.faq-2col .faq-item.open { background: var(--wf-10); }
+    /* Alinea "Ver más preguntas" con el texto de las preguntas (que van a 16px) */
+    #faqModal.faq-2col .faq-vermas { padding-left: 16px; }
   }
 
   /* Resultados en desktop: columna más ancha (clase results-wide en .app-main solo en step7),
