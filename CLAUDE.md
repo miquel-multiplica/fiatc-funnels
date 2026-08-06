@@ -70,3 +70,5 @@ Falta: pulido/feedback de cliente y las 4 decisiones abiertas de `FUNCIONAL.md` 
 - Solo variables `--wf-*` para color. SVGs inline. Sin emojis.
 - No añadir comentarios salvo que el WHY sea no obvio.
 - No commitear/push salvo que el usuario lo pida.
+- **Un push por tanda, no uno por ajuste.** Cada push encola un deploy de Pages y cancela el anterior; con pushes seguidos la cola se congestiona, algún deploy muere por timeout (`deployment_queued` en bucle → `Timeout reached`) y el sitio se queda sirviendo una versión antigua sin avisar.
+- **Verificar lo publicado con cache-buster y por tamaño**, no buscando una cadena: el CDN cachea 10 min (`max-age=600`). `curl -s -H 'Cache-Control: no-cache' "$URL?cb=$RANDOM"` y comparar `wc -c` con el archivo local. Los `.md` no pasan por Pages y se ven al instante en GitHub.
