@@ -40,7 +40,8 @@ añada una pantalla o un modal, o se cierre una de las decisiones abiertas.
 ## Principios de contenido
 - **Fidelidad de copy**: nada inventado; sale de guiones de ATC, web y área privada de FIATC.
 - **Dos audiencias en resultados** (~40% portabilidad "sin carencias desde el día uno" / ~59% primer seguro): mensaje dual condicional, no universal.
-- **Consentimiento granular por canal** (Ley ATC, oct 2026): opt-in por canal, trazable.
+- **Consentimiento granular por canal** (Ley ATC, oct 2026): opt-in por canal, trazable. Vive en `step6` (email). Ojo: es DISTINTO de la preferencia de canal de `step6b` ("¿Prefieres por WhatsApp?", para hablar de tu solicitud) — están separados a propósito y no deben juntarse. Ver `FUNCIONAL.md` §2.
+- **Enumerar, no negar**: para acotar el alcance de un permiso, decir para qué se usa, nunca "nada de publicidad" — una negación contradice a quien haya aceptado publi un paso antes.
 
 ## Arquitectura del archivo
 - Tokens de color: solo variables `--wf-0/10/20/30/40/60/90/100` (grises; 30 = `#DCE3EC`). Fuente Roboto. SVGs inline. Sin dependencias externas, sin emojis.

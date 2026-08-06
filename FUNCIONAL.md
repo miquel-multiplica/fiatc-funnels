@@ -55,8 +55,8 @@ PLANNED_FLOW = step0 · stepCP · step1 · step2 · step4 · step5 · [stepDNI] 
 | `step4` | Fecha de inicio de cobertura |
 | `step5` | ¿Ya eres cliente de FIATC? |
 | `stepDNI` | **Condicional**: solo si respondió que sí en `step5` |
-| `step6` | Email, con sugerencias de dominio |
-| `step6b` | Teléfono con prefijo internacional + consentimiento por canal |
+| `step6` | Email, con sugerencias de dominio + consentimiento comercial por canal |
+| `step6b` | Teléfono con prefijo internacional + preferencia de canal para la solicitud |
 | `step7` | Resultados |
 
 **Navegación**: `showStep` / `nextStep` / `prevStep` sobre `PLANNED_FLOW`.
@@ -65,10 +65,33 @@ PLANNED_FLOW = step0 · stepCP · step1 · step2 · step4 · step5 · [stepDNI] 
 **Fuera del flujo lineal**: `stepRecover` (recuperar un presupuesto guardado por email,
 entra directo a resultados).
 
-### Consentimiento por canal (`step6b`)
-Opt-in **independiente por canal** — email, WhatsApp, teléfono — cada uno con su toggle,
-no un consentimiento único. Responde a la Ley ATC 10/2025 (ver `project_ley_atc`): el
-consentimiento debe ser granular, revocable por canal y trazable.
+### Los dos permisos de WhatsApp, y por qué están en pantallas distintas
+Hay **dos cosas de naturaleza distinta** que ambas pasan por WhatsApp, y se piden por
+separado a propósito. Si convivieran en la misma pantalla se leerían como hermanas y
+nadie entendería la diferencia.
+
+**`step6` (email) — consentimiento comercial.** Opt-in **independiente por canal** —email,
+WhatsApp, teléfono—, cada uno con su toggle, no un consentimiento único. Responde a la Ley
+ATC 10/2025 (ver `project_ley_atc`): granular, revocable por canal y trazable. Caja
+`.pub-list` con tres filas, su texto legal y el "Leer más".
+
+**`step6b` (teléfono) — preferencia de canal para la propia solicitud.** *"¿Prefieres por
+WhatsApp?"* con una sola fila. No es publicidad: es decir por dónde quieres que os
+comuniquéis sobre tu presupuesto. Sin texto legal ni "Leer más", porque lo de las 2
+comunicaciones al año y la caducidad a los 24 meses no aplica a una preferencia de canal.
+
+Dos reglas de copy que salieron de aquí y conviene no romper:
+
+- **Enumerar, no negar.** La línea de alcance dice *"Lo usamos para hablar contigo de tu
+  presupuesto y resolver tus dudas"*, no *"nada de publicidad"*. Una negación se lee como
+  promesa sobre toda la relación y **contradice a quien acabe de activar WhatsApp para
+  ofertas** un paso antes. La especificidad ya tranquiliza sin negar nada.
+- **Aquí se está cotizando, no contratando.** No mencionar documentación, firma ni póliza:
+  todavía no existen. Eso es lenguaje de la fase de contratación.
+
+⚠ **Contradicción conocida y aceptada**: el subtítulo de `step6` dice *"Prometemos no
+enviarte spam :)"* justo encima de la caja que pide permiso para enviar ofertas. Señalado
+al cliente y decidió mantenerlo (el tono informal del `:)` lo aleja de una promesa legal).
 
 ---
 
