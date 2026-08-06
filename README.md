@@ -15,7 +15,7 @@ Consolidado a 29 julio 2026. Pensado para dar contexto completo a una conversaci
 ## Punto de partida del diseño
 
 La base sobre la que se trabaja es el **prototipo de la propuesta**
-(`https://miquel-multiplica.github.io/fiatc-prototipo/wireframe_mobile.html`).
+(`https://miquel-multiplica.github.io/fiatc-funnels/wireframe_propuesta.html`).
 Es un input necesario junto a estos documentos: la versión final acordada del funnel de quick
 wins se construye evolucionando ese prototipo con lo recogido aquí.
 

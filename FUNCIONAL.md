@@ -243,23 +243,50 @@ Además, `cFirma` simula el proceso de firma con un spinner y avanza solo a los 
 
 ---
 
-## 8. Decisiones de negocio abiertas
+## 8. Especificación del camino KO, y lo que queda pendiente
 
-Lo que el prototipo resuelve de una manera concreta pero que FIATC debe confirmar:
+### 8.1 · Camino cuando hay un "Sí" en el cuestionario — DECIDIDO
 
-1. **Dónde derivar cuando hay un "Sí" en el cuestionario.** Hoy salta directo a `cKO` y
-   corta el proceso entero: no llega a firma, ni a pago, ni a confirmación. Está
-   pendiente decidir si la derivación debe ocurrir ahí, más adelante (por ejemplo antes
-   del pago, para no cobrar sin revisar el riesgo) o solo como aviso en la confirmación.
-2. **`cKO` está fuera de `CONTRAT_FLOW`**, así que al entrar deja `contratIdx` en `-1` y
-   el botón atrás devuelve a resultados en lugar de al cuestionario. El arreglo depende
-   de la decisión anterior.
-3. **Copy del tooltip del resumen** ("Consulta aquí tu resumen: seguro, asegurados y
-   precio. Se actualiza a cada paso.") es redacción propia: no sale de guiones de ATC ni
-   de la web. Pendiente de validar.
-4. **Duplicidad en `cDerogacion`**: el título dice que se pueden enviar los documentos por
-   email después de contratar, y la nota gris de abajo repite la idea y además da la
-   dirección (`web@fiatc.es`). Hay que quedarse con uno de los dos sitios.
+Este es el comportamiento que hay que implementar:
+
+```
+cCuestionario  ──(algún "Sí")──►  cOtra  ──►  cKO
+```
+
+- **Pasa por `cOtra`** ("¿Tienes seguro con otra compañía?") antes del KO. Se sigue
+  preguntando la portabilidad, porque es un dato que interesa igualmente.
+- **Y después va al KO**, independientemente de lo que se responda en `cOtra`.
+- **No hay firma ni confirmación de teléfono por SMS.** El camino KO se salta `cTelefono`
+  y `cFirma`: no se firma nada mientras la solicitud esté pendiente de revisión médica.
+- `cKO` es terminal: de ahí se sale a resultados o a hablar con un asesor.
+
+Si no hay ningún "Sí", el flujo sigue completo y normal (`cTelefono` → `cFirma` → `cOtra`
+→ … → `cConfirm`).
+
+> **El prototipo no implementa esta bifurcación.** Hoy `proceedFromQuest()` salta directo
+> de `cCuestionario` a `cKO`, y `cKO` queda fuera de `CONTRAT_FLOW` (con `contratIdx` en
+> `-1`, así que el botón atrás vuelve a resultados). Es una simplificación deliberada: el
+> entregable es la propuesta de diseño y las pantallas son todas alcanzables desde el
+> índice del prototipo. La lógica de flujo la integra IT.
+
+### 8.2 · Pendientes reales
+
+1. **Copys sin validar.** Son redacción propia, no salen de guiones de ATC ni de la web:
+   - Tooltip del resumen: *"Consulta aquí tu resumen: seguro, asegurados y precio. Se
+     actualiza a cada paso."*
+   - Caja de WhatsApp de `step6b`: título, subtítulo y línea de alcance.
+2. **Duplicidad en `cDerogacion`.** Dos textos de la misma pantalla dicen lo mismo:
+   - Título: *"¿Tienes a mano estos documentos? Súbelos ahora o **envíanoslos por email
+     después de finalizar la contratación**:"*
+   - Nota gris: *"La documentación tendrá que ser validada. Si prefieres, **también
+     puedes enviárnosla más tarde a web@fiatc.es**."*
+
+   Las dos ofrecen enviarlo por email más tarde; la nota además da la dirección. Hay que
+   quedarse con un sitio: o el título deja de mencionarlo y la nota se queda con el
+   detalle, o el título lo dice y la nota se recorta a *"La documentación tendrá que ser
+   validada"*.
+3. **Contradicción aceptada en `step6`** entre el *"Prometemos no enviarte spam :)"* y la
+   caja de ofertas — detalle en §2. Señalada al cliente, decidió mantenerla.
 
 ---
 

@@ -19,7 +19,7 @@ Objetivos del pliego más relevantes para esta fase:
 ## Punto de partida del diseño
 
 La base sobre la que se trabaja es el **prototipo de la propuesta**
-(`https://miquel-multiplica.github.io/fiatc-prototipo/wireframe_mobile.html`), presentado en la
+(`https://miquel-multiplica.github.io/fiatc-funnels/wireframe_propuesta.html`), presentado en la
 fase de RFP. La versión final acordada del funnel de quick wins se construye evolucionando ese
 prototipo con la evidencia y las validaciones recogidas en estos documentos — no se parte de cero.
 El prototipo es por tanto un input necesario junto a estos archivos.
