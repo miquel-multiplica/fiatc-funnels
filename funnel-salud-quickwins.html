@@ -723,13 +723,21 @@
   /* Derogación de carencias (QW#24): docs necesarios + subida opcional */
   /* La subida de documentos es OPCIONAL → destacado gris para que no se confunda con un paso obligatorio */
   .deroga-optional { background: var(--wf-20); border-radius: 12px; padding: 16px; margin: 24px 0; }
-  .deroga-optional-label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--wf-0); background: var(--wf-90); padding: 3px 10px; border-radius: 999px; margin-bottom: 12px; }
+  .deroga-optional-label { flex-shrink: 0; display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--wf-0); background: var(--wf-90); padding: 3px 10px; border-radius: 999px; }
+  /* Título y badge en la misma fila, el badge pegado a la derecha */
+  .deroga-docs-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  /* Mobile: el badge sube y los dos quedan alineados a la izquierda (column-reverse
+     porque en el DOM el badge va después del título, para que lea antes el enunciado) */
+  @media (max-width: 600px) {
+    .deroga-docs-head { flex-direction: column-reverse; align-items: flex-start; gap: 10px; }
+  }
   .deroga-optional .deroga-docs { margin: 0 0 14px; }
   .deroga-optional .deroga-upload { margin: 0; }
   .deroga-optional .upload-box { background: var(--wf-0); }
   .deroga-docs { margin: 24px 0; }
-  .deroga-docs-title { font-size: 14px; font-weight: 400; color: var(--wf-90); line-height: 1.5; margin: 0 0 14px; }
+  .deroga-docs-title { font-size: 16px; font-weight: 700; color: var(--wf-100); line-height: 1.4; margin: 0; }
   .deroga-docs-title span { color: var(--wf-60); }
+  .deroga-docs-sub { font-size: 14px; font-weight: 400; color: var(--wf-90); line-height: 1.5; margin: 0 0 14px; }
   .deroga-doc-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--wf-90); line-height: 1.45; }
   .deroga-doc-item + .deroga-doc-item { margin-top: 10px; }
   .deroga-doc-item svg { flex-shrink: 0; margin-top: 1px; color: var(--wf-90); }
@@ -1351,6 +1359,9 @@
      tabs y título centrados, cards más anchas y centradas. Mobile intacto (scroll horizontal). */
   @media (min-width: 601px) {
     .app-main.results-wide .content-col { max-width: 1120px; }
+    /* La confirmación necesita más ancho que un paso de formulario: el stepper mete una
+       columna de dots a la izquierda y las cards del contenido se quedaban estrechas. */
+    body:has(#cConfirm.active) .content-col { max-width: 720px; }
     #step7 .filter-tabs { width: fit-content; max-width: 100%; margin: 0 auto 20px; }
     #step7 .results-summary { text-align: center; margin-bottom: 24px; }
     #step7 .results-meta { justify-content: center; }
@@ -2531,9 +2542,12 @@
         <h1 class="step-title">Sigue cubierto desde el primer día</h1>
         <p class="step-subtitle">Como vienes de otra aseguradora, podemos eliminar los periodos de carencia para que disfrutes de tu seguro <strong>desde el primer día</strong>.</p>
         <div class="deroga-optional">
-        <span class="deroga-optional-label">Opcional</span>
         <div class="deroga-docs">
-          <p class="deroga-docs-title">¿Tienes a mano estos documentos? Súbelos ahora o envíanoslos por email después de finalizar la contratación:</p>
+          <div class="deroga-docs-head">
+            <p class="deroga-docs-title">¿Tienes a mano estos documentos?</p>
+            <span class="deroga-optional-label">Opcional</span>
+          </div>
+          <p class="deroga-docs-sub">Súbelos ahora o te los pediremos por email después de la contratación</p>
           <div class="deroga-doc-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-680,-253)"><path fill-rule="evenodd" clip-rule="evenodd" d="M682.75 261C682.75 258.995 683.019 258.042 683.53 257.53C684.042 257.019 684.995 256.75 687 256.75H697C699.005 256.75 699.958 257.019 700.47 257.53C700.981 258.042 701.25 258.995 701.25 261V269C701.25 271.005 700.981 271.958 700.47 272.47C699.958 272.981 699.005 273.25 697 273.25H687C684.995 273.25 684.042 272.981 683.53 272.47C683.019 271.958 682.75 271.005 682.75 269V261ZM687 255.25C685.005 255.25 683.458 255.481 682.47 256.47C681.481 257.458 681.25 259.005 681.25 261V269C681.25 270.995 681.481 272.542 682.47 273.53C683.458 274.519 685.005 274.75 687 274.75H697C698.995 274.75 700.542 274.519 701.53 273.53C702.519 272.542 702.75 270.995 702.75 269V261C702.75 259.005 702.519 257.458 701.53 256.47C700.542 255.481 698.995 255.25 697 255.25H687ZM694 260.25C693.586 260.25 693.25 260.586 693.25 261C693.25 261.414 693.586 261.75 694 261.75H699C699.414 261.75 699.75 261.414 699.75 261C699.75 260.586 699.414 260.25 699 260.25H694ZM694.25 265C694.25 264.586 694.586 264.25 695 264.25H699C699.414 264.25 699.75 264.586 699.75 265C699.75 265.414 699.414 265.75 699 265.75H695C694.586 265.75 694.25 265.414 694.25 265ZM697 268.25C696.586 268.25 696.25 268.586 696.25 269C696.25 269.414 696.586 269.75 697 269.75H699C699.414 269.75 699.75 269.414 699.75 269C699.75 268.586 699.414 268.25 699 268.25H697ZM688.5 261.42C687.915 261.42 687.44 261.895 687.44 262.48C687.44 263.065 687.915 263.54 688.5 263.54C689.085 263.54 689.56 263.065 689.56 262.48C689.56 261.895 689.085 261.42 688.5 261.42ZM685.94 262.48C685.94 261.066 687.086 259.92 688.5 259.92C689.914 259.92 691.06 261.066 691.06 262.48C691.06 263.894 689.914 265.04 688.5 265.04C687.086 265.04 685.94 263.894 685.94 262.48ZM692.747 269.258C692.572 267.45 691.138 266.027 689.331 265.863C688.782 265.809 688.224 265.809 687.667 265.864C685.867 266.038 684.429 267.444 684.253 269.258C684.214 269.67 684.516 270.037 684.928 270.077C685.34 270.116 685.707 269.814 685.747 269.402C685.851 268.316 686.713 267.463 687.812 267.357L687.813 267.356C688.275 267.311 688.735 267.311 689.185 267.356L689.185 267.356L689.193 267.357C690.284 267.455 691.148 268.312 691.253 269.402C691.293 269.814 691.66 270.116 692.072 270.077C692.484 270.037 692.786 269.67 692.747 269.258Z" fill="currentColor"/></g></svg>
             <span>Tu <strong>póliza anterior</strong> o la <strong>tarjeta sanitaria</strong> donde conste la fecha de alta.</span>
@@ -2554,7 +2568,7 @@
         </div>
         <div class="cp-info" style="margin-top:16px;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <span>La documentación tendrá que ser validada. Puedes enviárnosla a <strong>web@fiatc.es</strong>.</span>
+          <span>La documentación tendrá que ser validada.</span>
         </div>
         <button class="btn-primary" id="derogaCta" onclick="nextContrat()">Prefiero enviarlos más tarde</button>
       </div>
@@ -2709,9 +2723,33 @@
               <p class="confirm-step-desc">Recibirás un correo a <strong>maria@gmail.com</strong> con tu documentación y contrato para firmar.</p>
             </div>
           </div>
-          <div class="confirm-step-row">
+          <!-- Variante: solo si viene de otra compañía y no subió los documentos en
+               cDerogacion. Aquí sí tiene sentido dar la dirección de correo, porque es
+               el momento en que va a actuar. -->
+          <div class="confirm-step-row" id="confirmDerogaStep" style="display:none;">
             <div class="confirm-step-left">
               <div class="confirm-step-dot">3</div>
+              <div class="confirm-step-line"></div>
+            </div>
+            <div class="confirm-step-body">
+              <div class="confirm-step-headrow">
+                <p class="confirm-step-head">Envíanos dos documentos y te quitamos las carencias</p>
+                <span class="confirm-firma-tag">Pendiente</span>
+              </div>
+              <p class="confirm-step-desc">Escríbenos a <strong>web@fiatc.es</strong> y podrás usar tu seguro desde el primer día, sin esperas.</p>
+              <div class="deroga-doc-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-680,-253)"><path fill-rule="evenodd" clip-rule="evenodd" d="M682.75 261C682.75 258.995 683.019 258.042 683.53 257.53C684.042 257.019 684.995 256.75 687 256.75H697C699.005 256.75 699.958 257.019 700.47 257.53C700.981 258.042 701.25 258.995 701.25 261V269C701.25 271.005 700.981 271.958 700.47 272.47C699.958 272.981 699.005 273.25 697 273.25H687C684.995 273.25 684.042 272.981 683.53 272.47C683.019 271.958 682.75 271.005 682.75 269V261ZM687 255.25C685.005 255.25 683.458 255.481 682.47 256.47C681.481 257.458 681.25 259.005 681.25 261V269C681.25 270.995 681.481 272.542 682.47 273.53C683.458 274.519 685.005 274.75 687 274.75H697C698.995 274.75 700.542 274.519 701.53 273.53C702.519 272.542 702.75 270.995 702.75 269V261C702.75 259.005 702.519 257.458 701.53 256.47C700.542 255.481 698.995 255.25 697 255.25H687ZM694 260.25C693.586 260.25 693.25 260.586 693.25 261C693.25 261.414 693.586 261.75 694 261.75H699C699.414 261.75 699.75 261.414 699.75 261C699.75 260.586 699.414 260.25 699 260.25H694ZM694.25 265C694.25 264.586 694.586 264.25 695 264.25H699C699.414 264.25 699.75 264.586 699.75 265C699.75 265.414 699.414 265.75 699 265.75H695C694.586 265.75 694.25 265.414 694.25 265ZM697 268.25C696.586 268.25 696.25 268.586 696.25 269C696.25 269.414 696.586 269.75 697 269.75H699C699.414 269.75 699.75 269.414 699.75 269C699.75 268.586 699.414 268.25 699 268.25H697ZM688.5 261.42C687.915 261.42 687.44 261.895 687.44 262.48C687.44 263.065 687.915 263.54 688.5 263.54C689.085 263.54 689.56 263.065 689.56 262.48C689.56 261.895 689.085 261.42 688.5 261.42ZM685.94 262.48C685.94 261.066 687.086 259.92 688.5 259.92C689.914 259.92 691.06 261.066 691.06 262.48C691.06 263.894 689.914 265.04 688.5 265.04C687.086 265.04 685.94 263.894 685.94 262.48ZM692.747 269.258C692.572 267.45 691.138 266.027 689.331 265.863C688.782 265.809 688.224 265.809 687.667 265.864C685.867 266.038 684.429 267.444 684.253 269.258C684.214 269.67 684.516 270.037 684.928 270.077C685.34 270.116 685.707 269.814 685.747 269.402C685.851 268.316 686.713 267.463 687.812 267.357L687.813 267.356C688.275 267.311 688.735 267.311 689.185 267.356L689.185 267.356L689.193 267.357C690.284 267.455 691.148 268.312 691.253 269.402C691.293 269.814 691.66 270.116 692.072 270.077C692.484 270.037 692.786 269.67 692.747 269.258Z" fill="currentColor"/></g></svg>
+                <span>Tu <strong>póliza anterior</strong> o la <strong>tarjeta sanitaria</strong> donde conste la fecha de alta.</span>
+              </div>
+              <div class="deroga-doc-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-168,-381)"><path fill-rule="evenodd" clip-rule="evenodd" d="M174 382.25C172.346 382.25 171.112 382.749 170.307 383.681C169.52 384.592 169.25 385.797 169.25 387V402C169.25 403.443 170.893 404.274 172.051 403.399L172.053 403.398L173.76 402.12C173.858 402.047 174 402.052 174.1 402.15L175.758 403.819L175.76 403.82C176.443 404.503 177.557 404.503 178.24 403.82L179.92 402.14C180.009 402.052 180.146 402.048 180.233 402.115L181.951 403.4L181.953 403.402C183.103 404.256 184.75 403.442 184.75 402V392.75H187.42C188.371 392.75 189.22 392.446 189.833 391.833C190.446 391.22 190.75 390.371 190.75 389.42V387C190.75 385.691 190.214 384.505 189.364 383.643L189.364 383.643L189.36 383.64C188.503 382.783 187.316 382.262 186.027 382.25L186.027 382.25H186.02L186.007 382.25L186 382.25H174ZM184.75 385.01V391.25H187.42C188.049 391.25 188.49 391.054 188.772 390.772C189.054 390.49 189.25 390.049 189.25 389.42V387C189.25 386.11 188.887 385.297 188.298 384.699C187.716 384.117 186.905 383.759 186.017 383.75C185.318 383.752 184.75 384.32 184.75 385.01ZM183.25 385.01V385C183.25 384.55 183.359 384.125 183.552 383.75H174C172.654 383.75 171.888 384.146 171.443 384.661C170.98 385.198 170.75 385.993 170.75 387V402C170.75 402.216 170.985 402.325 171.147 402.202L171.151 402.2L172.86 400.92C173.562 400.393 174.54 400.469 175.16 401.09L175.162 401.091L176.82 402.76C176.917 402.856 177.083 402.857 177.18 402.76L178.86 401.08C179.47 400.469 180.449 400.392 181.143 400.922L182.847 402.198L182.848 402.198C183.017 402.323 183.25 402.198 183.25 402V392V385.01ZM173.25 390C173.25 389.586 173.586 389.25 174 389.25H180C180.414 389.25 180.75 389.586 180.75 390C180.75 390.414 180.414 390.75 180 390.75H174C173.586 390.75 173.25 390.414 173.25 390ZM174.75 393.25C174.336 393.25 174 393.586 174 394C174 394.414 174.336 394.75 174.75 394.75H179.25C179.664 394.75 180 394.414 180 394C180 393.586 179.664 393.25 179.25 393.25H174.75Z" fill="currentColor"/></g></svg>
+                <span>El <strong>último recibo</strong> de tu seguro de salud anterior.</span>
+              </div>
+            </div>
+          </div>
+          <div class="confirm-step-row">
+            <div class="confirm-step-left">
+              <div class="confirm-step-dot" id="confirmAppDot">3</div>
             </div>
             <div class="confirm-step-body">
               <div class="confirm-step-headrow">
@@ -4357,10 +4395,19 @@
     }
     /* Refleja la forma de pago elegida en la confirmación */
     function fillConfirm() {
+      // Guarda, no early return: #confirmImporte ya no existe en el markup y con un
+      // "if (!el) return" al principio esta función entera dejaba de ejecutarse.
       const el = document.getElementById('confirmImporte');
-      if (!el) return;
-      const info = PAGO_INFO[pagoPeriodo] || PAGO_INFO['Mensual'];
-      el.textContent = pagoPeriodo + ' · ' + info.total + ' ' + info.suffix;
+      if (el) {
+        const info = PAGO_INFO[pagoPeriodo] || PAGO_INFO['Mensual'];
+        el.textContent = pagoPeriodo + ' · ' + info.total + ' ' + info.suffix;
+      }
+      // El paso de los documentos de derogación solo aplica si viene de otra compañía.
+      // Cuando aparece, la app pasa a ser el paso 4.
+      const deroga = document.getElementById('confirmDerogaStep');
+      if (deroga) deroga.style.display = comesFromOther ? 'flex' : 'none';
+      const dot = document.getElementById('confirmAppDot');
+      if (dot) dot.textContent = comesFromOther ? '4' : '3';
     }
     function showContrat(id) {
       const el = document.getElementById(id);
@@ -4787,12 +4834,14 @@
       updateResumenPrice(); // importe + sufijo según pagoPeriodo (Mensual por defecto)
       document.getElementById('raccFechaVal').textContent = selectedStartDate || '1 de agosto de 2026';
     }
-    function devJump(id) {
+    /* opts.other = false → simula que NO viene de otra compañía, para ver la variante de
+       confirmación sin el paso de enviar documentos. */
+    function devJump(id, opts) {
       seedDemo();
       _devFull = false;
       if (id === 'step7') { backToResults(); updateResultsMeta(); }
       else if (CONTRAT_FLOW.includes(id) || id === 'cKO') {
-        comesFromOther = true;                                   // deja alcanzable la derogación
+        comesFromOther = !(opts && opts.other === false);        // deja alcanzable la derogación
         _devFull = true;                                         // resumen completo con datos fake
         seedResumenHeader();                                     // precio/total demo (no venimos de "Me interesa")
         document.getElementById('raccAseg2').style.display = 'none'; // demo: 2 asegurados (tomador + Asegurado 1)
@@ -4842,7 +4891,8 @@
         <li><a onclick="devJump('cPago')">Forma de pago</a></li>
         <li><a onclick="devJump('cAntes')">Antes de continuar (legal + cargo)</a></li>
         <li><a onclick="devJump('cTPV')">Pago (TPV Sabadell)</a></li>
-        <li><a onclick="devJump('cConfirm')">Confirmación</a></li>
+        <li><a onclick="devJump('cConfirm')">Confirmación · viene de otra compañía (con envío de documentos)</a></li>
+        <li><a onclick="devJump('cConfirm', {other:false})">Confirmación · primer seguro (sin envío de documentos)</a></li>
       </ol>
     </div>
   </div>
