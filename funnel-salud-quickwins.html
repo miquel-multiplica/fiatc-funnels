@@ -180,13 +180,18 @@
     color: var(--wf-100); line-height: 27px;
     margin-bottom: 32px;
   }
-  #step0 .step-title { margin-bottom: 16px; font-size: 28px; line-height: 1.2; }
+  /* La confirmación es un momento de celebración, como la portada: mismo tamaño que
+     #step0 y no el de un paso de formulario. */
+  #step0 .step-title, #cConfirm .step-title { margin-bottom: 16px; font-size: 28px; line-height: 1.2; }
   @media (min-width: 601px) {
     .step-title { font-size: 28px; line-height: 36.5px; }
-    #step0 .step-title { font-size: 32px; }
+    #step0 .step-title, #cConfirm .step-title { font-size: 32px; }
   }
   .step-subtitle { font-size: 14px; color: var(--wf-90); line-height: 20px; margin: 0 0 20px; }
   .step-title + .step-subtitle { margin-top: -24px; }
+  /* Ese -24px compensa los 32px de margen del título de paso. En la confirmación el
+     título trae 16px, así que el negativo lo pegaría al subtítulo. */
+  #cConfirm .step-title + .step-subtitle { margin-top: 0; }
 
   /* Campos de formulario (input + label flotante, select) */
   .input-wrap {
@@ -733,6 +738,13 @@
   }
   .deroga-optional .deroga-docs { margin: 0 0 14px; }
   .deroga-optional .deroga-upload { margin: 0; }
+  /* Antes iba en una .cp-info aparte, fuera de la tarjeta: una caja más que empujaba el
+     CTA fuera de pantalla. Aquí es una línea de apoyo del propio campo de archivos. */
+  .deroga-note { display: flex; align-items: flex-start; gap: 8px; margin: 16px 0 0; font-size: 12px; color: var(--wf-90); line-height: 1.45; }
+  .deroga-note svg { flex-shrink: 0; margin-top: 2px; }
+  /* El CTA colgaba a 48px de la tarjeta (24 de margen de cada uno). Con el margen del
+     botón a 0, la distancia la fija solo la tarjeta. */
+  #derogaCta { margin-top: 0; }
   .deroga-optional .upload-box { background: var(--wf-0); }
   .deroga-docs { margin: 24px 0; }
   .deroga-docs-title { font-size: 16px; font-weight: 700; color: var(--wf-100); line-height: 1.4; margin: 0; }
@@ -746,10 +758,20 @@
   .deroga-upload-title span { font-weight: 400; color: var(--wf-60); }
   .upload-box { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 28px 20px; border: 2px dashed var(--wf-40); border-radius: 12px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
   .upload-box:hover { border-color: var(--wf-60); background: var(--wf-10); }
-  .upload-box svg { color: var(--wf-60); }
+  .upload-box svg { flex-shrink: 0; color: var(--wf-60); }
+  .upload-box-body { display: flex; flex-direction: column; align-items: center; gap: 6px; }
   .upload-box-text { font-size: 14px; color: var(--wf-90); }
   .upload-box-text strong { color: var(--wf-100); font-weight: 700; }
   .upload-box-hint { font-size: 12px; color: var(--wf-60); }
+  /* En mobile no existe el arrastrar: no hay ratón ni escritorio del que arrastrar un
+     archivo. Así que se cae el "Arrastra o", el borde deja de ser discontinuo (que es
+     lo que señala una zona de soltar) y la caja pasa a fila: 126px → ~64px. */
+  @media (max-width: 600px) {
+    .upload-box { flex-direction: row; justify-content: center; gap: 12px; padding: 14px 16px; text-align: left; border: 1.5px solid var(--wf-40); }
+    .upload-box svg { width: 20px; height: 20px; }
+    .upload-box-body { align-items: flex-start; gap: 2px; }
+    .upload-box-drag { display: none; }
+  }
   .upload-files { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
   .upload-files:empty { margin-top: 0; }
   /* Pantalla KO (QW#22): derivación pedagógica tras un "Sí" en el cuestionario */
@@ -823,11 +845,15 @@
   .confirm-step-dot.done { background: var(--wf-90); border-color: var(--wf-90); color: var(--wf-0); }
   /* La línea conecta hasta el número siguiente (cruza el hueco entre cards) */
   .confirm-step-line { position: absolute; left: 12px; top: 44px; bottom: -30px; width: 2px; background: var(--wf-30); }
-  .confirm-step-body { flex: 1; min-width: 0; background: var(--wf-0); border: 1px solid var(--wf-30); border-radius: 12px; padding: 16px; }
+  .confirm-step-body { flex: 1; min-width: 0; background: var(--wf-0); border: 1px solid var(--wf-30); border-radius: 12px; padding: 20px 22px; }
+  @media (max-width: 600px) { .confirm-step-body { padding: 16px; } }
   /* Primera card = paso ya hecho: borde más marcado */
   .confirm-step-row:first-child .confirm-step-body { border-width: 2px; border-color: var(--wf-40); }
-  .confirm-step-headrow { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
-  .confirm-step-head { font-size: 16px; font-weight: 700; color: var(--wf-100); margin: 0; }
+  .confirm-step-headrow { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  /* 18px, el siguiente peldaño de la escala: los títulos de card competían con el cuerpo
+     a 14px y el conjunto se leía plano. Al subir, el aire de debajo y el padding de la
+     card suben con ellos para que la jerarquía no quede apretada. */
+  .confirm-step-head { font-size: 18px; font-weight: 700; line-height: 1.35; color: var(--wf-100); margin: 0; }
   .confirm-step-desc { font-size: 14px; color: var(--wf-90); line-height: 1.45; margin: 0 0 12px; }
   .confirm-step-desc:last-child { margin-bottom: 0; }
   .confirm-step-desc strong { color: var(--wf-100); font-weight: 700; }
@@ -2560,15 +2586,17 @@
         <div class="deroga-upload">
           <label class="upload-box" onclick="fakeUpload(event)">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            <span class="upload-box-text">Arrastra o <strong>selecciona tus archivos</strong></span>
-            <span class="upload-box-hint">PDF o imagen · máx. 10 MB por archivo</span>
+            <span class="upload-box-body">
+              <span class="upload-box-text"><span class="upload-box-drag">Arrastra o </span><strong>selecciona tus archivos</strong></span>
+              <span class="upload-box-hint">PDF o imagen · máx. 10 MB por archivo</span>
+            </span>
           </label>
           <div class="upload-files" id="derogaFiles"></div>
+          <p class="deroga-note">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>La documentación tendrá que ser validada.</span>
+          </p>
         </div>
-        </div>
-        <div class="cp-info" style="margin-top:16px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <span>La documentación tendrá que ser validada.</span>
         </div>
         <button class="btn-primary" id="derogaCta" onclick="nextContrat()">Prefiero enviarlos más tarde</button>
       </div>
