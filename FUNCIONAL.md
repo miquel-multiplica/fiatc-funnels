@@ -275,16 +275,12 @@ Si no hay ningún "Sí", el flujo sigue completo y normal (`cTelefono` → `cFir
    - Tooltip del resumen: *"Consulta aquí tu resumen: seguro, asegurados y precio. Se
      actualiza a cada paso."*
    - Caja de WhatsApp de `step6b`: título, subtítulo y línea de alcance.
-2. **Duplicidad en `cDerogacion`.** Dos textos de la misma pantalla dicen lo mismo:
-   - Título: *"¿Tienes a mano estos documentos? Súbelos ahora o **envíanoslos por email
-     después de finalizar la contratación**:"*
-   - Nota gris: *"La documentación tendrá que ser validada. Si prefieres, **también
-     puedes enviárnosla más tarde a web@fiatc.es**."*
-
-   Las dos ofrecen enviarlo por email más tarde; la nota además da la dirección. Hay que
-   quedarse con un sitio: o el título deja de mencionarlo y la nota se queda con el
-   detalle, o el título lo dice y la nota se recorta a *"La documentación tendrá que ser
-   validada"*.
+2. ~~Duplicidad en `cDerogacion`~~ — **resuelto**. Tres elementos de la misma pantalla
+   ofrecían mandar los documentos por email más tarde: el enunciado, la nota gris y el
+   propio botón ("Prefiero enviarlos más tarde"). La nota se recortó a *"La documentación
+   tendrá que ser validada. Puedes enviárnosla a web@fiatc.es"*, quedándose solo con lo
+   que ningún otro elemento dice: que hay validación y cuál es el correo. El enunciado
+   mantiene la alternativa porque es donde se plantea la elección, antes de pedir nada.
 3. **Contradicción aceptada en `step6`** entre el *"Prometemos no enviarte spam :)"* y la
    caja de ofertas — detalle en §2. Señalada al cliente, decidió mantenerla.
 
