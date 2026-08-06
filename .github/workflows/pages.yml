@@ -26,26 +26,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Deja constancia de QUÉ se publica. Si un deploy se atasca, lo primero que
-      # hay que descartar es que el artefacto sea enorme o traiga algo raro.
-      - name: Inventario de lo que se publica
+      # El sitio publica SOLO los dos prototipos. La base de conocimiento (datos de
+      # GA4, hallazgos de las sesiones con ATC/negocio/IT, presupuesto) se queda en el
+      # repo pero no se sirve como página consultable. Lista blanca a propósito: si se
+      # añade documentación nueva, no aparece publicada por descuido.
+      - name: Preparar el sitio (solo los prototipos)
         run: |
-          echo "::group::Recuento y peso"
-          echo "archivos: $(find . -type f -not -path './.git/*' -not -path './.github/*' | wc -l)"
-          echo "peso total: $(du -sh --exclude=.git --exclude=.github . | cut -f1)"
-          echo "::endgroup::"
-          echo "::group::Los 15 más grandes"
-          find . -type f -not -path './.git/*' -not -path './.github/*' -printf '%10s  %p\n' | sort -rn | head -15
+          mkdir -p _site
+          cp funnel-salud-quickwins.html wireframe_propuesta.html _site/
+          echo "::group::Lo que se va a publicar"
+          find _site -type f -printf '%10s  %p\n' | sort -rn
+          echo "peso total: $(du -sh _site | cut -f1)"
           echo "::endgroup::"
           echo "::group::Nombres problemáticos (espacios, no-ASCII)"
-          find . -type f -not -path './.git/*' -not -path './.github/*' | grep -P '[^\x20-\x7E]|\s' || echo "ninguno"
+          find _site -type f | grep -P '[^\x20-\x7E]|\s' || echo "ninguno"
           echo "::endgroup::"
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       # Estado de Pages ANTES de desplegar: si ya viene en "building" o "errored"
       # de un intento anterior, el nuestro se va a quedar esperando.
