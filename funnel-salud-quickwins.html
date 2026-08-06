@@ -43,6 +43,9 @@
      ══════════════════════════════════════════ */
   .app-header {
     flex-shrink: 0;
+    /* relative (no sticky): da referencia al tooltip del resumen, que cuelga del header,
+       y activa el z-index de abajo, que sin position no hacía nada. */
+    position: relative;
     z-index: 100;
     background: var(--wf-0);
     border-bottom: 1px solid var(--wf-40);
@@ -550,6 +553,9 @@
   .resumen-fab { left: 0; right: 0; bottom: 0; border-radius: 0; border-left: none; border-right: none; border-bottom: none; border-top: 1px solid var(--wf-40); box-shadow: 0 -2px 16px rgba(39, 42, 48, 0.10); padding: 16px 24px calc(24px + env(safe-area-inset-bottom, 0px)); }
   @media (max-width: 899px) { body.resumen-active .app-main { padding-bottom: 110px; } }
   @media (min-width: 900px) { .resumen-fab { display: none !important; } }
+  /* Entrada del resumen en mobile: sube desde abajo al empezar la contratación */
+  .resumen-fab.enter { animation: fabUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  @keyframes fabUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
   /* Carrito del resumen en la cabecera (desktop ≥900): Hablemos pasa a la izquierda,
      el resumen a la derecha separado por una línea vertical. Solo en modo contratación. */
@@ -564,11 +570,56 @@
   .header-actions { grid-column: 3; justify-self: end; align-self: stretch; display: flex; align-items: center; gap: 20px; }
   /* Línea divisoria de arriba a abajo del header (solo contratación desktop) */
   .hactions-sep { display: none; align-self: stretch; width: 1px; background: var(--wf-30); }
+  /* Entrada del resumen en desktop: 0fr → 1fr gana ancho real y empuja el Hablemos.
+     Con un translateX no empujaría nada, porque transform no afecta al layout.
+     Desplegado por defecto: la animación es una capa añadida, nunca la que decide si se
+     ve. Si dependiera de ella, un fallo dejaría el resumen invisible. */
+  .hcart-wrap { display: grid; grid-template-columns: 1fr; align-self: stretch; }
+  .hcart-wrap.enter { animation: cartIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  @keyframes cartIn { from { grid-template-columns: 0fr; } to { grid-template-columns: 1fr; } }
+  .hcart-inner { display: flex; align-items: center; gap: 20px; min-width: 0; overflow: hidden; white-space: nowrap; }
   @media (min-width: 900px) {
     .app-header.contrat .hcart { display: flex; }
     .app-header.contrat .hactions-sep { display: block; }
     /* En confirmación el resumen solo se abre desde la card central: sin carrito de cabecera */
     .app-header.contrat.no-cart .hcart, .app-header.contrat.no-cart .hactions-sep { display: none; }
+  }
+  /* Fuera de desktop el envoltorio no debe reservar ni recortar nada */
+  @media (max-width: 899px) { .hcart-wrap { display: none; } }
+
+  /* Tooltip que presenta el resumen. Cuelga del header (mobile: sobre la barra inferior). */
+  .resumen-tip {
+    position: absolute; z-index: 140; display: none;
+    max-width: 300px; padding: 12px 40px 12px 14px;
+    background: var(--wf-100); color: var(--wf-0);
+    font-size: 13px; line-height: 1.45; border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(39, 42, 48, 0.22);
+  }
+  .resumen-tip::after {
+    content: ''; position: absolute; width: 10px; height: 10px;
+    background: var(--wf-100); transform: rotate(45deg);
+  }
+  .resumen-tip.show { display: block; animation: tipIn 0.3s ease both; }
+  @keyframes tipIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+  .resumen-tip-close {
+    position: absolute; top: 8px; right: 8px; width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer; color: var(--wf-40); padding: 0;
+  }
+  .resumen-tip-close:hover { color: var(--wf-0); }
+  /* Desktop: bajo el carrito de la cabecera, flecha arriba a la derecha */
+  @media (min-width: 900px) {
+    .resumen-tip { top: calc(100% + 10px); right: 24px; }
+    .resumen-tip::after { top: -5px; right: 40px; }
+  }
+  /* Mobile: sobre la barra inferior del resumen, centrado */
+  @media (max-width: 899px) {
+    .resumen-tip {
+      position: fixed; top: auto; left: 24px; right: 24px; max-width: none;
+      bottom: calc(104px + env(safe-area-inset-bottom, 0px));
+    }
+    .resumen-tip::after { bottom: -5px; left: 50%; margin-left: -5px; }
+    @keyframes tipIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
   }
 
   /* Card del seguro dentro del resumen (mismo estilo que "Me interesa") */
@@ -1412,6 +1463,9 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           <span class="hablemos-label">Hablemos</span>
         </button>
+        <!-- Envoltorio de una columna: al pasar de 0fr a 1fr el resumen entra desde la
+             derecha ganando ancho real, así que empuja el Hablemos en vez de taparlo. -->
+        <div class="hcart-wrap" id="hcartWrap"><div class="hcart-inner">
         <span class="hactions-sep" aria-hidden="true"></span>
         <button class="hcart" id="resumenCart" onclick="openResumen()" aria-label="Ver tu resumen">
           <span class="hcart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
@@ -1420,6 +1474,13 @@
             <span class="hcart-price"><strong id="resumenCartPrice">45,78€</strong> <span id="resumenCartPer">al mes</span></span>
           </span>
           <span class="hcart-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        </div></div>
+      </div>
+      <div class="resumen-tip" id="resumenTip">
+        Aquí tienes tu resumen. Ábrelo cuando quieras: lo que llevas y lo que pagas, siempre a mano.
+        <button class="resumen-tip-close" onclick="hideResumenTip()" aria-label="Entendido">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
     </div>
@@ -4119,6 +4180,34 @@
       comesFromOther = false; pagoSelected = false; pagoText = ''; _devFull = false; // estado limpio de contratación
       closeInteres();
       showContrat('cDatos');
+      playResumenIntro();
+    }
+    /* Presentación del resumen al entrar en contratación: entra animado (mobile de abajo
+       a arriba, desktop de derecha a izquierda empujando el Hablemos) y luego se explica
+       con un tooltip. Solo la primera vez: repetirlo en cada paso sería ruido. */
+    let _resumenIntroDone = false;
+    let _tipTimer = null;
+    function playResumenIntro() {
+      if (_resumenIntroDone) return;
+      _resumenIntroDone = true;
+      const wrap = document.getElementById('hcartWrap');
+      const fab = document.getElementById('resumenFab');
+      wrap.classList.remove('enter');
+      fab.classList.remove('enter');
+      void wrap.offsetWidth; // fuerza reflow: sin esto el navegador colapsa quitar+poner y no anima
+      wrap.classList.add('enter');
+      fab.classList.add('enter');
+      clearTimeout(_tipTimer);
+      _tipTimer = setTimeout(showResumenTip, 750);
+    }
+    function showResumenTip() {
+      document.getElementById('resumenTip').classList.add('show');
+      clearTimeout(_tipTimer);
+      _tipTimer = setTimeout(hideResumenTip, 7000); // se va solo; no obliga a cerrarlo
+    }
+    function hideResumenTip() {
+      clearTimeout(_tipTimer);
+      document.getElementById('resumenTip').classList.remove('show');
     }
     /* Firma del cuestionario: confirmación → cajita gris (Evicertia simulado) 5 s → avanza */
     let _firmaTimer = null;
@@ -4172,7 +4261,7 @@
         showContrat('cConfirm');
       }, 4800);
     }
-    function openResumen() { const m = document.getElementById('resumenModal'); m.querySelector('.side-modal-body').scrollTop = 0; m.classList.add('open'); }
+    function openResumen() { hideResumenTip(); const m = document.getElementById('resumenModal'); m.querySelector('.side-modal-body').scrollTop = 0; m.classList.add('open'); }
     function closeResumen() { document.getElementById('resumenModal').classList.remove('open'); }
     function toggleRacc(id) { const el = document.getElementById(id); if (el.classList.contains('pending')) return; el.classList.toggle('open'); }
     /* Rellena el resumen de forma acumulativa según el paso alcanzado (contratIdx).
@@ -4309,6 +4398,7 @@
     }
     function backToResults() {
       contractMode = false;
+      hideResumenTip();
       document.querySelector('.app-header').classList.remove('contrat', 'no-cart');
       document.querySelector('.app-header-title').textContent = 'Calcula tu seguro de salud';
       document.getElementById('resumenFab').classList.remove('visible');
