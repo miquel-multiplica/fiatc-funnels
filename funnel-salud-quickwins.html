@@ -553,8 +553,11 @@
   .resumen-fab { left: 0; right: 0; bottom: 0; border-radius: 0; border-left: none; border-right: none; border-bottom: none; border-top: 1px solid var(--wf-40); box-shadow: 0 -2px 16px rgba(39, 42, 48, 0.10); padding: 16px 24px calc(24px + env(safe-area-inset-bottom, 0px)); }
   @media (max-width: 899px) { body.resumen-active .app-main { padding-bottom: 110px; } }
   @media (min-width: 900px) { .resumen-fab { display: none !important; } }
-  /* Entrada del resumen en mobile: sube desde abajo al empezar la contratación */
-  .resumen-fab.enter { animation: fabUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  /* Entrada del resumen en mobile: sube desde abajo al empezar la contratación.
+     El retardo (1,8 s) va en la animación, no en un timer: con fill-mode "both" el estado
+     inicial (fuera de pantalla) se mantiene durante la espera, así que el paso carga
+     sin el resumen a la vista y no hace falta ninguna clase extra que lo oculte. */
+  .resumen-fab.enter { animation: fabUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.8s both; }
   @keyframes fabUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
   /* Carrito del resumen en la cabecera (desktop ≥900): Hablemos pasa a la izquierda,
@@ -575,7 +578,7 @@
      Desplegado por defecto: la animación es una capa añadida, nunca la que decide si se
      ve. Si dependiera de ella, un fallo dejaría el resumen invisible. */
   .hcart-wrap { display: grid; grid-template-columns: 1fr; align-self: stretch; }
-  .hcart-wrap.enter { animation: cartIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .hcart-wrap.enter { animation: cartIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.8s both; }
   @keyframes cartIn { from { grid-template-columns: 0fr; } to { grid-template-columns: 1fr; } }
   .hcart-inner { display: flex; align-items: center; gap: 20px; min-width: 0; overflow: hidden; white-space: nowrap; }
   @media (min-width: 900px) {
@@ -591,13 +594,13 @@
   .resumen-tip {
     position: absolute; z-index: 140; display: none;
     max-width: 300px; padding: 12px 40px 12px 14px;
-    background: var(--wf-100); color: var(--wf-0);
+    background: var(--wf-90); color: var(--wf-0);
     font-size: 13px; line-height: 1.45; border-radius: 10px;
     box-shadow: 0 6px 20px rgba(39, 42, 48, 0.22);
   }
   .resumen-tip::after {
     content: ''; position: absolute; width: 10px; height: 10px;
-    background: var(--wf-100); transform: rotate(45deg);
+    background: var(--wf-90); transform: rotate(45deg);
   }
   .resumen-tip.show { display: block; animation: tipIn 0.3s ease both; }
   @keyframes tipIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
@@ -1478,7 +1481,7 @@
         </div></div>
       </div>
       <div class="resumen-tip" id="resumenTip">
-        Aquí tienes tu resumen. Ábrelo cuando quieras: lo que llevas y lo que pagas, siempre a mano.
+        Consulta aquí tu resumen: seguro, asegurados y precio. Se actualiza a cada paso.
         <button class="resumen-tip-close" onclick="hideResumenTip()" aria-label="Entendido">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
@@ -4198,7 +4201,7 @@
       wrap.classList.add('enter');
       fab.classList.add('enter');
       clearTimeout(_tipTimer);
-      _tipTimer = setTimeout(showResumenTip, 750);
+      _tipTimer = setTimeout(showResumenTip, 2550); // 1800 de espera + 550 de animación + aire
     }
     function showResumenTip() {
       document.getElementById('resumenTip').classList.add('show');
