@@ -2753,9 +2753,9 @@
 
           <span class="call-slot-label">¿Cuándo te llamamos?</span>
           <div class="call-slots" style="margin-bottom:20px;">
-            <button type="button" class="call-slot selected" onclick="selectSlot(this)">Mañana (9h–13h)</button>
-            <button type="button" class="call-slot" onclick="selectSlot(this)">Mediodía (13h–16h)</button>
-            <button type="button" class="call-slot" onclick="selectSlot(this)">Tarde (16h–20h)</button>
+            <button type="button" class="call-slot selected" onclick="selectSlot(this)" data-slot="por la mañana, de 9h a 13h">Por la mañana, de 9h a 13h</button>
+            <button type="button" class="call-slot" onclick="selectSlot(this)" data-slot="a mediodía, de 13h a 16h">A mediodía, de 13h a 16h</button>
+            <button type="button" class="call-slot" onclick="selectSlot(this)" data-slot="por la tarde, de 16h a 20h">Por la tarde, de 16h a 20h</button>
           </div>
 
           <p class="legal-mini" style="margin:4px 0 0;">FIATC Mutua de Seguros tratará tus datos solo para gestionar esta solicitud de llamada. Puedes ejercer tus derechos de acceso, rectificación y supresión escribiéndonos. Más información en la <a onclick="return false;" href="#">Política de privacidad</a>.</p>
@@ -4596,9 +4596,11 @@
     function hablemosConfirm() {
       const view = document.querySelector('.hablemos-agendar');
       const phone = (view.querySelector('input[type="tel"]').value || '').trim() || '612 345 678';
-      const slot = (view.querySelector('.call-slot.selected') || {}).textContent || 'Mañana (9h–13h)';
+      // data-slot lleva la frase en minúscula para que encaje dentro de la confirmación
+      const sel = view.querySelector('.call-slot.selected');
+      const slot = (sel && sel.dataset.slot) || 'por la mañana, de 9h a 13h';
       document.querySelector('.hablemos-confirm .call-confirm-text').innerHTML =
-        'En menos de 24 h un asesor te llamará al <strong>' + phone + '</strong>, en horario de <strong>' + slot + '</strong>. Sin compromiso.';
+        'En menos de 24 h un asesor te llamará al <strong>' + phone + '</strong>, <strong>' + slot + '</strong>. Sin compromiso.';
       setHablemosView('confirm');
     }
 
