@@ -1088,25 +1088,18 @@
 
   /* Franjas horarias del agendar (reutilizado de wireframe_propuesta.html) */
   .call-slot-label { display: block; font-size: 14px; font-weight: 600; color: var(--wf-90); margin: 20px 0 10px; }
-  .call-slots { display: flex; flex-direction: column; gap: 8px; }
-  .call-slot {
-    display: flex; align-items: center; justify-content: space-between;
-    width: 100%; padding: 12px 16px; border-radius: 10px;
+  .call-slots { display: flex; flex-direction: column; gap: 6px; }
+  .slot-turno { font-size: 14px; font-weight: 400; color: var(--wf-90); margin-top: 6px; }
+  .slot-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .call-chip {
+    padding: 10px 14px; border-radius: 100px;
     border: 1.5px solid var(--wf-40); background: var(--wf-0);
     font-family: inherit; font-size: 14px; color: var(--wf-90);
-    text-align: left; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    cursor: pointer; white-space: nowrap;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   }
-  .call-slot:hover { border-color: var(--wf-60); }
-  .call-slot::after {
-    content: ''; flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%;
-    border: 1.5px solid var(--wf-40); transition: background 0.15s ease, border-color 0.15s ease;
-  }
-  .call-slot.selected { background: var(--wf-20); border-color: var(--wf-90); color: var(--wf-100); font-weight: 600; }
-  .call-slot.selected::after {
-    background: var(--wf-90); border-color: var(--wf-90);
-    background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: center;
-  }
+  .call-chip:hover { border-color: var(--wf-60); color: var(--wf-100); }
+  .call-chip.selected { background: var(--wf-90); border-color: var(--wf-90); color: var(--wf-0); font-weight: 600; }
 
   /* Vistas del Hablemos: main · agendar · confirmación */
   .hablemos-agendar, .hablemos-confirm { display: none; }
@@ -2816,15 +2809,24 @@
           </div>
 
           <span class="call-slot-label">¿Cuándo te llamamos?</span>
+          <!-- Agrupado por turno con las horas como chips: 5 franjas en 2 filas en vez de
+               5, y sin esconder ninguna detrás de una pestaña. -->
           <div class="call-slots" style="margin-bottom:20px;">
-            <button type="button" class="call-slot selected" onclick="selectSlot(this)" data-slot="por la mañana, de 9h a 13h">Por la mañana, de 9h a 13h</button>
-            <button type="button" class="call-slot" onclick="selectSlot(this)" data-slot="a mediodía, de 13h a 16h">A mediodía, de 13h a 16h</button>
-            <button type="button" class="call-slot" onclick="selectSlot(this)" data-slot="por la tarde, de 16h a 20h">Por la tarde, de 16h a 20h</button>
+            <span class="slot-turno">Mañana</span>
+            <div class="slot-chips">
+              <button type="button" class="call-chip selected" onclick="selectSlot(this)" data-slot="por la mañana, de 10h a 12h">10h a 12h</button>
+              <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la mañana, de 12h a 14h">12h a 14h</button>
+            </div>
+            <span class="slot-turno">Tarde</span>
+            <div class="slot-chips">
+              <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la tarde, de 14h a 16h">14h a 16h</button>
+              <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la tarde, de 16h a 18h">16h a 18h</button>
+              <button type="button" class="call-chip" onclick="selectSlot(this)" data-slot="por la tarde, de 18h a 20h">18h a 20h</button>
+            </div>
           </div>
 
-          <p class="legal-mini" style="margin:4px 0 0;">FIATC Mutua de Seguros tratará tus datos solo para gestionar esta solicitud de llamada. Puedes ejercer tus derechos de acceso, rectificación y supresión escribiéndonos. Más información en la <a onclick="return false;" href="#">Política de privacidad</a>.</p>
-
-          <button class="btn-primary" style="margin-top:16px;" onclick="hablemosConfirm()">Agendar llamada</button>
+          <button class="btn-primary" style="margin-top:4px;" onclick="hablemosConfirm()">Agendar llamada</button>
+          <p class="legal-mini" style="margin:16px 0 0;">FIATC Mutua de Seguros tratará tus datos solo para gestionar esta solicitud de llamada. Puedes ejercer tus derechos de acceso, rectificación y supresión escribiéndonos. Más información en la <a onclick="return false;" href="#">Política de privacidad</a>.</p>
         </div>
 
         <!-- Vista: Confirmación -->
@@ -4680,8 +4682,10 @@
         openExit();
       });
     }
+    /* Limpia sobre .call-slots, no sobre el padre: con los turnos en grupos separados
+       quedarían dos chips seleccionados a la vez, uno por grupo. */
     function selectSlot(btn) {
-      btn.parentElement.querySelectorAll('.call-slot').forEach(s => s.classList.remove('selected'));
+      btn.closest('.call-slots').querySelectorAll('.call-chip').forEach(s => s.classList.remove('selected'));
       btn.classList.add('selected');
     }
     /* La confirmación repite el teléfono y la franja elegidos: cierra el bucle de lo que
@@ -4690,8 +4694,8 @@
       const view = document.querySelector('.hablemos-agendar');
       const phone = (view.querySelector('input[type="tel"]').value || '').trim() || '612 345 678';
       // data-slot lleva la frase en minúscula para que encaje dentro de la confirmación
-      const sel = view.querySelector('.call-slot.selected');
-      const slot = (sel && sel.dataset.slot) || 'por la mañana, de 9h a 13h';
+      const sel = view.querySelector('.call-chip.selected');
+      const slot = (sel && sel.dataset.slot) || 'por la mañana, de 10h a 12h';
       document.querySelector('.hablemos-confirm .call-confirm-text').innerHTML =
         'En menos de 24 h un asesor te llamará al <strong>' + phone + '</strong>, <strong>' + slot + '</strong>. Sin compromiso.';
       setHablemosView('confirm');
