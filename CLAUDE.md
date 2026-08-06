@@ -28,6 +28,12 @@ Si el cliente valida el tema, el camino es portarlo a `funnel-salud-quickwins.ht
 y retirar esta copia; mientras siga siendo una prueba, no dividir el trabajo entre
 los dos archivos.
 
+## Documentación funcional
+`FUNCIONAL.md` — mapa funcional completo del archivo activo: pantallas, los dos flujos y
+su lógica condicional, resumen persistente, modales, loadings, qué está simulado y qué
+decisiones de negocio quedan abiertas. **Mantenerlo al día** cuando cambie el flujo, se
+añada una pantalla o un modal, o se cierre una de las decisiones abiertas.
+
 ## Base de conocimiento (inputs de la inmersión — NO editar como diario)
 `README.md`, `00-contexto.md`, `01-embudo-y-datos.md`, `02-hallazgos-clave.md`, `03-backlog-quickwins.md` (26 quick wins priorizados). Fuente canónica del proyecto; leer ahí antes de decidir. Prioridad = página de resultados (fuga 63-72%).
 
@@ -46,7 +52,17 @@ los dos archivos.
 - Animación de paso: fade + `translateX(24px)` (dcha→izq), 0.35s.
 
 ## Estado por pantalla y pendientes
-Ver la memoria `project_funnel_build.md` (estado vivo por pantalla + "para mañana" + decisión de calculadora QW#1). Resumen: step0→step7 (resultados) HECHOS; contratación COMPLETA de punta a punta (cDatos→cContacto→cDireccion→cAseg1→cAseg2→cCuestionario→[cKO si "Sí"]→cTelefono→cFirma→cOtra→[cDerogacion]→cPago→cAntes→cTPV→cConfirm). Firma y TPV son placeholders simulados (iframes reales de Evicertia/Sabadell). Hay un índice de navegación del prototipo (página inicial al recargar) para saltar a cualquier paso con datos demo sembrados. Falta: pulido/feedback de cliente y las capas de resultados aún pendientes (ver memoria).
+Detalle en `FUNCIONAL.md`; estado vivo y pendientes en la memoria `project_funnel_build.md`.
+Resumen: tarificación (step0→step7) y contratación (cDatos→cConfirm) COMPLETAS de punta a
+punta. Firma y TPV son placeholders simulados (iban iframes de Evicertia/Sabadell). Índice
+de navegación del prototipo al recargar, con datos demo sembrados.
+Falta: pulido/feedback de cliente y las 4 decisiones abiertas de `FUNCIONAL.md` §8.
+
+## Reglas visuales establecidas con el cliente
+- **Azul claro `#CEE1F2` sin borde y sin ancho completo = informativo · blanco con borde `#C5CBD2` y ancho completo = seleccionable.** Se fijó al detectar que una píldora informativa era indistinguible de las tarjetas pulsables.
+- **Acordeones: animar a la altura real** (`grid-template-rows: 0fr → 1fr`), nunca a un `max-height` fijo (cada respuesta tarda distinto y las largas se recortan).
+- **Ninguna animación decide si algo se ve**: estado final visible por defecto, animación como capa añadida.
+- **Un solo componente de loading** (`#stepLoading`) reutilizado con textos distintos; quien mute su título debe restaurarlo.
 
 ## Convenciones de edición
 - Editar solo `funnel-salud-quickwins.html`. No crear archivos nuevos ni dependencias.
