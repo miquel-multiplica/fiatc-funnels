@@ -1251,11 +1251,12 @@
   @media (min-width: 601px) { .faq-help { margin-left: -32px; margin-right: -32px; padding-left: 32px; padding-right: 32px; } }
 
   /* ══════════════════════════════════════════
-     PRUEBA · Modal de FAQ a dos columnas
-     Alcance deliberadamente mínimo, para valorar antes de replicar:
+     Modal de FAQ a dos columnas
+     Alcance:
        · solo la modal de FAQ (el resto de side-modals, sin tocar)
-       · solo cuando se abre desde resultados (clase .faq-2col que pone openFaq)
-       · solo desktop ≥901px (mobile intacto: sigue en bottom-sheet de una columna)
+       · los cuatro contextos: resultados, asegurados, cuestionario, confirmación
+       · SOLO desktop ≥901px — mobile sigue en bottom-sheet de una columna, sin
+         padding lateral en las filas ni fondo en la abierta
      Preguntas a la izquierda, contacto en la columna gris de la derecha, cada una
      con su scroll para que el contacto no se pierda al bajar por las preguntas.
      La X del panel ya cae sobre la columna gris.
@@ -1263,29 +1264,33 @@
   @media (min-width: 901px) {
     /* Panel ancho a propósito: la columna de preguntas necesita sitio para que los
        enunciados largos no partan a dos líneas. */
-    #faqModal.faq-2col .side-modal-panel { width: 1060px; }
-    #faqModal.faq-2col .side-modal-body {
+    #faqModal .side-modal-panel { width: 1060px; }
+    #faqModal .side-modal-body {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 400px;
       padding: 0;
       overflow: hidden;
     }
-    #faqModal.faq-2col .faq-main { overflow-y: auto; padding: 40px 44px 32px; }
+    #faqModal .faq-main { overflow-y: auto; padding: 40px 44px 32px; }
     /* El padding derecho es mayor que el izquierdo a propósito: la X ocupa de 16 a
        48px desde el borde, así que todo el bloque —no solo la cabecera— la esquiva. */
-    #faqModal.faq-2col .faq-help {
+    #faqModal .faq-help {
       margin: 0; padding: 80px 56px 32px 40px;
       border-top: none; border-left: 1px solid var(--wf-30);
       overflow-y: auto;
     }
-    /* Padding lateral en las filas y fondo gris en la abierta: destaca la que estás
-       leyendo. Pierde el borde para leerse como una pieza y no como una fila más. */
-    /* Separadoras al mismo tono que la divisoria de columnas (--wf-30) */
-    #faqModal.faq-2col .faq-item { padding: 0 16px; border-color: var(--wf-30); transition: background 0.34s cubic-bezier(0.4, 0, 0.2, 1); }
-    #faqModal.faq-2col .faq-item.open { background: var(--wf-10); }
-    /* Alinea "Ver más preguntas" con el texto de las preguntas (que van a 16px) */
-    #faqModal.faq-2col .faq-vermas { padding-left: 16px; }
+    /* Separadoras al mismo tono que la divisoria de columnas. Solo desktop: en mobile
+       no hay divisoria con la que igualarlas. */
+    #faqModal .faq-item { border-color: var(--wf-30); }
   }
+
+  /* Padding lateral en las filas y fondo en la abierta: destaca la que estás leyendo.
+     En TODOS los tamaños, también mobile (es lo único del rediseño que baja a mobile;
+     el layout a dos columnas se queda arriba). */
+  #faqModal .faq-item { padding: 0 16px; transition: background 0.34s cubic-bezier(0.4, 0, 0.2, 1); }
+  #faqModal .faq-item.open { background: var(--wf-10); }
+  /* "Ver más preguntas" acompaña el sangrado de las filas para no quedar descuadrado */
+  #faqModal .faq-vermas { padding-left: 16px; }
 
   /* Resultados en desktop: columna más ancha (clase results-wide en .app-main solo en step7),
      tabs y título centrados, cards más anchas y centradas. Mobile intacto (scroll horizontal). */
@@ -3727,9 +3732,9 @@
     function renderFaqList(ctx, openIndex) {
       faqCtx = ctx;
       const items = FAQS[ctx];
-      // En la prueba a dos columnas caben 6 sin scroll; resultados tiene 13, así que el
-      // "Ver más" sigue haciendo falta para el resto.
-      const twoCol = (ctx === 'resultados' && window.innerWidth >= 901);
+      // A dos columnas caben 6 sin scroll. Solo resultados (13) mantiene el "Ver más";
+      // los demás contextos tienen 4-6 y se ven completos.
+      const twoCol = (window.innerWidth >= 901);
       const n = twoCol ? 6 : (FAQ_VISIBLE[ctx] || items.length);
       let html = items.slice(0, n).map((f, i) => faqItemHTML(f, i, i === openIndex)).join('');
       if (items.length > n) {
@@ -3769,8 +3774,6 @@
       renderFaqList(ctx, i);
       const body = document.querySelector('#faqModal .side-modal-body');
       if (body) body.scrollTop = 0;
-      // PRUEBA de dos columnas: solo desde resultados. Para replicarla, añadir contextos aquí.
-      document.getElementById('faqModal').classList.toggle('faq-2col', ctx === 'resultados');
       document.getElementById('faqModal').classList.add('open');
     }
     function closeFaq() { document.getElementById('faqModal').classList.remove('open'); }
