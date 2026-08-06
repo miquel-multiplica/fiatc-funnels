@@ -1209,14 +1209,21 @@
   .faq-item { border-bottom: 1px solid var(--wf-20); }
   .faq-item:first-child { border-top: 1px solid var(--wf-20); }
   .faq-item:last-child { border-bottom: none; }
-  .faq-trigger { display: flex; align-items: center; gap: 12px; width: 100%; padding: 20px 0; background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; }
+  .faq-trigger { display: flex; align-items: center; gap: 12px; width: 100%; padding: 20px 0; background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; transition: padding-bottom 0.34s cubic-bezier(0.4, 0, 0.2, 1); }
   .faq-item.open .faq-trigger { padding-bottom: 8px; }
   .faq-q { flex: 1; font-size: 16px; font-weight: 400; color: var(--wf-100); line-height: 1.35; }
   .faq-item.open .faq-q { font-weight: 700; }
-  .faq-chevron { flex-shrink: 0; color: var(--wf-60); transition: transform 0.25s ease; }
+  .faq-chevron { flex-shrink: 0; color: var(--wf-60); transition: transform 0.34s cubic-bezier(0.4, 0, 0.2, 1); }
   .faq-item.open .faq-chevron { transform: rotate(180deg); }
-  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding-bottom 0.3s ease; }
-  .faq-item.open .faq-answer { max-height: 320px; padding-bottom: 20px; }
+  /* Anima a la altura real del contenido (0fr → 1fr). Con un max-height fijo cada
+     respuesta tardaba distinto —se animaba espacio vacío— y las de más de 320px
+     quedaban recortadas. */
+  .faq-answer {
+    display: grid; grid-template-rows: 0fr; overflow: hidden;
+    transition: grid-template-rows 0.34s cubic-bezier(0.4, 0, 0.2, 1), padding-bottom 0.34s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .faq-answer > * { min-height: 0; }
+  .faq-item.open .faq-answer { grid-template-rows: 1fr; padding-bottom: 20px; }
   .faq-answer p { font-size: 14px; color: var(--wf-90); line-height: 1.5; margin: 0; }
   .faq-more { display: none; }
   .faq-more.open { display: block; }
@@ -1237,6 +1244,42 @@
   #faqModal .side-modal-body, #exitModal .side-modal-body { display: flex; flex-direction: column; flex: 1; min-height: 0; padding-bottom: 0; }
   .faq-help { flex: 1 0 auto; }
   @media (min-width: 601px) { .faq-help { margin-left: -32px; margin-right: -32px; padding-left: 32px; padding-right: 32px; } }
+
+  /* ══════════════════════════════════════════
+     PRUEBA · Modal de FAQ a dos columnas
+     Alcance deliberadamente mínimo, para valorar antes de replicar:
+       · solo la modal de FAQ (el resto de side-modals, sin tocar)
+       · solo cuando se abre desde resultados (clase .faq-2col que pone openFaq)
+       · solo desktop ≥901px (mobile intacto: sigue en bottom-sheet de una columna)
+     Preguntas a la izquierda, contacto en la columna gris de la derecha, cada una
+     con su scroll para que el contacto no se pierda al bajar por las preguntas.
+     La X del panel ya cae sobre la columna gris.
+     ══════════════════════════════════════════ */
+  @media (min-width: 901px) {
+    #faqModal.faq-2col .side-modal-panel { width: 920px; }
+    #faqModal.faq-2col .side-modal-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 400px;
+      padding: 0;
+      overflow: hidden;
+    }
+    #faqModal.faq-2col .faq-main { overflow-y: auto; padding: 40px 44px 32px; }
+    /* El padding derecho es mayor que el izquierdo a propósito: la X ocupa de 16 a
+       48px desde el borde, así que todo el bloque —no solo la cabecera— la esquiva. */
+    #faqModal.faq-2col .faq-help {
+      /* padding-top 100 (no 40): alinea "¿Te ayudamos?" con el texto de la primera
+         pregunta, que cae a 109px del techo del panel por el título de la izquierda. */
+      margin: 0; padding: 100px 56px 32px 40px;
+      border-top: none; border-left: 1px solid var(--wf-30);
+      overflow-y: auto;
+    }
+    /* Padding lateral en las filas y fondo gris en la abierta: destaca la que estás
+       leyendo. Pierde el borde para leerse como una pieza y no como una fila más. */
+    /* Separadoras al mismo tono que la divisoria de columnas (--wf-30) */
+    #faqModal.faq-2col .faq-item { padding: 0 16px; border-color: var(--wf-30); transition: background 0.34s cubic-bezier(0.4, 0, 0.2, 1); }
+    #faqModal.faq-2col .faq-item.open { background: var(--wf-10); border-bottom-color: transparent; }
+    #faqModal.faq-2col .faq-item.open + .faq-item { border-top: none; }
+  }
 
   /* Resultados en desktop: columna más ancha (clase results-wide en .app-main solo en step7),
      tabs y título centrados, cards más anchas y centradas. Mobile intacto (scroll horizontal). */
@@ -2944,8 +2987,10 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="side-modal-body">
-        <div class="hablemos-title" style="margin-bottom:20px;">Resuelve tus dudas ahora</div>
-        <div class="faq-list" id="faqList"></div>
+        <div class="faq-main">
+          <div class="hablemos-title" style="margin-bottom:20px;">Resuelve tus dudas ahora</div>
+          <div class="faq-list" id="faqList"></div>
+        </div>
 
         <div class="faq-help">
           <div class="faq-help-head">
@@ -3676,7 +3721,10 @@
     function renderFaqList(ctx, openIndex) {
       faqCtx = ctx;
       const items = FAQS[ctx];
-      const n = FAQ_VISIBLE[ctx] || items.length;
+      // En la prueba a dos columnas caben 6 sin scroll; resultados tiene 13, así que el
+      // "Ver más" sigue haciendo falta para el resto.
+      const twoCol = (ctx === 'resultados' && window.innerWidth >= 901);
+      const n = twoCol ? 6 : (FAQ_VISIBLE[ctx] || items.length);
       let html = items.slice(0, n).map((f, i) => faqItemHTML(f, i, i === openIndex)).join('');
       if (items.length > n) {
         const rest = items.slice(n).map((f, k) => faqItemHTML(f, k + n, (k + n) === openIndex)).join('');
@@ -3715,6 +3763,8 @@
       renderFaqList(ctx, i);
       const body = document.querySelector('#faqModal .side-modal-body');
       if (body) body.scrollTop = 0;
+      // PRUEBA de dos columnas: solo desde resultados. Para replicarla, añadir contextos aquí.
+      document.getElementById('faqModal').classList.toggle('faq-2col', ctx === 'resultados');
       document.getElementById('faqModal').classList.add('open');
     }
     function closeFaq() { document.getElementById('faqModal').classList.remove('open'); }
