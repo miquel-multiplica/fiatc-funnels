@@ -1808,7 +1808,7 @@
       <!-- PASO 5 · ¿Seguro previo con FIATC? -->
       <div class="step" id="step5">
         <h1 class="step-title">¿Tienes contratado algún seguro con FIATC?</h1>
-        <p class="step-subtitle">Si ya eres cliente, vincularemos esta póliza a tu ficha para que lo tengas todo a mano.</p>
+        <p class="step-subtitle">Así solo te mostramos las coberturas disponibles en tu zona.</p>
         <div class="pref-list">
           <label class="pref-card" onclick="isClient=false; nextStep();">
             <div class="pref-body"><div class="pref-title">No, no soy cliente</div></div>
@@ -1822,10 +1822,9 @@
       <!-- PASO DNI · Solo si "ya soy cliente" -->
       <div class="step" id="stepDNI">
         <h1 class="step-title">¡Nos alegra que ya seas de FIATC!</h1>
-        <p class="step-subtitle">Introduce tu DNI para encontrar tu ficha.</p>
         <div class="step-promo">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-680,-253)"><path fill-rule="evenodd" clip-rule="evenodd" d="M682.75 261C682.75 258.995 683.019 258.042 683.53 257.53C684.042 257.019 684.995 256.75 687 256.75H697C699.005 256.75 699.958 257.019 700.47 257.53C700.981 258.042 701.25 258.995 701.25 261V269C701.25 271.005 700.981 271.958 700.47 272.47C699.958 272.981 699.005 273.25 697 273.25H687C684.995 273.25 684.042 272.981 683.53 272.47C683.019 271.958 682.75 271.005 682.75 269V261ZM687 255.25C685.005 255.25 683.458 255.481 682.47 256.47C681.481 257.458 681.25 259.005 681.25 261V269C681.25 270.995 681.481 272.542 682.47 273.53C683.458 274.519 685.005 274.75 687 274.75H697C698.995 274.75 700.542 274.519 701.53 273.53C702.519 272.542 702.75 270.995 702.75 269V261C702.75 259.005 702.519 257.458 701.53 256.47C700.542 255.481 698.995 255.25 697 255.25H687ZM694 260.25C693.586 260.25 693.25 260.586 693.25 261C693.25 261.414 693.586 261.75 694 261.75H699C699.414 261.75 699.75 261.414 699.75 261C699.75 260.586 699.414 260.25 699 260.25H694ZM694.25 265C694.25 264.586 694.586 264.25 695 264.25H699C699.414 264.25 699.75 264.586 699.75 265C699.75 265.414 699.414 265.75 699 265.75H695C694.586 265.75 694.25 265.414 694.25 265ZM697 268.25C696.586 268.25 696.25 268.586 696.25 269C696.25 269.414 696.586 269.75 697 269.75H699C699.414 269.75 699.75 269.414 699.75 269C699.75 268.586 699.414 268.25 699 268.25H697ZM688.5 261.42C687.915 261.42 687.44 261.895 687.44 262.48C687.44 263.065 687.915 263.54 688.5 263.54C689.085 263.54 689.56 263.065 689.56 262.48C689.56 261.895 689.085 261.42 688.5 261.42ZM685.94 262.48C685.94 261.066 687.086 259.92 688.5 259.92C689.914 259.92 691.06 261.066 691.06 262.48C691.06 263.894 689.914 265.04 688.5 265.04C687.086 265.04 685.94 263.894 685.94 262.48ZM692.747 269.258C692.572 267.45 691.138 266.027 689.331 265.863C688.782 265.809 688.224 265.809 687.667 265.864C685.867 266.038 684.429 267.444 684.253 269.258C684.214 269.67 684.516 270.037 684.928 270.077C685.34 270.116 685.707 269.814 685.747 269.402C685.851 268.316 686.713 267.463 687.812 267.357L687.813 267.356C688.275 267.311 688.735 267.311 689.185 267.356L689.185 267.356L689.193 267.357C690.284 267.455 691.148 268.312 691.253 269.402C691.293 269.814 691.66 270.116 692.072 270.077C692.484 270.037 692.786 269.67 692.747 269.258Z" fill="currentColor"/></g></svg>
-          <span>Como ya eres cliente, vinculamos esta póliza a tu <strong>ficha de FIATC</strong>.</span>
+          <span>Introduce tu <strong>DNI</strong> para que podamos <strong>personalizar tu presupuesto</strong>.</span>
         </div>
         <div class="input-wrap">
           <input type="text" id="clientDni" placeholder=" " onclick="if(!this.value){this.value='47854123X';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
@@ -1838,7 +1837,7 @@
       <div class="step" id="step6">
         <p class="step-eyebrow" style="text-align:center;">¡Ya casi está!</p>
         <h1 class="step-title" style="text-align:center;">Además de mostrarte el precio, te lo enviaremos por email</h1>
-        <p class="step-subtitle" style="text-align:center; margin-top:-12px;">Prometemos no enviarte spam :)</p>
+        <p class="step-subtitle" style="text-align:center; margin-top:-12px;">Así lo tendrás siempre a mano :)</p>
         <div class="contact-fields" style="margin-top:24px;">
           <div class="email-input-wrap">
             <div class="input-wrap">
@@ -1858,7 +1857,7 @@
           <div class="pub-head">
             <p class="pub-q">¿Te informamos sobre productos y ofertas relacionadas?</p>
             <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
-            <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email, teléfono y/o WhatsApp sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
+            <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar el consentimiento en cualquier momento. El consentimiento caduca a los 24 meses.</p>
             <div class="pub-head-foot">
               <span class="pub-cancel-badge">Cancela cuando quieras</span>
               <a class="pub-leermas" onclick="toggleLegal(this)">Leer más</a>
@@ -1871,26 +1870,6 @@
             <span class="pub-row-body">
               <span class="pub-row-text"><span class="pub-row-title">Por email</span></span>
               <span class="pub-row-adv">Directo a tu bandeja de entrada</span>
-            </span>
-            <span class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></span>
-          </label>
-          <label class="pub-row">
-            <span class="pub-row-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </span>
-            <span class="pub-row-body">
-              <span class="pub-row-text"><span class="pub-row-title">Por WhatsApp</span></span>
-              <span class="pub-row-adv">La manera más cómoda</span>
-            </span>
-            <span class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></span>
-          </label>
-          <label class="pub-row">
-            <span class="pub-row-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            </span>
-            <span class="pub-row-body">
-              <span class="pub-row-text"><span class="pub-row-title">Por teléfono</span></span>
-              <span class="pub-row-adv">Si lo prefieres de viva voz</span>
             </span>
             <span class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></span>
           </label>
@@ -1963,14 +1942,14 @@
           <div class="promo-banner-text"><strong>¡Consigue 2 meses gratis!</strong><span>Si contratas antes del 30 de septiembre de 2026</span></div>
         </div>
         <div class="filter-tabs">
-          <button class="filter-tab active" onclick="selectFilter('para-ti',this)" data-title="Las opciones más populares en clientes como tú" data-sub="Ideales para parejas jóvenes en Barcelona">Para ti</button>
+          <button class="filter-tab active" onclick="selectFilter('para-ti',this)" data-title="Las opciones que mejor se ajustan a ti" data-sub="Ideales para parejas jóvenes en Barcelona">Para ti</button>
           <button class="filter-tab" onclick="selectFilter('copago',this)" data-title="El equilibrio entre precio y cobertura" data-sub="Si prefieres cuota mensual baja y pagar algo en cada visita">Con copago</button>
           <button class="filter-tab" onclick="selectFilter('sin-copago',this)" data-title="Cada visita incluida, sin sorpresas" data-sub="Para quien usa mucho el seguro y prefiere precio fijo">Sin copago</button>
           <button class="filter-tab" onclick="selectFilter('reembolso',this)" data-title="Libertad total para elegir dónde te atienden" data-sub="Para quien quiere seguir con su médico de confianza">Reembolso</button>
         </div>
 
         <div class="results-summary">
-          <h1 class="step-title" id="step7Title" style="margin-bottom:16px;">Las opciones más populares en clientes como tú</h1>
+          <h1 class="step-title" id="step7Title" style="margin-bottom:16px;">Las opciones que mejor se ajustan a ti</h1>
           <div class="results-meta">
             <span><span id="metaCp">07310</span> <span class="results-meta-prov" id="metaProv">Illes Balears</span></span>
             <span class="results-meta-sep" aria-hidden="true">·</span>
@@ -1999,7 +1978,7 @@
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card featured">
-              <div class="card-badge">El más popular</div>
+              <div class="card-badge">El más elegido</div>
               <div class="card-head"><h3 class="card-name">Medifiatc P15</h3><span class="card-tag">Con copago</span></div>
               <div class="card-price-row"><div class="card-price" data-save="32"><strong>45<span class="price-dec">,78€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
@@ -2040,7 +2019,7 @@
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card featured">
-              <div class="card-badge">El más popular</div>
+              <div class="card-badge">El más elegido</div>
               <div class="card-head"><h3 class="card-name">Medifiatc P15</h3><span class="card-tag">Con copago</span></div>
               <div class="card-price-row"><div class="card-price" data-save="32"><strong>45<span class="price-dec">,78€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
@@ -2099,7 +2078,7 @@
           <!-- SIN COPAGO -->
           <div class="products-scroll" id="scroll-sin-copago">
             <div class="product-card featured">
-              <div class="card-badge">El más popular</div>
+              <div class="card-badge">El más elegido</div>
               <div class="card-head"><h3 class="card-name">Medifiatc</h3><span class="card-tag">Sin copago</span></div>
               <div class="card-price-row"><div class="card-price" data-save="59"><strong>82<span class="price-dec">,47€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
@@ -2142,7 +2121,7 @@
               <button class="card-detail" onclick="openDetail(this)">Detalles del seguro</button>
             </div>
             <div class="product-card featured">
-              <div class="card-badge">El más popular</div>
+              <div class="card-badge">El más elegido</div>
               <div class="card-head"><h3 class="card-name">Multi125</h3><span class="card-tag">Reembolso</span></div>
               <div class="card-price-row"><div class="card-price" data-save="45"><strong>63<span class="price-dec">,44€</span></strong> al mes</div></div>
               <div class="card-divider"></div>
@@ -2260,7 +2239,7 @@
       <!-- CONTRATACIÓN · step8 · Datos personales del tomador -->
       <div class="step" id="cDatos">
         <h1 class="step-title">¡Perfecto! Iniciemos la contratación con tus datos personales</h1>
-        <p class="step-subtitle">Estos son los datos del titular o tomador del seguro.</p>
+        <p class="step-subtitle">Incluye más asegurados y accede a un mejor precio.</p>
         <div class="input-wrap" style="margin-top:24px;">
           <input type="text" id="cNombre" placeholder=" " onclick="if(!this.value){this.value='María';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
           <label for="cNombre">Nombre</label>
@@ -2309,7 +2288,7 @@
       <!-- CONTRATACIÓN · step10 · Dirección -->
       <div class="step" id="cDireccion">
         <h1 class="step-title">¿Cuál es tu dirección?</h1>
-        <p class="step-subtitle">Para generar el contrato necesitamos el domicilio del titular.</p>
+        <p class="step-subtitle">Para generar el contrato necesitamos el domicilio del tomador.</p>
         <div class="input-wrap select-wrap" style="margin-top:24px;">
           <select onchange="this.closest('.input-wrap').classList.toggle('filled',!!this.value)">
             <option value="" disabled selected></option>
@@ -2359,7 +2338,7 @@
       <div class="step" id="cAseg1">
         <h1 class="step-title">Datos del asegurado 1</h1>
         <div class="aseg-toggle-wrap">
-          <span class="aseg-toggle-label">¿Copiamos los datos del titular?</span>
+          <span class="aseg-toggle-label">¿Copiamos los datos del tomador?</span>
           <label class="toggle-switch"><input type="checkbox" onchange="copyTitular('a1', this.checked)"><span class="toggle-track"></span></label>
         </div>
         <div class="input-wrap">
@@ -2532,7 +2511,7 @@
       <!-- CONTRATACIÓN · step14 · Firma del cuestionario (iframe Evicertia simulado) -->
       <!-- CONTRATACIÓN · step14b · Confirmar teléfono para firmar (PIN por SMS) -->
       <div class="step" id="cTelefono">
-        <h1 class="step-title">Confirma tu número de teléfono para poder firmar online</h1>
+        <h1 class="step-title">Confirma tu número de teléfono para poder firmar online el cuestionario de salud</h1>
         <p class="step-subtitle">Te enviaremos un <strong>SMS</strong> con un código de seguridad al número que confirmes.</p>
         <div class="input-wrap filled" style="margin-top:24px;">
           <input type="tel" value="612 345 678" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
@@ -2603,8 +2582,8 @@
 
       <!-- CONTRATACIÓN · step18 · Forma de pago (periodicidad + ahorro QW#10) -->
       <div class="step" id="cPago">
-        <h1 class="step-title">¿Qué modalidad de pago quieres?</h1>
-        <p class="step-subtitle">Elige el plazo que mejor se adapte a ti; cuanto más largo, más ahorras.</p>
+        <h1 class="step-title">¿Qué modalidad de pago prefieres?</h1>
+        <p class="step-subtitle">Los pagos trimestrales, semestrales y anuales incluyen descuento.</p>
         <div class="date-list" style="margin-top:24px;">
           <label class="date-card pago-card" onclick="selectPago('Mensual','45,78 €/mes'); nextContrat();">
             <span class="pago-left"><span class="date-label">Mensual</span></span>
@@ -2664,7 +2643,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           <span>Condiciones generales del seguro</span>
         </a>
-        <button class="btn-primary" onclick="showContrat('cTPV')">Continuar a los datos de pago</button>
+        <button class="btn-primary" onclick="showContrat('cTPV')">Continuar con los datos de pago</button>
       </div>
 
       <!-- CONTRATACIÓN · cTPV · Pasarela de pago (iframe Sabadell simulado; paso limpio, solo TPV) -->
@@ -3219,7 +3198,7 @@
           <p class="detail-hero-name" id="detailName">Medifiatc P15</p>
           <p class="detail-hero-sub" id="detailSub">Cobertura completa con cuota ajustada</p>
           <div class="detail-hero-badges">
-            <span class="detail-hero-pop" id="detailPop">El más popular</span>
+            <span class="detail-hero-pop" id="detailPop">El más elegido</span>
             <span class="detail-hero-tag" id="detailTag">Con copago</span>
           </div>
           <div class="detail-hero-pricerow">
