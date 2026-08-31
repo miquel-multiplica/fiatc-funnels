@@ -117,6 +117,49 @@
 - **Pago bancario**: online es TPV, pero se puede pedir domiciliación. Valorar microcopy en el paso de pago ("¿Prefieres domiciliación? Te ayudamos por teléfono").
 - **Firma (cFirma) — HECHA (simulada)**: modal de confirmación ("¿Confirmas el envío?") + **caja gris placeholder** "PROCESO DE FIRMA" (el iframe Evicertia real no se diseña) con loading 5 s que avanza solo. Real: teléfono → confirmar → PIN por SMS → Evicertia. 2ª firma = contrato por email post-pago (avisar en confirmación).
 - **Derogación (QW#24)**: doc = último recibo + copia de tarjeta; si la tarjeta no tiene fecha de alta → + recibo de hace un año. Email web@fiatc.es.
-- **KO pedagógica (QW#22)**: sin construir.
+- **KO pedagógica (QW#22)**: CONSTRUIDA (`cKO`). Ver el estado de aplicación al final.
 - **Simulaciones** (añadir recién nacido, quitar hijo, añadir asegurado que vence, completa↔copago): cubierto por la **calculadora** (add/quitar) + pestañas de modalidad; validar que cubre los casos.
 - **"El usuario no lee / pierde la pantalla"**: principio transversal → no abrir ventanas nuevas, no perder el contexto de tarificación (ya respetado en el prototipo con modales/capas).
+
+---
+
+## Estado de aplicación (31 ago 2026)
+
+Foto de qué se ha llevado al prototipo `conceptualizacion/funnel-salud-quickwins.html`.
+Las secciones de arriba son los **inputs** de la inmersión y no se tocan; esto es el
+**resultado**. Detalle funcional de cada pantalla en `conceptualizacion/FUNCIONAL.md`.
+
+### Aplicados (21)
+
+1 efecto calculadora · 3 cards y modal de detalles · 5 guardar presupuesto ·
+6 anticipación del proceso · 7 badges de orientación · 8 limpieza legacy ·
+9 social proof · 10 ahorro por periodicidad · 11 sugerencias de dominio ·
+13 progreso y resumen sticky · 14 microcopy contextual · 15 modal Hablemos ·
+16 exit-intent · 17 copiar datos del tomador · 18 preguntas una a una ·
+19 copy de tranquilización · 20 lista de lo que no declarar · 21 máscara peso/altura ·
+22 KO pedagógica · 24 subida de documentación de derogación · 26 agendación de llamada
+
+### Parciales (2)
+
+- **QW#2 · mensaje dual por audiencia.** Los dos argumentarios están en el acordeón de la
+  portada, pero **no son condicionales**: el ~40% de portabilidad y el ~59% de primer
+  seguro ven lo mismo. La FAQ de carencias hace de autoselección.
+- **QW#4 · claridad del precio.** Hechos los dos decimales, el "al mes" explícito y el
+  total por nº de asegurados. Falta el resto de malentendidos que listó ATC: renovación,
+  vencimiento, promocional vs. captación y si el CP afecta.
+
+### Fuera del alcance de diseño (3)
+
+- **QW#12 · diagnóstico Clarity.** Analítica, no diseño. Sigue siendo el prerequisito para
+  atacar la fuga 2 con criterio en vez de a ciegas.
+- **QW#23 · recordatorio post-emisión.** Marketing Cloud. **Es el más urgente de los tres**:
+  afecta al ~40% de portabilidad, que hoy descubre las carencias cuando le deniegan una
+  prueba. El paso que se añadió en la confirmación (enviar documentos a web@fiatc.es) cubre
+  el momento, pero no a quien cierra la pestaña y se olvida.
+- **QW#25 · email de presupuesto.** Marketing Cloud.
+
+### Estado con el cliente
+
+La **parte transaccional está aprobada por negocio** (21 ago 2026). Pendiente la revisión
+de **TI** y de **jurídico** sobre su parte. El consentimiento comercial se redujo a un
+único canal (email) y queda provisional hasta que jurídico se pronuncie.
