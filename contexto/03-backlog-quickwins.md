@@ -71,6 +71,7 @@
 | Descuento cliente visible junto al precio | Depende de legal + scoring | Carril B (con sponsor interno) |
 | WhatsApp en el funnel | Herramienta no lista, datos no viajan bien | Fase 2, tras agendación |
 | Cambio del proceso de firma (unificar/mover) | "Medio plazo, probar tiempos" | Carril B |
+| **QW#21 · máscara de peso y altura** | El cliente confirma que **ya no es un problema** (31 ago 2026); era el error nº1 del cuestionario según ATC, pero ya no se da | Retirado del backlog. El filtro a dígitos sigue en el código: no molesta y evita el caso si reapareciera |
 
 ## Pendientes de información
 
@@ -129,15 +130,15 @@ Foto de qué se ha llevado al prototipo `conceptualizacion/funnel-salud-quickwin
 Las secciones de arriba son los **inputs** de la inmersión y no se tocan; esto es el
 **resultado**. Detalle funcional de cada pantalla en `conceptualizacion/FUNCIONAL.md`.
 
-### Aplicados (21)
+### Aplicados (20)
 
 1 efecto calculadora · 3 cards y modal de detalles · 5 guardar presupuesto ·
 6 anticipación del proceso · 7 badges de orientación · 8 limpieza legacy ·
 9 social proof · 10 ahorro por periodicidad · 11 sugerencias de dominio ·
 13 progreso y resumen sticky · 14 microcopy contextual · 15 modal Hablemos ·
 16 exit-intent · 17 copiar datos del tomador · 18 preguntas una a una ·
-19 copy de tranquilización · 20 lista de lo que no declarar · 21 máscara peso/altura ·
-22 KO pedagógica · 24 subida de documentación de derogación · 26 agendación de llamada
+19 copy de tranquilización · 20 lista de lo que no declarar · 22 KO pedagógica ·
+24 subida de documentación de derogación · 26 agendación de llamada
 
 ### Parciales (2)
 
@@ -147,6 +148,11 @@ Las secciones de arriba son los **inputs** de la inmersión y no se tocan; esto 
 - **QW#4 · claridad del precio.** Hechos los dos decimales, el "al mes" explícito y el
   total por nº de asegurados. Falta el resto de malentendidos que listó ATC: renovación,
   vencimiento, promocional vs. captación y si el CP afecta.
+
+### Retirado (1)
+
+- **QW#21 · máscara de peso y altura.** El cliente confirma que ya no es un problema.
+  Detalle en "Caídos / aplazados".
 
 ### Fuera del alcance de diseño (3)
 
