@@ -18,7 +18,7 @@ Para **la sesión con el cliente**: `04-preguntas-cliente.md`, que es autoconten
 Para **entender el terreno**: `00` (cómo se mide) → `03` (qué dicen los números) → `02` (qué
 pedir) → `01` (cómo diagnosticar).
 
-## Las cuatro cosas que hay que saber
+## Las cinco cosas que hay que saber
 
 1. **El cierre offline es la norma.** 93 de cada 100 pólizas las cierra una persona; lo
    online es el 7,0%. El funnel es hoy un generador de leads, no un canal de venta directa.
@@ -30,6 +30,11 @@ pedir) → `01` (cómo diagnosticar).
 4. **El tramo entre el clic en contratar y la firma no está instrumentado**, porque el iframe
    lo hacía invisible. El funnel nuevo no usa iframe: es la ocasión de arreglarlo, y solo
    existe una vez.
+5. **Dos conclusiones que afectan a lo que podemos prometer** (`03` §6): con 18 pólizas
+   online al mes, la métrica de éxito no puede ser la venta online —hay que comprometerse con
+   el clic en contratar y las firmas, que sí tienen volumen—; y el cuestionario de salud, al
+   derivar a revisión médica con un solo "Sí", **puede ser un techo estructural** cuya altura
+   nadie ha medido.
 
 ## Aviso de uso
 

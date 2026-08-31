@@ -51,7 +51,20 @@ Lo que desbloquea:
 
 ---
 
-## 2. Eventos por fuga
+## 2. Los eventos intermedios no son un extra: son la única medición viable
+
+Con **18 pólizas online al mes** (12 a 28, sin tendencia), una mejora del 50% son +9 al mes:
+indistinguible del ruido. **Ninguna instrumentación arregla eso**, porque es un problema de
+tamaño de muestra, no de medición.
+
+Por eso el clic en "Contratar" y los eventos del tramo de contratación no son un detalle
+técnico: **son lo único que va a permitir demostrar si el rediseño funciona** en los primeros
+meses. Miles de sesiones en el muro del precio y ~315 firmas al mes sí acusan un cambio del
+10%; 18 pólizas no acusan nada. Razonamiento completo en `analitica/03-linea-base.md` §6.1.
+
+---
+
+## 3. Eventos por fuga
 
 El embudo pierde gente en cuatro sitios y hoy dos de ellos no se pueden diagnosticar. Los
 eventos deben cubrir **las transiciones**, que es donde están los muros: el tramo interno de
@@ -85,7 +98,7 @@ cotización no se puede separar una cosa de la otra.
 
 ---
 
-## 3. Trazabilidad del consentimiento
+## 4. Trazabilidad del consentimiento
 
 No es analítica, es cumplimiento, pero se resuelve en el mismo sitio. La **Ley ATC 10/2025**
 exige consentimiento granular por canal, revocable por canal y trazable. El CRM guarda hoy
@@ -99,7 +112,7 @@ estética, es que el sistema no lo puede almacenar. Ver `analitica/00-como-se-mi
 
 ---
 
-## 4. Qué hay que medir para validar cada decisión del prototipo
+## 5. Qué hay que medir para validar cada decisión del prototipo
 
 Las decisiones de diseño que hemos tomado son **hipótesis**. Esta tabla dice qué evento
 convierte cada una en algo comprobable. Es la lista que hay que cruzar con SEOCom para que
@@ -112,7 +125,7 @@ no se quede ninguna sin instrumentar.
 | **Agendar llamada** con franja horaria, frente al teléfono directo | Ruta elegida y conversión de cada una. ATC convierte al 11,31%, ×2,5 el funnel | Sin medir |
 | **Consentimiento comercial** (email, `step6`) separado de la **preferencia de canal** (WhatsApp, `step6b`) | Dos marcas distinguibles, con canal, fecha y origen | Una sola marca → `04` §1.4 |
 | **Cuestionario de salud** paso a paso, con progreso por asegurado | Un evento por asegurado guardado, y **el tiempo total** | Sin medir. Choca con la ventana de 20 min → `04` §2.3 |
-| **Derivación a revisión médica** (la salida cuando el cuestionario se complica) | Volumen de derivaciones y qué pasa después | Sin medir. No sabemos ni el orden de magnitud |
+| **Derivación a revisión médica** (la salida cuando el cuestionario se complica) | Volumen de derivaciones y qué pasa después | Sin medir. **Es el techo de la venta online**: ver `03` §6.2 |
 | **Guardar presupuesto** y volver más tarde | Evento de guardado y de retorno — necesita el identificador | Sin medir → `04` §1.1 |
 | **Calculadora de asegurados** y recálculo en resultados | Aperturas y recálculos, con el precio antes y después | Sin medir |
 | **Pago anual** con el mensaje "De una vez y olvídate" | Reparto anual/mensual. El descuento es pequeño, así que el efecto es del copy | Sin medir |
@@ -130,7 +143,7 @@ gratis.
 
 ---
 
-## 5. Antes de dar nada por bueno
+## 6. Antes de dar nada por bueno
 
 - **Respetar sus convenciones.** Si SEOCom ya tiene nomenclatura de eventos o un data layer
   definido, se usa. Inventar otra taxonomía en paralelo garantiza que nadie cruce los datos.

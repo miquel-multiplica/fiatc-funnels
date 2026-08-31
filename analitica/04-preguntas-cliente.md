@@ -53,6 +53,20 @@ campaña. Ramo Salud.
 → **Desbloquea**: el diagnóstico de Clarity de `analitica/01-clarity.md`, que es lo que
 explica *por qué* se abandona en las fugas 1 y 2.
 
+**1.6 · ¿Qué porcentaje de cuestionarios de salud tiene al menos un "Sí"?**
+*O, dicho de otra forma: cuántas solicitudes acaban derivadas a revisión médica.*
+→ **Por qué es la pregunta con más consecuencias de toda la lista**: un solo "Sí" en el
+cuestionario deriva a revisión médica, y eso significa que no hay compra online. Como el
+cuestionario es **por asegurado**, en una familia de cuatro los cuatro tienen que estar
+limpios. Ese porcentaje es por tanto **el techo máximo de venta online que el canal puede
+alcanzar**, y hoy nadie lo conoce.
+→ **Qué cambia según la respuesta**: si la mayoría de solicitudes tienen algún "Sí", el 7% de
+venta online está cerca de su techo y el límite es de suscripción, no de diseño. Si el techo
+está en el 20% o más, hay margen amplio y el 7% es un problema de embudo. Son dos proyectos
+distintos.
+→ **Si esta sesión no puede responderlo**, escalarlo a negocio o a suscripción: no debería
+quedarse sin respuesta. Ver `analitica/03-linea-base.md` §6.2.
+
 ---
 
 ## 2. Las que cambiarían nuestro plan de trabajo
@@ -140,6 +154,7 @@ Conviene fijar cuál se usa como referencia.
 | **SEOCom** (etiquetado GA4/GTM) | 1.2, 1.5, 2.2, 2.4, 4 (nomenclatura) |
 | **Héctor López** (iframe, data layer) | 1.1, 1.3, 1.4 (parte técnica), 2.5 |
 | **Negocio / Diana** (datos) | 2.1, 3.1, 3.2, 3.3 |
+| **Negocio o Suscripción** | **1.6** — si esta sesión no puede responderla, hay que escalarla |
 | **Sistemas** | 1.4 (almacenamiento y trazabilidad del consentimiento) |
 | **Equipo de Laia Avilés** (CRM) | 2.3, 3.1 |
 | **TrueIT** (contactabilidad) | sesión posterior |

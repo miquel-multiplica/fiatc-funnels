@@ -183,7 +183,60 @@ frente a brutas, o cortes de fecha distintos. Al comparar hay que decir cuál se
 
 ---
 
-## 6. Qué pedir todavía
+## 6. Qué implica para lo que podemos prometer
+
+Dos conclusiones que salen de esta línea base y que afectan al planteamiento del proyecto,
+no al diseño de las pantallas.
+
+### 6.1 · La métrica de éxito no puede ser la venta online
+
+Son **18 pólizas al mes**, entre 12 y 28, sin tendencia. Con ese volumen, una mejora del 50%
+son **+9 pólizas al mes**: indistinguible de la variación normal de un mes cualquiera.
+
+Es decir: **si el entregable promete "más ventas online", no vamos a poder demostrarlo en
+meses**, ni aunque el rediseño funcione muy bien. No es un problema de instrumentación —es de
+tamaño de muestra— y por tanto no lo arregla ningún identificador ni ningún evento nuevo.
+
+Lo que hay que hacer es comprometerse con **métricas intermedias que sí tienen volumen**:
+
+| Métrica | Volumen mensual | Sirve para |
+|---|---|---|
+| Clic en "Contratar" | miles de sesiones | La fuga 3, que es la prioridad. Un cambio del 10% se ve |
+| Firmas del cuestionario | ~315 | La fuga 4. Con 315 al mes, un cambio del 10% también se ve |
+| Pólizas online | ~18 | **Nada, a corto plazo.** Se lee por trimestres o por año |
+
+No es rebajar la ambición: es elegir dónde se mide para que el resultado sea defendible.
+
+### 6.2 · El cuestionario de salud puede ser un techo estructural
+
+Esta no sale de los informes, sino de cruzarlos con nuestra propia decisión de flujo. En
+`conceptualizacion/FUNCIONAL.md` §8.1, marcada como DECIDIDO: **un solo "Sí" en el
+cuestionario lleva a `cKO`**, que es terminal, sin firma y sin compra online. Y el
+cuestionario es **por asegurado**.
+
+Así que el máximo de venta online alcanzable es **la proporción de solicitudes en las que
+todos los asegurados responden "No" a todo**. En una familia de cuatro, los cuatro tienen que
+estar limpios. **Nunca hemos preguntado cuánta gente es.**
+
+Y de ahí depende cómo se lee todo lo demás:
+
+- **Si la mayoría de solicitudes tienen algún "Sí"**, el 7% de venta online puede estar ya
+  cerca de su techo estructural. El límite sería de **suscripción, no de diseño**, y habría
+  que reformular lo que el proyecto puede prometer.
+- **Si el techo está en el 20% o más**, hay mucho margen y el 7% sí es un problema de embudo.
+
+Es una pregunta abierta, no una conclusión, y es **barata de responder**: el porcentaje de
+cuestionarios con al menos un "Sí", o el volumen de derivaciones a revisión médica. Planteada
+en `analitica/04-preguntas-cliente.md` §1.6.
+
+> **Relacionado**: la **ventana de 20 minutos** (`analitica/00-como-se-mide-hoy.md` §3) cobra
+> otro sentido con el cuestionario por asegurado delante. Una familia de cuatro tarda de
+> sobra más de 20 minutos, así que el agente llama a gente que está a medio proceso. Puede
+> ser parte de la explicación del reparto online/teléfono.
+
+---
+
+## 7. Qué pedir todavía
 
 FIATC ofreció sacar aparte las oportunidades que entran por atención al cliente sin rating.
 **Sí interesa**, y ya han enviado la de ATC. Falta:

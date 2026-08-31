@@ -128,7 +128,7 @@ modelo de cierre offline descrito arriba.
 Queda una cosa por saber, y es de instrumentación: el tramo **no está medido paso a paso**
 (el iframe lo hacía invisible), así que no se sabe cuánta gente se pierde *entre* el clic en
 contratar y la firma. Ese hueco lo cierra el funnel nuevo, que no usa iframe. Ver
-`analitica/02-medicion-funnel-nuevo.md` §2.
+`analitica/02-medicion-funnel-nuevo.md` §3.
 
 > **Cuidado al cruzar cifras.** Las fugas 1-3 están medidas en **sesiones de GA4 (2025)** y
 > la fuga 4 en **leads de negocio (2026)**. `contexto/01-embudo-y-datos.md` lo advierte en
@@ -188,17 +188,12 @@ Puntos a cerrar:
 4. Vacíos de medición.
 5. **Qué dejar preparado para el funnel nuevo** → ver `analitica/02-medicion-funnel-nuevo.md`.
 
-Y dos preguntas propias que conviene no olvidar:
+**Las preguntas propias, priorizadas y con su contexto, están en
+`analitica/04-preguntas-cliente.md`** — que es la lista canónica y autocontenida. No
+duplicarlas aquí: si se añade una, va allí.
 
-- **Cuánta gente se pierde entre el clic en contratar y la firma** (§4): hoy el tramo no
-  está medido paso a paso y es lo único que falta para cerrar la fuga 4.
-- **El descuadre de 629 pólizas** entre el informe mensual y las oportunidades convertidas,
-  y las 3.338 oportunidades sin rating. Ver `analitica/03-linea-base.md` §5.
-- **La fuga 3 cruzada por rating** (calidad del lead): distingue sensibilidad al precio de
-  problema de diseño. Ver `analitica/03-linea-base.md` §2.
-- **Desglose por dispositivo**, que no viene en ninguno de los tres informes.
-- **Cuánta gente supera la ventana de 20 minutos** (§3) y recibe llamada estando aún dentro
-  del proceso.
+La de más consecuencias es **qué porcentaje de cuestionarios de salud tiene algún "Sí"**
+(`04` §1.6): marca el techo máximo de la venta online y hoy nadie lo conoce.
 
 Contactabilidad, CRM, consentimiento y testing con usuarios quedan para sesiones posteriores
 con sus equipos, a la vuelta de vacaciones. Testing con usuarios puede requerir a **Legal**.
