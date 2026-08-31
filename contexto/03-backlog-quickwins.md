@@ -167,7 +167,7 @@ eso es fricción para resolver algo que el acordeón ya resuelve.
 ### Fuera del alcance de diseño (2) · más el diagnóstico, ya en marcha
 
 - **QW#12 · diagnóstico Clarity.** Ya hay acceso a Clarity, así que deja de ser un quick
-  win pendiente: el plan de qué mirar está en `analitica/CLARITY.md`.
+  win pendiente: el plan de qué mirar está en `analitica/01-clarity.md`.
 - **QW#23 · recordatorio post-emisión.** Marketing Cloud. **Es el más urgente de los tres**:
   afecta al ~40% de portabilidad, que hoy descubre las carencias cuando le deniegan una
   prueba. El paso que se añadió en la confirmación (enviar documentos a web@fiatc.es) cubre

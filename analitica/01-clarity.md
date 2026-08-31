@@ -1,7 +1,8 @@
 # Qué mirar en Clarity — plan de diagnóstico
 
-Ya tenemos acceso a Microsoft Clarity. Este documento dice **qué buscar, dónde y para qué
-decisión sirve cada hallazgo**. Sustituye al antiguo QW#12 ("diagnóstico Clarity"), que era
+Este documento dice **qué buscar, dónde y para qué decisión sirve cada hallazgo**.
+Estado de la medición actual en `analitica/00-como-se-mide-hoy.md`; lo que hay que dejar
+preparado para el funnel nuevo, en `analitica/02-medicion-funnel-nuevo.md`. Sustituye al antiguo QW#12 ("diagnóstico Clarity"), que era
 un quick win pendiente: ya no es una tarea por hacer, es un plan de trabajo.
 
 El embudo pierde gente en cuatro sitios (`contexto/01-embudo-y-datos.md`). De dos de ellos

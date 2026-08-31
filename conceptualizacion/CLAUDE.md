@@ -26,8 +26,9 @@ se cierre una decisión abierta.
 ## Principios de contenido
 - **Fidelidad de copy**: nada inventado; sale de guiones de ATC, web y área privada de
   FIATC. Lo que sea redacción propia se marca como pendiente de validar.
-- **Dos audiencias en resultados** (~40% portabilidad "sin carencias desde el día uno" /
-  ~59% primer seguro): mensaje dual condicional, no universal.
+- **Dos audiencias en resultados** (~40% portabilidad / ~59% primer seguro): el acordeón
+  lleva un argumento para cada una y **se muestran siempre los dos**. En resultados no se
+  conoce la audiencia: la portabilidad no se declara hasta `cOtra`. Ver `FUNCIONAL.md` §3.
 - **"Tomador", nunca "titular"**, en todos los pasos de contratación. Indicación del cliente.
 - **Consentimiento comercial** (Ley ATC, oct 2026): hoy un único canal, email, en `step6`.
   Ojo: es DISTINTO de la preferencia de canal de `step6b` ("¿Prefieres por WhatsApp?", para

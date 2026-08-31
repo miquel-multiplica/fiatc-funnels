@@ -121,9 +121,12 @@ Pantalla prioritaria del proyecto: es donde se concentra la fuga (63–72%).
 - **"Me interesa"** (`#interesModal`): confirma plan y anticipa el proceso antes de
   entrar en contratación.
 
-**Mensaje dual**: ~40% del tráfico viene con portabilidad ("sin carencias desde el día
-uno") y ~59% es primer seguro. El copy debe ser condicional a cada audiencia, no
-universal.
+**Mensaje dual**: ~40% del tráfico viene con portabilidad y ~59% es primer seguro, así que
+el acordeón "¿Por qué FIATC?" lleva un argumento para cada una — *"en días, no en meses,
+sin listas de espera"* (compara contra la pública) y *"derogamos tus carencias"* (compara
+contra su prima de renovación). **Se muestran siempre los dos**: en resultados el funnel
+todavía no sabe de qué audiencia se trata, porque la portabilidad no se declara hasta
+`cOtra`. `comesFromOther` solo decide si se pasa por `cDerogacion`.
 
 ---
 

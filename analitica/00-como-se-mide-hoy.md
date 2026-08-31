@@ -1,0 +1,204 @@
+# Cómo se mide hoy el funnel de Salud
+
+Qué existe, qué no, quién es dueño de cada pieza y cuál es la línea base. Es material de
+**referencia**: se consulta antes de proponer medición, no se edita como diario.
+
+> **Fuente**: respuestas de Laura Solé (FIATC, Marketing Online & Ecommerce) al cuestionario
+> de medición, 20 de agosto de 2026. Las cifras del embudo vienen de
+> `contexto/01-embudo-y-datos.md` (GA4 2025 y datos de negocio).
+
+---
+
+## 1. Quién es dueño de qué
+
+Ningún equipo controla la medición de punta a punta. Son cinco actores:
+
+| Pieza | Responsable |
+|---|---|
+| Etiquetado analítico (GA4, GTM) | **SEOCom** (agencia externa) |
+| Iframe del tarificador y data layer | **Héctor López** (FIATC) |
+| Integraciones con CRM | equipo de **Laia Avilés** (FIATC) |
+| Contactabilidad · plataforma Evolution | **TrueIT** (proveedor) |
+| Consentimiento a nivel técnico | **Sistemas** (FIATC) |
+
+Consecuencia práctica: cualquier cambio de medición que cruce el tarificador y el CRM
+necesita coordinar al menos a tres. No es un problema de voluntad, es de reparto.
+
+---
+
+## 2. Definiciones oficiales del cliente
+
+Hasta ahora el proyecto usaba "lead" y "conversión" sin definición cerrada. Estas son las
+suyas, y son las que hay que usar al comparar cifras:
+
+| Término | Nombre interno | Definición |
+|---|---|---|
+| **Lead** | Oportunidad | Cualquier alta de oportunidad que entra en el CRM |
+| **Lead cualificado** | Oportunidad neta | Todas menos las descartadas por: Posible bot · Datos incorrectos · Tel. erróneo · Validador teléfono · Inactividad chat · Transferencia ATC |
+| **Contacto efectivo** | Oportunidad gestionada | Las que han tenido contacto comercial |
+| **Conversión** | — | Oportunidades que derivan en venta de póliza |
+
+Siguen dos ratios distintos: **% conversión sobre oportunidades** y **% conversión sobre
+oportunidades gestionadas**. Al citar un porcentaje hay que decir cuál de los dos es.
+
+---
+
+## 3. Ciclo de vida de un lead en el CRM
+
+```
+Pendiente enviar a EVO  →  Sin gestionar  →  En proceso  →  Cierre
+   (ventana 20 min)         (en Evolution)    (agente ya
+                                               contactó)
+```
+
+- **Pendiente enviar a EVO** — la oportunidad espera 20 minutos mientras se verifica que no
+  se complete una compra online.
+- **Sin gestionar** — pasada la ventana, el lead va a Evolution (plataforma de llamadas) y
+  espera al primer contacto de un agente.
+- **En proceso** — un agente ha contactado y gestiona comercialmente.
+- **Pendiente Gestión Proveedor** — equivalente a "Sin gestionar" para el Call Center externo.
+
+**Cierre**, con tres salidas y sus submotivos:
+
+| Convertido | Descartado | Rechazado |
+|---|---|---|
+| venta | Abandono proceso | Política de suscripción Fiatc |
+| | Consulta precio | Por precio |
+| | Contrata FIATC por otro canal | Riesgo no asegurable |
+| | Datos incorrectos | |
+| | Máximos intentos EVO | |
+| | Posible Bot | |
+| | Tel. erróneo | |
+| | Transferencia a ATC | |
+| | Validador tel. | |
+
+Dos submotivos son oro para el proyecto: **"Abandono proceso"** y **"Consulta precio"**
+cuantifican desde el CRM la misma fuga que GA4 ve como el muro del precio. Son dos fuentes
+independientes del mismo fenómeno.
+
+### La ventana de 20 minutos afecta al diseño
+Si alguien tarda más de 20 minutos en completar, el lead ya se ha enviado al call center y
+recibirá llamada **aunque esté comprando**. El prototipo promete "2 min" para el precio,
+pero el cuestionario de salud de varios asegurados puede irse bastante más allá. Conviene
+saber cuánta gente supera ese umbral.
+
+---
+
+## 4. Línea base (agosto 2025 – julio 2026)
+
+Cifras cerradas de los informes de FIATC (ago-25 a jul-26). Detalle y lectura completa en
+`analitica/03-linea-base.md`.
+
+| | |
+|---|---|
+| Contrataciones **online** | **220** · ~18/mes |
+| Contrataciones **cerradas por agente** | **2.905** · ~242/mes |
+| Total pólizas | **3.125** |
+| Peso de lo online | **7,0%** |
+| Oportunidades | **51.814** · ~4.318/mes |
+| Conversión global sobre oportunidades | **4,60%** |
+| Conversión **online** sobre oportunidades | **0,42%** |
+
+> **Corrección.** Antes se manejaba 1.948 ventas de agente y un 10,1% de peso online. El
+> dato de agente **no incluía el call center externo**; lo advirtió FIATC al enviar el
+> informe completo. Con los 957 que faltaban, el peso de lo online baja de 10,1% a **7,0%**,
+> coherente con el ~6% que da negocio de memoria. Cualquier cifra anterior a estos informes
+> queda sustituida por esta tabla.
+
+**El cierre offline es la norma en Salud, no una anomalía.** Es un dato conocido del negocio
+y hay que tomarlo como punto de partida, no como problema a resolver.
+
+**Lo que esto significa.** El funnel es hoy un **generador de leads que cierra el call
+center**, no un canal de venta directa: 93 de cada 100 pólizas las cierra una persona. No
+invalida el proyecto —justo ahí está el margen— pero cambia la métrica de éxito: duplicar
+las ventas online seguiría dejando el canal en minoría. Y significa que **la mayor parte del
+efecto de una mejora del funnel se juega en la pata telefónica**, donde hoy no es
+atribuible.
+
+### La fuga 4: qué cuenta el 1.260
+`contexto/01-embudo-y-datos.md` da la fuga 4 como **"1.260 en 4 meses = 8% de los leads del
+periodo"** (fuente: Diana). A diferencia de las otras tres, que son porcentajes de pérdida,
+esta es un absoluto sin signo. **Son los que alcanzan la firma del cuestionario**: ~315 al
+mes.
+
+Y no hay caída oculta en el pago, que es lo que parecería al cruzarlo con las ~18 ventas
+online mensuales: la mayoría de esos 315 **firma online y cierra con un agente**. Es el
+modelo de cierre offline descrito arriba.
+
+Queda una cosa por saber, y es de instrumentación: el tramo **no está medido paso a paso**
+(el iframe lo hacía invisible), así que no se sabe cuánta gente se pierde *entre* el clic en
+contratar y la firma. Ese hueco lo cierra el funnel nuevo, que no usa iframe. Ver
+`analitica/02-medicion-funnel-nuevo.md` §2.
+
+> **Cuidado al cruzar cifras.** Las fugas 1-3 están medidas en **sesiones de GA4 (2025)** y
+> la fuga 4 en **leads de negocio (2026)**. `contexto/01-embudo-y-datos.md` lo advierte en
+> cabecera: los cruces entre ambas fuentes son órdenes de magnitud, no cifras exactas. Por
+> eso el periodo único agosto 2025 – julio 2026 que se ha pedido para el día 2 importa.
+
+---
+
+## 5. Qué se mide y qué no
+
+**Disponible**
+- Inicios y presupuestos generados
+- Leads y contrataciones
+- Contrataciones online frente a cerradas por agente
+- Informes internos: oportunidades por estado, conversión por canal y tipo de campaña,
+  conversión por rating
+- Contactabilidad, vía Evolution / TrueIT
+- Conversión por canal de la oportunidad
+
+**No disponible** — y esto es lo que condiciona el trabajo:
+
+| Vacío | Por qué importa |
+|---|---|
+| **No existe identificador que una presupuesto → lead → contratación** | Se puede medir *si* mejora, pero no *por qué*, ni atribuir la mejora que se materializa en la pata telefónica. Confirmado con su IT |
+| Sin evento específico de clic en "contratar" | Es justo el muro del 63-72%. Se ve en GA4, no en CRM |
+| Precios mostrados, sin detalle | No se puede cruzar precio con abandono |
+| **Consentimiento: una única marca**, sin canal, ni fecha, ni origen | Ver abajo |
+| Tasas de aceptación por canal | No se miden |
+
+### El consentimiento es el vacío más urgente
+El CRM guarda **una sola marca** para el consentimiento recogido en el tarificador. Hoy la
+web muestra un único checkbox de *"Deseo recibir comunicaciones promocionales"*.
+
+Eso explica una decisión de diseño que hasta ahora parecía solo comercial: **el diseño de
+tres toggles por canal no era implementable**. Se redujo a un canal (email) y ahora sabemos
+que el sistema no podía almacenar tres.
+
+Pero abre un problema con fecha: la **Ley ATC 10/2025** exige consentimiento granular por
+canal, revocable por canal y **trazable** (canal, fecha, origen). Nada de eso existe. No es
+un ajuste de diseño, es trabajo de Sistemas con plazo. Ver `contexto/` y la memoria
+`project_ley_atc`.
+
+---
+
+## 6. Reunión del 2 de septiembre
+
+Con SEOCom (analítica) y Héctor López (iframe y data layer). Accesos a GA4, GTM y Clarity
+solicitados para `enriclieder@multiplica.com` y `miquel@multiplica.com`. Periodo acordado:
+**agosto 2025 – julio 2026**, con desglose mensual y, cuando exista, por dispositivo,
+fuente, canal y campaña. Foco en Salud.
+
+Puntos a cerrar:
+
+1. Cómo se mide hoy el funnel de Salud, evento por evento.
+2. Qué se captura dentro y fuera del iframe.
+3. Eventos y estructura del data layer actual.
+4. Vacíos de medición.
+5. **Qué dejar preparado para el funnel nuevo** → ver `analitica/02-medicion-funnel-nuevo.md`.
+
+Y dos preguntas propias que conviene no olvidar:
+
+- **Cuánta gente se pierde entre el clic en contratar y la firma** (§4): hoy el tramo no
+  está medido paso a paso y es lo único que falta para cerrar la fuga 4.
+- **El descuadre de 629 pólizas** entre el informe mensual y las oportunidades convertidas,
+  y las 3.338 oportunidades sin rating. Ver `analitica/03-linea-base.md` §5.
+- **La fuga 3 cruzada por rating** (calidad del lead): distingue sensibilidad al precio de
+  problema de diseño. Ver `analitica/03-linea-base.md` §2.
+- **Desglose por dispositivo**, que no viene en ninguno de los tres informes.
+- **Cuánta gente supera la ventana de 20 minutos** (§3) y recibe llamada estando aún dentro
+  del proceso.
+
+Contactabilidad, CRM, consentimiento y testing con usuarios quedan para sesiones posteriores
+con sus equipos, a la vuelta de vacaciones. Testing con usuarios puede requerir a **Legal**.
