@@ -299,7 +299,7 @@
   .dob-locked.show-tip .dob-tip { display: block; }
   /* Etiqueta de sección de campos */
   .field-section-label { display: block; font-size: 14px; font-weight: 400; color: var(--wf-90); margin: 16px 0 8px; }
-  /* Toggle "¿Copiamos los datos del titular?" (asegurados) — solo línea inferior, como el proto */
+  /* Toggle "¿Copiamos los datos del tomador?" (asegurados) — solo línea inferior, como el proto */
   .aseg-toggle-wrap { display: flex; align-items: center; gap: 12px; margin: 8px 0 12px; padding-bottom: 16px; border-bottom: 1px solid var(--wf-20); }
   .aseg-toggle-label { flex: 1; font-size: 14px; font-weight: 500; color: var(--wf-100); }
   .dob-chevron {
@@ -2238,7 +2238,7 @@
       <!-- CONTRATACIÓN · step8 · Datos personales del tomador -->
       <div class="step" id="cDatos">
         <h1 class="step-title">¡Perfecto! Iniciemos la contratación con tus datos personales</h1>
-        <p class="step-subtitle">Incluye más asegurados y accede a un mejor precio.</p>
+        <p class="step-subtitle">Estos son los datos del tomador del seguro.</p>
         <div class="input-wrap" style="margin-top:24px;">
           <input type="text" id="cNombre" placeholder=" " onclick="if(!this.value){this.value='María';this.closest('.input-wrap').classList.add('filled');}" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
           <label for="cNombre">Nombre</label>
@@ -2333,7 +2333,7 @@
         <button class="btn-primary" onclick="nextContrat()">Continuar</button>
       </div>
 
-      <!-- CONTRATACIÓN · step11 · Datos del asegurado 1 (con copiar-titular · QW17) -->
+      <!-- CONTRATACIÓN · step11 · Datos del asegurado 1 (con copiar-tomador · QW17) -->
       <div class="step" id="cAseg1">
         <h1 class="step-title">Datos del asegurado 1</h1>
         <div class="aseg-toggle-wrap">
@@ -4446,7 +4446,7 @@
       document.getElementById('appMain').scrollTop = 0;
       requestAnimationFrame(() => centerFeatured(document.querySelector('#step7 .products-scroll.active')));
     }
-    /* QW#17 · "¿Copiamos los datos del titular?" en asegurado 1 */
+    /* QW#17 · "¿Copiamos los datos del tomador?" en asegurado 1 */
     function copyTitular(prefix, on) {
       const map = { Nombre: 'cNombre', Ap1: 'cAp1', Ap2: 'cAp2', Nif: 'cNif' };
       const demo = { cNombre: 'María', cAp1: 'García', cAp2: 'López', cNif: '47854123X' };

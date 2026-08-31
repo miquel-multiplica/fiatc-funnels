@@ -35,7 +35,7 @@ jobs:
           mkdir -p _site
           # Los dos aterrizan en la raíz de _site/ aunque en el repo vivan en carpetas
           # distintas: así las URLs publicadas no cambian al reordenar el repositorio.
-          cp funnel-salud-quickwins.html _site/
+          cp conceptualizacion/funnel-salud-quickwins.html _site/
           cp propuesta/wireframe_propuesta.html _site/
           echo "::group::Lo que se va a publicar"
           find _site -type f -printf '%10s  %p\n' | sort -rn

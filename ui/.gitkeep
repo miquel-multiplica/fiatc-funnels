@@ -1,0 +1,9 @@
+Carpeta reservada para la fase de UI: el diseño visual del funnel sobre el design
+system real de FIATC, frente al wireframe gris de conceptualizacion/.
+
+Este archivo existe solo para que git pueda versionar la carpeta vacía; git no
+registra directorios, solo archivos. Se puede borrar en cuanto haya contenido.
+
+Al empezar, crear ui/CLAUDE.md con las convenciones de esta fase (hereda las del
+CLAUDE.md de la raíz). Referencia de partida: la prueba prueba-funnel-salud-estilos-app.html
+(en local, no versionada) y el design system en material-cliente/.

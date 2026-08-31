@@ -62,7 +62,7 @@ PLANNED_FLOW = step0 · stepCP · step1 · step2 · step4 · step5 · [stepDNI] 
 | `step4` | Fecha de inicio de cobertura |
 | `step5` | ¿Ya eres cliente de FIATC? |
 | `stepDNI` | **Condicional**: solo si respondió que sí en `step5` |
-| `step6` | Email, con sugerencias de dominio + consentimiento comercial por canal |
+| `step6` | Email, con sugerencias de dominio + consentimiento comercial (solo email) |
 | `step6b` | Teléfono con prefijo internacional + preferencia de canal para la solicitud |
 | `step7` | Resultados |
 
@@ -72,33 +72,40 @@ PLANNED_FLOW = step0 · stepCP · step1 · step2 · step4 · step5 · [stepDNI] 
 **Fuera del flujo lineal**: `stepRecover` (recuperar un presupuesto guardado por email,
 entra directo a resultados).
 
-### Los dos permisos de WhatsApp, y por qué están en pantallas distintas
-Hay **dos cosas de naturaleza distinta** que ambas pasan por WhatsApp, y se piden por
-separado a propósito. Si convivieran en la misma pantalla se leerían como hermanas y
-nadie entendería la diferencia.
+### Los dos permisos, y por qué están en pantallas distintas
+Se piden **dos cosas de naturaleza distinta**, y se separan a propósito: si convivieran en
+la misma pantalla se leerían como hermanas y nadie entendería la diferencia.
 
-**`step6` (email) — consentimiento comercial.** Opt-in **independiente por canal** —email,
-WhatsApp, teléfono—, cada uno con su toggle, no un consentimiento único. Responde a la Ley
-ATC 10/2025 (ver `project_ley_atc`): granular, revocable por canal y trazable. Caja
-`.pub-list` con tres filas, su texto legal y el "Leer más".
+**`step6` (email) — consentimiento comercial.** Opt-in para recibir información sobre
+productos y ofertas, con su texto legal y el "Leer más" (máximo 2 comunicaciones al año,
+revocable, caduca a los 24 meses). Responde a la Ley ATC 10/2025 (ver `project_ley_atc`):
+debe ser granular, revocable y trazable.
+
+> **Un solo canal: email.** Se decidió en agosto de 2026 reducirlo de tres canales (email,
+> WhatsApp, teléfono) a solo email, y se aplicó en las tres cajas que lo piden —`step6`, la
+> confirmación de agendar llamada y el "presupuesto guardado" del exit-intent.
+>
+> Con un canal único **la granularidad es trivial**: no hay nada que segmentar, así que un
+> opt-in cumple. Lo que sí implica es de alcance comercial, no legal: **FIATC renuncia a
+> hacer publicidad por WhatsApp y por teléfono** a quien pase por este funnel. Si más
+> adelante los quiere, hará falta consentimiento nuevo, porque el que se recoge ahora es
+> solo para email y así debe quedar trazado.
+>
+> Pendiente de que **jurídico** revise su parte, así que trátese como provisional.
 
 **`step6b` (teléfono) — preferencia de canal para la propia solicitud.** *"¿Prefieres por
 WhatsApp?"* con una sola fila. No es publicidad: es decir por dónde quieres que os
 comuniquéis sobre tu presupuesto. Sin texto legal ni "Leer más", porque lo de las 2
-comunicaciones al año y la caducidad a los 24 meses no aplica a una preferencia de canal.
+comunicaciones al año y la caducidad no aplica a una preferencia de canal.
 
 Dos reglas de copy que salieron de aquí y conviene no romper:
 
 - **Enumerar, no negar.** La línea de alcance dice *"Lo usamos para hablar contigo de tu
   presupuesto y resolver tus dudas"*, no *"nada de publicidad"*. Una negación se lee como
-  promesa sobre toda la relación y **contradice a quien acabe de activar WhatsApp para
-  ofertas** un paso antes. La especificidad ya tranquiliza sin negar nada.
+  promesa sobre toda la relación y contradice a quien acabe de aceptar publicidad un paso
+  antes. La especificidad ya tranquiliza sin negar nada.
 - **Aquí se está cotizando, no contratando.** No mencionar documentación, firma ni póliza:
   todavía no existen. Eso es lenguaje de la fase de contratación.
-
-⚠ **Contradicción conocida y aceptada**: el subtítulo de `step6` dice *"Prometemos no
-enviarte spam :)"* justo encima de la caja que pide permiso para enviar ofertas. Señalado
-al cliente y decidió mantenerlo (el tono informal del `:)` lo aleja de una promesa legal).
 
 ---
 
@@ -134,7 +141,7 @@ CONTRAT_FLOW = cDatos · cContacto · cDireccion · cAseg1 · cAseg2 · cCuestio
 | `cDatos` | Datos del tomador |
 | `cContacto` | Confirmación de email y teléfono |
 | `cDireccion` | Dirección; CP autorrellena ciudad y provincia (no editables) |
-| `cAseg1` / `cAseg2` | Datos por asegurado. Permite copiar los del titular |
+| `cAseg1` / `cAseg2` | Datos por asegurado. Permite copiar los del tomador |
 | `cCuestionario` | Un cuestionario de salud por asegurado, en modal (`#questModal`) |
 | `cKO` | **Bifurcación**: derivación a revisión médica telefónica |
 | `cTelefono` | Confirmación del móvil para la firma |
@@ -288,8 +295,12 @@ Si no hay ningún "Sí", el flujo sigue completo y normal (`cTelefono` → `cFir
    tendrá que ser validada. Puedes enviárnosla a web@fiatc.es"*, quedándose solo con lo
    que ningún otro elemento dice: que hay validación y cuál es el correo. El enunciado
    mantiene la alternativa porque es donde se plantea la elección, antes de pedir nada.
-3. **Contradicción aceptada en `step6`** entre el *"Prometemos no enviarte spam :)"* y la
-   caja de ofertas — detalle en §2. Señalada al cliente, decidió mantenerla.
+3. ~~Contradicción en `step6`~~ — **resuelta**. El subtítulo decía *"Prometemos no enviarte
+   spam :)"* justo encima de la caja que pide permiso para enviar ofertas. Ahora dice
+   *"Así lo tendrás siempre a mano :)"*, que habla del email del presupuesto y no promete
+   nada sobre publicidad.
+4. **Consentimiento comercial pendiente de jurídico.** Hoy es un solo canal (email); ver
+   el aviso en §2. Hasta que jurídico se pronuncie, provisional.
 
 ---
 

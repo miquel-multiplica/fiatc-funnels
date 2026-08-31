@@ -1,7 +1,7 @@
 # Prototipo de la propuesta — `wireframe_propuesta.html`
 
 > Documento de referencia del **prototipo original** con el que se ganó/presentó la propuesta.
-> NO es el archivo de trabajo actual (ese es `funnel-salud-quickwins.html`, ver `CLAUDE.md`).
+> NO es el archivo de trabajo actual (ese es `conceptualizacion/funnel-salud-quickwins.html`, ver su `CLAUDE.md`).
 > Se conserva porque es la base validada de la que evoluciona el funnel nuevo y sigue publicado
 > para el cliente vía GitHub Pages. No editar salvo para no romper el enlace del cliente.
 
