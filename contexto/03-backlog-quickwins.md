@@ -130,9 +130,9 @@ Foto de qué se ha llevado al prototipo `conceptualizacion/funnel-salud-quickwin
 Las secciones de arriba son los **inputs** de la inmersión y no se tocan; esto es el
 **resultado**. Detalle funcional de cada pantalla en `conceptualizacion/FUNCIONAL.md`.
 
-### Aplicados (20)
+### Aplicados (21)
 
-1 efecto calculadora · 3 cards y modal de detalles · 5 guardar presupuesto ·
+1 efecto calculadora · 2 mensaje dual · 3 cards y modal de detalles · 5 guardar presupuesto ·
 6 anticipación del proceso · 7 badges de orientación · 8 limpieza legacy ·
 9 social proof · 10 ahorro por periodicidad · 11 sugerencias de dominio ·
 13 progreso y resumen sticky · 14 microcopy contextual · 15 modal Hablemos ·
@@ -140,24 +140,34 @@ Las secciones de arriba son los **inputs** de la inmersión y no se tocan; esto 
 19 copy de tranquilización · 20 lista de lo que no declarar · 22 KO pedagógica ·
 24 subida de documentación de derogación · 26 agendación de llamada
 
-### Parciales (2)
+**Sobre el QW#2 (mensaje dual).** Se cierra como aplicado, no como parcial: en resultados
+**no se sabe de qué tipo de cliente se trata**, así que los dos argumentarios —portabilidad
+y primer seguro— tienen que estar presentes. Condicionarlos exigiría preguntarlo antes, y
+eso es fricción para resolver algo que el acordeón ya resuelve.
 
-- **QW#2 · mensaje dual por audiencia.** Los dos argumentarios están en el acordeón de la
-  portada, pero **no son condicionales**: el ~40% de portabilidad y el ~59% de primer
-  seguro ven lo mismo. La FAQ de carencias hace de autoselección.
+### Parciales (1)
+
 - **QW#4 · claridad del precio.** Hechos los dos decimales, el "al mes" explícito y el
-  total por nº de asegurados. Falta el resto de malentendidos que listó ATC: renovación,
-  vencimiento, promocional vs. captación y si el CP afecta.
+  total por nº de asegurados. De los otros cuatro malentendidos de la lista de ATC:
+  - *Renovación* — se obvia.
+  - *Vencimiento* — **pendiente de aclarar con ATC qué vence**: ¿el precio o la póliza?
+    Sin eso no se puede redactar.
+  - *Promocional vs. captación* — hoy la promo son 2 meses gratis, que no tocan el precio,
+    así que no hay nada que aclarar. **Queda pendiente** una versión de las tarjetas que
+    marque la promo (precio tachado o similar) para cuando haya una que sí afecte.
+  - *Si el CP afecta al precio* — sí afecta, pero **negocio no quiere transparentarlo**. En
+    el funnel solo se habla de coberturas disponibles por zona, que es lo que dice hoy el
+    subtítulo de `stepCP`. Cerrado.
 
 ### Retirado (1)
 
 - **QW#21 · máscara de peso y altura.** El cliente confirma que ya no es un problema.
   Detalle en "Caídos / aplazados".
 
-### Fuera del alcance de diseño (3)
+### Fuera del alcance de diseño (2) · más el diagnóstico, ya en marcha
 
-- **QW#12 · diagnóstico Clarity.** Analítica, no diseño. Sigue siendo el prerequisito para
-  atacar la fuga 2 con criterio en vez de a ciegas.
+- **QW#12 · diagnóstico Clarity.** Ya hay acceso a Clarity, así que deja de ser un quick
+  win pendiente: el plan de qué mirar está en `analitica/CLARITY.md`.
 - **QW#23 · recordatorio post-emisión.** Marketing Cloud. **Es el más urgente de los tres**:
   afecta al ~40% de portabilidad, que hoy descubre las carencias cuando le deniegan una
   prueba. El paso que se añadió en la confirmación (enviar documentos a web@fiatc.es) cubre

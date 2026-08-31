@@ -157,6 +157,20 @@ CONTRAT_FLOW = cDatos · cContacto · cDireccion · cAseg1 · cAseg2 · cCuestio
 propia barra de progreso. `cDerogacion` se salta en ambos sentidos si `comesFromOther`
 es `false`.
 
+### La confirmación (`cConfirm`)
+Stepper con lo que queda por hacer. Dos reglas de tono que conviene no romper:
+
+- **El título celebra, el subtítulo condiciona.** *"¡Ya eres de FIATC, María!"* es cierto
+  —ha pagado y tiene número de póliza— pero la cobertura **depende de que firme**. Por eso
+  el subtítulo dice *"En cuanto firmes el contrato, la cobertura empieza el…"*: conserva la
+  fecha, que es lo que tranquiliza, subordinada a la firma. Sin eso, la pantalla daba
+  sensación de "todo hecho" cuando falta el paso decisivo.
+- **Solo llevan tag `Pendiente` los pasos obligatorios.** Firma y envío de documentación sí;
+  descargar la app no, porque es opcional y un tag amarillo la convertía en deuda. Ser el
+  único paso sin tag ya lo distingue.
+- El paso de la documentación **solo aparece si viene de otra compañía**; cuando aparece, la
+  app pasa a ser el paso 4. Las dos variantes son alcanzables desde el índice.
+
 ### El resumen persistente
 Acompaña toda la contratación y se va rellenando paso a paso (`updateResumen`): una
 sección deja de estar "pendiente" cuando su dato ya se ha recogido.
@@ -181,7 +195,13 @@ persona sin ver su precio.
 Modal a pantalla casi completa, una pregunta por vez. Marcar "Sí" abre un campo de
 detalle y la siguiente pregunta no aparece hasta pulsar "Continuar"; marcar "No" revela
 la siguiente directamente. Se guarda con "Guardar respuestas" y la tarjeta del paso pasa
-a "Completado" con opción de editar.
+a `8 / 8` en oscuro, con opción de editar.
+
+**Sin tag verde de "Completado", a propósito.** Prometía un resultado que todavía no está
+decidido: si se marcó algún "Sí", lo que viene es una llamada de revisión médica, no un
+"todo en orden". El `8 / 8` dice lo que de verdad se sabe —que están las ocho respuestas—
+sin anticipar el desenlace. Por lo mismo, el resumen dice "Respondido" y no "Completado".
+El tag `Pendiente` sí se mantiene mientras falten respuestas: ahí no promete nada, avisa.
 
 Cuando todos los cuestionarios están completos aparece el botón de salida
 (`proceedFromQuest`).

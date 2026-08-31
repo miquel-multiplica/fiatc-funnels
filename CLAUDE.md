@@ -11,6 +11,8 @@ Reglas **de repositorio y proceso**. Las convenciones de cada entregable viven e
 conceptualizacion/   el wireframe del funnel, su documentación funcional y el
                      prompt del userflow para Figma
 ui/                  (vacía) diseño visual sobre el design system de FIATC
+analitica/           CLARITY.md: qué mirar en Clarity para diagnosticar las fugas
+                     cuya causa no conocemos
 contexto/            inputs de la inmersión (00 a 03). Ni conceptualización ni UI:
                      es la investigación de partida, no lo que producimos
 propuesta/           fase anterior, cerrada: el prototipo de la propuesta y su doc
