@@ -1,10 +1,13 @@
-wireframe_mobile_generico.html
 .DS_Store
 .claude/
-pruebas-descartadas/
-# Design system interno de FIATC (área privada). El repo es público y este CSS
-# no es nuestro: se consulta en local, no se publica. El tema ya va inline en
-# funnel-salud-estilos-app.html.
-css app/
-# Prueba de estilos con el DS del cliente: no se publica (repo público)
-funnel-salud-estilos-app.html
+
+# Material que nos pasa el cliente (su design system, documentación interna…).
+# No es nuestro y este repo es PÚBLICO, así que nada de aquí se versiona.
+# Todo lo que llegue de FIATC va a esta carpeta, no a la raíz.
+# OJO: no viaja en un git clone. Guardar copia fuera de git (Drive/Teams).
+material-cliente/
+
+# Pruebas: no se publican ni se versionan. Van con el prefijo "prueba-" para que el
+# patrón las cape solas y renombrarlas no las saque del .gitignore por descuido.
+# Ahora mismo: prueba-funnel-salud-estilos-app.html (el tema con el DS del cliente).
+prueba-*

@@ -4,13 +4,20 @@ Documenta **`funnel-salud-quickwins.html`**, el prototipo activo. Es el mapa fun
 para quien tenga que integrarlo: qué pantallas hay, en qué orden, qué es condicional,
 qué está simulado y qué decisiones de negocio quedan abiertas.
 
-Para el prototipo anterior, ver `PROTOTIPO-PROPUESTA.md` (`wireframe_propuesta.html`).
-Para el porqué de cada mejora, ver `03-backlog-quickwins.md`.
+Para el prototipo anterior, ver `propuesta/PROTOTIPO-PROPUESTA.md`.
+Para el porqué de cada mejora, ver `contexto/03-backlog-quickwins.md`.
 
 > **Alcance del entregable.** Esto es una propuesta de diseño y UX, no una
 > especificación funcional cerrada. Las reglas de negocio (cuándo derivar a revisión
 > médica, cuándo cobrar, qué validaciones aplican) las decide FIATC y las implementa IT.
 > Donde el prototipo toma una decisión de negocio, se marca abajo como **abierto**.
+>
+> **Es la primera fase.** Cubre el ramo de Salud con los quick wins priorizados en la
+> inmersión, y describe lo construido a día de hoy — no un alcance definitivo. Está
+> previsto que crezca: más pantallas, otros ramos o funcionalidad que hoy queda fuera.
+> Lo que no aparece aquí no está descartado, simplemente no entra en esta fase.
+> **Mantener este documento al día** conforme se amplíe, para que siga siendo el mapa
+> fiable y no una foto vieja.
 
 ---
 

@@ -7,10 +7,10 @@ Consolidado a 29 julio 2026. Pensado para dar contexto completo a una conversaci
 
 | Archivo | Contenido | Úsalo para |
 |---|---|---|
-| `00-contexto.md` | Proyecto, flujo actual del funnel, actores/sistemas, vocabulario, fuentes, principios de trabajo | Entender de qué va todo antes de nada |
-| `01-embudo-y-datos.md` | Embudo con cifras, tabla GA4 2025, estados de contratación, portabilidad, matices de interpretación | Cualquier decisión basada en datos; priorización |
-| `02-hallazgos-clave.md` | Hallazgos por tema con fuente (ATC, walkthrough, IT, negocio) | Justificar decisiones de diseño; redactar copys con contenido real de FIATC |
-| `03-backlog-quickwins.md` | 26 quick wins con evidencia, viabilidad IT y estado + caídos + pendientes | Diseñar; scope de las 40h |
+| `contexto/00-contexto.md` | Proyecto, flujo actual del funnel, actores/sistemas, vocabulario, fuentes, principios de trabajo | Entender de qué va todo antes de nada |
+| `contexto/01-embudo-y-datos.md` | Embudo con cifras, tabla GA4 2025, estados de contratación, portabilidad, matices de interpretación | Cualquier decisión basada en datos; priorización |
+| `contexto/02-hallazgos-clave.md` | Hallazgos por tema con fuente (ATC, walkthrough, IT, negocio) | Justificar decisiones de diseño; redactar copys con contenido real de FIATC |
+| `contexto/03-backlog-quickwins.md` | 26 quick wins con evidencia, viabilidad IT y estado + caídos + pendientes | Diseñar; scope de las 40h |
 
 ## Punto de partida del diseño
 

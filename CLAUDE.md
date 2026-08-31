@@ -3,10 +3,28 @@
 ## Archivo de trabajo actual
 `funnel-salud-quickwins.html` (repo raíz) — **este es el archivo activo**. Un solo HTML autocontenido (CSS + HTML + JS inline), zero-build, se abre con `file://` y se publica en GitHub Pages. Responsive: se valida desktop directo y mobile con el device mode de Chrome.
 
-Evoluciona el prototipo original `wireframe_propuesta.html` (documentado en `PROTOTIPO-PROPUESTA.md`), reutilizando piezas de UX/copy **sin** la carcasa de iPhone ni el chatbot.
+Evoluciona el prototipo original `propuesta/wireframe_propuesta.html` (documentado en `propuesta/PROTOTIPO-PROPUESTA.md`), reutilizando piezas de UX/copy **sin** la carcasa de iPhone ni el chatbot.
 
-Hay material de trabajo que **no se versiona** porque este repo es público y el cliente
-puede verlo: está en `.gitignore` y documentado en la memoria del proyecto, no aquí.
+## Estructura del repo
+```
+funnel-salud-quickwins.html   el archivo activo
+CLAUDE.md · FUNCIONAL.md      convenciones y mapa funcional
+README.md                     portada e índice de la base de conocimiento
+userflow-figma-prompt.md      prompt del flujo para Figma
+contexto/                     inputs de la inmersión (00 a 03)
+propuesta/                    fase anterior: el prototipo de la propuesta y su doc
+utils/                        serve.py, para abrir el prototipo por http://
+material-cliente/             lo que nos pasa FIATC · IGNORADO, ver abajo
+```
+
+Hay material que **no se versiona** porque este repo es público: todo lo que llega del
+cliente va a `material-cliente/`, que está en `.gitignore` entero. También se ignora la
+cualquier archivo con prefijo `prueba-*` (hoy, `prueba-funnel-salud-estilos-app.html`).
+Documentado en la memoria del proyecto, no aquí.
+
+**Al reordenar carpetas, ojo con Pages**: el workflow monta el sitio copiando los dos HTML
+a `_site/` con una lista blanca, así que las URLs no dependen de dónde vivan los archivos
+en el repo — pero hay que actualizar esas rutas en `.github/workflows/pages.yml`.
 
 ## Documentación funcional
 `FUNCIONAL.md` — mapa funcional completo del archivo activo: pantallas, los dos flujos y
@@ -15,7 +33,7 @@ decisiones de negocio quedan abiertas. **Mantenerlo al día** cuando cambie el f
 añada una pantalla o un modal, o se cierre una de las decisiones abiertas.
 
 ## Base de conocimiento (inputs de la inmersión — NO editar como diario)
-`README.md`, `00-contexto.md`, `01-embudo-y-datos.md`, `02-hallazgos-clave.md`, `03-backlog-quickwins.md` (26 quick wins priorizados). Fuente canónica del proyecto; leer ahí antes de decidir. Prioridad = página de resultados (fuga 63-72%).
+`README.md` y `contexto/` (`00-contexto.md`, `01-embudo-y-datos.md`, `02-hallazgos-clave.md`, `03-backlog-quickwins.md`) (26 quick wins priorizados). Fuente canónica del proyecto; leer ahí antes de decidir. Prioridad = página de resultados (fuga 63-72%).
 
 ## Principios de contenido
 - **Fidelidad de copy**: nada inventado; sale de guiones de ATC, web y área privada de FIATC.

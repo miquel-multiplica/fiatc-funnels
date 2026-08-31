@@ -33,7 +33,10 @@ jobs:
       - name: Preparar el sitio (solo los prototipos)
         run: |
           mkdir -p _site
-          cp funnel-salud-quickwins.html wireframe_propuesta.html _site/
+          # Los dos aterrizan en la raíz de _site/ aunque en el repo vivan en carpetas
+          # distintas: así las URLs publicadas no cambian al reordenar el repositorio.
+          cp funnel-salud-quickwins.html _site/
+          cp propuesta/wireframe_propuesta.html _site/
           echo "::group::Lo que se va a publicar"
           find _site -type f -printf '%10s  %p\n' | sort -rn
           echo "peso total: $(du -sh _site | cut -f1)"

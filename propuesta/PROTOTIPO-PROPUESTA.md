@@ -6,7 +6,7 @@
 > para el cliente vía GitHub Pages. No editar salvo para no romper el enlace del cliente.
 
 ## Archivo único
-`/Users/miquelmir/Fiatc/wireframe_propuesta.html` (~4400 líneas)
+`propuesta/wireframe_propuesta.html` (~4400 líneas)
 
 Todo está en un solo archivo HTML autocontenido: CSS, HTML y JS. No hay build system, no hay dependencias externas. Se abre directamente en el navegador con `file://`.
 
