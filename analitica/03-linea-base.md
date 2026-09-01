@@ -207,12 +207,12 @@ Lo que hay que hacer es comprometerse con **métricas intermedias que sí tienen
 | Métrica | Volumen mensual | Sirve para |
 |---|---|---|
 | Clic en "Contratar" | miles de sesiones | La fuga 3, que es la prioridad. Un cambio del 10% se ve |
-| Caídas entre el clic y la firma | ~315 | La fuga 4. Es el dato que sí existe; las firmas no se cuentan |
+| Inicios de contratación | ~1.000 usuarios | La fuga 4, ahora medible paso a paso con `paso tarificadores` |
 | Pólizas online | ~18 | **Nada, a corto plazo.** Se lee por trimestres o por año |
 
 No es rebajar la ambición: es elegir dónde se mide para que el resultado sea defendible.
 
-### 6.2 · El cuestionario de salud pone un techo, pero no parece la causa principal
+### 6.2 · El cuestionario de salud NO es el techo — resuelto
 
 Esta no sale de los informes, sino de cruzarlos con nuestra propia decisión de flujo. En
 `conceptualizacion/FUNCIONAL.md` §8.1, marcada como DECIDIDO: **un solo "Sí" en el
@@ -223,16 +223,15 @@ Así que el máximo de venta online alcanzable es **la proporción de solicitude
 todos los asegurados responden "No" a todo**. En una familia de cuatro, los cuatro tienen que
 estar limpios.
 
-**Del orden de magnitud sí hay un dato**, en la tabla de estados del CRM de
-`contexto/01-embudo-y-datos.md`: **112 derivaciones a Teladoc** (el volumen de KOs) frente a
-**1.260 caídas** entre el clic y la firma en el mismo periodo de cuatro meses. Es decir que
-**el KO del cuestionario no es la causa dominante de la fuga 4**: la mayor parte se cae por
-otros motivos, y esos no están instrumentados.
+**Resuelto con el embudo por paso de GA4** (`analitica/05-ga4-y-clarity.md` §2): en 30 días
+hay **25 usuarios derivados a Teladoc frente a 996 que inician contratación**, o sea un
+**2,5%**. Y cuadra con los estados del CRM, que daban 112 en 4 meses = 28/mes.
 
-Dos cautelas antes de dar el 112 por bueno: el propio documento advierte que **no se sabe si
-los estados del CRM son foto actual o acumulado desde enero**, y **112 es un volumen, no una
-tasa**. Sigue faltando el dato que de verdad fija el techo: **qué porcentaje de cuestionarios
-tiene al menos un "Sí"**. Planteado en `analitica/04-preguntas-cliente.md` §1.6.
+**El cuestionario de salud no es lo que limita la venta online.** La preocupación de esta
+sección queda cerrada.
+
+Sobre los 110 que llegan al cuestionario sí supone un 23%, pero llegan muy pocos: el desplome
+ocurre mucho antes, entre los datos del titular y la dirección, donde se pierde el **81,7%**.
 
 > **Relacionado**: la **ventana de 20 minutos** (`analitica/00-como-se-mide-hoy.md` §3) cobra
 > otro sentido con el cuestionario por asegurado delante. Una familia de cuatro tarda de

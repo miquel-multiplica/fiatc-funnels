@@ -7,6 +7,9 @@ raíz, que se aplica igualmente.
 `conceptualizacion/funnel-salud-quickwins.html` — **este es el archivo activo**. Un solo
 HTML autocontenido (CSS + HTML + JS inline), zero-build, se abre con `file://` y se publica
 en GitHub Pages. Responsive: se valida desktop directo y mobile con el device mode de Chrome.
+Reparto real, contando **usuarios de los pasos del tarificador**: **56% móvil / 43%
+escritorio** (GA4, 30 días). El escritorio **no es un caso secundario**, y además su conversión
+cambia de signo según el tramo. Ver `analitica/05-ga4-y-clarity.md` §2.
 
 Evoluciona el prototipo original `propuesta/wireframe_propuesta.html` (documentado en
 `propuesta/PROTOTIPO-PROPUESTA.md`), reutilizando piezas de UX/copy **sin** la carcasa de
@@ -70,6 +73,10 @@ se cierre una decisión abierta.
 - **Un solo componente de loading** (`#stepLoading`) reutilizado con textos distintos; quien
   mute su título debe restaurarlo.
 - **En mobile no hay drag & drop**: los campos de subida de archivo no lo prometen.
+- **Reservar espacio para lo que cargue tarde** (imágenes, módulos, el resumen), en vez de
+  dejar que empuje el contenido al aparecer. El tarificador actual tiene un CLS de 0,217, más
+  del doble del umbral bueno, y en una pantalla de formulario eso hace pulsar donde no se
+  quería. Ver `analitica/05-ga4-y-clarity.md` §4.
 
 ## Estado y pendientes
 Detalle en `FUNCIONAL.md`; estado vivo en la memoria `project_funnel_build.md`.

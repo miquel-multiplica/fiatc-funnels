@@ -15,10 +15,19 @@ define al construir, el funnel nace midiendo. Si se deja para después del lanza
 que volver a tocar el código y se pierden los primeros meses de datos — justo los que dirán
 si los quick wins funcionan.
 
-Y hay una ventana que se cierra: **el funnel nuevo no usa iframe**. Eso elimina de raíz el
-punto ciego de hoy, donde los eventos no cruzan la frontera del iframe y por eso el tramo
-entre el clic y la firma no está instrumentado paso a paso. Es la ocasión de arreglarlo, y
-solo existe una vez.
+Y hay una ventana que se cierra: **el funnel nuevo no usa iframe**. Eso elimina de raíz dos
+puntos ciegos de hoy:
+
+- **Los eventos de GA4 sí cruzan** —la dimensión `paso tarificadores` mide el embudo entero,
+  incluido el tramo de contratación (`analitica/05-ga4-y-clarity.md` §2)— pero **la
+  instrumentación es frágil e inconsistente entre ramos**, con numeración con huecos y un
+  segmento parcheado a mano.
+- **Clarity no ve nada dentro del iframe** — confirmado: rectángulo gris y "Clics: 0" en
+  sesiones de varios minutos (`analitica/05-ga4-y-clarity.md` §4). Hoy es imposible diagnosticar
+  *por qué* se abandona en las fugas 1, 2 y 3.
+
+Así que al funnel nuevo hay que **instalarle Clarity desde el primer día**, no solo los eventos
+de GA4. Es la ocasión de arreglar las dos cosas, y solo existe una vez.
 
 ---
 
@@ -86,14 +95,13 @@ Precio mostrado, **con la modalidad y el importe** · pestaña de modalidad camb
 del seguro abierto · calculadora abierta y recálculo · **clic en contratar** (hoy no existe
 como evento) · guardar presupuesto.
 
-**Fuga 4 · clic → firma (~315 caídas/mes, 8% de los leads)**
-Un evento por paso de contratación, y en particular: cuestionario iniciado y guardado por
-asegurado · derivación a revisión médica · firma · TPV mostrado · pago completado. Es el
-tramo que el iframe hacía invisible: **se sabe cuántos se caen, no cuántos firman**.
+**Fuga 4 · el tramo de contratación**
+**Ya hay pasos medidos** (`05` §2): datos del titular 996 usuarios → dirección 182 → asegurado
+168 → resumen 122 → cuestionario 110 → TPV 22, en 30 días. Lo que falta es **completarlo y
+estabilizarlo**: firma, derogación, forma de pago, y nombres consistentes.
 
-Los estados del CRM acotan el resto del tramo —56 no firman, 88 se caen en el TPV, 19 en
-documentación o forma de pago, 112 van a Teladoc— pero sin saber si son foto o acumulado.
-Instrumentar el tramo es lo que convierte esos estados en un embudo legible.
+El mayor muro de todo el embudo está entre **los datos del titular y la dirección: se pierde el
+81,7%**, más que en el precio. Es donde hay que poner el detalle de eventos.
 
 Ojo con otra lectura: como la mayoría de las pólizas las cierra un agente, **un descenso de
 pagos online no implica por sí solo una fuga en el pago**. Sin el identificador de cotización
@@ -168,3 +176,5 @@ gratis.
 - **Pedir entorno de pruebas.** Validar la medición antes de lanzar, no después.
 - **Un evento sin dueño no existe.** Cada uno necesita alguien que lo implemente y alguien
   que lo verifique; con cinco actores en el reparto, lo que no se asigna se cae.
+- **Clarity dentro del funnel, desde el primer día.** Sin iframe ya no hay impedimento técnico,
+  y es lo que permitirá diagnosticar el *por qué* que hoy no se puede ver.

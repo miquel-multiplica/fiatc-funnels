@@ -16,7 +16,7 @@
 | Nace la "oportunidad" (lead) | 25.449 desde enero 2026 (~3.600/mes) | Diana | — |
 | Ven precio | ~48-57% de las sesiones de entrada | GA4 2025 (producto pasos 1-7) | — |
 | **Fuga 3 · Precio → clic Contratar** | **-63% a -72%** (solo 28-37% clica) | GA4 2025 | El mayor muro. Comparación activa contra otras aseguradoras y comparadores (Rastreator, Acierto). Algunos acaban contratando por otra vía |
-| **Fuga 4 · Clic → firma del cuestionario** | 1.260 en 4 meses = 8% de los leads del periodo | Diana | Tramo NO instrumentado paso a paso. Los agentes telefónicos usan estos triggers para acompañar la contratación. **El 1.260 son caídas, no firmas**: es el estado "Inicio de contratación sin proseguir" de la tabla siguiente |
+| **Fuga 4 · Clic → firma del cuestionario** | 1.260 en 4 meses = 8% de los leads del periodo | Diana | Los agentes telefónicos usan estos triggers para acompañar la contratación. **El 1.260 son caídas, no firmas**: es el estado "Inicio de contratación sin proseguir" de la tabla siguiente. Se dio por "no instrumentado paso a paso", pero **sí lo está** vía la dimensión `paso tarificadores` de GA4, que nadie usaba: ver `analitica/05-ga4-y-clarity.md` §2 |
 | Interior post-firma | Fluye | — | Los muros están en las transiciones, no dentro |
 
 ## Estados atascados en contratación (desde enero 2026)

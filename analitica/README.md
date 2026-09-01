@@ -10,7 +10,7 @@ funnel nuevo.
 | `03-linea-base.md` | Cifras cerradas ago-25 → jul-26: pólizas por canal, conversión por rating y campaña, estacionalidad, ATC | Cualquier cifra del embudo; fijar objetivos |
 | `02-medicion-funnel-nuevo.md` | Especificación de eventos por fuga, identificador de cotización, y qué medir para validar cada decisión del prototipo | Hablar con SEOCom y Héctor López |
 | `05-ga4-y-clarity.md` | Lectura de los exports crudos: cómo está instrumentado GA4 hoy evento por evento, qué no se mide, y por qué Clarity queda aparcado | Saber con qué instrumento contamos antes de pedir eventos nuevos |
-| `01-clarity.md` | Plan de diagnóstico con Clarity, por prioridad y con hipótesis. **Aparcado** hasta tener una ventana de varios meses | Diagnosticar *por qué* se abandona en las fugas 1 y 2, cuando haya datos |
+| `01-clarity.md` | Plan de diagnóstico con Clarity. **Clarity no ve dentro del iframe**, así que las fugas 1-3 no se pueden diagnosticar hoy: queda como plan para el funnel nuevo, más lo poco que sí se puede hacer ya | Diagnosticar *por qué* se abandona, cuando sea posible |
 
 ## Por dónde empezar
 
@@ -19,7 +19,7 @@ Para **la sesión con el cliente**: `04-preguntas-cliente.md`, que es autoconten
 Para **entender el terreno**: `00` (cómo se mide) → `03` (qué dicen los números) → `05` (con
 qué instrumento) → `02` (qué pedir) → `01` (cómo diagnosticar).
 
-## Las cinco cosas que hay que saber
+## Las seis cosas que hay que saber
 
 1. **El cierre offline es la norma.** 93 de cada 100 pólizas las cierra una persona; lo
    online es el 7,0%. El funnel es hoy un generador de leads, no un canal de venta directa.
@@ -28,20 +28,23 @@ qué instrumento) → `02` (qué pedir) → `01` (cómo diagnosticar).
 3. **Dos confusores grandes y cuantificados**: la estacionalidad es ×2,3 entre el mejor mes y
    el peor, y la conversión varía ×4,5 según el rating (calidad del lead). El antes/después
    hay que leerlo segmentado, no en agregado.
-4. **El tramo entre el clic en contratar y la firma no está instrumentado**, porque el iframe
-   lo hacía invisible. El funnel nuevo no usa iframe: es la ocasión de arreglarlo, y solo
-   existe una vez.
-5. **Dos conclusiones que afectan a lo que podemos prometer** (`03` §6): con 18 pólizas
-   online al mes, la métrica de éxito no puede ser la venta online —hay que comprometerse con
-   el clic en contratar y las firmas, que sí tienen volumen—; y el cuestionario de salud, al
-   derivar a revisión médica con un solo "Sí", **puede ser un techo estructural** cuya altura
-   nadie ha medido.
+4. **El embudo sí está medido paso a paso**, con la dimensión `paso tarificadores` de GA4 que
+   nadie usaba — de **7.048 usuarios a 22 pagos** en 30 días, un 0,31%. Lo que el iframe impide
+   no es medir, es **ver**: Clarity no graba dentro, así que sabemos el *cuánto* y no el
+   *porqué*.
+5. **El mayor muro no es el precio.** El precio pierde el 77,1%, pero **entre los datos del
+   titular y la dirección se pierde el 81,7%**, y nadie lo había visto. El KO del cuestionario
+   de salud, que temíamos que fuese un techo, es solo el 2,5%.
+6. **Con 18 pólizas online al mes, la métrica de éxito no puede ser la venta online** (`03`
+   §6.1): hay que comprometerse con los pasos intermedios, que sí tienen volumen.
 
 ## Aviso de uso
 
-⚠ **Los datos de Clarity son provisionales** hasta tener periodos más amplios: las dos
-ventanas disponibles son de 3 días y se contradicen entre sí. No se citan como conclusión, y
-el plan de diagnóstico (`01`) está aparcado. Ver `05-ga4-y-clarity.md` §4.
+**Sobre Clarity**: la ventana de **30 días** (3 ago – 1 sep 2026, 236.400 sesiones) ya es
+utilizable a nivel de site — las dos fotos de 3 días anteriores no valían, una se desviaba 19
+puntos en el reparto de dispositivo. Pero **Clarity no captura nada dentro del iframe del
+tarificador**: rectángulo gris y "Clics: 0". Las fugas 1, 2 y 3 **no se pueden diagnosticar
+hoy**. Ver `05-ga4-y-clarity.md` §4.
 
 `00`, `01`, `02` y `03` son **razonamiento interno**: incluyen nuestras propias correcciones y
 cifras que hemos tenido que rectificar. `04` está redactado para poder plantearse tal cual

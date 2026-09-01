@@ -128,9 +128,12 @@ su tabla de estados del CRM nombra ese mismo 1.260: **"Inicio de contratación s
 clic en Contratar y caída en algún punto ANTES de firmar el cuestionario"** (fuente: Diana).
 
 Así que son **~315 caídas al mes, no 315 firmas**, y la fuga 4 queda coherente con las otras
-tres: todas son pérdida. **Cuántos firman no se sabe**, porque el tramo no está instrumentado
-paso a paso — el iframe lo hacía invisible. Ese hueco lo cierra el funnel nuevo, que no usa
-iframe. Ver `analitica/02-medicion-funnel-nuevo.md` §3.
+tres: todas son pérdida.
+
+> **Actualización.** El tramo **sí está instrumentado**, a través de la dimensión
+> `paso tarificadores` de GA4, que nadie estaba usando. Hay pasos de contratación hasta el
+> pago, y en 30 días dan 996 usuarios que inician contratación y 22 que llegan al TPV. Ver
+> `analitica/05-ga4-y-clarity.md` §2.
 
 Los estados vecinos de esa misma tabla acotan dónde se cae después del clic: **56** no firman
 el cuestionario, **88** se caen en el pago con TPV, **19** en documentación o forma de pago y
@@ -161,7 +164,7 @@ tasas.
 | Vacío | Por qué importa |
 |---|---|
 | **No existe identificador que una presupuesto → lead → contratación** | Se puede medir *si* mejora, pero no *por qué*, ni atribuir la mejora que se materializa en la pata telefónica. Confirmado con su IT |
-| Sin evento específico de clic en "contratar" | Es justo el muro del 63-72%. Se ve en GA4, no en CRM |
+| Sin evento específico de clic en "contratar" | Cierto como *evento*, pero **sí se mide** como transición entre pasos con `paso tarificadores` (`05` §1) |
 | Precios mostrados, sin detalle | No se puede cruzar precio con abandono |
 | **Consentimiento: una única marca**, sin canal, ni fecha, ni origen | Ver abajo |
 | Tasas de aceptación por canal | No se miden |
