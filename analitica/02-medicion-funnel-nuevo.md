@@ -59,8 +59,9 @@ tamaño de muestra, no de medición.
 
 Por eso el clic en "Contratar" y los eventos del tramo de contratación no son un detalle
 técnico: **son lo único que va a permitir demostrar si el rediseño funciona** en los primeros
-meses. Miles de sesiones en el muro del precio y ~315 firmas al mes sí acusan un cambio del
-10%; 18 pólizas no acusan nada. Razonamiento completo en `analitica/03-linea-base.md` §6.1.
+meses. Miles de sesiones en el muro del precio, y ~315 caídas al mes entre el clic y la
+firma, sí acusan un cambio del 10%; 18 pólizas no acusan nada. Razonamiento completo en
+`analitica/03-linea-base.md` §6.1.
 
 ---
 
@@ -85,14 +86,18 @@ Precio mostrado, **con la modalidad y el importe** · pestaña de modalidad camb
 del seguro abierto · calculadora abierta y recálculo · **clic en contratar** (hoy no existe
 como evento) · guardar presupuesto.
 
-**Fuga 4 · clic → firma (~315 firmas/mes, 8% de los leads)**
+**Fuga 4 · clic → firma (~315 caídas/mes, 8% de los leads)**
 Un evento por paso de contratación, y en particular: cuestionario iniciado y guardado por
 asegurado · derivación a revisión médica · firma · TPV mostrado · pago completado. Es el
-tramo que el iframe hacía invisible: se sabe cuántos firman, no cuántos se caen antes.
+tramo que el iframe hacía invisible: **se sabe cuántos se caen, no cuántos firman**.
 
-Ojo con la lectura: la mayoría de quien firma **cierra después con un agente**, no en el
-TPV. Un descenso de pagos online no implica una fuga en el pago; sin el identificador de
-cotización no se puede separar una cosa de la otra.
+Los estados del CRM acotan el resto del tramo —56 no firman, 88 se caen en el TPV, 19 en
+documentación o forma de pago, 112 van a Teladoc— pero sin saber si son foto o acumulado.
+Instrumentar el tramo es lo que convierte esos estados en un embudo legible.
+
+Ojo con otra lectura: como la mayoría de las pólizas las cierra un agente, **un descenso de
+pagos online no implica por sí solo una fuga en el pago**. Sin el identificador de cotización
+no se pueden separar las dos cosas.
 
 **Transversal en todos**: dispositivo, fuente, campaña, y el identificador de cotización.
 
@@ -125,8 +130,8 @@ no se quede ninguna sin instrumentar.
 | **Agendar llamada** con franja horaria, frente al teléfono directo | Ruta elegida y conversión de cada una. ATC convierte al 11,31%, ×2,5 el funnel | Sin medir |
 | **Consentimiento comercial** (email, `step6`) separado de la **preferencia de canal** (WhatsApp, `step6b`) | Dos marcas distinguibles, con canal, fecha y origen | Una sola marca → `04` §1.4 |
 | **Cuestionario de salud** paso a paso, con progreso por asegurado | Un evento por asegurado guardado, y **el tiempo total** | Sin medir. Choca con la ventana de 20 min → `04` §2.3 |
-| **Derivación a revisión médica** (la salida cuando el cuestionario se complica) | Volumen de derivaciones y qué pasa después | Sin medir. **Es el techo de la venta online**: ver `03` §6.2 |
-| **Guardar presupuesto** y volver más tarde | Evento de guardado y de retorno — necesita el identificador | Sin medir → `04` §1.1 |
+| **Derivación a revisión médica** (la salida cuando el cuestionario se complica) | La **tasa** de derivación sobre solicitudes, y qué pasa después | Hay volumen (112 KOs) pero no tasa ni periodo → `03` §6.2 |
+| **Guardar presupuesto** y volver más tarde | Evento de guardado y de retorno — necesita el identificador | Hoy ya existe el email con el presupuesto y **casi nadie lo usa**, y el enlace funciona: es problema de visibilidad, no técnico (`contexto/01`) |
 | **Calculadora de asegurados** y recálculo en resultados | Aperturas y recálculos, con el precio antes y después | Sin medir |
 | **Pago anual** con el mensaje "De una vez y olvídate" | Reparto anual/mensual. El descuento es pequeño, así que el efecto es del copy | Sin medir |
 | **Modal de dudas frecuentes** a dos columnas | Qué preguntas se abren: es señal directa de qué información falta en la página | Sin medir |
@@ -156,6 +161,10 @@ gratis.
 - **Excluir afiliación y comparadores de la línea base.** Atrato, Adpepper y Kelisto suman
   2.267 oportunidades con 10 ventas (0,44%) y ya están cortados; dejarlos dentro ensucia la
   comparación. Ver `analitica/03-linea-base.md` §2.
+- **Deduplicar por email o DNI.** `contexto/01-embudo-y-datos.md` confirma leads duplicados:
+  la gente re-cotiza desde cero para cambiar algo, p. ej. añadir un asegurado olvidado. Los
+  volúmenes actuales están **inflados** y las conversiones reales son mejores que las
+  aparentes, así que sin deduplicar el antes/después parte de una base falseada.
 - **Pedir entorno de pruebas.** Validar la medición antes de lanzar, no después.
 - **Un evento sin dueño no existe.** Cada uno necesita alguien que lo implemente y alguien
   que lo verifique; con cinco actores en el reparto, lo que no se asigna se cae.

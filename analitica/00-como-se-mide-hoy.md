@@ -4,8 +4,14 @@ Qué existe, qué no, quién es dueño de cada pieza y cuál es la línea base. 
 **referencia**: se consulta antes de proponer medición, no se edita como diario.
 
 > **Fuente**: respuestas de Laura Solé (FIATC, Marketing Online & Ecommerce) al cuestionario
-> de medición, 20 de agosto de 2026. Las cifras del embudo vienen de
-> `contexto/01-embudo-y-datos.md` (GA4 2025 y datos de negocio).
+> de medición, 20 de agosto de 2026.
+
+> **Reparto con `contexto/01-embudo-y-datos.md`**, para no duplicar ni contradecirse:
+> aquel documento es el canónico de **qué pasa en el embudo** —los porcentajes de las cuatro
+> fugas, la tabla GA4 de retención por paso, los estados atascados del CRM, la portabilidad—
+> y este es el canónico de **cómo se mide y quién lo mide**, más la línea base cerrada.
+> Cuando una cifra aparezca en los dos, manda `analitica/03-linea-base.md`, que es la única
+> con periodo y unidad únicos.
 
 ---
 
@@ -115,20 +121,22 @@ las ventas online seguiría dejando el canal en minoría. Y significa que **la m
 efecto de una mejora del funnel se juega en la pata telefónica**, donde hoy no es
 atribuible.
 
-### La fuga 4: qué cuenta el 1.260
-`contexto/01-embudo-y-datos.md` da la fuga 4 como **"1.260 en 4 meses = 8% de los leads del
-periodo"** (fuente: Diana). A diferencia de las otras tres, que son porcentajes de pérdida,
-esta es un absoluto sin signo. **Son los que alcanzan la firma del cuestionario**: ~315 al
-mes.
+### La fuga 4: el 1.260 son caídas, no firmas
+`contexto/01-embudo-y-datos.md` lo define en **dos sitios que hay que leer juntos**. La fila
+de la fuga 4 da *"1.260 en 4 meses = 8% de los leads del periodo"*, y siete líneas más abajo
+su tabla de estados del CRM nombra ese mismo 1.260: **"Inicio de contratación sin proseguir —
+clic en Contratar y caída en algún punto ANTES de firmar el cuestionario"** (fuente: Diana).
 
-Y no hay caída oculta en el pago, que es lo que parecería al cruzarlo con las ~18 ventas
-online mensuales: la mayoría de esos 315 **firma online y cierra con un agente**. Es el
-modelo de cierre offline descrito arriba.
+Así que son **~315 caídas al mes, no 315 firmas**, y la fuga 4 queda coherente con las otras
+tres: todas son pérdida. **Cuántos firman no se sabe**, porque el tramo no está instrumentado
+paso a paso — el iframe lo hacía invisible. Ese hueco lo cierra el funnel nuevo, que no usa
+iframe. Ver `analitica/02-medicion-funnel-nuevo.md` §3.
 
-Queda una cosa por saber, y es de instrumentación: el tramo **no está medido paso a paso**
-(el iframe lo hacía invisible), así que no se sabe cuánta gente se pierde *entre* el clic en
-contratar y la firma. Ese hueco lo cierra el funnel nuevo, que no usa iframe. Ver
-`analitica/02-medicion-funnel-nuevo.md` §3.
+Los estados vecinos de esa misma tabla acotan dónde se cae después del clic: **56** no firman
+el cuestionario, **88** se caen en el pago con TPV, **19** en documentación o forma de pago y
+**112** se derivan a Teladoc. Con el aviso que da el propio documento: **falta confirmar si
+esos estados son foto actual o acumulado desde enero**, así que no se pueden convertir en
+tasas.
 
 > **Cuidado al cruzar cifras.** Las fugas 1-3 están medidas en **sesiones de GA4 (2025)** y
 > la fuga 4 en **leads de negocio (2026)**. `contexto/01-embudo-y-datos.md` lo advierte en
@@ -193,7 +201,8 @@ Puntos a cerrar:
 duplicarlas aquí: si se añade una, va allí.
 
 La de más consecuencias es **qué porcentaje de cuestionarios de salud tiene algún "Sí"**
-(`04` §1.6): marca el techo máximo de la venta online y hoy nadie lo conoce.
+(`04` §1.6): marca el techo máximo de la venta online. Del volumen hay una pista —112
+derivaciones a Teladoc— pero no de la tasa.
 
 Contactabilidad, CRM, consentimiento y testing con usuarios quedan para sesiones posteriores
 con sus equipos, a la vuelta de vacaciones. Testing con usuarios puede requerir a **Legal**.

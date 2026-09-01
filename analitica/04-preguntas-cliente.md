@@ -33,8 +33,8 @@ empezar.
 
 **1.3 · El tramo entre el clic y la firma, paso a paso**
 *Hoy no está instrumentado: el iframe lo hacía invisible. Sabemos que ~315 personas al mes
-llegan a firmar el cuestionario, pero no cuántas se caen antes.* **El funnel nuevo no usa
-iframe**, así que es la ocasión de cerrarlo — y solo existe una vez.
+se caen entre el clic y la firma, pero no en qué paso — ni cuántas llegan a firmar.* **El
+funnel nuevo no usa iframe**, así que es la ocasión de cerrarlo — y solo existe una vez.
 → **Desbloquea**: la fuga 4, hoy ciega.
 
 **1.4 · Consentimiento: ¿se pueden distinguir dos marcas?**
@@ -59,7 +59,9 @@ explica *por qué* se abandona en las fugas 1 y 2.
 cuestionario deriva a revisión médica, y eso significa que no hay compra online. Como el
 cuestionario es **por asegurado**, en una familia de cuatro los cuatro tienen que estar
 limpios. Ese porcentaje es por tanto **el techo máximo de venta online que el canal puede
-alcanzar**, y hoy nadie lo conoce.
+alcanzar**. Del volumen hay una pista —**112 derivaciones a Teladoc** en la tabla de estados
+del CRM, frente a 1.260 caídas en el mismo tramo— pero no de la tasa, ni del periodo que
+cubre ese 112.
 → **Qué cambia según la respuesta**: si la mayoría de solicitudes tienen algún "Sí", el 7% de
 venta online está cerca de su techo y el límite es de suscripción, no de diseño. Si el techo
 está en el 20% o más, hay margen amplio y el 7% es un problema de embudo. Son dos proyectos

@@ -207,12 +207,12 @@ Lo que hay que hacer es comprometerse con **métricas intermedias que sí tienen
 | Métrica | Volumen mensual | Sirve para |
 |---|---|---|
 | Clic en "Contratar" | miles de sesiones | La fuga 3, que es la prioridad. Un cambio del 10% se ve |
-| Firmas del cuestionario | ~315 | La fuga 4. Con 315 al mes, un cambio del 10% también se ve |
+| Caídas entre el clic y la firma | ~315 | La fuga 4. Es el dato que sí existe; las firmas no se cuentan |
 | Pólizas online | ~18 | **Nada, a corto plazo.** Se lee por trimestres o por año |
 
 No es rebajar la ambición: es elegir dónde se mide para que el resultado sea defendible.
 
-### 6.2 · El cuestionario de salud puede ser un techo estructural
+### 6.2 · El cuestionario de salud pone un techo, pero no parece la causa principal
 
 Esta no sale de los informes, sino de cruzarlos con nuestra propia decisión de flujo. En
 `conceptualizacion/FUNCIONAL.md` §8.1, marcada como DECIDIDO: **un solo "Sí" en el
@@ -221,18 +221,18 @@ cuestionario es **por asegurado**.
 
 Así que el máximo de venta online alcanzable es **la proporción de solicitudes en las que
 todos los asegurados responden "No" a todo**. En una familia de cuatro, los cuatro tienen que
-estar limpios. **Nunca hemos preguntado cuánta gente es.**
+estar limpios.
 
-Y de ahí depende cómo se lee todo lo demás:
+**Del orden de magnitud sí hay un dato**, en la tabla de estados del CRM de
+`contexto/01-embudo-y-datos.md`: **112 derivaciones a Teladoc** (el volumen de KOs) frente a
+**1.260 caídas** entre el clic y la firma en el mismo periodo de cuatro meses. Es decir que
+**el KO del cuestionario no es la causa dominante de la fuga 4**: la mayor parte se cae por
+otros motivos, y esos no están instrumentados.
 
-- **Si la mayoría de solicitudes tienen algún "Sí"**, el 7% de venta online puede estar ya
-  cerca de su techo estructural. El límite sería de **suscripción, no de diseño**, y habría
-  que reformular lo que el proyecto puede prometer.
-- **Si el techo está en el 20% o más**, hay mucho margen y el 7% sí es un problema de embudo.
-
-Es una pregunta abierta, no una conclusión, y es **barata de responder**: el porcentaje de
-cuestionarios con al menos un "Sí", o el volumen de derivaciones a revisión médica. Planteada
-en `analitica/04-preguntas-cliente.md` §1.6.
+Dos cautelas antes de dar el 112 por bueno: el propio documento advierte que **no se sabe si
+los estados del CRM son foto actual o acumulado desde enero**, y **112 es un volumen, no una
+tasa**. Sigue faltando el dato que de verdad fija el techo: **qué porcentaje de cuestionarios
+tiene al menos un "Sí"**. Planteado en `analitica/04-preguntas-cliente.md` §1.6.
 
 > **Relacionado**: la **ventana de 20 minutos** (`analitica/00-como-se-mide-hoy.md` §3) cobra
 > otro sentido con el cuestionario por asegurado delante. Una familia de cuatro tarda de
