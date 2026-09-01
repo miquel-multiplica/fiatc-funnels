@@ -367,24 +367,33 @@ tarificador** se mide igual. Sacar su distribución responde **cuánta gente sup
 20 minutos** del CRM (`04` §2.3), que hoy es una incógnita. También son visibles el referente de
 entrada y el dispositivo por sesión. Detalle en `analitica/01-clarity.md`.
 
-### Clarity cuenta 3,08 veces las sesiones de GA4
+### GA4 y Clarity coinciden, si se comparan bien
 
-| Herramienta | Periodo | Sesiones | Por día |
-|---|---|---|---|
-| Clarity | 3 ago – 1 sep (30d) | 236.400 | **7.880** |
-| GA4 | 27 jul – 23 ago (28d) | 71.592 | **2.557** |
+Aquí hubo un error de método propio que conviene dejar escrito, porque estuvo a punto de
+convertirse en una alarma. Se comparó **Clarity site 3 ago–1 sep (30d)** con **GA4 site 27 jul–23
+ago (28d)**: 7.880 sesiones/día frente a 2.557, un **×3,08**. Se llegó a plantear que GA4
+pudiera estar perdiendo dos tercios del tráfico por el consentimiento de cookies.
 
-Son periodos casi iguales y todo el site en los dos casos. **Y en el tarificador la relación se
-invierte**: Clarity da 7.793 sesiones en 30 días donde GA4 da 12.501 inicios en 28. Otra razón
-para no cruzar las dos herramientas sin saber qué cuenta cada una. **La diferencia es ×3,08 y no
-tenemos explicación.** El candidato más probable es el **consentimiento de cookies**: si GA4
-solo dispara tras aceptar y Clarity graba antes o al margen, GA4 estaría perdiendo
-sistemáticamente la mayoría del tráfico.
+**Periodos distintos, todo el web, y "sesión" no significa lo mismo en las dos herramientas.**
+Comparando como toca —misma URL, mismo periodo, misma métrica:
 
-**Si eso se confirma, afecta a todo lo que damos por sabido**: los porcentajes de las cuatro
-fugas salen de sesiones de GA4. No cambiarían necesariamente los *porcentajes* —si la pérdida
-es uniforme, las proporciones se mantienen— pero sí los volúmenes, y habría que comprobar que
-la pérdida es uniforme y no sesgada. Preguntado en `04` §3.11.
+| | Periodo | Usuarios |
+|---|---|---|
+| Clarity, `/calcular-seguro-medico` | 3 ago – 1 sep | **7.003 únicos** |
+| **GA4, primer paso `salud-codigo-postal`** | 2 – 31 ago | **7.048** |
+
+**Difieren un 0,6%.** Las dos herramientas cuentan prácticamente lo mismo, y eso es una
+**validación fuerte del embudo de §2**: dos sistemas independientes, con tecnologías distintas,
+ven a la misma gente.
+
+Queda una cifra descolgada: el informe de páginas de GA4 da **3.706 usuarios activos** para esa
+URL, la mitad. **Y tiene explicación**: los eventos de paso no se atribuyen a esa URL, viven
+bajo la del iframe, así que el informe de página pierde a quien usa el tarificador sin generar
+una vista de página propia. Es la misma razón por la que filtrar GA4 por URL no devuelve el
+embudo (§3).
+
+Del desajuste a nivel de site no sabemos la causa, pero **ya no es un problema del proyecto**:
+las cifras que usamos son las del embudo, y ahí las dos fuentes cuadran.
 
 ### Tres cautelas sobre la herramienta
 

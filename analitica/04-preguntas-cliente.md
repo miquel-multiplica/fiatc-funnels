@@ -221,15 +221,14 @@ dos exports de periodos distintos).*
 → **Por qué importa**: si GA4 no los filtra, todas las cifras del embudo están infladas en una
 proporción que no conocemos. Es también uno de los candidatos a explicar la brecha de §3.7.
 
-**3.11 · ¿Por qué Clarity cuenta 3,08 veces las sesiones de GA4?**
-*Clarity da 7.880 sesiones/día (30 días, todo el site); GA4 da 2.557/día en un periodo casi
-igual.*
-→ **Candidato principal**: el **consentimiento de cookies**. Si GA4 solo dispara tras aceptar y
-Clarity graba antes o al margen, GA4 pierde sistemáticamente la mayoría del tráfico.
-→ **Por qué importa**: los porcentajes de las cuatro fugas salen de sesiones de GA4. Si la
-pérdida es uniforme, las proporciones aguantan; si es sesgada —por ejemplo, si quien rechaza
-cookies se comporta distinto— el embudo que usamos está torcido. Hay que saber al menos **qué
-modo de consentimiento tiene GA4 configurado**.
+**3.11 · A nivel de site, Clarity cuenta bastante más sesiones que GA4**
+*En el tarificador las dos coinciden —7.003 usuarios únicos de Clarity frente a 7.048 de GA4,
+un 0,6% de diferencia—, así que **el embudo es sólido**. Pero a nivel de todo el web Clarity da
+muchas más sesiones.*
+→ **Prioridad baja**: no afecta a ninguna cifra que usemos. Vale la pena preguntarlo solo para
+saber si hay algo mal en el etiquetado del resto del site —el propio GA4 avisa de que **la
+etiqueta de Google no está bien colocada**— o si es que cada herramienta define "sesión" a su
+manera.
 
 **3.12 · ¿Cuánta conservación de datos tiene configurada GA4?**
 *GA4 permite 2 o 14 meses. Se ha pedido el periodo **ago-25 a jul-26**, y agosto de 2025 queda

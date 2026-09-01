@@ -144,9 +144,9 @@ la pantalla no se puede saber por qué.
 - **Nunca leer pocos días.** El día de la semana mueve las métricas más que cualquier cosa
   que diseñemos: es lo que dejó este plan aparcado.
 - **Filtrar bots y confirmar que la vista los excluye.** En 30 días son el **28,8%** del
-  tráfico. Y ojo: Clarity cuenta ×3,08 las sesiones de GA4 a nivel de site (`05` §4), pero
-  **menos** que GA4 en el tarificador (7.793 sesiones frente a 12.501 inicios). Al comparar hay
-  que decir de dónde sale cada cifra.
+  tráfico. Y al comparar cifras entre herramientas, **igualar periodo, ámbito y métrica**:
+  bien comparadas, Clarity y GA4 coinciden en el tarificador con un 0,6% de diferencia
+  (`05` §4).
 - **Segmentar móvil y escritorio por separado.** Son dos comportamientos distintos y
   mezclarlos esconde los dos. A nivel de site el reparto es **64% móvil / 36% escritorio**, así
   que el escritorio **no es un caso secundario**: es más de un tercio.
