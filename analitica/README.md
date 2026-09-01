@@ -9,14 +9,15 @@ funnel nuevo.
 | `00-como-se-mide-hoy.md` | Quién es dueño de qué, definiciones oficiales del cliente, ciclo de vida del lead en el CRM, qué se mide y qué no | Entender el punto de partida antes de proponer medición |
 | `03-linea-base.md` | Cifras cerradas ago-25 → jul-26: pólizas por canal, conversión por rating y campaña, estacionalidad, ATC | Cualquier cifra del embudo; fijar objetivos |
 | `02-medicion-funnel-nuevo.md` | Especificación de eventos por fuga, identificador de cotización, y qué medir para validar cada decisión del prototipo | Hablar con SEOCom y Héctor López |
-| `01-clarity.md` | Plan de diagnóstico con Clarity, por prioridad y con hipótesis | Diagnosticar *por qué* se abandona en las fugas 1 y 2 |
+| `05-ga4-y-clarity.md` | Lectura de los exports crudos: cómo está instrumentado GA4 hoy evento por evento, qué no se mide, y por qué Clarity queda aparcado | Saber con qué instrumento contamos antes de pedir eventos nuevos |
+| `01-clarity.md` | Plan de diagnóstico con Clarity, por prioridad y con hipótesis. **Aparcado** hasta tener una ventana de varios meses | Diagnosticar *por qué* se abandona en las fugas 1 y 2, cuando haya datos |
 
 ## Por dónde empezar
 
 Para **la sesión con el cliente**: `04-preguntas-cliente.md`, que es autocontenido.
 
-Para **entender el terreno**: `00` (cómo se mide) → `03` (qué dicen los números) → `02` (qué
-pedir) → `01` (cómo diagnosticar).
+Para **entender el terreno**: `00` (cómo se mide) → `03` (qué dicen los números) → `05` (con
+qué instrumento) → `02` (qué pedir) → `01` (cómo diagnosticar).
 
 ## Las cinco cosas que hay que saber
 
@@ -37,6 +38,10 @@ pedir) → `01` (cómo diagnosticar).
    nadie ha medido.
 
 ## Aviso de uso
+
+⚠ **Los datos de Clarity son provisionales** hasta tener periodos más amplios: las dos
+ventanas disponibles son de 3 días y se contradicen entre sí. No se citan como conclusión, y
+el plan de diagnóstico (`01`) está aparcado. Ver `05-ga4-y-clarity.md` §4.
 
 `00`, `01`, `02` y `03` son **razonamiento interno**: incluyen nuestras propias correcciones y
 cifras que hemos tenido que rectificar. `04` está redactado para poder plantearse tal cual

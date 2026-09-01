@@ -1,9 +1,26 @@
 # Qué mirar en Clarity — plan de diagnóstico
 
-Este documento dice **qué buscar, dónde y para qué decisión sirve cada hallazgo**.
+Este documento dice **qué buscar, dónde y para qué decisión sirve cada hallazgo**. Es el
+**plan**; la lectura de los datos que ya tenemos está en `analitica/05-ga4-y-clarity.md`.
 Estado de la medición actual en `analitica/00-como-se-mide-hoy.md`; lo que hay que dejar
-preparado para el funnel nuevo, en `analitica/02-medicion-funnel-nuevo.md`. Sustituye al antiguo QW#12 ("diagnóstico Clarity"), que era
-un quick win pendiente: ya no es una tarea por hacer, es un plan de trabajo.
+preparado para el funnel nuevo, en `analitica/02-medicion-funnel-nuevo.md`. Sustituye al
+antiguo QW#12 ("diagnóstico Clarity"), que era un quick win pendiente: ya no es una tarea por
+hacer, es un plan de trabajo.
+
+> ## APARCADO hasta tener una ventana grande
+>
+> ⚠ **Los datos de Clarity que hay hoy son PROVISIONALES** y no deben citarse como
+> conclusión. El plan está listo, pero **no se ejecuta todavía**. Las dos ventanas de Clarity disponibles
+> son de 3 días, de todo el web, y **no se parecen entre sí**: el móvil pasa del 83% al 65% y
+> los bots de 21.525 a 2.843 (`analitica/05-ga4-y-clarity.md` §4). En la página del
+> tarificador hay 140-230 sesiones al día, insuficiente para segmentar por hipótesis.
+>
+> **Qué hace falta para retomarlo:**
+>
+> 1. **Una ventana de varios meses**, segmentada por dispositivo y con los bots excluidos.
+> 2. **Saber si Clarity graba dentro del iframe** del tarificador. Las fugas 1, 2 y 3 pasan
+>    ahí dentro; si no lo graba, las prioridades 1 y 2 **no se pueden ejecutar** tal como
+>    están escritas. Preguntado en `analitica/04-preguntas-cliente.md` §1.5.
 
 El embudo pierde gente en cuatro sitios (`contexto/01-embudo-y-datos.md`). De dos de ellos
 **no sabemos la causa**, y eso es lo que Clarity puede resolver:
@@ -77,11 +94,24 @@ sin eventos definidos no hay embudo que medir. Antes de analizar, hay que instru
 
 ## Antes de sacar conclusiones
 
+- **Nunca leer pocos días.** El día de la semana mueve las métricas más que cualquier cosa
+  que diseñemos: es lo que dejó este plan aparcado.
+- **Filtrar bots y confirmar que la vista los excluye.** Clarity los cifra entre el 13% y el
+  66% del tráfico según la ventana, y ni el caso bueno es inocuo.
 - **Segmentar móvil y escritorio por separado.** Son dos comportamientos distintos y
-  mezclarlos esconde los dos.
+  mezclarlos esconde los dos. El móvil domina siempre, pero el reparto exacto está sin
+  resolver: hay que mirar el peso real en el periodo que se analice.
 - **Descartar el tráfico de rebote inmediato** al medir cualquier fuga: infla los números y
   no dice nada del diseño.
+- **Leer las señales de fricción como tasa sobre sesiones implicadas**, no en absoluto: suben
+  cuando sube la implicación, porque quien rebota sin mirar no llega a producir fricción.
+- **No usar los "eventos inteligentes" de Clarity** como métrica de negocio: son heurísticas
+  automáticas y se desmienten solas entre exports (`05` §4).
+- **Fijar la base de comparación con la propia ventana larga**, no con las fotos de 3 días.
+  Un valor del funnel solo significa algo al lado del valor del site en el mismo periodo.
 - **Una hipótesis, una prueba.** Cada hallazgo de arriba tiene una prueba concreta; si la
   grabación no la confirma ni la desmiente, no vale como evidencia.
 - **Contrastar con GA4.** Clarity dice *qué hace* la gente; GA4, *cuántos*. Las cifras del
   embudo salen de GA4 (`contexto/01-embudo-y-datos.md`) y no se sustituyen con grabaciones.
+  Pero **GA4 y el CRM no cuadran entre sí** —GA4 da ×1,8 las oportunidades (`05` §2)—, así
+  que al citar un volumen hay que decir de qué herramienta sale.
