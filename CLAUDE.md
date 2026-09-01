@@ -14,7 +14,7 @@ ui/                  (vacía) diseño visual sobre el design system de FIATC
 analitica/           medición: cómo se mide hoy, línea base cerrada, qué dejar preparado
                      para el funnel nuevo, plan de Clarity y preguntas para el
                      cliente (00 a 04, con README de índice)
-contexto/            inputs de la inmersión (00 a 03). Ni conceptualización ni UI:
+contexto/            inputs de la inmersión (00 a 04). Ni conceptualización ni UI:
                      es la investigación de partida, no lo que producimos
 propuesta/           fase anterior, cerrada: el prototipo de la propuesta y su doc
 utils/               serve.py, para abrir el prototipo por http:// en vez de file://
@@ -38,9 +38,10 @@ Este repo es **público** y el cliente puede verlo. Están en `.gitignore`:
 Ojo: nada de esto viaja en un `git clone`. Conviene copia fuera de git.
 
 ## Base de conocimiento (inputs de la inmersión — NO editar como diario)
-`README.md` y `contexto/`: `00-contexto.md`, `01-embudo-y-datos.md`, `02-hallazgos-clave.md`
-y `03-backlog-quickwins.md` (26 quick wins priorizados). Fuente canónica del proyecto; leer
-ahí antes de decidir. Prioridad = página de resultados (fuga 63-72%).
+`README.md` y `contexto/`: `00-contexto.md`, `01-embudo-y-datos.md`, `02-hallazgos-clave.md`,
+`03-backlog-quickwins.md` (26 quick wins priorizados) y `04-perfiles-cliente.md` (los diez
+perfiles de cliente de Salud). Fuente canónica del proyecto; leer ahí antes de decidir.
+Prioridad = página de resultados (fuga 63-72%).
 
 ## Publicación (GitHub Pages)
 El sitio se monta con **lista blanca** en `.github/workflows/pages.yml`: copia los dos HTML

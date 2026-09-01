@@ -32,6 +32,11 @@ que se había pedido para la reunión del día 2.
 center externo**; FIATC lo advirtió al enviarlo. Los 957 que faltaban bajan el peso de lo
 online de 10,1% a **7,0%**. Es la cifra a usar de aquí en adelante.
 
+> **Confirmado por una segunda fuente del cliente.** El PDF *Información negocio: Modelo
+> actual* (pág. 2) da la contratación 100% online de **Salud en el 6%**, frente al 30% del
+> total de ramos, y **52.433 cotizaciones** de Salud en el último año. Coincide con el 7,0%
+> de aquí dentro del redondeo. Ver `contexto/04-perfiles-cliente.md` §4.
+
 Lo online se mueve entre 12 y 28 pólizas al mes sin tendencia: **es ruido, no serie**. Con
 volúmenes así, un mes suelto no dice nada y hay que leer trimestres.
 

@@ -129,6 +129,27 @@ desde enero 2026— no cuadra: ene-jul 2026 suman 27.207 en los informes nuevos.
 → Probablemente sean **oportunidades netas frente a brutas**, o cortes de fecha distintos.
 Conviene fijar cuál se usa como referencia.
 
+**3.4 · ¿Existe cuantificación de los perfiles de cliente de Salud?**
+*El PDF de modelo de negocio define **diez perfiles de cliente de Salud**, pero sin ningún
+dato de tamaño ni de valor. En cambio, los siete arquetipos de audiencia sí están
+cuantificados — y están declarados explícitamente como "otros ramos", así que dejan Salud
+fuera.*
+→ **Por qué importa**: sin saber qué peso tiene cada perfil no podemos priorizar a quién
+optimizamos la pantalla de resultados, que es donde está el mayor muro. Hoy sabríamos hablarle
+a los diez, pero no a cuál conviene.
+→ **Y una segunda**: ¿la priorización de audiencias vale también para Salud? En el marco de
+otros ramos, los seniors quedan en potencial MEDIO **pese a ser los que más seguros tienen y
+más valoran la calidad**, porque no se plantean cambiar. Si en Salud pasa lo mismo, tiene
+consecuencias de diseño. Ver `contexto/04-perfiles-cliente.md` §3.4.
+
+**3.5 · ¿"Cotización" y "oportunidad" son lo mismo?**
+*El PDF da **52.433 cotizaciones de Salud** en el último año. El informe de rating da **51.814
+oportunidades** en ago-25 → jul-26. Son casi la misma cifra.*
+→ **Por qué importa**: si cada cotización genera una oportunidad, entonces prácticamente todo
+el que tarifica acaba como lead, y eso cambia cómo leemos la fuga 2 (el paso de
+consentimiento) y de dónde salen las ~4.318 oportunidades al mes. Si son cosas distintas que
+casualmente se parecen, hay que dejar de cruzarlas.
+
 ---
 
 ## 4. Acuerdos de proceso a cerrar en la sesión
@@ -153,7 +174,8 @@ Conviene fijar cuál se usa como referencia.
 |---|---|
 | **SEOCom** (etiquetado GA4/GTM) | 1.2, 1.5, 2.2, 2.4, 4 (nomenclatura) |
 | **Héctor López** (iframe, data layer) | 1.1, 1.3, 1.4 (parte técnica), 2.5 |
-| **Negocio / Diana** (datos) | 2.1, 3.1, 3.2, 3.3 |
+| **Negocio / Diana** (datos) | 2.1, 3.1, 3.2, 3.3, 3.5 |
+| **Marketing / Laura Solé** | **3.4** — perfiles de cliente y priorización de audiencias |
 | **Negocio o Suscripción** | **1.6** — si esta sesión no puede responderla, hay que escalarla |
 | **Sistemas** | 1.4 (almacenamiento y trazabilidad del consentimiento) |
 | **Equipo de Laia Avilés** (CRM) | 2.3, 3.1 |

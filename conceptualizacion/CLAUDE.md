@@ -29,6 +29,9 @@ se cierre una decisión abierta.
 - **Dos audiencias en resultados** (~40% portabilidad / ~59% primer seguro): el acordeón
   lleva un argumento para cada una y **se muestran siempre los dos**. En resultados no se
   conoce la audiencia: la portabilidad no se declara hasta `cOtra`. Ver `FUNCIONAL.md` §3.
+- **Diez perfiles de cliente de Salud** definidos por FIATC en `contexto/04-perfiles-cliente.md`.
+  Útiles para tono y jerarquía de coberturas: la mitad son digitales y comparadores, y tres
+  (los de más edad) piden teléfono, oficina o trato humano.
 - **"Tomador", nunca "titular"**, en todos los pasos de contratación. Indicación del cliente.
 - **Consentimiento comercial** (Ley ATC, oct 2026): hoy un único canal, email, en `step6`.
   Ojo: es DISTINTO de la preferencia de canal de `step6b` ("¿Prefieres por WhatsApp?", para
