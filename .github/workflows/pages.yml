@@ -2,6 +2,16 @@ name: Deploy Pages
 on:
   push:
     branches: [main]
+    # Un push que SOLO toca documentación no tiene nada que publicar: la lista blanca
+    # de abajo copia únicamente los dos HTML. Sin este filtro, cada commit de .md
+    # lanzaba un deploy vacío que a veces se quedaba colgado en "updating_pages" hasta
+    # el timeout, dejando el historial en rojo sin que el sitio tuviera ningún problema.
+    #
+    # paths-ignore y no paths a propósito: así CUALQUIER otro cambio sí despliega. Con
+    # una lista de rutas exactas, renombrar un HTML dejaría de disparar el workflow y el
+    # sitio se quedaría obsoleto en silencio, que es mucho peor que un deploy de más.
+    paths-ignore:
+      - '**.md'
   workflow_dispatch:
 
 permissions:

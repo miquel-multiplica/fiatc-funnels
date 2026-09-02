@@ -65,3 +65,8 @@ Las URLs **no dependen de dónde vivan los archivos** —ambos aterrizan en la r
   Los `.md` no pasan por Pages y se ven al instante en GitHub.
 - Si un deploy no arranca, mirar **si hay un run anterior en `waiting`/`queued`** bloqueando
   el grupo de concurrencia antes de tocar la configuración de Pages.
+- **Un deploy en rojo no implica un sitio roto.** El workflow ignora los pushes que solo tocan
+  `.md` (`paths-ignore`), pero si alguno falla igualmente, la comprobación válida es **por
+  tamaño contra el local**, no el color del run: si los dos HTML coinciden, no hay nada que
+  arreglar. Pasó tres veces con `Timeout reached` esperando `updating_pages` sin que hubiera
+  nada nuevo que publicar.
