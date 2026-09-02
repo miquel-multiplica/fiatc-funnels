@@ -34,7 +34,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # El sitio publica SOLO los dos prototipos. La base de conocimiento (datos de
       # GA4, hallazgos de las sesiones con ATC/negocio/IT, presupuesto) se queda en el
@@ -55,9 +55,9 @@ jobs:
           find _site -type f | grep -P '[^\x20-\x7E]|\s' || echo "ninguno"
           echo "::endgroup::"
 
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
@@ -70,8 +70,9 @@ jobs:
 
       # timeout de 5 min en vez de los 10 por defecto: si el backend está atascado
       # preferimos saberlo pronto y no tener el job ocupado media hora.
+      # v5 mantiene los inputs timeout y error_count; se comprobó antes de subir la versión.
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
         with:
           timeout: 300000
           error_count: 5
