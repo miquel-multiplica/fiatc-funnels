@@ -4,6 +4,8 @@ Documenta **`funnel-salud-quickwins.html`**, el prototipo activo. Es el mapa fun
 para quien tenga que integrarlo: qué pantallas hay, en qué orden, qué es condicional,
 qué está simulado y qué decisiones de negocio quedan abiertas.
 
+Para la **lógica condicional** en formato de escenarios verificables, ver
+`conceptualizacion/SPECS.md` — es el documento que se lleva a la revisión con IT.
 Para el prototipo anterior, ver `propuesta/PROTOTIPO-PROPUESTA.md`.
 Para el porqué de cada mejora, ver `contexto/03-backlog-quickwins.md`.
 
@@ -67,7 +69,7 @@ PLANNED_FLOW = step0 · stepCP · step1 · step2 · step4 · step5 · [stepDNI] 
 | `step7` | Resultados |
 
 **Navegación**: `showStep` / `nextStep` / `prevStep` sobre `PLANNED_FLOW`.
-`stepDNI` se salta en ambos sentidos cuando `isClient` es `false`.
+`stepDNI` se salta en ambos sentidos cuando `isClient` es `false` (spec: `SPECS.md` F-02).
 
 **Fuera del flujo lineal**: `stepRecover` (recuperar un presupuesto guardado por email,
 entra directo a resultados).
@@ -158,7 +160,7 @@ CONTRAT_FLOW = cDatos · cContacto · cDireccion · cAseg1 · cAseg2 · cCuestio
 
 **Navegación**: `showContrat` / `nextContrat` / `prevContrat` sobre `CONTRAT_FLOW`, con su
 propia barra de progreso. `cDerogacion` se salta en ambos sentidos si `comesFromOther`
-es `false`.
+es `false` (spec: `SPECS.md` F-06).
 
 ### La confirmación (`cConfirm`)
 Stepper con lo que queda por hacer. Dos reglas de tono que conviene no romper:
@@ -211,16 +213,25 @@ Cuando todos los cuestionarios están completos aparece el botón de salida
 
 ---
 
-## 5. Lógica condicional — resumen
+## 5. Lógica condicional → `conceptualizacion/SPECS.md`
 
-| Condición | Efecto |
-|---|---|
-| `isClient` | Incluye o salta `stepDNI` |
-| `comesFromOther` | Incluye o salta `cDerogacion` |
-| Algún "Sí" en el cuestionario | Salta a `cKO` **(abierto, ver §8)** |
-| `intentMode` / `insuredCount` | Nº de bloques de asegurado y etiquetas |
-| `pagoSelected` | Textos del cargo en `cAntes` y `cConfirm` |
-| `reachedResults` | "Guardar presupuesto" en el exit-intent |
+**La lógica condicional vive en `conceptualizacion/SPECS.md`**, en formato de asunciones y
+escenarios Given/When/Then, para que IT la confirme o la corrija punto por punto. Ocho
+bloques, 39 asunciones y 22 escenarios.
+
+**No duplicarla aquí.** Si cambia una condición, se cambia allí; este documento explica
+pantallas, decisiones y porqués.
+
+De un vistazo, las banderas que usa el prototipo y dónde están especificadas:
+
+| Bandera | Efecto | Spec |
+|---|---|---|
+| `isClient` | Incluye o salta `stepDNI` | F-02 |
+| `intentMode` / `insuredCount` | Nº de bloques de asegurado y etiquetas | F-04 |
+| Algún "Sí" en el cuestionario | Camino KO | F-05 |
+| `comesFromOther` | Incluye o salta `cDerogacion`; paso de documentación en `cConfirm` | F-06 |
+| `pagoSelected` | Textos del cargo en `cAntes` y `cConfirm` | F-07 |
+| `reachedResults` | "Guardar presupuesto" en el exit-intent | F-08 |
 
 ---
 
@@ -284,21 +295,13 @@ Además, `cFirma` simula el proceso de firma con un spinner y avanza solo a los 
 
 ### 8.1 · Camino cuando hay un "Sí" en el cuestionario — DECIDIDO
 
-Este es el comportamiento que hay que implementar:
-
 ```
 cCuestionario  ──(algún "Sí")──►  cOtra  ──►  cKO
 ```
 
-- **Pasa por `cOtra`** ("¿Tienes seguro con otra compañía?") antes del KO. Se sigue
-  preguntando la portabilidad, porque es un dato que interesa igualmente.
-- **Y después va al KO**, independientemente de lo que se responda en `cOtra`.
-- **No hay firma ni confirmación de teléfono por SMS.** El camino KO se salta `cTelefono`
-  y `cFirma`: no se firma nada mientras la solicitud esté pendiente de revisión médica.
-- `cKO` es terminal: de ahí se sale a resultados o a hablar con un asesor.
-
-Si no hay ningún "Sí", el flujo sigue completo y normal (`cTelefono` → `cFirma` → `cOtra`
-→ … → `cConfirm`).
+El comportamiento acordado está especificado en **`conceptualizacion/SPECS.md` F-05**, con
+sus escenarios. En resumen: pasa por `cOtra` antes del KO, se salta `cTelefono` y `cFirma`
+—no se firma nada pendiente de revisión médica— y `cKO` es terminal.
 
 > **El prototipo no implementa esta bifurcación.** Hoy `proceedFromQuest()` salta directo
 > de `cCuestionario` a `cKO`, y `cKO` queda fuera de `CONTRAT_FLOW` (con `contratIdx` en

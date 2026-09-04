@@ -20,11 +20,19 @@ fase de UI y vivirá en `ui/`.
 
 También está aquí `userflow-figma-prompt.md`, el prompt para llevar el flujo a Figma.
 
-## Documentación funcional
-`conceptualizacion/FUNCIONAL.md` — mapa funcional completo: pantallas, los dos flujos y su
-lógica condicional, resumen persistente, modales, loadings, qué está simulado y qué queda
-abierto. **Mantenerlo al día** cuando cambie el flujo, se añada una pantalla o un modal, o
-se cierre una decisión abierta.
+## Documentación funcional — dos archivos con reparto claro
+- **`conceptualizacion/FUNCIONAL.md`** — el mapa: pantallas, los dos flujos, resumen
+  persistente, modales, loadings, qué está simulado, convenciones y **el porqué de cada
+  decisión de diseño**. Es el documento explicativo.
+- **`conceptualizacion/SPECS.md`** — **la lógica condicional**, en asunciones (`A-`) y
+  escenarios Given/When/Then (`ESC-`). Es lo que se lleva a la revisión con IT.
+
+**El reparto no se rompe**: si cambia una condición se toca `SPECS.md`; si cambia una
+pantalla o un porqué, `FUNCIONAL.md`. Nunca las dos, o acabaremos con dos versiones y una
+falsa.
+
+Dice **"el prototipo asume"** y no "el sistema debe" a propósito: es un entregable de
+diseño, y las reglas de negocio las decide FIATC. Mantener ese registro.
 
 ## Principios de contenido
 - **Fidelidad de copy**: nada inventado; sale de guiones de ATC, web y área privada de

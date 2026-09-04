@@ -8,8 +8,9 @@ Reglas **de repositorio y proceso**. Las convenciones de cada entregable viven e
 
 ## Estructura del repo
 ```
-conceptualizacion/   el wireframe del funnel, su documentación funcional y el
-                     prompt del userflow para Figma
+conceptualizacion/   el wireframe del funnel, su documentación funcional
+                     (FUNCIONAL.md), la lógica condicional en escenarios
+                     (SPECS.md) y el prompt del userflow para Figma
 ui/                  (vacía) diseño visual sobre el design system de FIATC
 analitica/           medición: cómo se mide hoy, línea base cerrada, qué dejar preparado
                      para el funnel nuevo, plan de Clarity y preguntas para el
