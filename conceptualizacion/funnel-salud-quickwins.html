@@ -691,7 +691,7 @@
   /* padding-bottom generoso: cualquier pregunta puede subir hasta arriba (las respondidas quedan ocultas) */
   .quest-modal-scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 24px 24px 65vh; scroll-behavior: smooth; }
   /* Degradado anclado al fondo del header: difumina la pregunta anterior que asoma (pista de scroll) */
-  .quest-scroll-fade { position: absolute; top: calc(100% + 1px); left: 0; right: 0; height: 88px; z-index: 5; pointer-events: none; opacity: 0; transition: opacity 0.2s ease; background: linear-gradient(to bottom, var(--wf-0), transparent); }
+  .quest-scroll-fade { position: absolute; top: calc(100% + 1px); left: 0; right: 0; height: 80px; z-index: 5; pointer-events: none; opacity: 0; transition: opacity 0.2s ease; background: linear-gradient(to bottom, var(--wf-0), transparent); }
   .quest-modal-foot { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--wf-20); background: var(--wf-0); z-index: 6; }
   .quest-modal-foot .btn-primary { width: auto; flex-shrink: 0; }
   @media (min-width: 601px) {
@@ -712,7 +712,7 @@
   .quest-nodeclare { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: var(--wf-90); line-height: 1.5; margin-top: 4px; }
   .quest-nodeclare svg { flex-shrink: 0; margin-top: 2px; color: var(--wf-90); }
   .quest-sep { height: 1px; background: var(--wf-20); margin: 24px 0; }
-  .quest-q { display: none; margin-bottom: 72px; scroll-margin-top: 40px; } /* separación entre preguntas; la pregunta nueva sube justo debajo de la cabecera */
+  .quest-q { display: none; margin-bottom: 72px; scroll-margin-top: 32px; } /* separación entre preguntas; la pregunta nueva sube justo debajo de la cabecera */
   .quest-q.show { display: block; animation: questIn 0.3s ease; }
   @keyframes questIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   .quest-q-num { display: block; font-size: 14px; font-weight: 700; color: var(--wf-60); margin-bottom: 6px; letter-spacing: 0.02em; }
