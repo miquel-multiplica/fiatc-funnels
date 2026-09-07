@@ -13,7 +13,8 @@ Consolidado a 29 julio 2026. Pensado para dar contexto completo a una conversaci
 | `contexto/03-backlog-quickwins.md` | 26 quick wins con evidencia, viabilidad IT y estado + caídos + pendientes | Diseñar; scope de las 40h |
 | `contexto/04-perfiles-cliente.md` | Los diez perfiles de cliente de Salud definidos por FIATC, y por qué los segmentos de audiencia del mismo PDF son de otros ramos | Tono, orden de argumentos, jerarquía de coberturas |
 | `analitica/` | Medición: cómo se mide hoy, línea base cerrada ago-25 → jul-26, qué dejar preparado para el funnel nuevo, plan de Clarity y las preguntas para el cliente. Índice en `analitica/README.md` | Cualquier cifra del embudo; preparar la sesión de analítica |
-| `ux/` | El wireframe del funnel en `ux/prototipo/`, su documentación funcional (`FUNCIONAL.md`), la lógica condicional en escenarios (`SPECS.md`) y el prompt del userflow para Figma | Trabajar sobre el prototipo; llevar `SPECS.md` a la revisión con IT |
+| `prototipos/` | Todos los HTML publicables. Hoy el wireframe del funnel y el prototipo de la propuesta | Abrir el prototipo; es lo único que se publica |
+| `ux/` | La documentación funcional del funnel (`FUNCIONAL.md`), la lógica condicional en escenarios (`SPECS.md`) y el prompt del userflow para Figma | Trabajar sobre el prototipo; llevar `SPECS.md` a la revisión con IT |
 | `test-usuarios/` | Guión del test de usabilidad: 8 tests think-aloud, 6 escenarios | Preparar y conducir los tests |
 
 ## Punto de partida del diseño

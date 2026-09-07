@@ -1,12 +1,12 @@
 # Prototipo de la propuesta — `wireframe_propuesta.html`
 
 > Documento de referencia del **prototipo original** con el que se ganó/presentó la propuesta.
-> NO es el archivo de trabajo actual (ese es `ux/prototipo/funnel-salud-quickwins.html`, ver su `CLAUDE.md`).
+> NO es el archivo de trabajo actual (ese es `prototipos/funnel-salud-quickwins.html`, ver su `CLAUDE.md`).
 > Se conserva porque es la base validada de la que evoluciona el funnel nuevo y sigue publicado
 > para el cliente vía GitHub Pages. No editar salvo para no romper el enlace del cliente.
 
 ## Archivo único
-`propuesta/prototipo/wireframe_propuesta.html` (~4400 líneas)
+`prototipos/wireframe_propuesta.html` (~4400 líneas)
 
 Todo está en un solo archivo HTML autocontenido: CSS, HTML y JS. No hay build system, no hay dependencias externas. Se abre directamente en el navegador con `file://`.
 

@@ -8,13 +8,12 @@ Reglas **de repositorio y proceso**. Las convenciones de cada entregable viven e
 
 ## Estructura del repo
 ```
+prototipos/          TODOS los HTML publicables · ES LO ÚNICO QUE SE PUBLICA
 ux/                  fase de UX: FUNCIONAL.md (el mapa), SPECS.md (la lógica
                      condicional) y el prompt del userflow para Figma
-  ux/prototipo/      el wireframe del funnel · SE PUBLICA
-ui/                  fase de UI: diseño visual sobre el design system de FIATC
-  ui/prototipo/      (vacía) · SE PUBLICA
+ui/                  fase de UI: documentación del diseño visual sobre el
+                     design system de FIATC
 propuesta/           fase anterior, cerrada: su documentación
-  propuesta/prototipo/   el prototipo de la propuesta · SE PUBLICA
 analitica/           medición: cómo se mide hoy, línea base cerrada, qué dejar preparado
                      para el funnel nuevo, plan de Clarity y preguntas para el
                      cliente (00 a 05, con README de índice)
@@ -27,10 +26,19 @@ material-cliente/    lo que nos pasa FIATC · IGNORADO, ver abajo
 README.md            portada e índice de la base de conocimiento
 ```
 
-**Los HTML viven en carpetas `prototipo/`, y son lo único que se publica.** La regla es la
-carpeta, no una lista de archivos: así añadir un HTML no obliga a tocar el proceso de
-publicación. La contrapartida es que **la disciplina es nuestra**: lo que entre en un
-`prototipo/` se publica, así que ahí no va ninguna prueba ni nada con material del cliente.
+**Todos los HTML publicables viven en `prototipos/`, y es lo único que se publica.** Una sola
+carpeta a propósito: el proceso de publicación se configura con una lista fija de directorios,
+así que con una única entrada **no dependemos de nadie para añadir un HTML**. Si algún día
+hacen falta rutas en la URL, se crean subcarpetas dentro y tampoco hay que pedir nada.
+
+Dos contrapartidas asumidas:
+
+- **La disciplina es nuestra**: lo que entre en `prototipos/` se publica, así que ahí no va
+  ninguna prueba ni nada con material del cliente.
+- **Los nombres no pueden repetirse**, porque están todos planos en la misma carpeta.
+
+Y los HTML quedan separados de su documentación —`ux/FUNCIONAL.md` documenta un archivo que
+vive en `prototipos/`—. Es el precio de no depender de IT para cada añadido.
 
 **Rutas en la documentación**: se escriben siempre **desde la raíz del repo**
 (`ux/FUNCIONAL.md`), no relativas al archivo que las menciona. Son prosa,

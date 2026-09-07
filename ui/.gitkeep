@@ -1,7 +1,8 @@
-Carpeta reservada para los HTML de la fase de UI: el diseño visual del funnel sobre
-el design system real de FIATC, frente al wireframe gris de ux/prototipo/.
+Carpeta reservada para la fase de UI: la documentación del diseño visual sobre el
+design system real de FIATC, frente al wireframe gris que documenta ux/.
 
-OJO: todo lo que entre aquí SE PUBLICA. Nada de pruebas ni de material del cliente.
+Los HTML NO van aquí: todos los prototipos publicables viven en prototipos/, en la
+raíz del repo. Aquí van los .md de esta fase.
 
 Este archivo existe solo para que git pueda versionar la carpeta vacía; git no
 registra directorios, solo archivos. Se puede borrar en cuanto haya contenido.

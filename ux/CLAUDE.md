@@ -4,14 +4,14 @@ Convenciones **del entregable**. Las de repositorio y proceso están en el `CLAU
 raíz, que se aplica igualmente.
 
 ## Archivo de trabajo actual
-`ux/prototipo/funnel-salud-quickwins.html` — **este es el archivo activo**. Un solo
+`prototipos/funnel-salud-quickwins.html` — **este es el archivo activo**. Un solo
 HTML autocontenido (CSS + HTML + JS inline), zero-build, se abre con `file://` y se publica
 en GitHub Pages. Responsive: se valida desktop directo y mobile con el device mode de Chrome.
 Reparto real, contando **usuarios de los pasos del tarificador**: **56% móvil / 43%
 escritorio** (GA4, 30 días). El escritorio **no es un caso secundario**, y además su conversión
 cambia de signo según el tramo. Ver `analitica/05-ga4-y-clarity.md` §2.
 
-Evoluciona el prototipo original `propuesta/prototipo/wireframe_propuesta.html` (documentado en
+Evoluciona el prototipo original `prototipos/wireframe_propuesta.html` (documentado en
 `propuesta/PROTOTIPO-PROPUESTA.md`), reutilizando piezas de UX/copy **sin** la carcasa de
 iPhone ni el chatbot.
 

@@ -1,8 +1,8 @@
 """Servidor local para abrir el prototipo por http:// en vez de file://.
 
     python3 utils/serve.py
-        →  http://localhost:8080/ux/prototipo/funnel-salud-quickwins.html
-        →  http://localhost:8080/propuesta/prototipo/wireframe_propuesta.html
+        →  http://localhost:8080/prototipos/funnel-salud-quickwins.html
+        →  http://localhost:8080/prototipos/wireframe_propuesta.html
 
 Sirve la raíz del repo, calculada desde la ubicación de este archivo: antes iba a
 una ruta absoluta escrita a mano, que se rompía al mover el script o al clonar el

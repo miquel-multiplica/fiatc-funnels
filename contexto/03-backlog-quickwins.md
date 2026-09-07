@@ -1,6 +1,6 @@
 # FIATC Salud · Backlog de quick wins
 
-> Base de diseño: el **prototipo de la propuesta** (`propuesta/prototipo/wireframe_propuesta.html`).
+> Base de diseño: el **prototipo de la propuesta** (`prototipos/wireframe_propuesta.html`).
 > Estos quick wins se materializan evolucionando ese prototipo hasta la versión final acordada.
 > Presupuesto de diseño: **40h** para diseñar el funnel con quick wins.
 > Todos validados con IT (28 jul) salvo indicación. Ordenados por fuga que atacan.
@@ -126,7 +126,7 @@
 
 ## Estado de aplicación (31 ago 2026)
 
-Foto de qué se ha llevado al prototipo `ux/prototipo/funnel-salud-quickwins.html`.
+Foto de qué se ha llevado al prototipo `prototipos/funnel-salud-quickwins.html`.
 Las secciones de arriba son los **inputs** de la inmersión y no se tocan; esto es el
 **resultado**. Detalle funcional de cada pantalla en `ux/FUNCIONAL.md`.
 
