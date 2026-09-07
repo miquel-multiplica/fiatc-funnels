@@ -3,29 +3,37 @@
 Reglas **de repositorio y proceso**. Las convenciones de cada entregable viven en el
 `CLAUDE.md` de su carpeta, que se suma a este al trabajar ahí:
 
-- `conceptualizacion/CLAUDE.md` — el wireframe del funnel
+- `ux/CLAUDE.md` — el wireframe del funnel
 - `ui/CLAUDE.md` — cuando exista la fase de UI
 
 ## Estructura del repo
 ```
-conceptualizacion/   el wireframe del funnel, su documentación funcional
-                     (FUNCIONAL.md), la lógica condicional en escenarios
-                     (SPECS.md) y el prompt del userflow para Figma
-ui/                  (vacía) diseño visual sobre el design system de FIATC
+ux/                  fase de UX: FUNCIONAL.md (el mapa), SPECS.md (la lógica
+                     condicional) y el prompt del userflow para Figma
+  ux/prototipo/      el wireframe del funnel · SE PUBLICA
+ui/                  fase de UI: diseño visual sobre el design system de FIATC
+  ui/prototipo/      (vacía) · SE PUBLICA
+propuesta/           fase anterior, cerrada: su documentación
+  propuesta/prototipo/   el prototipo de la propuesta · SE PUBLICA
 analitica/           medición: cómo se mide hoy, línea base cerrada, qué dejar preparado
                      para el funnel nuevo, plan de Clarity y preguntas para el
-                     cliente (00 a 04, con README de índice)
-contexto/            inputs de la inmersión (00 a 04). Ni conceptualización ni UI:
-                     es la investigación de partida, no lo que producimos
-propuesta/           fase anterior, cerrada: el prototipo de la propuesta y su doc
+                     cliente (00 a 05, con README de índice)
+contexto/            inputs de la inmersión (00 a 04). Ni UX ni UI: es la
+                     investigación de partida, no lo que producimos
+test-usuarios/       guión del test de usabilidad
 utils/               serve.py, para abrir el prototipo por http:// en vez de file://
 pruebas-descartadas/ alternativas exploradas y no elegidas
 material-cliente/    lo que nos pasa FIATC · IGNORADO, ver abajo
 README.md            portada e índice de la base de conocimiento
 ```
 
+**Los HTML viven en carpetas `prototipo/`, y son lo único que se publica.** La regla es la
+carpeta, no una lista de archivos: así añadir un HTML no obliga a tocar el proceso de
+publicación. La contrapartida es que **la disciplina es nuestra**: lo que entre en un
+`prototipo/` se publica, así que ahí no va ninguna prueba ni nada con material del cliente.
+
 **Rutas en la documentación**: se escriben siempre **desde la raíz del repo**
-(`conceptualizacion/FUNCIONAL.md`), no relativas al archivo que las menciona. Son prosa,
+(`ux/FUNCIONAL.md`), no relativas al archivo que las menciona. Son prosa,
 no enlaces, y así se leen igual desde cualquier documento.
 
 ## Material que NO se versiona
@@ -56,6 +64,16 @@ Las URLs **no dependen de dónde vivan los archivos** —ambos aterrizan en la r
 
 ## Convenciones de git
 - **No commitear/push salvo que el usuario lo pida.**
+- **`git fetch` al empezar cada tanda, no solo antes de pushear.** Celia trabaja en paralelo
+  sobre el mismo `funnel-salud-quickwins.html`. Si sus cambios se descubren al final, ya se
+  han hecho veinte ediciones encima y el rebase duele; descubiertos al principio, se integran
+  antes de tocar nada. Pasó el 4 de septiembre: el push se rechazó, y salió bien solo porque
+  ella tocaba el HTML y nosotros únicamente `.md`.
+- **Integrar con `rebase`, no con `merge`**, cuando los cambios van a archivos distintos: el
+  historial queda lineal y se lee. Si los dos hemos tocado el HTML, resolver el conflicto a
+  mano **conservando las dos partes** y **volver a verificar visualmente**: es un solo archivo
+  de 370 KB con CSS, HTML y JS inline, así que un rebase puede dejar el archivo válido y aun
+  así haber perdido un ajuste.
 - **Un push por tanda, no uno por ajuste.** Cada push encola un deploy de Pages y cancela
   el anterior; con pushes seguidos la cola se congestiona, algún deploy muere por timeout
   (`deployment_queued` en bucle → `Timeout reached`) y el sitio se queda sirviendo una

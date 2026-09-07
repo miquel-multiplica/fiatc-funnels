@@ -215,7 +215,7 @@ No es rebajar la ambición: es elegir dónde se mide para que el resultado sea d
 ### 6.2 · El cuestionario de salud NO es el techo — resuelto
 
 Esta no sale de los informes, sino de cruzarlos con nuestra propia decisión de flujo. En
-`conceptualizacion/FUNCIONAL.md` §8.1, marcada como DECIDIDO: **un solo "Sí" en el
+`ux/FUNCIONAL.md` §8.1, marcada como DECIDIDO: **un solo "Sí" en el
 cuestionario lleva a `cKO`**, que es terminal, sin firma y sin compra online. Y el
 cuestionario es **por asegurado**.
 

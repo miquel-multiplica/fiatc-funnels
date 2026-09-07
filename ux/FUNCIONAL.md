@@ -5,7 +5,7 @@ para quien tenga que integrarlo: qué pantallas hay, en qué orden, qué es cond
 qué está simulado y qué decisiones de negocio quedan abiertas.
 
 Para la **lógica condicional** en formato de escenarios verificables, ver
-`conceptualizacion/SPECS.md` — es el documento que se lleva a la revisión con IT.
+`ux/SPECS.md` — es el documento que se lleva a la revisión con IT.
 Para el prototipo anterior, ver `propuesta/PROTOTIPO-PROPUESTA.md`.
 Para el porqué de cada mejora, ver `contexto/03-backlog-quickwins.md`.
 
@@ -213,9 +213,9 @@ Cuando todos los cuestionarios están completos aparece el botón de salida
 
 ---
 
-## 5. Lógica condicional → `conceptualizacion/SPECS.md`
+## 5. Lógica condicional → `ux/SPECS.md`
 
-**La lógica condicional vive en `conceptualizacion/SPECS.md`**, en formato de asunciones y
+**La lógica condicional vive en `ux/SPECS.md`**, en formato de asunciones y
 escenarios Given/When/Then, para que IT la confirme o la corrija punto por punto. Ocho
 bloques, 39 asunciones y 22 escenarios.
 
@@ -299,7 +299,7 @@ Además, `cFirma` simula el proceso de firma con un spinner y avanza solo a los 
 cCuestionario  ──(algún "Sí")──►  cOtra  ──►  cKO
 ```
 
-El comportamiento acordado está especificado en **`conceptualizacion/SPECS.md` F-05**, con
+El comportamiento acordado está especificado en **`ux/SPECS.md` F-05**, con
 sus escenarios. En resumen: pasa por `cOtra` antes del KO, se salta `cTelefono` y `cFirma`
 —no se firma nada pendiente de revisión médica— y `cKO` es terminal.
 

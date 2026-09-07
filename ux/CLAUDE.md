@@ -4,14 +4,14 @@ Convenciones **del entregable**. Las de repositorio y proceso están en el `CLAU
 raíz, que se aplica igualmente.
 
 ## Archivo de trabajo actual
-`conceptualizacion/funnel-salud-quickwins.html` — **este es el archivo activo**. Un solo
+`ux/prototipo/funnel-salud-quickwins.html` — **este es el archivo activo**. Un solo
 HTML autocontenido (CSS + HTML + JS inline), zero-build, se abre con `file://` y se publica
 en GitHub Pages. Responsive: se valida desktop directo y mobile con el device mode de Chrome.
 Reparto real, contando **usuarios de los pasos del tarificador**: **56% móvil / 43%
 escritorio** (GA4, 30 días). El escritorio **no es un caso secundario**, y además su conversión
 cambia de signo según el tramo. Ver `analitica/05-ga4-y-clarity.md` §2.
 
-Evoluciona el prototipo original `propuesta/wireframe_propuesta.html` (documentado en
+Evoluciona el prototipo original `propuesta/prototipo/wireframe_propuesta.html` (documentado en
 `propuesta/PROTOTIPO-PROPUESTA.md`), reutilizando piezas de UX/copy **sin** la carcasa de
 iPhone ni el chatbot.
 
@@ -21,10 +21,10 @@ fase de UI y vivirá en `ui/`.
 También está aquí `userflow-figma-prompt.md`, el prompt para llevar el flujo a Figma.
 
 ## Documentación funcional — dos archivos con reparto claro
-- **`conceptualizacion/FUNCIONAL.md`** — el mapa: pantallas, los dos flujos, resumen
+- **`ux/FUNCIONAL.md`** — el mapa: pantallas, los dos flujos, resumen
   persistente, modales, loadings, qué está simulado, convenciones y **el porqué de cada
   decisión de diseño**. Es el documento explicativo.
-- **`conceptualizacion/SPECS.md`** — **la lógica condicional**, en asunciones (`A-`) y
+- **`ux/SPECS.md`** — **la lógica condicional**, en asunciones (`A-`) y
   escenarios Given/When/Then (`ESC-`). Es lo que se lleva a la revisión con IT.
 
 **El reparto no se rompe**: si cambia una condición se toca `SPECS.md`; si cambia una

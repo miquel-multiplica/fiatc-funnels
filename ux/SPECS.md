@@ -14,7 +14,7 @@ confirme o las corrija punto por punto**. Formato OpenSpec adaptado:
 
 **Este documento es el único propietario de la lógica condicional.** El mapa de pantallas, el
 porqué de cada decisión de diseño y las convenciones están en
-`conceptualizacion/FUNCIONAL.md`, que apunta aquí y no la duplica.
+`ux/FUNCIONAL.md`, que apunta aquí y no la duplica.
 
 Cada bloque lleva su **estado**: `decidido` (acordado con negocio), `pendiente` (falta que
 alguien se pronuncie) o `simulado` (el prototipo lo finge para la demo).
@@ -310,4 +310,4 @@ El comportamiento está acordado; el prototipo lo simplifica a propósito.
   nuestras y no las asumimos más allá de lo listado arriba.
 - **Lo que está simulado** (firma, TPV, precios, datos demo) → `FUNCIONAL.md` §9.
 - **Convenciones de código y reglas visuales** → `FUNCIONAL.md` §10 y
-  `conceptualizacion/CLAUDE.md`.
+  `ux/CLAUDE.md`.

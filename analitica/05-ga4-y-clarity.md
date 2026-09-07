@@ -245,7 +245,7 @@ del web. Va primero; la comparación de ventanas viene después.
 
 **El funnel es más móvil que el site: 75,6% frente a 64,4%.** El escritorio baja al **24,4%**,
 no el 36% del site. Refuerza el mobile-first, y corrige la nota que había puesto en
-`conceptualizacion/CLAUDE.md`.
+`ux/CLAUDE.md`.
 
 **Sí hay una señal de fricción medible, y es fuerte: el clic atrás rápido está en el 22,82%,
 más de cuatro veces el del site.** Casi una de cada cuatro sesiones del tarificador acaba
