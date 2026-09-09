@@ -680,10 +680,6 @@
   .ques-tag.pending { background: #FEF3C7; color: #92400E; }
   .ques-tag.done { background: #E8F5E9; color: #2E7D32; }
   .ques-progress { font-size: 12px; font-weight: 600; color: var(--wf-60); }
-  /* Respondido: el progreso se oscurece y hace de señal, en lugar de un tag "Completado"
-     verde. Ese verde daba sensación de "todo en orden" cuando aún no está decidido: si se
-     marcó algún "Sí", lo que viene es una llamada de revisión médica. El 8 / 8 dice lo que
-     de verdad sabemos —que están las 8 respuestas— y no promete un resultado. */
   .ques-progress.done { color: var(--wf-100); font-weight: 700; }
   .ques-cta { flex-shrink: 0; background: var(--wf-100); color: var(--wf-0); border: none; border-radius: 8px; padding: 10px 16px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
   .ques-cta.edit { background: none; color: var(--wf-90); display: inline-flex; align-items: center; gap: 6px; padding: 10px 4px; }
@@ -1535,12 +1531,24 @@
   .dev-index-group { font-size: 13px; font-weight: 700; margin: 22px 0 6px; }
   .dev-index ol { margin: 0; padding-left: 24px; }
   .dev-index li { margin: 2px 0; font-size: 14px; }
-  /* Sub-numeración 8.1/8.2 (Email V1/V2): mismo marker box que el resto, solo cambia el texto,
-     así queda alineada a la izquierda igual que los números automáticos del <ol>. */
-  .dev-index li.li-8-1::marker { content: "8.1  "; }
-  .dev-index li.li-8-2::marker { content: "8.2  "; }
+  /* Números manuales (permite 8.1/8.2 para Email V1/V2): el marker automático del <ol> alinea
+     a la derecha, así que "8.1" (más ancho que "6.") quedaría desplazado. Con ancho fijo en
+     .n todos los dígitos arrancan en la misma posición, sea "1." o "8.1". */
+  .dev-index ol.dev-index-num { list-style: none; padding-left: 0; }
+  .dev-index-num .n { display: inline-block; width: 30px; }
   .dev-index a { color: #0645ad; text-decoration: underline; cursor: pointer; }
   .dev-index a:hover { color: #0b0080; }
+  /* Estado de cada pantalla frente al cliente (gestión interna, no del design system):
+     verde validado · naranja in progress · marrón feedback interno · morado feedback
+     cliente · gris no empezado · rojo bloqueado · azul explorando. */
+  .dev-index .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .dev-index .dot-green { background: #12B835; }
+  .dev-index .dot-orange { background: #FFAA04; }
+  .dev-index .dot-brown { background: #995A40; }
+  .dev-index .dot-purple { background: #7B61FF; }
+  .dev-index .dot-gray { background: #CCCCCC; }
+  .dev-index .dot-red { background: #DD3247; }
+  .dev-index .dot-blue { background: #2999FF; }
 </style>
 </head>
 <body>
@@ -2060,8 +2068,8 @@
         <div class="filter-tabs">
           <button class="filter-tab active" onclick="selectFilter('para-ti',this)" data-title="Las opciones que mejor se ajustan a ti" data-sub="Ideales para parejas jóvenes en Barcelona">Para ti</button>
           <button class="filter-tab" onclick="selectFilter('copago',this)" data-title="El equilibrio entre precio y cobertura" data-sub="Si prefieres cuota mensual baja y pagar algo en cada visita">Con copago</button>
-          <button class="filter-tab" onclick="selectFilter('sin-copago',this)" data-title="Cada visita incluida, sin sorpresas" data-sub="Para quien usa mucho el seguro y prefiere precio fijo">Sin copago</button>
-          <button class="filter-tab" onclick="selectFilter('reembolso',this)" data-title="Libertad total para elegir dónde te atienden" data-sub="Para quien quiere seguir con su médico de confianza">Reembolso</button>
+          <button class="filter-tab" onclick="selectFilter('sin-copago',this)" data-title="Sin pagos adicionales, tranquilidad total" data-sub="Para quien usa mucho el seguro y prefiere precio fijo">Sin copago</button>
+          <button class="filter-tab" onclick="selectFilter('reembolso',this)" data-title="Libertad total para elegir tu médico o tu centro médico" data-sub="Para quien quiere seguir con su médico de confianza">Reembolso</button>
         </div>
 
         <div class="results-summary">
@@ -2606,9 +2614,9 @@
               </div>
               <div>
                 Agenda una llamada
-                <div class="hablemos-hours">Un asesor de carne y hueso resolverá todas tus dudas</div>
+                <div class="hablemos-hours">Un asesor de nuestro equipo resolverá todas tus dudas.</div>
                 <div class="agendar-badges">
-                  <span class="agendar-badge">Sin música de espera</span>
+                  <span class="agendar-badge">Sin esperas</span>
                   <span class="agendar-badge">Eliges el horario</span>
                 </div>
               </div>
@@ -2946,9 +2954,9 @@
             </div>
             <div>
               Agenda una llamada
-              <div class="hablemos-hours">Un asesor de carne y hueso resolverá todas tus dudas</div>
+              <div class="hablemos-hours">Un asesor de nuestro equipo resolverá todas tus dudas.</div>
               <div class="agendar-badges">
-                <span class="agendar-badge">Sin música de espera</span>
+                <span class="agendar-badge">Sin esperas</span>
                 <span class="agendar-badge">Eliges el horario</span>
               </div>
             </div>
@@ -3086,9 +3094,9 @@
             </div>
             <div>
               Agenda una llamada
-              <div class="hablemos-hours">Un asesor de carne y hueso resolverá todas tus dudas</div>
+              <div class="hablemos-hours">Un asesor de nuestro equipo resolverá todas tus dudas.</div>
               <div class="agendar-badges">
-                <span class="agendar-badge">Sin música de espera</span>
+                <span class="agendar-badge">Sin esperas</span>
                 <span class="agendar-badge">Eliges el horario</span>
               </div>
             </div>
@@ -3242,9 +3250,9 @@
               </div>
               <div>
                 Agenda una llamada
-                <div class="hablemos-hours">Un asesor de carne y hueso resolverá todas tus dudas</div>
+                <div class="hablemos-hours">Un asesor de nuestro equipo resolverá todas tus dudas.</div>
                 <div class="agendar-badges">
-                  <span class="agendar-badge">Sin música de espera</span>
+                  <span class="agendar-badge">Sin esperas</span>
                   <span class="agendar-badge">Eliges el horario</span>
                 </div>
               </div>
@@ -4280,10 +4288,9 @@
     function markQuestDone(idx) {
       questDone[idx] = true;
       const card = document.querySelector('.ques-card[data-q-idx="' + idx + '"]');
-      // Se retira el tag verde de "Completado": prometía un resultado que aún no está
-      // decidido (un "Sí" lleva a revisión médica). El peso lo asume el 8 / 8 en oscuro.
       const tag = card.querySelector('.ques-tag');
-      tag.remove();
+      tag.className = 'ques-tag done';
+      tag.textContent = 'Completado';
       card.querySelector('.ques-progress').classList.add('done');
       card.querySelector('.ques-progress').textContent = '8 / 8';
       const cta = card.querySelector('.ques-cta');
@@ -4963,42 +4970,46 @@
       <p class="dev-index-sub">Recarga la página para volver a este índice.</p>
 
       <div class="dev-index-group">Tarificación</div>
-      <ol>
-        <li><a onclick="devJump('step0')">Portada</a></li>
-        <li><a onclick="devJump('stepCP')">Código postal</a></li>
-        <li><a onclick="devJump('step1')">¿Para quién?</a></li>
-        <li><a onclick="devJump('step2')">Edades</a></li>
-        <li><a onclick="devJump('step4')">Fecha de inicio</a></li>
-        <li><a onclick="devJump('step5')">¿Ya cliente?</a></li>
-        <li><a onclick="devJump('stepDNI')">DNI (cliente)</a></li>
-        <li value="8" class="li-8-1"><a onclick="devJump('step6')">Email V1</a></li>
-        <li value="8" class="li-8-2"><a onclick="devJump('step6v2')">Email V2</a></li>
-        <li><a onclick="devJump('step6b')">Teléfono</a></li>
+      <ol class="dev-index-num">
+        <li><span class="n">1.</span><span class="dot dot-green"></span><a onclick="devJump('step0')">Portada</a></li>
+        <li><span class="n">2.</span><span class="dot dot-green"></span><a onclick="devJump('stepCP')">Código postal</a></li>
+        <li><span class="n">3.</span><span class="dot dot-green"></span><a onclick="devJump('step1')">¿Para quién?</a></li>
+        <li><span class="n">4.</span><span class="dot dot-purple"></span><a onclick="devJump('step2')">Edades</a></li>
+        <li><span class="n">5.</span><span class="dot dot-green"></span><a onclick="devJump('step4')">Fecha de inicio</a></li>
+        <li><span class="n">6.</span><span class="dot dot-green"></span><a onclick="devJump('step5')">¿Ya cliente?</a></li>
+        <li><span class="n">7.</span><span class="dot dot-green"></span><a onclick="devJump('stepDNI')">DNI (cliente)</a></li>
+        <!-- 8.1 Email V1 oculto del índice a petición de FIATC (backlog, no descartado):
+             el diseño anterior queda en pausa por si se retoma más adelante. El bloque
+             #step6 sigue intacto en el HTML; para reactivarlo, descomenta esta línea:
+        <li><span class="n">8.1</span><span class="dot dot-brown"></span><a onclick="devJump('step6')">Email V1</a></li>
+        -->
+        <li><span class="n">8.2</span><span class="dot dot-purple"></span><a onclick="devJump('step6v2')">Email V2</a></li>
+        <li><span class="n">9.</span><span class="dot dot-purple"></span><a onclick="devJump('step6b')">Teléfono</a></li>
       </ol>
 
       <div class="dev-index-group">Resultados</div>
       <ol start="10">
-        <li><a onclick="devJump('step7')">Resultados</a></li>
+        <li><span class="dot dot-purple"></span><a onclick="devJump('step7')">Resultados</a></li>
       </ol>
 
       <div class="dev-index-group">Contratación</div>
       <ol start="11">
-        <li><a onclick="devJump('cDatos')">Datos del tomador</a></li>
-        <li><a onclick="devJump('cContacto')">Contacto</a></li>
-        <li><a onclick="devJump('cDireccion')">Dirección</a></li>
-        <li><a onclick="devJump('cAseg1')">Asegurado 1</a></li>
-        <li><a onclick="devJump('cAseg2')">Asegurado 2</a></li>
-        <li><a onclick="devJump('cCuestionario')">Cuestionario de salud</a></li>
-        <li><a onclick="devJump('cKO')">KO · derivación a Teladoc</a></li>
-        <li><a onclick="devJump('cTelefono')">Confirmar teléfono</a></li>
-        <li><a onclick="devJump('cFirma')">Firma</a></li>
-        <li><a onclick="devJump('cOtra')">¿Otra compañía?</a></li>
-        <li><a onclick="devJump('cDerogacion')">Derogación de carencias</a></li>
-        <li><a onclick="devJump('cPago')">Forma de pago</a></li>
-        <li><a onclick="devJump('cAntes')">Antes de continuar (legal + cargo)</a></li>
-        <li><a onclick="devJump('cTPV')">Pago (TPV Sabadell)</a></li>
-        <li><a onclick="devJump('cConfirm')">Confirmación · viene de otra compañía (con envío de documentos)</a></li>
-        <li><a onclick="devJump('cConfirm', {other:false})">Confirmación · primer seguro (sin envío de documentos)</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cDatos')">Datos del tomador</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cContacto')">Contacto</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cDireccion')">Dirección</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cAseg1')">Asegurado 1</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cAseg2')">Asegurado 2</a></li>
+        <li><span class="dot dot-purple"></span><a onclick="devJump('cCuestionario')">Cuestionario de salud</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cKO')">KO · derivación a Teladoc</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cTelefono')">Confirmar teléfono</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cFirma')">Firma</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cOtra')">¿Otra compañía?</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cDerogacion')">Derogación de carencias</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cPago')">Forma de pago</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cAntes')">Antes de continuar (legal + cargo)</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cTPV')">Pago (TPV Sabadell)</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cConfirm')">Confirmación · viene de otra compañía (con envío de documentos)</a></li>
+        <li><span class="dot dot-green"></span><a onclick="devJump('cConfirm', {other:false})">Confirmación · primer seguro (sin envío de documentos)</a></li>
       </ol>
     </div>
   </div>
