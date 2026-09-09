@@ -434,6 +434,11 @@
   .pub-leermas { font-size: 12px; color: var(--wf-60); cursor: pointer; white-space: nowrap; flex-shrink: 0; }
   .pub-row-title { display: block; font-size: 14px; font-weight: 700; color: var(--wf-100); }
   .pub-row-sub { display: block; font-size: 12px; color: var(--wf-60); margin-top: 2px; }
+  /* Email V2: toggle subido a la cabecera, junto al título. min-width:0 en el título permite que
+     el texto salte a dos líneas en vez de forzar el toggle a bajar o solaparse con él. */
+  #step6v2 .pub-head-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
+  #step6v2 .pub-head-top .pub-q { margin: 0; flex: 1 1 auto; min-width: 0; }
+  #step6v2 .pub-head-top .toggle-switch { flex-shrink: 0; margin-top: 2px; }
 
   .step-hero-msg {
     display: flex; align-items: flex-start; gap: 12px;
@@ -1530,6 +1535,10 @@
   .dev-index-group { font-size: 13px; font-weight: 700; margin: 22px 0 6px; }
   .dev-index ol { margin: 0; padding-left: 24px; }
   .dev-index li { margin: 2px 0; font-size: 14px; }
+  /* Sub-numeración 8.1/8.2 (Email V1/V2): mismo marker box que el resto, solo cambia el texto,
+     así queda alineada a la izquierda igual que los números automáticos del <ol>. */
+  .dev-index li.li-8-1::marker { content: "8.1  "; }
+  .dev-index li.li-8-2::marker { content: "8.2  "; }
   .dev-index a { color: #0645ad; text-decoration: underline; cursor: pointer; }
   .dev-index a:hover { color: #0b0080; }
 </style>
@@ -1924,7 +1933,7 @@
         </div>
         <div class="pub-list">
           <div class="pub-head">
-            <p class="pub-q">¿Te informamos sobre productos y ofertas relacionadas?</p>
+            <p class="pub-q">¿Te informamos sobre otros productos y ofertas relacionadas?</p>
             <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
             <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
             <div class="pub-head-foot">
@@ -1946,10 +1955,48 @@
         <button class="btn-primary" onclick="nextStep()">Continuar</button>
       </div>
 
+      <!-- PASO 8.2 · Email V2 — duplicado de step6 para comparar variantes de copy (solo accesible
+           desde el índice del prototipo, fuera de PLANNED_FLOW a propósito). -->
+      <div class="step" id="step6v2">
+        <p class="step-eyebrow" style="text-align:center;">¡Ya casi está!</p>
+        <h1 class="step-title" style="text-align:center;">Además de mostrarte el precio, te lo enviaremos por email</h1>
+        <p class="step-subtitle" style="text-align:center; margin-top:-12px;">Así lo tendrás siempre a mano :)</p>
+        <div class="contact-fields" style="margin-top:24px;">
+          <div class="email-input-wrap">
+            <div class="input-wrap">
+              <input type="text" autocomplete="email" id="contactEmail2" placeholder=" " onclick="showEmailSuggest(this,'2')" onblur="hideEmailSuggest('2')" oninput="this.closest('.input-wrap').classList.toggle('filled',this.value.length>0)">
+              <label for="contactEmail2">Email</label>
+            </div>
+            <div class="email-suggest" id="emailSuggest2">
+              <div class="email-suggest-item" onmousedown="event.preventDefault();selectEmail('maria@gmail.com','2')">maria@gmail.com</div>
+              <div class="email-suggest-item" onmousedown="event.preventDefault();selectEmail('maria@hotmail.com','2')">maria@hotmail.com</div>
+              <div class="email-suggest-item" onmousedown="event.preventDefault();selectEmail('maria@icloud.com','2')">maria@icloud.com</div>
+              <div class="email-suggest-item" onmousedown="event.preventDefault();selectEmail('maria@yahoo.es','2')">maria@yahoo.es</div>
+              <div class="email-suggest-item" onmousedown="event.preventDefault();selectEmail('maria@outlook.es','2')">maria@outlook.es</div>
+            </div>
+          </div>
+        </div>
+        <div class="pub-list">
+          <div class="pub-head">
+            <div class="pub-head-top">
+              <p class="pub-q">¿Te informamos sobre otros productos y ofertas relacionadas?</p>
+              <label class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></label>
+            </div>
+            <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
+            <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
+            <div class="pub-head-foot">
+              <span class="pub-cancel-badge">Cancela cuando quieras</span>
+              <a class="pub-leermas" onclick="toggleLegal(this)">Leer más</a>
+            </div>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="showStep('step6b')">Continuar</button>
+      </div>
+
       <!-- PASO 6b · Teléfono (incluye módulo WhatsApp) -->
       <div class="step" id="step6b">
         <h1 class="step-title" style="text-align:center;">Y si necesitamos llamarte...</h1>
-        <p class="step-subtitle" style="text-align:center; margin-top:-12px;">Solo para gestionar tu solicitud, nada más :)</p>
+        <p class="step-subtitle" style="text-align:center; margin-top:-12px;">Solo para gestionar tu consulta, nada más :)</p>
         <div class="input-wrap tel-wrap" style="margin-top:24px; margin-bottom:0;">
           <button type="button" class="tel-prefix" onmousedown="event.preventDefault();" onclick="toggleCcList(event)">
             <span id="ccCode">+34</span>
@@ -1977,8 +2024,8 @@
              negación contradiría a quien acabe de activar WhatsApp para ofertas. -->
         <div class="pub-list">
           <div class="pub-head">
-            <p class="pub-q">¿Prefieres por WhatsApp?</p>
-            <p class="legal-mini" style="margin:0;">Para lo mismo: solo resolver dudas sobre tu presupuesto :)</p>
+            <p class="pub-q">¿Podemos contactarte también por WhatsApp?</p>
+            <p class="legal-mini" style="margin:0;">En caso de no localizarte por teléfono.</p>
             <div class="pub-head-foot">
               <span class="pub-cancel-badge">Contestas cuando puedas</span>
             </div>
@@ -1988,7 +2035,7 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </span>
             <span class="pub-row-body">
-              <span class="pub-row-text"><span class="pub-row-title">Sí, prefiero WhatsApp</span></span>
+              <span class="pub-row-text"><span class="pub-row-title">Sí, también por WhatsApp</span></span>
             </span>
             <span class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></span>
           </label>
@@ -3783,10 +3830,10 @@
       const dob = i => (i <= calcBaseCount ? CALC_DOBS[(i - 1) % CALC_DOBS.length] : null);
       let html = '';
       if (withMe) {
-        html = calcBlockHTML('c1', 'Tu edad', false, dob(1));
-        for (let i = 2; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Edad asegurado ' + i, true, dob(i));
+        html = calcBlockHTML('c1', 'Asegurado 1 (tú)', false, dob(1));
+        for (let i = 2; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Asegurado ' + i, true, dob(i));
       } else {
-        for (let i = 1; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Edad asegurado ' + i, i > 1, dob(i));
+        for (let i = 1; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Asegurado ' + i, i > 1, dob(i));
       }
       list.innerHTML = html;
     }
@@ -3794,7 +3841,7 @@
     function calcRelabel() {
       document.querySelectorAll('#calcInsuredList .insured-block').forEach((b, idx) => {
         const strong = b.querySelector('.insured-header strong');
-        if (strong) strong.textContent = (withMe && idx === 0) ? 'Tu edad' : 'Edad asegurado ' + (idx + 1);
+        if (strong) strong.textContent = (withMe && idx === 0) ? 'Asegurado 1 (tú)' : 'Asegurado ' + (idx + 1);
       });
     }
     function openCalc() {
@@ -3819,7 +3866,7 @@
     function calcAdd() {
       calcCount++;
       const id = 'c' + (++calcSeq); // id monotónico → nunca choca aunque se hayan quitado bloques
-      document.getElementById('calcInsuredList').insertAdjacentHTML('beforeend', calcBlockHTML(id, 'Edad asegurado ' + calcCount, true, null));
+      document.getElementById('calcInsuredList').insertAdjacentHTML('beforeend', calcBlockHTML(id, 'Asegurado ' + calcCount, true, null));
     }
     function calcRemove(el) {
       const blocks = document.querySelectorAll('#calcInsuredList .insured-block');
@@ -4649,14 +4696,14 @@
       const title = document.getElementById('step2Title');
       let html = '';
       if (withMe && insuredCount === 1) {
-        html = insuredBlockHTML(1, 'Tu edad', false);
+        html = insuredBlockHTML(1, 'Asegurado 1 (tú)', false);
         title.textContent = 'Añade tu fecha de nacimiento';
       } else if (withMe) {
-        html = insuredBlockHTML(1, 'Tu edad', false);
-        for (let i = 2; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Edad asegurado ' + i, true);
+        html = insuredBlockHTML(1, 'Asegurado 1 (tú)', false);
+        for (let i = 2; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Asegurado ' + i, true);
         title.textContent = 'Añade las fechas de nacimiento';
       } else {
-        for (let i = 1; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Edad asegurado ' + i, i > 1);
+        for (let i = 1; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Asegurado ' + i, i > 1);
         title.textContent = 'Añade las fechas de nacimiento';
       }
       list.innerHTML = html;
@@ -4687,24 +4734,27 @@
     }
 
     /* ── Email (step6): sugerencias de dominio (QW#2) ── */
-    function showEmailSuggest(input) {
+    function showEmailSuggest(input, sfx) {
+      sfx = sfx || '';
       if (input.value === '') {
         input.value = 'maria@';
         input.closest('.input-wrap').classList.add('filled');
       }
-      document.getElementById('emailSuggest').classList.add('visible');
+      document.getElementById('emailSuggest' + sfx).classList.add('visible');
     }
-    function hideEmailSuggest() {
+    function hideEmailSuggest(sfx) {
+      sfx = sfx || '';
       setTimeout(function () {
-        const el = document.getElementById('emailSuggest');
+        const el = document.getElementById('emailSuggest' + sfx);
         if (el) el.classList.remove('visible');
       }, 150);
     }
-    function selectEmail(email) {
-      const input = document.getElementById('contactEmail');
+    function selectEmail(email, sfx) {
+      sfx = sfx || '';
+      const input = document.getElementById('contactEmail' + sfx);
       input.value = email;
       input.closest('.input-wrap').classList.add('filled');
-      document.getElementById('emailSuggest').classList.remove('visible');
+      document.getElementById('emailSuggest' + sfx).classList.remove('visible');
     }
     function toggleLegal(a) {
       const scope = a.closest('.pub-head') || a.closest('.legal-block');
@@ -4921,7 +4971,8 @@
         <li><a onclick="devJump('step4')">Fecha de inicio</a></li>
         <li><a onclick="devJump('step5')">¿Ya cliente?</a></li>
         <li><a onclick="devJump('stepDNI')">DNI (cliente)</a></li>
-        <li><a onclick="devJump('step6')">Email</a></li>
+        <li value="8" class="li-8-1"><a onclick="devJump('step6')">Email V1</a></li>
+        <li value="8" class="li-8-2"><a onclick="devJump('step6v2')">Email V2</a></li>
         <li><a onclick="devJump('step6b')">Teléfono</a></li>
       </ol>
 
