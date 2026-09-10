@@ -147,7 +147,7 @@ porqué está en `FUNCIONAL.md` §2.
 
 ---
 
-## F-05 · Cuestionario de salud y camino KO · `decidido, no implementado`
+## F-05 · Cuestionario de salud y camino KO · `decidido, falta un paso`
 
 El comportamiento está acordado; el prototipo lo simplifica a propósito.
 
@@ -204,9 +204,10 @@ El comportamiento está acordado; el prototipo lo simplifica a propósito.
 > algún "Sí", lo que viene es una llamada de revisión médica, no un "todo en orden". Ver
 > `FUNCIONAL.md` §4.
 >
-> **Lo que el prototipo NO implementa**: hoy salta directo de `cCuestionario` a `cKO`, y `cKO`
-> queda fuera del flujo. Es una simplificación deliberada — todas las pantallas son
-> alcanzables desde el índice— y la bifurcación real la integra IT.
+> **Qué falta en el prototipo, exactamente**: la bifurcación **sí está** —comprueba si hay
+> algún "Sí" y va al KO o sigue por la firma—. **Lo único que no hace es intercalar `cOtra`
+> antes del KO** (A-05.4). Y `cKO` queda fuera del flujo, así que el botón atrás vuelve a
+> resultados.
 >
 > **Dato de contexto**: la derivación a Teladoc afecta al **2,5%** de quien inicia
 > contratación (`analitica/05-ga4-y-clarity.md` §2), así que es un camino minoritario.

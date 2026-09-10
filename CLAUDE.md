@@ -10,7 +10,8 @@ Reglas **de repositorio y proceso**. Las convenciones de cada entregable viven e
 ```
 prototipos/          TODOS los HTML publicables · ES LO ÚNICO QUE SE PUBLICA
 ux/                  fase de UX: FUNCIONAL.md (el mapa), SPECS.md (la lógica
-                     condicional) y el prompt del userflow para Figma
+                     condicional), PENDIENTES.md (lo que falta) y el prompt
+                     del userflow para Figma
 ui/                  fase de UI: documentación del diseño visual sobre el
                      design system de FIATC
 propuesta/           fase anterior, cerrada: su documentación

@@ -303,11 +303,13 @@ El comportamiento acordado está especificado en **`ux/SPECS.md` F-05**, con
 sus escenarios. En resumen: pasa por `cOtra` antes del KO, se salta `cTelefono` y `cFirma`
 —no se firma nada pendiente de revisión médica— y `cKO` es terminal.
 
-> **El prototipo no implementa esta bifurcación.** Hoy `proceedFromQuest()` salta directo
-> de `cCuestionario` a `cKO`, y `cKO` queda fuera de `CONTRAT_FLOW` (con `contratIdx` en
-> `-1`, así que el botón atrás vuelve a resultados). Es una simplificación deliberada: el
-> entregable es la propuesta de diseño y las pantallas son todas alcanzables desde el
-> índice del prototipo. La lógica de flujo la integra IT.
+> **El prototipo sí bifurca; lo que le falta es un paso.** `proceedFromQuest()` comprueba si
+> hay algún "Sí" y, si lo hay, va a `cKO`; si no, sigue el flujo normal por la firma. **Lo
+> único que no hace es pasar por `cOtra` antes del KO.** Y `cKO` queda fuera de
+> `CONTRAT_FLOW` (con `contratIdx` en `-1`, así que el botón atrás vuelve a resultados).
+>
+> Para el test de usabilidad esto ya es suficiente: quien responda todo "No" recorre el flujo
+> normal y quien marque un "Sí" acaba en el KO.
 
 ### 8.2 · Pendientes reales
 

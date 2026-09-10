@@ -20,12 +20,14 @@ fase de UI y vivirá en `ui/`.
 
 También está aquí `userflow-figma-prompt.md`, el prompt para llevar el flujo a Figma.
 
-## Documentación funcional — dos archivos con reparto claro
+## Documentación funcional — tres archivos con reparto claro
 - **`ux/FUNCIONAL.md`** — el mapa: pantallas, los dos flujos, resumen
   persistente, modales, loadings, qué está simulado, convenciones y **el porqué de cada
   decisión de diseño**. Es el documento explicativo.
 - **`ux/SPECS.md`** — **la lógica condicional**, en asunciones (`A-`) y
   escenarios Given/When/Then (`ESC-`). Es lo que se lleva a la revisión con IT.
+- **`ux/PENDIENTES.md`** — **lo que falta para la versión final**, y de quién depende cada
+  cosa. Incluye un apartado de lo ya revisado que NO es pendiente, para no reabrirlo.
 
 **El reparto no se rompe**: si cambia una condición se toca `SPECS.md`; si cambia una
 pantalla o un porqué, `FUNCIONAL.md`. Nunca las dos, o acabaremos con dos versiones y una
