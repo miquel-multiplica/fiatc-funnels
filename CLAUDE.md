@@ -52,6 +52,10 @@ Este repo es **público** y el cliente puede verlo. Están en `.gitignore`:
   área privada). No es nuestro código. Lo que llegue del cliente va aquí, no a la raíz.
 - **`prueba-*`** — patrón, no nombre exacto, para que renombrar una prueba no la saque del
   `.gitignore` por descuido. Hoy: `prueba-funnel-salud-estilos-app.html`.
+- **`*.pdf`** — los informes que producimos nosotros para el cliente llevan cifras de negocio
+  y no deben ser públicos. Patrón amplio a propósito: **no hay ningún PDF que queramos
+  publicar** —lo publicable son los dos HTML de `prototipos/`—, así que sale más seguro
+  caparlos todos que acordarse de añadir cada uno. Si alguno debe versionarse: `git add -f`.
 
 Ojo: nada de esto viaja en un `git clone`. Conviene copia fuera de git.
 

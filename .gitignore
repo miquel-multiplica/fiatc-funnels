@@ -11,3 +11,10 @@ material-cliente/
 # patrón las cape solas y renombrarlas no las saque del .gitignore por descuido.
 # Ahora mismo: prueba-funnel-salud-estilos-app.html (el tema con el DS del cliente).
 prueba-*
+
+# Informes en PDF, nuestros: entregables para el cliente con cifras de negocio.
+# No van al repo porque es PÚBLICO. Patrón amplio a propósito: aquí no hay ningún
+# PDF que queramos publicar —lo publicable son los dos HTML de prototipos/—, así que
+# es más seguro caparlos todos que acordarse de añadir cada uno.
+# Si algún día hay uno que sí deba versionarse: git add -f.
+*.pdf
