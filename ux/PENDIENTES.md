@@ -34,6 +34,14 @@ precio anterior tachado y el nuevo destacado.
 
 Viene del QW#4 de `contexto/03-backlog-quickwins.md`, que quedó como parcial por esto.
 
+### 1.3 · Ajustes de Celia, hechos en local y sin subir
+Hay un conjunto de ajustes ya trabajados en local que **no se han subido todavía**: están a la
+espera de que el cliente confirme unas dudas. En cuanto responda se integran y se publican.
+
+No es trabajo pendiente de diseñar, es trabajo pendiente de **confirmar y subir**. Conviene
+enumerarlos aquí cuando se sepa qué queda dentro y qué fuera, para que no se pierda ninguno en
+el camino.
+
 ---
 
 ## 2. Esperando a terceros · sin trabajo de diseño por nuestra parte
