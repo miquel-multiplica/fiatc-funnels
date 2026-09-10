@@ -191,6 +191,15 @@ El comportamiento está acordado; el prototipo lo simplifica a propósito.
 - Then: cada tarjeta muestra `8 / 8` en oscuro con opción de editar, **sin tag de
   "Completado"**, y aparece el botón para continuar
 
+> **Por qué se pregunta `cOtra` pero NO se muestra `cDerogacion`**: se captura el dato, no el
+> papeleo. La pregunta es una respuesta de dos segundos y **le sirve al agente** que llamará en
+> 1-2 días. Subir la documentación de la póliza anterior es trabajo real, y en el camino KO la
+> solicitud **puede acabar rechazada**: pedirla ahí sería hacerle buscar papeles para algo que
+> quizá no exista, contradiría la propia pantalla de KO —que dice "antes de continuar"— y
+> supondría recoger datos sensibles para un trámite que aún no es necesario. Si la solicitud
+> sigue adelante, el agente los pide en la llamada. La pantalla de KO ya avisa de que puede
+> haber que "aportar informes médicos".
+
 > **Por qué no hay tag verde**: prometería un resultado que aún no está decidido. Si se marcó
 > algún "Sí", lo que viene es una llamada de revisión médica, no un "todo en orden". Ver
 > `FUNCIONAL.md` §4.
