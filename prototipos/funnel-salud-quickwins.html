@@ -262,6 +262,7 @@
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   .insured-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
   .insured-header strong { font-size: 14px; font-weight: 700; color: var(--wf-100); }
+  .insured-header strong .insured-you { font-weight: 400; }
   .btn-remove { background: none; border: none; cursor: pointer; color: var(--wf-60); padding: 4px; display: flex; align-items: center; }
   .btn-remove:hover { color: var(--wf-100); }
 
@@ -407,6 +408,9 @@
 
   /* Consentimiento por canal — caja con cabecera (Acepto…) + filas */
   .pub-list { border: 1px solid var(--wf-40); border-radius: 10px; margin: 32px 0 32px; overflow: hidden; background: var(--wf-0); }
+  /* Activado: el borde exterior sube dos tonos de gris (wf-40 → wf-90), como refuerzo visual
+     de que el canal está marcado, a juego con .pub-row-icon al marcar. */
+  .pub-list:has(.toggle-switch input:checked) { border-color: var(--wf-90); }
   .pub-head { padding: 16px 16px; position: relative; }
   .pub-head::after { content: ''; position: absolute; bottom: 0; left: 16px; right: 16px; height: 1px; background: var(--wf-20); }
   .pub-q { font-size: 16px; font-weight: 700; color: var(--wf-100); line-height: 1.4; margin: 0 0 4px; }
@@ -434,11 +438,12 @@
   .pub-leermas { font-size: 12px; color: var(--wf-60); cursor: pointer; white-space: nowrap; flex-shrink: 0; }
   .pub-row-title { display: block; font-size: 14px; font-weight: 700; color: var(--wf-100); }
   .pub-row-sub { display: block; font-size: 12px; color: var(--wf-60); margin-top: 2px; }
-  /* Email V2: toggle subido a la cabecera, junto al título. min-width:0 en el título permite que
+  /* Consentimiento de un solo canal (email V2, agendar llamada, guardar presupuesto):
+     toggle subido a la cabecera, junto al título. min-width:0 en el título permite que
      el texto salte a dos líneas en vez de forzar el toggle a bajar o solaparse con él. */
-  #step6v2 .pub-head-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
-  #step6v2 .pub-head-top .pub-q { margin: 0; flex: 1 1 auto; min-width: 0; }
-  #step6v2 .pub-head-top .toggle-switch { flex-shrink: 0; margin-top: 2px; }
+  .pub-head-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
+  .pub-head-top .pub-q { margin: 0; flex: 1 1 auto; min-width: 0; }
+  .pub-head-top .toggle-switch { flex-shrink: 0; margin-top: 2px; }
 
   .step-hero-msg {
     display: flex; align-items: flex-start; gap: 12px;
@@ -1542,6 +1547,13 @@
      verde validado · naranja in progress · marrón feedback interno · morado feedback
      cliente · gris no empezado · rojo bloqueado · azul explorando. */
   .dev-index .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .dev-index-legend { padding-bottom: 16px; margin-bottom: 4px; border-bottom: 1px solid #ddd; }
+  .dev-index-legend-title { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #333; cursor: pointer; user-select: none; list-style: none; }
+  .dev-index-legend-title::-webkit-details-marker { display: none; }
+  .dev-index-legend-chevron { display: inline-flex; color: #333; transition: transform 0.2s; }
+  .dev-index-legend[open] .dev-index-legend-chevron { transform: rotate(180deg); }
+  .dev-index-legend ul { list-style: none; margin: 8px 0 0; padding: 0; }
+  .dev-index-legend li { font-size: 13px; color: #333; margin: 4px 0; }
   .dev-index .dot-green { background: #12B835; }
   .dev-index .dot-orange { background: #FFAA04; }
   .dev-index .dot-brown { background: #995A40; }
@@ -1943,11 +1955,11 @@
           <div class="pub-head">
             <p class="pub-q">¿Te informamos sobre otros productos y ofertas relacionadas?</p>
             <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
-            <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
             <div class="pub-head-foot">
               <span class="pub-cancel-badge">Cancela cuando quieras</span>
               <a class="pub-leermas" onclick="toggleLegal(this)">Leer más</a>
             </div>
+            <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
           </div>
           <label class="pub-row">
             <span class="pub-row-icon">
@@ -1991,11 +2003,11 @@
               <label class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></label>
             </div>
             <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
-            <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
             <div class="pub-head-foot">
               <span class="pub-cancel-badge">Cancela cuando quieras</span>
               <a class="pub-leermas" onclick="toggleLegal(this)">Leer más</a>
             </div>
+            <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
           </div>
         </div>
         <button class="btn-primary" onclick="showStep('step6b')">Continuar</button>
@@ -3031,24 +3043,17 @@
 
           <div class="pub-list" style="text-align:left; margin:20px 0 8px;">
             <div class="pub-head">
-              <p class="pub-q">¡No te pierdas nada! ¿Quieres recibir novedades y ofertas?</p>
-              <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
-              <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
+              <div class="pub-head-top">
+                <p class="pub-q">¡No te pierdas nada! ¿Quieres recibir novedades y ofertas?</p>
+                <label class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></label>
+              </div>
+              <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales por email.</p>
               <div class="pub-head-foot">
                 <span class="pub-cancel-badge">Cancela cuando quieras</span>
                 <a class="pub-leermas" onclick="toggleLegal(this)">Leer más</a>
               </div>
+              <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
             </div>
-            <label class="pub-row">
-              <span class="pub-row-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
-              </span>
-              <span class="pub-row-body">
-                <span class="pub-row-text"><span class="pub-row-title">Por email</span></span>
-                <span class="pub-row-adv">Directo a tu bandeja de entrada</span>
-              </span>
-              <span class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></span>
-            </label>
           </div>
 
           <p class="consent-hint" style="display:none;">Activa el email para poder avisarte.</p>
@@ -3153,24 +3158,17 @@
 
           <div class="pub-list" style="text-align:left; margin:20px 0 8px;">
             <div class="pub-head">
-              <p class="pub-q">¡No te pierdas nada! ¿Quieres recibir novedades y ofertas?</p>
-              <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales.</p>
-              <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
+              <div class="pub-head-top">
+                <p class="pub-q">¡No te pierdas nada! ¿Quieres recibir novedades y ofertas?</p>
+                <label class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></label>
+              </div>
+              <p class="legal-mini" style="margin:0;">Acepto recibir comunicaciones comerciales por email.</p>
               <div class="pub-head-foot">
                 <span class="pub-cancel-badge">Cancela cuando quieras</span>
                 <a class="pub-leermas" onclick="toggleLegal(this)">Leer más</a>
               </div>
+              <p class="legal-more">Consiento que FIATC Mutua de Seguros me informe por email sobre productos y servicios aseguradores de mi interés, con un máximo de 2 comunicaciones al año. Puedo revocar cada consentimiento de forma independiente en cualquier momento. El consentimiento caduca a los 24 meses.</p>
             </div>
-            <label class="pub-row">
-              <span class="pub-row-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
-              </span>
-              <span class="pub-row-body">
-                <span class="pub-row-text"><span class="pub-row-title">Por email</span></span>
-                <span class="pub-row-adv">Directo a tu bandeja de entrada</span>
-              </span>
-              <span class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></span>
-            </label>
           </div>
 
           <p class="consent-hint" style="display:none;">Activa el email para poder avisarte.</p>
@@ -3666,7 +3664,7 @@
     /* ── Navegación del funnel ──
        PLANNED_FLOW define el orden completo previsto; solo se navega a los
        pasos que ya existen en el DOM (se van añadiendo pantalla a pantalla). */
-    const PLANNED_FLOW = ['step0', 'stepCP', 'step1', 'step2', 'step4', 'step5', 'stepDNI', 'step6', 'step6b'];
+    const PLANNED_FLOW = ['step0', 'stepCP', 'step1', 'step2', 'step4', 'step5', 'stepDNI', 'step6v2', 'step6b'];
     let stepIdx = 0;
     let isClient = false; // "Sí, ya soy cliente" → pasa por el paso de DNI
 
@@ -3838,7 +3836,7 @@
       const dob = i => (i <= calcBaseCount ? CALC_DOBS[(i - 1) % CALC_DOBS.length] : null);
       let html = '';
       if (withMe) {
-        html = calcBlockHTML('c1', 'Asegurado 1 (tú)', false, dob(1));
+        html = calcBlockHTML('c1', 'Asegurado 1 <span class="insured-you">· tú</span>', false, dob(1));
         for (let i = 2; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Asegurado ' + i, true, dob(i));
       } else {
         for (let i = 1; i <= calcCount; i++) html += calcBlockHTML('c' + i, 'Asegurado ' + i, i > 1, dob(i));
@@ -3849,7 +3847,7 @@
     function calcRelabel() {
       document.querySelectorAll('#calcInsuredList .insured-block').forEach((b, idx) => {
         const strong = b.querySelector('.insured-header strong');
-        if (strong) strong.textContent = (withMe && idx === 0) ? 'Asegurado 1 (tú)' : 'Asegurado ' + (idx + 1);
+        if (strong) strong.innerHTML = (withMe && idx === 0) ? 'Asegurado 1 <span class="insured-you">· tú</span>' : 'Asegurado ' + (idx + 1);
       });
     }
     function openCalc() {
@@ -4703,10 +4701,10 @@
       const title = document.getElementById('step2Title');
       let html = '';
       if (withMe && insuredCount === 1) {
-        html = insuredBlockHTML(1, 'Asegurado 1 (tú)', false);
+        html = insuredBlockHTML(1, 'Asegurado 1 <span class="insured-you">· tú</span>', false);
         title.textContent = 'Añade tu fecha de nacimiento';
       } else if (withMe) {
-        html = insuredBlockHTML(1, 'Asegurado 1 (tú)', false);
+        html = insuredBlockHTML(1, 'Asegurado 1 <span class="insured-you">· tú</span>', false);
         for (let i = 2; i <= insuredCount; i++) html += insuredBlockHTML(i, 'Asegurado ' + i, true);
         title.textContent = 'Añade las fechas de nacimiento';
       } else {
@@ -4887,7 +4885,7 @@
     }
     /* QW#5 · Guardar presupuesto desde el exit-intent */
     function exitSaveBudget() {
-      const email = ((document.getElementById('contactEmail') || {}).value) || ((document.getElementById('recoverEmail') || {}).value) || 'maria@gmail.com';
+      const email = ((document.getElementById('contactEmail2') || {}).value) || ((document.getElementById('recoverEmail') || {}).value) || 'maria@gmail.com';
       const input = document.getElementById('exitSaveEmail');
       if (input) { input.value = email; input.closest('.input-wrap').classList.add('filled'); }
       const body = document.getElementById('exitBody');
@@ -4969,6 +4967,19 @@
       <h1>Índice del prototipo — FIATC Salud</h1>
       <p class="dev-index-sub">Recarga la página para volver a este índice.</p>
 
+      <details class="dev-index-legend">
+        <summary class="dev-index-legend-title">Leyenda<span class="dev-index-legend-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <ul>
+          <li><span class="dot dot-red"></span>Bloqueado, no podemos trabajar</li>
+          <li><span class="dot dot-gray"></span>Sin empezar</li>
+          <li><span class="dot dot-blue"></span>Explorando opciones</li>
+          <li><span class="dot dot-orange"></span>En progreso</li>
+          <li><span class="dot dot-brown"></span>Feedback interno Multiplica</li>
+          <li><span class="dot dot-purple"></span>Pendiente validación FIATC</li>
+          <li><span class="dot dot-green"></span>Validado por FIATC</li>
+        </ul>
+      </details>
+
       <div class="dev-index-group">Tarificación</div>
       <ol class="dev-index-num">
         <li><span class="n">1.</span><span class="dot dot-green"></span><a onclick="devJump('step0')">Portada</a></li>
@@ -4983,7 +4994,7 @@
              #step6 sigue intacto en el HTML; para reactivarlo, descomenta esta línea:
         <li><span class="n">8.1</span><span class="dot dot-brown"></span><a onclick="devJump('step6')">Email V1</a></li>
         -->
-        <li><span class="n">8.2</span><span class="dot dot-purple"></span><a onclick="devJump('step6v2')">Email V2</a></li>
+        <li><span class="n">8.2</span><span class="dot dot-purple"></span><a onclick="devJump('step6v2')">Email</a></li>
         <li><span class="n">9.</span><span class="dot dot-purple"></span><a onclick="devJump('step6b')">Teléfono</a></li>
       </ol>
 
