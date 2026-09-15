@@ -29,7 +29,7 @@ alguien se pronuncie) o `simulado` (el prototipo lo finge para la demo).
   progreso: tarificación (`step0` → `step6b`, y de ahí a resultados) y contratación
   (`cDatos` → `cConfirm`).
 - A-01.2 El orden de tarificación es: `step0` · `stepCP` · `step1` · `step2` · `step4` ·
-  `step5` · `[stepDNI]` · `step6` · `step6b` → pantalla de espera → `step7`.
+  `step5` · `[stepDNI]` · `step6v2` · `step6b` → pantalla de espera → `step7`.
 - A-01.3 El orden de contratación es: `cDatos` · `cContacto` · `cDireccion` · `cAseg1` ·
   `cAseg2` · `cCuestionario` · `cTelefono` · `cFirma` · `cOtra` · `[cDerogacion]` · `cPago` ·
   `cAntes` · `cTPV` · `cConfirm`.
@@ -74,7 +74,7 @@ alguien se pronuncie) o `simulado` (el prototipo lo finge para la demo).
 **ESC-02.B — Cliente nuevo**
 - Given: el usuario está en `step5`
 - When: responde que no es cliente
-- Then: el siguiente paso es `step6`, sin pasar por `stepDNI`
+- Then: el siguiente paso es `step6v2`, sin pasar por `stepDNI`
 
 ---
 
@@ -85,7 +85,7 @@ porqué está en `FUNCIONAL.md` §2.
 
 ### Asunciones
 
-- A-03.1 En `step6` el prototipo pide **consentimiento comercial**: opt-in para recibir
+- A-03.1 En `step6v2` el prototipo pide **consentimiento comercial**: opt-in para recibir
   información sobre productos y ofertas, con texto legal y "Leer más".
 - A-03.2 Ese consentimiento es **de un solo canal, email**. El prototipo asume que FIATC
   renuncia a publicidad por WhatsApp y teléfono para quien pase por este funnel.
@@ -98,12 +98,12 @@ porqué está en `FUNCIONAL.md` §2.
 ### Escenarios
 
 **ESC-03.A — Avanzar sin marcar nada**
-- Given: el usuario está en `step6` o `step6b`
+- Given: el usuario está en `step6v2` o `step6b`
 - When: avanza sin marcar el permiso
 - Then: el sistema le deja continuar sin error
 
 **ESC-03.B — Los dos permisos son independientes**
-- Given: el usuario ha aceptado el consentimiento comercial en `step6`
+- Given: el usuario ha aceptado el consentimiento comercial en `step6v2`
 - When: llega a `step6b`
 - Then: la preferencia de canal aparece sin marcar, y viceversa
 

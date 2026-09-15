@@ -46,7 +46,7 @@ diseño, y las reglas de negocio las decide FIATC. Mantener ese registro.
   Útiles para tono y jerarquía de coberturas: la mitad son digitales y comparadores, y tres
   (los de más edad) piden teléfono, oficina o trato humano.
 - **"Tomador", nunca "titular"**, en todos los pasos de contratación. Indicación del cliente.
-- **Consentimiento comercial** (Ley ATC, oct 2026): hoy un único canal, email, en `step6`.
+- **Consentimiento comercial** (Ley ATC, oct 2026): hoy un único canal, email, en `step6v2`.
   Ojo: es DISTINTO de la preferencia de canal de `step6b` ("¿Prefieres por WhatsApp?", para
   hablar de tu solicitud) — están separados a propósito y no deben juntarse. Ver
   `FUNCIONAL.md` §2.
@@ -64,7 +64,7 @@ diseño, y las reglas de negocio las decide FIATC. Mantener ese registro.
   header. Clic en logo → `openExit()` (exit-intent).
 - **Back**: mobile en la cabecera (`.app-back`); desktop (≥900) botón `.gutter-back` fixed
   pegado al borde izq de pantalla.
-- **Navegación**: `PLANNED_FLOW = ['step0','stepCP','step1','step2','step4','step5','stepDNI','step6','step6b']`
+- **Navegación**: `PLANNED_FLOW = ['step0','stepCP','step1','step2','step4','step5','stepDNI','step6v2','step6b']`
   → `showStep/nextStep/prevStep`. `stepDNI` es condicional (solo si `isClient`);
   nextStep/prevStep lo saltan si no.
 - **Modales** (patrón `.side-modal`): panel lateral derecho en desktop / bottom-sheet en

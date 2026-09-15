@@ -40,6 +40,11 @@ Al recargar aparece un índice (`#devIndex`) que permite saltar a cualquier pant
 datos demo sembrados (`seedDemo`). Es una herramienta de demo, **no forma parte del
 producto**: va deliberadamente sin diseñar para que no se confunda con el funnel.
 
+**Además hace de tablero de estado.** Lleva una leyenda con seis estados —*Bloqueado, no
+podemos trabajar · Sin empezar · Explorando opciones · En progreso · Feedback interno
+Multiplica · Pendiente validación FIATC*— que dice en qué punto está cada pantalla. Es la
+fuente viva del avance; `ux/PENDIENTES.md` recoge solo lo que queda por hacer y por qué.
+
 Saltar por el índice omite las animaciones de entrada y los tooltips de presentación,
 porque no hay recorrido previo que las justifique.
 
@@ -48,7 +53,7 @@ porque no hay recorrido previo que las justifique.
 ## 2. Flujo de tarificación
 
 ```
-PLANNED_FLOW = step0 · stepCP · step1 · step2 · step4 · step5 · [stepDNI] · step6 · step6b
+PLANNED_FLOW = step0 · stepCP · step1 · step2 · step4 · step5 · [stepDNI] · step6v2 · step6b
                                                                      ↓
                                                               loading (~4,8 s)
                                                                      ↓
@@ -64,27 +69,31 @@ PLANNED_FLOW = step0 · stepCP · step1 · step2 · step4 · step5 · [stepDNI] 
 | `step4` | Fecha de inicio de cobertura |
 | `step5` | ¿Ya eres cliente de FIATC? |
 | `stepDNI` | **Condicional**: solo si respondió que sí en `step5` |
-| `step6` | Email, con sugerencias de dominio + consentimiento comercial (solo email) |
+| `step6v2` | Email, con sugerencias de dominio + consentimiento comercial (solo email) |
 | `step6b` | Teléfono con prefijo internacional + preferencia de canal para la solicitud |
 | `step7` | Resultados |
 
 **Navegación**: `showStep` / `nextStep` / `prevStep` sobre `PLANNED_FLOW`.
 `stepDNI` se salta en ambos sentidos cuando `isClient` es `false` (spec: `SPECS.md` F-02).
 
-**Fuera del flujo lineal**: `stepRecover` (recuperar un presupuesto guardado por email,
-entra directo a resultados).
+**Fuera del flujo lineal**:
+- `stepRecover` — recuperar un presupuesto guardado por email, entra directo a resultados.
+- **`step6` — la versión original del paso de email**, con el bloque de consentimiento a
+  varias filas (una por canal). **Se conserva a propósito para cuando se vuelvan a ofrecer más
+  canales**; hoy no está en `PLANNED_FLOW` porque con un solo canal una lista de un elemento
+  sobra, y `step6v2` la sustituye. **No devolverla al flujo** creyendo que es un descuido.
 
 ### Los dos permisos, y por qué están en pantallas distintas
 Se piden **dos cosas de naturaleza distinta**, y se separan a propósito: si convivieran en
 la misma pantalla se leerían como hermanas y nadie entendería la diferencia.
 
-**`step6` (email) — consentimiento comercial.** Opt-in para recibir información sobre
+**`step6v2` (email) — consentimiento comercial.** Opt-in para recibir información sobre
 productos y ofertas, con su texto legal y el "Leer más" (máximo 2 comunicaciones al año,
 revocable, caduca a los 24 meses). Responde a la Ley ATC 10/2025 (ver `project_ley_atc`):
 debe ser granular, revocable y trazable.
 
 > **Un solo canal: email.** Se decidió en agosto de 2026 reducirlo de tres canales (email,
-> WhatsApp, teléfono) a solo email, y se aplicó en las tres cajas que lo piden —`step6`, la
+> WhatsApp, teléfono) a solo email, y se aplicó en las tres cajas que lo piden —`step6v2`, la
 > confirmación de agendar llamada y el "presupuesto guardado" del exit-intent.
 >
 > Con un canal único **la granularidad es trivial**: no hay nada que segmentar, así que un

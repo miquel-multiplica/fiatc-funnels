@@ -38,7 +38,7 @@ Usa exactamente los nombres de pantalla y las etiquetas de rama de la sección "
 6. ◆ **DECISIÓN: ¿Ya eres cliente de FIATC?** (`step5`)
    - **Sí** → **DNI** (`stepDNI`) → continúa
    - **No** → continúa directo
-7. **Email + consentimiento comercial** (`step6`) — opt-in de publicidad, **solo canal email**, con texto legal
+7. **Email + consentimiento comercial** (`step6v2`) — opt-in de publicidad, **solo canal email**, con texto legal
 8. **Teléfono + preferencia de canal** (`step6b`) — *"¿Prefieres por WhatsApp?"*, para hablar de tu solicitud. **No es publicidad** y no lleva texto legal
 9. ▱ **Cálculo** (loading, ~4 s) → Resultados
 
